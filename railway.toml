@@ -1,0 +1,6 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "echo 'Use the individual service configs in apps/api and apps/web'"
+
