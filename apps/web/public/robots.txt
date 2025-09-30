@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://conferencia2026.ucs.br/sitemap.xml
+

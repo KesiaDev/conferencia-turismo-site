@@ -1,0 +1,173 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "keynotes": "Conferenciantes",
+    "program": "Programa",
+    "call": "Convocatoria",
+    "fees": "Inscripciones",
+    "committees": "Comités",
+    "hackathon": "Maratón de Innovación",
+    "access": "Accesibilidad",
+    "venue": "Lugar",
+    "news": "Noticias",
+    "contact": "Contacto"
+  },
+  "meta": {
+    "description": "III Conferencia Internacional de Turismo Literario y Cinematográfico — Economía Creativa, Innovación y Desarrollo Territorial. 26-28 Mar 2026 en Caxias do Sul/RS, Brasil"
+  },
+  "footer": {
+    "about": "Sobre la Conferencia",
+    "aboutText": "Evento internacional dedicado al turismo literario y cinematográfico, explorando la economía creativa y el desarrollo territorial.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Contacto",
+    "rights": "Todos los derechos reservados."
+  },
+  "countdown": {
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos"
+  },
+  "home": {
+    "subtitle": "Economía Creativa, Innovación y Desarrollo Territorial",
+    "submitWork": "Enviar Trabajo",
+    "register": "Inscribirse",
+    "aboutTitle": "Sobre la Conferencia",
+    "aboutText": "La III Conferencia Internacional de Turismo Literario y Cinematográfico reúne investigadores, profesionales y estudiantes interesados en explorar las intersecciones entre literatura, cine, turismo y desarrollo territorial. Con enfoque en la economía creativa e innovación, el evento ofrece un espacio de debate e intercambio de experiencias internacionales.",
+    "marchDate": "Marzo 2026",
+    "languages": "Idiomas",
+    "opportunities": "Oportunidades",
+    "featuredSpeakers": "Conferenciantes Destacados",
+    "viewAllSpeakers": "Ver Todos los Conferenciantes",
+    "importantDates": "Fechas Importantes",
+    "submissionDeadline": "Fecha Límite de Envío",
+    "earlyBird": "Inscripción Anticipada",
+    "conference": "Conferencia"
+  },
+  "keynotes": {
+    "title": "Conferenciantes",
+    "description": "Conozca los principales conferenciantes de la III Conferencia Internacional",
+    "intro": "Tenemos el placer de presentar investigadores reconocidos de varias partes del mundo, especialistas en turismo literario, cinematográfico y desarrollo territorial."
+  },
+  "program": {
+    "title": "Programa",
+    "description": "Consulte la programación completa del evento",
+    "intro": "El evento se desarrolla durante tres días, con sesiones plenarias, conferencias magistrales, comunicaciones científicas y actividades especiales.",
+    "time": "Horario",
+    "activity": "Actividad",
+    "location": "Lugar",
+    "track": "Línea"
+  },
+  "call": {
+    "title": "Convocatoria de Trabajos",
+    "description": "Envíe su investigación para presentación en la conferencia",
+    "deadline": "Fecha límite",
+    "guidelines": "Directrices para Envío",
+    "guidelinesText": "Invitamos a investigadores, profesores, estudiantes y profesionales a enviar trabajos relacionados con el turismo literario y cinematográfico.",
+    "formats": "Formatos de Presentación",
+    "wordCount": "Extensión",
+    "words": "palabras",
+    "mustInclude": "Debe incluir",
+    "tracks": "Líneas Temáticas",
+    "submitForm": "Formulario de Envío",
+    "successTitle": "¡Envío recibido!",
+    "successMessage": "Su trabajo ha sido enviado con éxito. Recibirá un correo de confirmación.",
+    "errorTitle": "Error",
+    "errorMessage": "Ocurrió un error al enviar. Por favor, intente nuevamente.",
+    "name": "Nombre completo",
+    "email": "Correo electrónico",
+    "workTitle": "Título del trabajo",
+    "thematicTrack": "Línea temática",
+    "selectTrack": "Seleccione una línea temática",
+    "abstract": "Resumen",
+    "minimum": "mínimo",
+    "characters": "caracteres",
+    "submitting": "Enviando...",
+    "submit": "Enviar"
+  },
+  "fees": {
+    "title": "Inscripciones y Tasas",
+    "description": "Información sobre valores y formas de pago",
+    "notice": "Las inscripciones incluyen acceso a todas las sesiones, materiales del evento, pausas para café y certificado de participación.",
+    "category": "Categoría",
+    "included": "Qué está Incluido",
+    "includedItem1": "Acceso a todas las sesiones plenarias y paralelas",
+    "includedItem2": "Material de apoyo digital",
+    "includedItem3": "Pausas para café",
+    "includedItem4": "Certificado de participación",
+    "includedItem5": "Acceso a la plataforma online del evento",
+    "notIncluded": "No Incluido",
+    "notIncludedItem1": "Alojamiento y transporte",
+    "notIncludedItem2": "Tour cultural (Villa Dei Troni) - inscripción aparte",
+    "payment": "Formas de Pago",
+    "paymentInfo": "Las inscripciones se pueden realizar mediante transferencia bancaria o tarjeta de crédito. Se enviarán instrucciones detalladas después de completar el formulario."
+  },
+  "committees": {
+    "title": "Comités",
+    "description": "Conozca los miembros de los comités organizadores",
+    "organizing": "Comité Organizador",
+    "executive": "Comité Ejecutivo",
+    "scientific": "Comité Científico"
+  },
+  "hackathon": {
+    "title": "Maratón de Innovación",
+    "subtitle": "Soluciones Tecnológicas para el Turismo Cultural",
+    "description": "Desarrolle soluciones innovadoras para el turismo literario y cinematográfico",
+    "intro": "La Maratón de Innovación es un evento paralelo a la conferencia, enfocado en el desarrollo de soluciones tecnológicas aplicadas al turismo cultural.",
+    "challenges": "Desafíos",
+    "criteriaTitle": "Criterios de Evaluación",
+    "deliverablesTitle": "Entregables"
+  },
+  "access": {
+    "title": "Accesibilidad e Inclusión",
+    "description": "Nuestro compromiso con un evento accesible e inclusivo",
+    "intro": "La organización de la III Conferencia está comprometida en proporcionar un ambiente accesible e inclusivo para todos los participantes.",
+    "physicalTitle": "Accesibilidad Física",
+    "physical1": "Todas las instalaciones tienen acceso para sillas de ruedas",
+    "physical2": "Baños adaptados disponibles",
+    "physical3": "Plazas de estacionamiento reservadas",
+    "physical4": "Señalización táctil en espacios principales",
+    "communicationTitle": "Accesibilidad en la Comunicación",
+    "communication1": "Intérpretes de lengua de señas disponibles en sesiones plenarias",
+    "communication2": "Material en formato digital accesible",
+    "communication3": "Traducción simultánea PT/EN/ES en sesiones principales",
+    "digitalTitle": "Accesibilidad Digital",
+    "digital1": "Sitio web compatible con lectores de pantalla",
+    "digital2": "Contraste adecuado en todos los materiales",
+    "digital3": "Subtítulos en videos institucionales",
+    "requestTitle": "Solicitudes Especiales",
+    "requestText": "Si necesita algún recurso de accesibilidad no listado, por favor contáctenos con anticipación a través del correo litfilmtourismconferenceucs@gmail.com"
+  },
+  "venue": {
+    "title": "Lugar del Evento",
+    "description": "Información sobre el lugar y cómo llegar",
+    "ucsTitle": "Universidad de Caxias do Sul",
+    "ucsText": "La conferencia se realizará en la Universidad de Caxias do Sul (UCS), una de las principales instituciones de educación superior de la región sur de Brasil. El campus ofrece infraestructura completa para eventos académicos.",
+    "locationTitle": "Dirección",
+    "accommodationTitle": "Alojamiento",
+    "accommodationText": "Caxias do Sul ofrece diversas opciones de alojamiento para todos los perfiles. La lista de hoteles asociados estará disponible próximamente.",
+    "transportTitle": "Cómo Llegar",
+    "transportText": "La ciudad tiene su propio aeropuerto y está a 120km de Porto Alegre. Transporte público y taxis están disponibles."
+  },
+  "news": {
+    "title": "Noticias",
+    "description": "Últimas actualizaciones sobre el evento",
+    "readMore": "Leer más",
+    "backToNews": "Volver a noticias"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Póngase en contacto con nosotros",
+    "infoTitle": "Información de Contacto",
+    "email": "Correo electrónico",
+    "address": "Dirección",
+    "social": "Redes Sociales",
+    "socialText": "Pronto divulgaremos nuestras redes sociales oficiales.",
+    "sendMessage": "Enviar Mensaje",
+    "name": "Nombre",
+    "emailLabel": "Correo electrónico",
+    "message": "Mensaje",
+    "send": "Enviar"
+  }
+}
+
