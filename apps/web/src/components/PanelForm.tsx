@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import apiService from "../api/client";
 
 interface PanelFormData {
@@ -20,7 +19,6 @@ interface PanelFormData {
 }
 
 export default function PanelForm() {
-  const { t } = useTranslation();
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle"
   );
