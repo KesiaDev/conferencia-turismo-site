@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import Hero from "../components/Hero";
 import Section from "../components/Section";
 import SpeakerCard from "../components/SpeakerCard";
 import Seo from "../components/Seo";
@@ -19,16 +18,30 @@ export default function Keynotes() {
     <>
       <Seo title={t("nav.keynotes")} description={t("keynotes.description")} />
 
-      <Hero title={t("keynotes.title")} height="medium" />
+      <div className="w-full aspect-[16/5]">
+        <img
+          src="/hero.png"
+          alt="Banner da Conferência"
+          className="w-full h-full object-cover block"
+        />
+      </div>
+
+      <div className="py-8 bg-[#e0a085]">
+        <div className="container-custom">
+          <h1 className="text-2xl md:text-3xl font-semibold text-center text-white">
+            {t("keynotes.title")}
+          </h1>
+        </div>
+      </div>
 
       <Section>
-        <div className="max-w-4xl mx-auto mb-12">
-          <p className="text-lg text-gray-700 text-center leading-relaxed">
+        <div className="max-w-4xl mx-auto mb-8">
+          <p className="text-base text-gray-600 text-center leading-relaxed">
             {t("keynotes.intro")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
           {speakers.map((speaker) => (
             <SpeakerCard key={speaker.id} speaker={speaker} />
           ))}
@@ -37,4 +50,3 @@ export default function Keynotes() {
     </>
   );
 }
-

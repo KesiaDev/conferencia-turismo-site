@@ -29,7 +29,7 @@ export default function FeeTable({ fees }: FeeTableProps) {
               <td className="p-4 font-medium">{fee.category}</td>
               {fee.windows.map((window, i) => (
                 <td key={i} className="text-center p-4">
-                  <span className="text-lg font-bold text-primary">
+                  <span className="text-lg font-bold text-accent">
                     R$ {window.value.toFixed(2)}
                   </span>
                 </td>
@@ -41,4 +41,3 @@ export default function FeeTable({ fees }: FeeTableProps) {
     </div>
   );
 }
-

@@ -3,6 +3,17 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "Inter",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
+      },
       maxWidth: {
         container: "1200px",
       },
@@ -22,14 +33,19 @@ export default {
       },
       colors: {
         primary: {
-          DEFAULT: "#1e40af",
-          dark: "#1e3a8a",
-          light: "#3b82f6",
+          DEFAULT: "#8B4513",
+          dark: "#654321",
+          light: "#A0522D",
         },
         secondary: {
-          DEFAULT: "#7c3aed",
-          dark: "#6d28d9",
-          light: "#8b5cf6",
+          DEFAULT: "#D2B48C",
+          dark: "#C19A6B",
+          light: "#E8D5B7",
+        },
+        accent: {
+          DEFAULT: "#e0a085",
+          dark: "#c88567",
+          light: "#edbaa3",
         },
       },
     },
@@ -40,4 +56,3 @@ export default {
     require("@tailwindcss/line-clamp"),
   ],
 };
-

@@ -47,13 +47,12 @@ export default function Countdown({ targetDate }: CountdownProps) {
         { label: t("countdown.seconds"), value: timeLeft.seconds },
       ].map((item, i) => (
         <div key={i} className="text-center">
-          <div className="bg-white text-primary text-3xl md:text-5xl font-bold rounded-lg p-4 mb-2 shadow-lg">
+          <div className="bg-secondary-light text-accent text-3xl md:text-5xl font-bold rounded-lg p-4 mb-2 shadow-lg border-2 border-accent/20">
             {String(item.value).padStart(2, "0")}
           </div>
-          <div className="text-sm md:text-base font-medium">{item.label}</div>
+          <div className="text-sm md:text-base font-medium text-gray-700">{item.label}</div>
         </div>
       ))}
     </div>
   );
 }
-

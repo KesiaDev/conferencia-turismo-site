@@ -9,6 +9,8 @@ import speakersRouter from "./routes/speakers.js";
 import programRouter from "./routes/program.js";
 import feesRouter from "./routes/fees.js";
 import submissionsRouter from "./routes/submissions.js";
+import panelsRouter from "./routes/panels.js";
+import contactRouter from "./routes/contact.js";
 
 dotenv.config();
 
@@ -43,6 +45,8 @@ app.use("/api/speakers", speakersRouter);
 app.use("/api/program", programRouter);
 app.use("/api/fees", feesRouter);
 app.use("/api/submissions", submissionsRouter);
+app.use("/api/panels", panelsRouter);
+app.use("/api/contact", contactRouter);
 
 // 404 handler
 app.use((req, res) => {

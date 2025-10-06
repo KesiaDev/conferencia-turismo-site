@@ -4,8 +4,19 @@ export const sessionSlotSchema = z.object({
   time: z.string(),
   title: z.string(),
   location: z.string(),
-  kind: z.enum(["service", "plenary", "keynote", "sessions", "break", "panel", "networking", "tour"]),
+  kind: z.enum([
+    "service",
+    "plenary",
+    "keynote",
+    "sessions",
+    "break",
+    "panel",
+    "networking",
+    "tour",
+  ]),
   track: z.string().optional(),
+  description: z.string().optional(),
+  speaker: z.string().optional(),
 });
 
 export const programDaySchema = z.object({
@@ -15,4 +26,3 @@ export const programDaySchema = z.object({
 
 export type SessionSlot = z.infer<typeof sessionSlotSchema>;
 export type ProgramDay = z.infer<typeof programDaySchema>;
-

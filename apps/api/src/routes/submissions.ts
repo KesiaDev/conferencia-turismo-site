@@ -1,12 +1,15 @@
 import { Router } from "express";
 import { submissionSchema } from "../schemas/submission.js";
 import { submissions } from "../db/data.js";
+import { emailService } from "../services/email.js";
 
 const router = Router();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
+    console.log("📥 Dados recebidos:", req.body);
     const validated = submissionSchema.parse(req.body);
+    console.log("✅ Dados validados com sucesso:", validated);
 
     // Add to in-memory storage
     const submission = {
@@ -17,15 +20,10 @@ router.post("/", (req, res) => {
 
     submissions.push(submission);
 
-    // Mock email notification (log only)
-    console.log("📧 Mock Email Sent:");
-    console.log("To:", validated.email);
-    console.log("Subject: Submission Received - Conference 2026");
-    console.log("---");
-    console.log(`Thank you, ${validated.name}!`);
-    console.log(`Your submission "${validated.title}" has been received.`);
-    console.log(`Track: ${validated.track}`);
-    console.log("---\n");
+    // Envia email para a organização
+    emailService.sendSubmissionNotification(validated).catch((err) => {
+      console.error("Erro ao enviar email de submissão:", err);
+    });
 
     res.status(201).json({
       success: true,
@@ -33,7 +31,9 @@ router.post("/", (req, res) => {
       id: submission.id,
     });
   } catch (error: any) {
+    console.error("❌ Erro na validação:", error);
     if (error.name === "ZodError") {
+      console.error("🔍 Detalhes da validação:", error.errors);
       return res.status(400).json({
         success: false,
         error: "Validation failed",

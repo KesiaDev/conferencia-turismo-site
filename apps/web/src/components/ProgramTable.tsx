@@ -11,20 +11,6 @@ export default function ProgramTable({ program }: ProgramTableProps) {
   const { t } = useTranslation();
   const [activeDay, setActiveDay] = useState(0);
 
-  const getKindColor = (kind: string) => {
-    const colors: Record<string, string> = {
-      service: "bg-gray-100 text-gray-700",
-      plenary: "bg-blue-100 text-blue-700",
-      keynote: "bg-purple-100 text-purple-700",
-      sessions: "bg-green-100 text-green-700",
-      break: "bg-yellow-100 text-yellow-700",
-      panel: "bg-indigo-100 text-indigo-700",
-      networking: "bg-pink-100 text-pink-700",
-      tour: "bg-orange-100 text-orange-700",
-    };
-    return colors[kind] || "bg-gray-100 text-gray-700";
-  };
-
   return (
     <div>
       {/* Tabs */}
@@ -35,7 +21,7 @@ export default function ProgramTable({ program }: ProgramTableProps) {
             onClick={() => setActiveDay(index)}
             className={`px-6 py-3 font-semibold whitespace-nowrap transition-colors ${
               activeDay === index
-                ? "border-b-2 border-primary text-primary"
+                ? "border-b-2 border-accent text-accent"
                 : "text-gray-600 hover:text-gray-900"
             }`}
           >
@@ -57,23 +43,27 @@ export default function ProgramTable({ program }: ProgramTableProps) {
           <tbody>
             {program[activeDay].slots.map((slot, index) => (
               <tr key={index} className="border-b hover:bg-gray-50">
-                <td className="p-4 font-mono text-sm">{slot.time}</td>
+                <td className="p-4 text-sm align-top font-bold text-gray-900">{slot.time}</td>
                 <td className="p-4">
-                  <div className="flex items-start gap-2">
-                    <span className={`text-xs px-2 py-1 rounded ${getKindColor(slot.kind)}`}>
-                      {slot.kind}
-                    </span>
-                    <div>
-                      <div className="font-medium">{slot.title}</div>
-                      {slot.track && (
-                        <div className="text-sm text-gray-600 mt-1">
-                          {t("program.track")}: {slot.track}
-                        </div>
-                      )}
-                    </div>
+                  <div>
+                    <div className="font-semibold text-gray-900">{slot.title}</div>
+                    {slot.description && (
+                      <div className="text-sm text-gray-700 mt-2 leading-relaxed">
+                        {slot.description}
+                      </div>
+                    )}
+                    {slot.speaker && (
+                      <div className="text-sm text-gray-600 mt-2 italic">
+                        <span className="font-medium">🎤 </span>
+                        {slot.speaker}
+                      </div>
+                    )}
+                    {slot.track && (
+                      <div className="text-xs text-[#e0a085] mt-2 font-medium">{slot.track}</div>
+                    )}
                   </div>
                 </td>
-                <td className="p-4 text-sm text-gray-600">{slot.location}</td>
+                <td className="p-4 text-sm text-gray-600 align-top font-medium">{slot.location}</td>
               </tr>
             ))}
           </tbody>
@@ -82,4 +72,3 @@ export default function ProgramTable({ program }: ProgramTableProps) {
     </div>
   );
 }
-

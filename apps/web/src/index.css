@@ -14,7 +14,11 @@
   }
 
   body {
-    @apply text-gray-900 bg-white;
+    @apply text-gray-900;
+    background-color: #EBE3D5;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1,
@@ -23,7 +27,7 @@
   h4,
   h5,
   h6 {
-    @apply font-bold;
+    @apply font-bold text-accent;
   }
 
   h1 {
@@ -41,7 +45,7 @@
 
 @layer components {
   .container-custom {
-    @apply mx-auto px-6 w-full;
+    @apply mx-auto px-4 w-full;
     max-width: 1200px;
   }
 
@@ -58,19 +62,47 @@
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-6 rounded-btn h-btn transition-colors duration-200 inline-flex items-center justify-center;
+    @apply bg-primary hover:bg-primary-dark text-white font-semibold py-3 px-6 rounded-btn min-h-[48px] transition-colors duration-200 inline-flex items-center justify-center shadow-md text-sm md:text-base;
   }
 
   .btn-secondary {
-    @apply bg-secondary hover:bg-secondary-dark text-white font-semibold py-3 px-6 rounded-btn h-btn transition-colors duration-200 inline-flex items-center justify-center;
+    @apply bg-secondary hover:bg-secondary-dark text-gray-800 font-semibold py-3 px-6 rounded-btn min-h-[48px] transition-colors duration-200 inline-flex items-center justify-center shadow-md text-sm md:text-base;
   }
 
   .btn-outline {
-    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-6 rounded-btn h-btn transition-colors duration-200 inline-flex items-center justify-center;
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3 px-6 rounded-btn min-h-[48px] transition-colors duration-200 inline-flex items-center justify-center text-sm md:text-base;
   }
 
   *:focus-visible {
     @apply outline-2 outline-offset-2 outline-primary;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.4s ease-out;
   }
 }
 

@@ -6,14 +6,12 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-900 text-gray-300 py-12 mt-20">
+    <footer className="bg-black text-gray-300 py-12 mt-20">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-white font-bold text-lg mb-4">{t("footer.about")}</h3>
-            <p className="text-sm leading-relaxed">
-              {t("footer.aboutText")}
-            </p>
+            <p className="text-sm leading-relaxed">{t("footer.aboutText")}</p>
           </div>
 
           <div>
@@ -39,14 +37,21 @@ export default function Footer() {
                   {t("nav.fees")}
                 </Link>
               </li>
+              <li>
+                <Link to="/accessibility" className="hover:text-white transition-colors">
+                  ♿ Acessibilidade
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-white font-bold text-lg mb-4">{t("footer.contact")}</h3>
             <p className="text-sm leading-relaxed">
-              Universidade de Caxias do Sul<br />
-              Caxias do Sul/RS, Brasil<br />
+              Universidade de Caxias do Sul
+              <br />
+              Caxias do Sul/RS, Brasil
+              <br />
               <a
                 href="mailto:litfilmtourismconferenceucs@gmail.com"
                 className="hover:text-white transition-colors"
@@ -67,4 +72,3 @@ export default function Footer() {
     </footer>
   );
 }
-

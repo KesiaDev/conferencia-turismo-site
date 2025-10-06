@@ -7,7 +7,7 @@ export const speakerSchema = z.object({
   bio: z.string().optional(),
   tags: z.array(z.string()),
   photo: z.string(),
+  photoModal: z.string().optional(),
 });
 
 export type Speaker = z.infer<typeof speakerSchema>;
-

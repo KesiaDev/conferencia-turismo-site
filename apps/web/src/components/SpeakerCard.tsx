@@ -12,7 +12,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
   return (
     <>
       <div
-        className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+        className="relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
         onClick={() => setIsModalOpen(true)}
         role="button"
         tabIndex={0}
@@ -22,38 +22,26 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           }
         }}
       >
-        <div className="w-full h-60">
+        <div className="w-full aspect-square overflow-hidden">
           <img
             src={speaker.photo}
             alt={speaker.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+            style={{ objectPosition: "50% 30%" }}
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://via.placeholder.com/320x240?text=Speaker";
+              (e.target as HTMLImageElement).src =
+                "https://via.placeholder.com/400x400?text=Speaker";
             }}
           />
         </div>
-        <div className="p-4">
-          <h3 className="text-lg font-bold mb-1">{speaker.name}</h3>
-          <p className="text-sm text-gray-600 mb-3">{speaker.affiliation}</p>
-          <div className="flex flex-wrap gap-2">
-            {speaker.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="text-xs bg-primary/10 text-primary px-2 py-1 rounded"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+          <span className="text-white text-xs font-semibold tracking-wide">
+            Clique para ver detalhes
+          </span>
         </div>
       </div>
 
-      <SpeakerModal
-        speaker={speaker}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <SpeakerModal speaker={speaker} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
-

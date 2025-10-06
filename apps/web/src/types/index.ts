@@ -5,6 +5,7 @@ export interface Speaker {
   bio?: string;
   tags: string[];
   photo: string;
+  photoModal?: string;
 }
 
 export interface SessionSlot {
@@ -13,6 +14,8 @@ export interface SessionSlot {
   location: string;
   kind: "service" | "plenary" | "keynote" | "sessions" | "break" | "panel" | "networking" | "tour";
   track?: string;
+  description?: string;
+  speaker?: string;
 }
 
 export interface ProgramDay {
@@ -56,5 +59,6 @@ export interface CallInfo {
 export interface Committees {
   organizing: string[];
   executive: string[];
+  doctoral: string[];
   scientific: string[];
 }
