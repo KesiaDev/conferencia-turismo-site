@@ -1,6 +1,8 @@
 [build]
-builder = "NIXPACKS"
+builder = "nixpacks"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
 
 [deploy]
-startCommand = "echo 'Use the individual service configs in apps/api and apps/web'"
-
+startCommand = "cd apps/web && pnpm preview --host 0.0.0.0 --port $PORT"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
