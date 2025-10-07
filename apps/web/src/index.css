@@ -121,11 +121,11 @@
 
   /* Filtros para melhorar a aparência das fotos dos palestrantes */
   .speaker-photo {
-    filter: contrast(1.1) brightness(1.05) saturate(1.1);
+    filter: contrast(1.05) brightness(1.02) saturate(1.02);
     transition: filter 0.3s ease;
   }
 
   .speaker-photo:hover {
-    filter: contrast(1.15) brightness(1.1) saturate(1.15);
+    filter: contrast(1.08) brightness(1.05) saturate(1.05);
   }
 }
