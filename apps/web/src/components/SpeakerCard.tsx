@@ -13,8 +13,8 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
     <>
       <div
         className={`relative overflow-hidden transition-all duration-300 group ${
-          speaker.id === "keynote-tbd" 
-            ? "cursor-default" 
+          speaker.id === "keynote-tbd"
+            ? "cursor-default"
             : "cursor-pointer hover:shadow-2xl hover:scale-105"
         }`}
         onClick={() => speaker.id !== "keynote-tbd" && setIsModalOpen(true)}
@@ -26,14 +26,14 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           }
         }}
       >
-        <div className="w-full aspect-square overflow-hidden">
+        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg">
           {speaker.id === "keynote-tbd" ? (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-4">
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-6">
               <div className="text-center text-gray-600">
-                <div className="text-2xl mb-3 opacity-60">⏳</div>
-                <div className="text-xs font-semibold mb-1">{speaker.name}</div>
-                <div className="text-xs text-gray-500 mb-2">{speaker.affiliation}</div>
-                <div className="text-xs font-medium text-[#e0a085]">Em breve</div>
+                <div className="text-3xl mb-4 opacity-60">⏳</div>
+                <div className="text-sm font-semibold mb-2">{speaker.name}</div>
+                <div className="text-sm text-gray-500 mb-3">{speaker.affiliation}</div>
+                <div className="text-sm font-medium text-[#e0a085]">Em breve</div>
               </div>
             </div>
           ) : (
@@ -41,7 +41,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
               src={speaker.photo}
               alt={speaker.name}
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-              style={{ objectPosition: "50% 30%" }}
+              style={{ objectPosition: "50% 25%" }}
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   "https://via.placeholder.com/400x400?text=Speaker";
