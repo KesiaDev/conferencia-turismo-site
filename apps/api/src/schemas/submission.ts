@@ -27,6 +27,7 @@ export const panelSubmissionSchema = z.object({
       2000,
       "O resumo do painel deve ter no máximo 2000 caracteres (aproximadamente 300 palavras)"
     ),
+  panelKeywords: z.string().min(3, "Palavras-chave do painel são obrigatórias"),
   references: z.string().min(20),
   summaries: z
     .array(
@@ -34,6 +35,7 @@ export const panelSubmissionSchema = z.object({
         title: z.string().min(5),
         authors: z.string().min(3),
         abstract: z.string().max(2000, "Cada resumo deve ter no máximo 2000 caracteres"),
+        keywords: z.string().min(3, "Palavras-chave são obrigatórias"),
         affiliation: z.string().min(2),
         degree: z.string().min(2),
       })

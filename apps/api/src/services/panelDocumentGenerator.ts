@@ -210,6 +210,11 @@ export class PanelDocumentGenerator {
             </div>
 
             <div class="section">
+                <div class="section-title">Palavras-chave do Painel:</div>
+                <div class="section-content"><strong>Palavras-chave:</strong> ${data.panelKeywords}</div>
+            </div>
+
+            <div class="section">
                 <div class="section-title">Referências Bibliográficas:</div>
                 <div class="section-content">${data.references}</div>
             </div>
@@ -252,6 +257,11 @@ export class PanelDocumentGenerator {
                         <div class="section">
                             <div class="section-title">Resumo:</div>
                             <div class="section-content">${summary.abstract}</div>
+                        </div>
+
+                        <div class="section">
+                            <div class="section-title">Palavras-chave:</div>
+                            <div class="section-content"><strong>Palavras-chave:</strong> ${summary.keywords}</div>
                         </div>
                     </div>
                 `
@@ -419,7 +429,16 @@ export class PanelDocumentGenerator {
       new Paragraph({
         text: data.panelAbstract,
         alignment: AlignmentType.JUSTIFIED,
-        spacing: { after: 200 },
+        spacing: { after: 100 },
+      }),
+
+      // Palavras-chave do Painel
+      new Paragraph({
+        spacing: { after: 100 },
+        children: [
+          new TextRun({ text: "Palavras-chave: ", bold: true }),
+          new TextRun({ text: data.panelKeywords }),
+        ],
       }),
 
       // Referências
@@ -501,7 +520,14 @@ export class PanelDocumentGenerator {
         new Paragraph({
           text: summary.abstract,
           alignment: AlignmentType.JUSTIFIED,
+          spacing: { after: 100 },
+        }),
+        new Paragraph({
           spacing: { after: 200 },
+          children: [
+            new TextRun({ text: "Palavras-chave: ", bold: true }),
+            new TextRun({ text: summary.keywords }),
+          ],
         })
       );
     });

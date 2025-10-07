@@ -8,11 +8,13 @@ interface PanelFormData {
   track: string;
   language: string;
   panelAbstract: string;
+  panelKeywords: string;
   references: string;
   summaries: Array<{
     title: string;
     authors: string;
     abstract: string;
+    keywords: string;
     affiliation: string;
     degree: string;
   }>;
@@ -30,12 +32,13 @@ export default function PanelForm() {
     track: "",
     language: "pt",
     panelAbstract: "",
+    panelKeywords: "",
     references: "",
     summaries: [
-      { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-      { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-      { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-      { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
+      { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+      { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+      { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+      { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
     ],
   });
 
@@ -51,7 +54,7 @@ export default function PanelForm() {
         ...formData,
         summaries: [
           ...formData.summaries,
-          { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
+          { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
         ],
       });
     }
@@ -82,12 +85,13 @@ export default function PanelForm() {
         track: "",
         language: "pt",
         panelAbstract: "",
+        panelKeywords: "",
         references: "",
         summaries: [
-          { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-          { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-          { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
-          { title: "", authors: "", abstract: "", affiliation: "", degree: "" },
+          { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+          { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+          { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
+          { title: "", authors: "", abstract: "", keywords: "", affiliation: "", degree: "" },
         ],
       });
     } catch (error) {
@@ -248,6 +252,22 @@ export default function PanelForm() {
           </div>
         </div>
 
+        {/* Palavras-chave do Painel */}
+        <div>
+          <label htmlFor="panelKeywords" className="block font-semibold mb-2">
+            Palavras-chave do painel *
+          </label>
+          <input
+            type="text"
+            id="panelKeywords"
+            required
+            value={formData.panelKeywords}
+            onChange={(e) => setFormData({ ...formData, panelKeywords: e.target.value })}
+            className="w-full border border-gray-300 rounded-lg p-3"
+            placeholder="Ex: Turismo, Literatura, Cinema, Economia Criativa"
+          />
+        </div>
+
         {/* Referências */}
         <div>
           <label htmlFor="references" className="block font-semibold mb-2">
@@ -353,6 +373,18 @@ export default function PanelForm() {
                     <div className="text-sm text-gray-500 mt-1">
                       {summary.abstract.length}/2000 caracteres
                     </div>
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold mb-2">Palavras-chave *</label>
+                    <input
+                      type="text"
+                      required
+                      value={summary.keywords}
+                      onChange={(e) => handleSummaryChange(index, "keywords", e.target.value)}
+                      className="w-full border border-gray-300 rounded-lg p-3"
+                      placeholder="Ex: Turismo, Literatura, Cinema"
+                    />
                   </div>
                 </div>
               </div>
