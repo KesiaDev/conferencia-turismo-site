@@ -66,7 +66,7 @@ export default function Header() {
     >
       <nav className="relative w-full h-full flex items-center" aria-label="Main navigation">
         {/* Logo clicável - posicionado à esquerda */}
-        <div className="absolute left-4 z-10">
+        <div className="absolute left-8 z-10">
           <Link
             to="/"
             className="flex items-center hover:opacity-80 transition-opacity cursor-pointer"
@@ -101,7 +101,7 @@ export default function Header() {
         </div>
 
         {/* Contador regressivo - posicionado à direita */}
-        <div className="hidden lg:flex items-center gap-3 absolute right-4">
+        <div className="hidden lg:flex items-center gap-3 absolute right-8">
           {[
             { value: timeLeft.days, label: "DIAS" },
             { value: timeLeft.hours, label: "HRS" },
