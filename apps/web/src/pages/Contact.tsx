@@ -201,8 +201,7 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold text-[#e0a085] mb-2">🚌 Transporte Público</h4>
                   <p className="text-sm text-gray-600">
-                    Diversas linhas de ônibus passam próximas ao campus. Consulte o transporte
-                    local.
+                    Diversas linhas de ônibus levam ao campus. Consulte o transporte local.
                   </p>
                 </div>
 
