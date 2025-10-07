@@ -11,7 +11,191 @@ export default function Program() {
   const [program, setProgram] = useState<ProgramDay[]>([]);
 
   useEffect(() => {
-    apiService.getProgram().then(setProgram);
+    apiService
+      .getProgram()
+      .then(setProgram)
+      .catch(() => {
+        // Fallback com dados estáticos se a API falhar
+        const staticProgram: ProgramDay[] = [
+          {
+            day: "2026-03-26",
+            slots: [
+              {
+                time: "08:30 - 09:00",
+                title: "Credenciamento e Welcome Coffee",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "09:00 - 09:30",
+                title: "Cerimônia de Abertura",
+                description: "Abertura oficial do evento com autoridades e organizadores",
+                location: "Auditório Principal",
+              },
+              {
+                time: "09:30 - 10:30",
+                title: "Palestra Magna",
+                description:
+                  "O impacto regional do turismo literário e cinematográfico no território",
+                speaker: "Diomira Maria Cicci Pinto Faria (UFMG)",
+                location: "Auditório Principal",
+              },
+              {
+                time: "10:30 - 11:00",
+                title: "Coffee Break",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "11:00 - 12:30",
+                title: "Mesa Internacional",
+                description:
+                  "Perspectivas internacionais sobre turismo literário e cinematográfico",
+                speaker:
+                  "Deborah Castro-Mariño (RUG), Jordi Arcos-Pumarola (CETT-UB), Rita Baleiro (UAlg)",
+                location: "Auditório Principal",
+              },
+              {
+                time: "12:30 - 14:00",
+                title: "Almoço",
+                location: "Restaurante Universitário",
+              },
+              {
+                time: "14:00 - 15:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track A: Turismo Literário",
+                location: "Sala 101",
+              },
+              {
+                time: "14:00 - 15:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track B: Turismo Cinematográfico",
+                location: "Sala 102",
+              },
+              {
+                time: "15:30 - 16:00",
+                title: "Coffee Break",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "16:00 - 17:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track C: Desenvolvimento Territorial",
+                location: "Sala 103",
+              },
+            ],
+          },
+          {
+            day: "2026-03-27",
+            slots: [
+              {
+                time: "08:30 - 09:00",
+                title: "Welcome Coffee",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "09:00 - 10:00",
+                title: "Keynote",
+                description: "Políticas públicas para turismo cultural",
+                speaker: "Palestrante a definir (Embratur/Ancine)",
+                location: "Auditório Principal",
+              },
+              {
+                time: "10:00 - 10:30",
+                title: "Coffee Break",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "10:30 - 12:00",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track A: Turismo Literário",
+                location: "Sala 101",
+              },
+              {
+                time: "10:30 - 12:00",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track B: Turismo Cinematográfico",
+                location: "Sala 102",
+              },
+              {
+                time: "12:00 - 14:00",
+                title: "Almoço",
+                location: "Restaurante Universitário",
+              },
+              {
+                time: "14:00 - 15:30",
+                title: "Painel Especial",
+                description:
+                  "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+                speaker: "André Riani Costa Perinotto (UFDPar), Lissandro Stallivieri (UCS)",
+                location: "Auditório Principal",
+              },
+              {
+                time: "15:30 - 16:00",
+                title: "Coffee Break",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "16:00 - 17:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track C: Desenvolvimento Territorial",
+                location: "Sala 103",
+              },
+            ],
+          },
+          {
+            day: "2026-03-28",
+            slots: [
+              {
+                time: "08:30 - 09:00",
+                title: "Welcome Coffee",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "09:00 - 10:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track A: Turismo Literário",
+                location: "Sala 101",
+              },
+              {
+                time: "09:00 - 10:30",
+                title: "Sessões Paralelas",
+                description: "Comunicações científicas",
+                track: "Track B: Turismo Cinematográfico",
+                location: "Sala 102",
+              },
+              {
+                time: "10:30 - 11:00",
+                title: "Coffee Break",
+                location: "Hall de Entrada",
+              },
+              {
+                time: "11:00 - 12:30",
+                title: "Sessão de Encerramento",
+                description: "Apresentação dos resultados e perspectivas futuras",
+                location: "Auditório Principal",
+              },
+              {
+                time: "12:30 - 13:00",
+                title: "Cerimônia de Encerramento",
+                description: "Encerramento oficial do evento",
+                location: "Auditório Principal",
+              },
+              {
+                time: "13:00 - 14:00",
+                title: "Almoço de Confraternização",
+                location: "Restaurante Universitário",
+              },
+            ],
+          },
+        ];
+        setProgram(staticProgram);
+      });
   }, []);
 
   return (
