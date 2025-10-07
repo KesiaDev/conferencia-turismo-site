@@ -12,12 +12,16 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
   return (
     <>
       <div
-        className="relative overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
-        onClick={() => setIsModalOpen(true)}
+        className={`relative overflow-hidden transition-all duration-300 group ${
+          speaker.id === "keynote-tbd" 
+            ? "cursor-default" 
+            : "cursor-pointer hover:shadow-2xl hover:scale-105"
+        }`}
+        onClick={() => speaker.id !== "keynote-tbd" && setIsModalOpen(true)}
         role="button"
         tabIndex={0}
         onKeyPress={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
+          if ((e.key === "Enter" || e.key === " ") && speaker.id !== "keynote-tbd") {
             setIsModalOpen(true);
           }
         }}
@@ -36,7 +40,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
           <span className="text-white text-xs font-semibold tracking-wide">
-            Clique para ver detalhes
+            {speaker.id === "keynote-tbd" ? "Em breve" : "Clique para ver detalhes"}
           </span>
         </div>
       </div>
