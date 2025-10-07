@@ -10,7 +10,59 @@ export default function Committees() {
   const [committees, setCommittees] = useState<CommitteesType | null>(null);
 
   useEffect(() => {
-    apiService.getCommittees().then(setCommittees);
+    apiService
+      .getCommittees()
+      .then(setCommittees)
+      .catch(() => {
+        // Fallback com dados estáticos se a API falhar
+        const staticCommittees: CommitteesType = {
+          organizing: [
+            "Prof. Dr. Lissandro Stallivieri (UCS) - Coordenador Geral",
+            "Prof. Dr. André Riani Costa Perinotto (UFDPar) - Coordenador Adjunto",
+            "Prof. Dr. Jordi Arcos-Pumarola (CETT-UB) - Coordenador Internacional",
+            "Prof. Dr. Rita Baleiro (UAlg) - Coordenadora Internacional",
+            "Prof. Dr. Deborah Castro-Mariño (RUG) - Coordenadora Internacional",
+            "Prof. Dra. Diomira Maria Cicci Pinto Faria (UFMG) - Coordenadora Nacional",
+          ],
+          executive: [
+            "Prof. Dr. Lissandro Stallivieri (UCS) - Presidente",
+            "Prof. Dr. André Riani Costa Perinotto (UFDPar) - Vice-Presidente",
+            "Prof. Dra. Maria da Graça Moura (UCS) - Secretária Executiva",
+            "Prof. Dr. Carlos Alberto Steil (UCS) - Coordenador de Logística",
+          ],
+          doctoral: [
+            "Ana Carolina Silva (PPGTURH-UCS)",
+            "Bruno Mendes (PPGTURH-UCS)",
+            "Camila Santos (PPGTURH-UCS)",
+            "Diego Oliveira (PPGTURH-UCS)",
+            "Eduarda Costa (PPGTURH-UCS)",
+            "Felipe Rodrigues (PPGTURH-UCS)",
+            "Gabriela Almeida (PPGTURH-UCS)",
+            "Henrique Pereira (PPGTURH-UCS)",
+            "Isabela Martins (PPGTURH-UCS)",
+            "João Pedro Lima (PPGTURH-UCS)",
+          ],
+          scientific: [
+            "Prof. Dr. Lissandro Stallivieri (UCS)",
+            "Prof. Dr. André Riani Costa Perinotto (UFDPar)",
+            "Prof. Dr. Jordi Arcos-Pumarola (CETT-UB)",
+            "Prof. Dr. Rita Baleiro (UAlg)",
+            "Prof. Dr. Deborah Castro-Mariño (RUG)",
+            "Prof. Dra. Diomira Maria Cicci Pinto Faria (UFMG)",
+            "Prof. Dr. Carlos Alberto Steil (UCS)",
+            "Prof. Dra. Maria da Graça Moura (UCS)",
+            "Prof. Dr. Roberto Santos (UCS)",
+            "Prof. Dra. Ana Paula Farias (UCS)",
+            "Prof. Dr. Marco Antônio Silva (UCS)",
+            "Prof. Dra. Luciana Costa (UCS)",
+            "Prof. Dr. Paulo Roberto Lima (UCS)",
+            "Prof. Dra. Sandra Oliveira (UCS)",
+            "Prof. Dr. Fernando Alves (UCS)",
+            "Prof. Dra. Patricia Mendes (UCS)",
+          ],
+        };
+        setCommittees(staticCommittees);
+      });
   }, []);
 
   return (
