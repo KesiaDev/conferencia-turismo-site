@@ -60,25 +60,25 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 w-full bg-black h-[90px] flex items-center ${
-        isScrolled ? "shadow-2xl bg-black/95 backdrop-blur-md" : "shadow-lg"
-      }`}
+      className={`sticky top-0 z-40 transition-all duration-300 w-full bg-black ${
+        isMenuOpen ? "h-auto" : "h-[90px]"
+      } flex items-center ${isScrolled ? "shadow-2xl bg-black/95 backdrop-blur-md" : "shadow-lg"}`}
     >
       <nav className="relative w-full h-full flex items-center" aria-label="Main navigation">
-        {/* Logo clicável - posicionado à esquerda */}
-        <div className="absolute left-20 z-10">
+        {/* Logo clicável - responsivo */}
+        <div className="absolute left-4 md:left-8 lg:left-20 z-10">
           <Link
             to="/"
             className="flex items-center hover:opacity-80 transition-opacity cursor-pointer"
             onClick={() => {
-              // Scroll suave para o topo da página
               window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMenuOpen(false);
             }}
           >
             <img
               src="/logo.svg"
               alt="LITFILM 2026"
-              className="h-12 md:h-14 w-auto"
+              className="h-10 sm:h-12 md:h-14 w-auto"
               style={{
                 filter:
                   "brightness(0) saturate(100%) invert(75%) sepia(28%) saturate(545%) hue-rotate(328deg) brightness(95%) contrast(89%)",
@@ -88,19 +88,35 @@ export default function Header() {
         </div>
 
         {/* Desktop Navigation - perfeitamente centralizado */}
-        <div className="hidden lg:flex items-center gap-10 absolute left-1/2 transform -translate-x-1/2">
+        <div className="hidden lg:flex items-center gap-8 xl:gap-10 absolute left-1/2 transform -translate-x-1/2">
           {navigation.map((item) => (
             <Link
               key={item.href}
               to={item.href}
-              className="text-xl font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
+              className="text-lg xl:text-xl font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
             >
               {item.name}
             </Link>
           ))}
         </div>
 
-        {/* Contador regressivo - posicionado à direita */}
+        {/* Contador regressivo - responsivo */}
+        <div className="hidden md:flex lg:hidden items-center gap-2 absolute right-4">
+          {[
+            { value: timeLeft.days, label: "DIAS" },
+            { value: timeLeft.hours, label: "HRS" },
+            { value: timeLeft.minutes, label: "MIN" },
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center w-[40px]">
+              <div className="bg-[#e0a085] text-white text-sm font-bold rounded-md py-1 w-full text-center shadow-md">
+                {String(item.value).padStart(2, "0")}
+              </div>
+              <div className="text-[10px] text-[#e0a085] font-semibold mt-1">{item.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Contador regressivo - posicionado à direita */}
         <div className="hidden lg:flex items-center gap-3 absolute right-20">
           {[
             { value: timeLeft.days, label: "DIAS" },
@@ -126,7 +142,7 @@ export default function Header() {
           aria-label="Toggle menu"
         >
           <svg
-            className="w-7 h-7"
+            className="w-6 h-6 sm:w-7 sm:h-7"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -138,38 +154,40 @@ export default function Header() {
           </svg>
         </button>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - melhorado */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4 space-y-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                to={item.href}
-                className="block py-3 text-base text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800">
+            <div className="px-4 py-6 space-y-3">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className="block py-3 text-lg text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800 last:border-b-0"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
 
-            {/* Mobile Countdown */}
-            <div className="pt-4 mt-4 border-t border-gray-700">
-              <div className="flex justify-center gap-2">
-                {[
-                  { value: timeLeft.days, label: "DIAS" },
-                  { value: timeLeft.hours, label: "HRS" },
-                  { value: timeLeft.minutes, label: "MIN" },
-                  { value: timeLeft.seconds, label: "SEG" },
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center w-[50px]">
-                    <div className="bg-[#e0a085] text-white text-base font-bold rounded-md py-2 w-full text-center shadow-md">
-                      {String(item.value).padStart(2, "0")}
+              {/* Mobile Countdown */}
+              <div className="pt-4 mt-4 border-t border-gray-700">
+                <div className="flex justify-center gap-3">
+                  {[
+                    { value: timeLeft.days, label: "DIAS" },
+                    { value: timeLeft.hours, label: "HRS" },
+                    { value: timeLeft.minutes, label: "MIN" },
+                    { value: timeLeft.seconds, label: "SEG" },
+                  ].map((item, i) => (
+                    <div key={i} className="flex flex-col items-center w-[55px]">
+                      <div className="bg-[#e0a085] text-white text-lg font-bold rounded-lg py-2 w-full text-center shadow-lg">
+                        {String(item.value).padStart(2, "0")}
+                      </div>
+                      <div className="text-[11px] text-[#e0a085] font-semibold mt-1">
+                        {item.label}
+                      </div>
                     </div>
-                    <div className="text-[10px] text-[#e0a085] font-semibold mt-1">
-                      {item.label}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
