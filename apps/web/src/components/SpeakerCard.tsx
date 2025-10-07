@@ -28,10 +28,12 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
       >
         <div className="w-full aspect-square overflow-hidden">
           {speaker.id === "keynote-tbd" ? (
-            <div className="w-full h-full bg-gradient-to-br from-[#e0a085] to-[#d49070] flex items-center justify-center">
-              <div className="text-center text-white">
-                <div className="text-4xl mb-2">🎤</div>
-                <div className="text-sm font-semibold">Em breve</div>
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-4">
+              <div className="text-center text-gray-600">
+                <div className="text-2xl mb-3 opacity-60">⏳</div>
+                <div className="text-xs font-semibold mb-1">{speaker.name}</div>
+                <div className="text-xs text-gray-500 mb-2">{speaker.affiliation}</div>
+                <div className="text-xs font-medium text-[#e0a085]">Em breve</div>
               </div>
             </div>
           ) : (
