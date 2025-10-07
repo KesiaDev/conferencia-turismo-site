@@ -15,8 +15,15 @@
 
   body {
     @apply text-gray-900;
-    background-color: #EBE3D5;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #ebe3d5;
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -104,5 +111,21 @@
   .animate-slideUp {
     animation: slideUp 0.4s ease-out;
   }
-}
 
+  /* Melhorias na qualidade das imagens */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    image-rendering: high-quality;
+  }
+
+  /* Filtros para melhorar a aparência das fotos dos palestrantes */
+  .speaker-photo {
+    filter: contrast(1.1) brightness(1.05) saturate(1.1);
+    transition: filter 0.3s ease;
+  }
+
+  .speaker-photo:hover {
+    filter: contrast(1.15) brightness(1.1) saturate(1.15);
+  }
+}

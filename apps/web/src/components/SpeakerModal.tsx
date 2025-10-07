@@ -60,6 +60,11 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                   src={speaker.photoModal || speaker.photo}
                   alt={speaker.name}
                   className="w-full h-full object-cover"
+                  style={{
+                    imageRendering: "high-quality",
+                    filter: "contrast(1.1) brightness(1.05) saturate(1.1)",
+                  }}
+                  loading="eager"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =
                       "https://via.placeholder.com/400x400?text=Speaker";
