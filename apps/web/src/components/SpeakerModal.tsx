@@ -61,7 +61,7 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                   alt={speaker.name}
                   className="w-full h-full object-cover"
                   style={{
-                    imageRendering: "high-quality",
+                    imageRendering: "crisp-edges" as any,
                     filter: "contrast(1.05) brightness(1.02) saturate(1.02)",
                   }}
                   loading="eager"
