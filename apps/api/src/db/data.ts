@@ -61,18 +61,6 @@ export const speakers: Speaker[] = [
     bio: "Investigadora e docente da Universidade do Algarve, Rita Baleiro é referência internacional em turismo literário e cinematográfico. Doutora em Estudos Anglo-Portugueses pela Universidade Nova de Lisboa, tem contribuído de forma decisiva para consolidar este campo de investigação, articulando literatura, cultura e turismo em projetos inovadores como o LITESCAPE.PT – Atlas of Literary Landscapes of Continental Portugal e a Rota Literária do Algarve. Autora e editora de obras fundamentais, incluindo Researching Literary Tourism: A Handbook for Students and Supervisors (2024) e Global Perspectives on Literary Tourism and Film-Induced Tourism (2022), integra redes internacionais como o TULE – Turismo Letterario. Sua produção científica e experiência em organização de conferências internacionais fazem dela uma das vozes mais influentes na valorização do patrimônio literário e cultural como motor de inovação, identidade e desenvolvimento de destinos turísticos.",
   },
   {
-    id: "lissandro",
-    name: "Lissandro Stallivieri",
-    affiliation: "UCS (Brasil)",
-    tags: [
-      "Painel Especial",
-      "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
-    ],
-    photo: "/speakers/Lissandro.png",
-    photoModal: "/speakers/Lissandro-modal.png",
-    bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
-  },
-  {
     id: "andre",
     name: "André Riani Costa Perinotto",
     affiliation: "UFDPar (Brasil)",
@@ -83,6 +71,18 @@ export const speakers: Speaker[] = [
     photo: "/speakers/Andre Peritonotto.png",
     photoModal: "/speakers/Andre Peritonotto-modal.png",
     bio: "Professor da UFDPar e UFPI / Film Commission Noronha 2B. Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
+  },
+  {
+    id: "lissandro",
+    name: "Lissandro Stallivieri",
+    affiliation: "UCS (Brasil)",
+    tags: [
+      "Painel Especial",
+      "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+    ],
+    photo: "/speakers/Lissandro.png",
+    photoModal: "/speakers/Lissandro-modal.png",
+    bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
   },
 ];
 
