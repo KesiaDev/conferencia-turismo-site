@@ -325,7 +325,7 @@ export const committees = {
   doctoral: [
     "Me. Ronaldo Leites Diaz",
     "Me. Vanilson Pereira Silveira",
-    "Me. Viviane Rocha de Palma",
+    "Me. Viviane da Rocha Palma",
   ],
   scientific: [
     "Dr. Alberto Rophe (Unirio e USP)",
