@@ -12,7 +12,47 @@ export default function Fees() {
   const [fees, setFees] = useState<FeeCategory[]>([]);
 
   useEffect(() => {
-    apiService.getFees().then(setFees);
+    apiService
+      .getFees()
+      .then(setFees)
+      .catch(() => {
+        // Fallback com dados estáticos se a API falhar
+        const staticFees: FeeCategory[] = [
+          {
+            category: "Estudante de Graduação",
+            windows: [
+              { label: "Early Bird", value: 150.0 },
+              { label: "Regular", value: 200.0 },
+              { label: "Late", value: 250.0 },
+            ],
+          },
+          {
+            category: "Estudante de Pós-Graduação",
+            windows: [
+              { label: "Early Bird", value: 200.0 },
+              { label: "Regular", value: 250.0 },
+              { label: "Late", value: 300.0 },
+            ],
+          },
+          {
+            category: "Profissional",
+            windows: [
+              { label: "Early Bird", value: 300.0 },
+              { label: "Regular", value: 400.0 },
+              { label: "Late", value: 500.0 },
+            ],
+          },
+          {
+            category: "Professor/Pesquisador",
+            windows: [
+              { label: "Early Bird", value: 250.0 },
+              { label: "Regular", value: 300.0 },
+              { label: "Late", value: 350.0 },
+            ],
+          },
+        ];
+        setFees(staticFees);
+      });
   }, []);
 
   return (
@@ -46,38 +86,38 @@ export default function Fees() {
         <div className="max-w-5xl mx-auto mb-12">
           <div className="relative bg-gradient-to-br from-[#e0a085] via-[#e8a98f] to-[#f4c490] rounded-2xl shadow-2xl overflow-hidden">
             {/* Efeito de brilho no canto */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full blur-3xl -ml-24 -mb-24"></div>
+            <div className="absolute top-0 right-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-white/10 rounded-full blur-3xl -mr-16 sm:-mr-24 md:-mr-32 -mt-16 sm:-mt-24 md:-mt-32"></div>
+            <div className="absolute bottom-0 left-0 w-24 sm:w-36 md:w-48 h-24 sm:h-36 md:h-48 bg-white/10 rounded-full blur-3xl -ml-12 sm:-ml-18 md:-ml-24 -mb-12 sm:-mb-18 md:-mb-24"></div>
 
-            <div className="relative p-8 md:p-10">
-              <div className="flex items-start gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-5xl shadow-lg border border-white/30">
+            <div className="relative p-4 sm:p-6 md:p-8 lg:p-10">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-shrink-0 mx-auto sm:mx-0">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-3xl sm:text-5xl shadow-lg border border-white/30">
                     💳
                   </div>
                 </div>
 
-                <div className="flex-1">
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">
+                <div className="flex-1 w-full">
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg text-center sm:text-left">
                     Formas de Pagamento
                   </h2>
 
-                  <div className="bg-white rounded-xl shadow-xl p-6 border-2 border-white/50">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-2xl">
+                  <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 border-2 border-white/50">
+                    <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
+                      <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-lg sm:text-2xl mx-auto sm:mx-0">
                         📢
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
                           Informações sobre pagamento serão divulgadas em breve.
                         </h3>
                       </div>
                     </div>
 
-                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border-l-4 border-blue-500">
-                      <p className="text-sm text-gray-700 flex items-start gap-2">
-                        <span className="text-lg">ℹ️</span>
-                        <span>
+                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-3 sm:p-4 border-l-4 border-blue-500">
+                      <p className="text-xs sm:text-sm text-gray-700 flex flex-col sm:flex-row items-start gap-2">
+                        <span className="text-base sm:text-lg flex-shrink-0">ℹ️</span>
+                        <span className="text-center sm:text-left">
                           Instruções detalhadas serão enviadas por e-mail após o preenchimento do
                           formulário de inscrição.
                         </span>
@@ -109,39 +149,43 @@ export default function Fees() {
           </ul>
         </div>
 
-        <div className="mt-12 max-w-5xl mx-auto bg-white rounded-lg shadow-md p-8 border-l-4 border-[#e0a085]">
-          <h2 className="text-2xl font-bold mb-6 text-[#e0a085]">{t("fees.payment")}</h2>
+        <div className="mt-12 max-w-5xl mx-auto bg-white rounded-lg shadow-md p-4 sm:p-6 md:p-8 border-l-4 border-[#e0a085]">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-[#e0a085] text-center sm:text-left">
+            {t("fees.payment")}
+          </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {/* PIX - Seção preparada */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="text-2xl">💳</span>
+            <div className="space-y-3 sm:space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center justify-center sm:justify-start gap-2">
+                <span className="text-xl sm:text-2xl">💳</span>
                 Pagamento via PIX
               </h3>
 
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                <p className="text-base font-semibold text-blue-900 mb-2">
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
+                <p className="text-sm sm:text-base font-semibold text-blue-900 mb-2 text-center sm:text-left">
                   📢 Informações serão divulgadas em breve
                 </p>
-                <p className="text-sm text-blue-800">
+                <p className="text-xs sm:text-sm text-blue-800 text-center sm:text-left">
                   Instruções de pagamento via PIX serão disponibilizadas em breve.
                 </p>
               </div>
             </div>
 
             {/* Outras formas - Seção preparada */}
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <span className="text-2xl">🏦</span>
+            <div className="space-y-3 sm:space-y-4">
+              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center justify-center sm:justify-start gap-2">
+                <span className="text-xl sm:text-2xl">🏦</span>
                 Outras Formas de Pagamento
               </h3>
 
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                <p className="text-base font-semibold text-blue-900 mb-2">
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
+                <p className="text-sm sm:text-base font-semibold text-blue-900 mb-2 text-center sm:text-left">
                   📢 Informações serão divulgadas em breve
                 </p>
-                <p className="text-sm text-blue-800">{t("fees.paymentInfo")}</p>
+                <p className="text-xs sm:text-sm text-blue-800 text-center sm:text-left">
+                  {t("fees.paymentInfo")}
+                </p>
               </div>
             </div>
           </div>
