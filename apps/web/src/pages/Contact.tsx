@@ -193,7 +193,8 @@ export default function Contact() {
                 <div>
                   <h4 className="font-semibold text-[#e0a085] mb-2">🚗 De Carro</h4>
                   <p className="text-sm text-gray-600">
-                    Estacionamento disponível no campus. Siga pela Av. Francisco Getúlio Vargas.
+                    Estacionamento gratuito disponível no campus. Siga pela Av. Francisco Getúlio
+                    Vargas.
                   </p>
                 </div>
 
