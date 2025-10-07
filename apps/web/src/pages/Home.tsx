@@ -63,7 +63,7 @@ export default function Home() {
       </Section>
 
       <Section title={t("home.featuredSpeakers")} background="gray">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10 max-w-8xl mx-auto">
           {speakers.map((speaker) => (
             <SpeakerCard key={speaker.id} speaker={speaker} />
           ))}

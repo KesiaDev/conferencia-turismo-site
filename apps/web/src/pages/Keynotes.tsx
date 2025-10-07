@@ -41,7 +41,7 @@ export default function Keynotes() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-10 max-w-8xl mx-auto">
           {speakers.map((speaker) => (
             <SpeakerCard key={speaker.id} speaker={speaker} />
           ))}
