@@ -49,6 +49,11 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+// Test endpoint
+app.get("/test", (req, res) => {
+  res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
+});
+
 // Routes
 app.use("/api/meta", metaRouter);
 app.use("/api/speakers", speakersRouter);
@@ -72,4 +77,10 @@ app.use((err: Error, req: express.Request, res: express.Response) => {
 app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📡 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`🔧 API Routes configured:`);
+  console.log(`   - GET /health`);
+  console.log(`   - GET /test`);
+  console.log(`   - POST /api/submissions`);
+  console.log(`   - POST /api/panels`);
+  console.log(`   - POST /api/contact`);
 });
