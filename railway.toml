@@ -10,4 +10,5 @@ restartPolicyMaxRetries = 10
 # URGENTE: FRONTEND DEVE SER SERVIDO NO DOMÍNIO PRINCIPAL
 # Site: turismocinematografico.com.br
 # Status: ERRO 404 - Precisa servir HTML, não JSON
-# Data: $(date)
+# Data: 2024-01-XX
+# FORÇA ATUALIZAÇÃO: Frontend deve funcionar AGORA!
