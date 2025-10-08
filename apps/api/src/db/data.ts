@@ -128,7 +128,7 @@ export const program: ProgramDay[] = [
       {
         time: "15:10–15:30",
         title: "Coffee break",
-        location: "Hall Bloco F",
+        location: "Hall do Bloco F",
         kind: "break",
       },
       {
@@ -143,7 +143,7 @@ export const program: ProgramDay[] = [
         description:
           "Entre palavras: o impacto regional do turismo literário e cinematográfico no território",
         speaker: "Diomira Maria Cicci Pinto Faria (UFMG)",
-        location: "Auditório H",
+        location: "UCS Teatro",
         kind: "keynote",
       },
       {
@@ -167,7 +167,7 @@ export const program: ProgramDay[] = [
       {
         time: "10:15–10:30",
         title: "Coffee break",
-        location: "Hall Bloco F",
+        location: "Hall do Bloco F",
         kind: "break",
       },
       {
@@ -194,7 +194,7 @@ export const program: ProgramDay[] = [
       {
         time: "15:00–15:15",
         title: "Coffee break",
-        location: "Hall Bloco F",
+        location: "Hall do Bloco F",
         kind: "break",
       },
       {
@@ -210,7 +210,7 @@ export const program: ProgramDay[] = [
       {
         time: "17:15–18:00",
         title: "Encerramento das atividades acadêmicas + Networking",
-        location: "Hall Bloco F",
+        location: "UCS Teatro",
         kind: "service",
       },
     ],

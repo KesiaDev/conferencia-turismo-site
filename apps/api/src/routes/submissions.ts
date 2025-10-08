@@ -20,9 +20,10 @@ router.post("/", async (req, res) => {
 
     submissions.push(submission);
 
-    // Envia email para a organização
+    // Envia email para a organização (não bloqueia a resposta)
     emailService.sendSubmissionNotification(validated).catch((err) => {
       console.error("Erro ao enviar email de submissão:", err);
+      console.error("Stack trace:", err instanceof Error ? err.stack : "No stack trace");
     });
 
     res.status(201).json({

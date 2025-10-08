@@ -1,0 +1,10 @@
+node_modules
+src
+*.ts
+tsconfig.json
+nodemon.json
+.git
+.gitignore
+README.md
+output
+*.log

@@ -102,5 +102,3 @@ Os emails serão enviados automaticamente para: `litfilmtourismconferenceucs@gma
 ## 📞 Suporte
 
 Se tiver problemas, me avise que te ajudo!
-
-

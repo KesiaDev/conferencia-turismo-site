@@ -51,9 +51,13 @@ export const emailService = {
 
     // Gerar documentos
     try {
+      console.log("🔄 Iniciando geração de PDF...");
       const pdfPath = await PDFGenerator.generatePDF(data);
+      console.log("✅ PDF gerado com sucesso:", pdfPath);
+
+      console.log("🔄 Iniciando geração de Word...");
       const wordPath = await PDFGenerator.generateWord(data);
-      console.log("📄 Documentos gerados:", pdfPath, wordPath);
+      console.log("✅ Word gerado com sucesso:", wordPath);
 
       // Se transporter estiver configurado, envia email real
       if (transporter) {
@@ -163,6 +167,8 @@ export const emailService = {
       }
     } catch (error) {
       console.error("❌ Erro ao gerar documentos:", error);
+      console.error("❌ Stack trace:", error instanceof Error ? error.stack : "No stack trace");
+      throw error;
     }
   },
 
