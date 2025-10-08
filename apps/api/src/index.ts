@@ -16,6 +16,8 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+console.log("🔍 DEBUG - PORT:", PORT);
+console.log("🔍 DEBUG - process.env.PORT:", process.env.PORT);
 
 // Middleware
 app.use(helmet());

@@ -23,7 +23,7 @@ export default function Program() {
               {
                 time: "08h00 – 09h30",
                 title: "Credenciamento",
-                location: "Hall de Entrada",
+                location: "Hall Bloco F",
                 kind: "service",
               },
               {
@@ -31,7 +31,7 @@ export default function Program() {
                 title: "Abertura Oficial",
                 description:
                   "Representantes: Ministério do Turismo, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
-                location: "Auditório Principal",
+                location: "UCS Teatro",
                 kind: "plenary",
               },
               {
@@ -40,33 +40,33 @@ export default function Program() {
                 description:
                   "Turismo Literário e Cinematográfico como vetor de desenvolvimento territorial, inovação e internacionalização do Brasil",
                 speaker: "Representante da Embratur ou Ancine (a definir)",
-                location: "Auditório Principal",
+                location: "UCS Teatro",
                 kind: "keynote",
               },
               {
                 time: "12h00 – 13h30",
                 title: "Intervalo / Almoço livre",
-                location: "Restaurante Universitário",
+                location: "—",
                 kind: "break",
               },
               {
                 time: "13h30 – 15h00",
                 title: "Sessões Paralelas de Comunicação Científica",
                 description: "Comunicações científicas",
-                location: "Salas 101, 102, 103",
+                location: "Bloco F",
                 kind: "sessions",
               },
               {
                 time: "15h10 – 15h30",
                 title: "Coffee break",
-                location: "Hall de Entrada",
+                location: "Hall do Bloco F",
                 kind: "break",
               },
               {
                 time: "15h35 – 17h00",
                 title: "Sessões Paralelas de Comunicação Científica",
                 description: "Comunicações científicas",
-                location: "Salas 101, 102, 103",
+                location: "Bloco F",
                 kind: "sessions",
               },
               {
@@ -75,7 +75,7 @@ export default function Program() {
                 description:
                   "Entre palavras: o impacto regional do turismo literário e cinematográfico no território",
                 speaker: "Profa. Diomira Maria Cicci Pinto Faria (UFMG)",
-                location: "Auditório Principal",
+                location: "UCS Teatro",
                 kind: "keynote",
               },
               {
@@ -94,13 +94,13 @@ export default function Program() {
                 time: "09h00 – 10h30",
                 title: "Sessões Paralelas de Comunicações Científicas",
                 description: "Comunicações científicas",
-                location: "Salas 101, 102, 103",
+                location: "Bloco F",
                 kind: "sessions",
               },
               {
                 time: "10h15 – 10h30",
                 title: "Coffee break",
-                location: "Hall de Entrada",
+                location: "Hall do Bloco F",
                 kind: "break",
               },
               {
@@ -109,26 +109,26 @@ export default function Program() {
                 description: "Turismo literário, turismo cinematográfico e inovação territorial",
                 speaker:
                   "Deborah Castro-Mariño (Univ. Groningen, Países Baixos), Jordi Arcos-Pumarola (CETT – Univ. Barcelona, Espanha), Rita Baleiro (Univ. Algarve, Portugal)",
-                location: "Auditório Principal",
+                location: "Auditório Bloco H",
                 kind: "plenary",
               },
               {
                 time: "12h00 – 13h30",
                 title: "Intervalo / Almoço livre",
-                location: "Restaurante Universitário",
+                location: "—",
                 kind: "break",
               },
               {
                 time: "13h30 – 15h00",
                 title: "Sessões Paralelas de Comunicação Científica",
                 description: "Comunicações científicas",
-                location: "Salas 101, 102, 103",
+                location: "Bloco F",
                 kind: "sessions",
               },
               {
                 time: "15h00 – 15h15",
                 title: "Coffee break",
-                location: "Hall de Entrada",
+                location: "Hall do Bloco F",
                 kind: "break",
               },
               {
@@ -138,13 +138,13 @@ export default function Program() {
                   "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
                 speaker:
                   "Lissandro Stallivieri (cineasta, professor de cinema UCS, Spaghetti Films), Representante da Film Commission Porto Alegre (a confirmar), André Perinotto (UFPI / Film Commission Noronha 2B)",
-                location: "Auditório Principal",
+                location: "Auditório Bloco H",
                 kind: "panel",
               },
               {
                 time: "17h15 – 18h00",
                 title: "Encerramento das atividades acadêmicas + Networking",
-                location: "Auditório Principal",
+                location: "UCS Teatro",
                 kind: "networking",
               },
             ],
