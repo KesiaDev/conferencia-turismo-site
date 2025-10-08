@@ -1,10 +1,10 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
+buildCommand = "npm run build"
 
 [deploy]
-startCommand = "cd apps/web && npx serve dist -p $PORT -s"
+startCommand = "npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# FORCE DEPLOY - Frontend deve ser servido no domínio principal
+# API Configuration - Build and serve the API
