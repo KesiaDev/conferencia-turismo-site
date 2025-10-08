@@ -10,9 +10,7 @@ restartPolicyMaxRetries = 10
 [env]
 NODE_ENV = "production"
 PORT = "3001"
-PUPPETEER_EXECUTABLE_PATH = "/usr/bin/chromium-browser"
-PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "false"
-DISPLAY = ":99"
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
 EMAIL_USER = "litfilmtourismconferenceucs@gmail.com"
 EMAIL_PASS = "ownzmecmczapbxfb"
 CONFERENCE_EMAIL = "litfilmtourismconferenceucs@gmail.com"
