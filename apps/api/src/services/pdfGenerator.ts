@@ -1,4 +1,3 @@
-import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
 import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel } from "docx";
@@ -26,89 +25,20 @@ export class PDFGenerator {
     await this.ensureDirectories();
 
     const timestamp = Date.now();
-    const fileName = `submission_${timestamp}_sem_autoria.pdf`;
-    const pdfPath = path.join(this.OUTPUT_DIR, fileName);
+    const fileName = `submission_${timestamp}_sem_autoria.html`;
+    const htmlPath = path.join(this.OUTPUT_DIR, fileName);
 
     try {
-      // Gerar HTML
+      // Gerar HTML formatado para impressão
       const html = await this.generateHTML(data);
 
-      // Configuração otimizada para Railway
-      const browser = await puppeteer.launch({
-        headless: true,
-        args: [
-          "--no-sandbox",
-          "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage",
-          "--disable-gpu",
-          "--disable-web-security",
-          "--disable-features=VizDisplayCompositor",
-          "--single-process",
-          "--no-zygote",
-          "--disable-background-timer-throttling",
-          "--disable-backgrounding-occluded-windows",
-          "--disable-renderer-backgrounding",
-          "--disable-extensions",
-          "--disable-plugins",
-          "--disable-images",
-          "--disable-javascript",
-          "--disable-default-apps",
-          "--disable-sync",
-          "--disable-translate",
-          "--hide-scrollbars",
-          "--mute-audio",
-          "--no-first-run",
-          "--disable-ipc-flooding-protection",
-        ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
-        timeout: 60000,
-      });
-
-      try {
-        const page = await browser.newPage();
-
-        // Configurar viewport
-        await page.setViewport({ width: 1200, height: 800 });
-
-        // Definir conteúdo HTML
-        await page.setContent(html, {
-          waitUntil: "domcontentloaded",
-          timeout: 30000,
-        });
-
-        // Aguardar um pouco para garantir que tudo carregou
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        // Gerar PDF
-        const pdfBuffer = await page.pdf({
-          format: "A4",
-          margin: {
-            top: "2cm",
-            right: "2cm",
-            bottom: "2cm",
-            left: "2cm",
-          },
-          printBackground: true,
-          displayHeaderFooter: false,
-          preferCSSPageSize: true,
-        });
-
-        // Salvar PDF
-        fs.writeFileSync(pdfPath, pdfBuffer);
-        console.log(`📄 PDF REAL gerado: ${pdfPath}`);
-        return pdfPath;
-      } finally {
-        await browser.close();
-      }
-    } catch (error) {
-      console.error("❌ Erro ao gerar PDF:", error);
-      // Se falhar, criar um arquivo HTML como fallback
-      const htmlFileName = `submission_${timestamp}_sem_autoria.html`;
-      const htmlPath = path.join(this.OUTPUT_DIR, htmlFileName);
-      const html = await this.generateHTML(data);
+      // Salvar como HTML (pode ser convertido para PDF pelo navegador)
       fs.writeFileSync(htmlPath, html);
-      console.log(`📄 HTML gerado como fallback: ${htmlPath}`);
+      console.log(`📄 Documento HTML gerado: ${htmlPath}`);
       return htmlPath;
+    } catch (error) {
+      console.error("❌ Erro ao gerar documento:", error);
+      throw error;
     }
   }
 
