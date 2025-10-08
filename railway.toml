@@ -1,8 +1,8 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/api build"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
 
 [deploy]
-startCommand = "cd apps/api && npm start"
+startCommand = "cd apps/web && npx serve dist -p $PORT -s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
