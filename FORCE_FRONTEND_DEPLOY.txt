@@ -1,0 +1,7 @@
+FORCE FRONTEND DEPLOY - URGENTE!
+Timestamp: $(date)
+Site: turismocinematografico.com.br
+Status: ERRO 404 - Precisa servir FRONTEND
+Action: RESTAURAR FRONTEND NO DOMÍNIO PRINCIPAL
+Build: pnpm --filter @conferencia/web build
+Start: cd apps/web && npx serve dist -p $PORT -s
