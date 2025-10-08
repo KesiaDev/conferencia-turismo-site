@@ -1,10 +1,10 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm run build"
+buildCommand = "cd apps/api && npm run build"
 
 [deploy]
-startCommand = "npm start"
+startCommand = "cd apps/api && npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# API Configuration - Build and serve the API
+# FORCE API DEPLOY - Build and serve the API from apps/api directory

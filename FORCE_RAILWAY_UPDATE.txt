@@ -1,0 +1,5 @@
+FORCE RAILWAY UPDATE - API CONFIGURATION
+Timestamp: $(date)
+Build Command: cd apps/api && npm run build
+Start Command: cd apps/api && npm start
+This should build and serve the API, not the frontend!
