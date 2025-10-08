@@ -7,4 +7,7 @@ startCommand = "cd apps/web && npx serve dist -p $PORT -s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# FRONTEND - Serve the web frontend on the main domain
+# URGENTE: FRONTEND DEVE SER SERVIDO NO DOMÍNIO PRINCIPAL
+# Site: turismocinematografico.com.br
+# Status: ERRO 404 - Precisa servir HTML, não JSON
+# Data: $(date)
