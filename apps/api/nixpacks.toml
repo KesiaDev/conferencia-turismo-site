@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["chromium", "chromedriver"]
+nixPkgs = ["chromium", "chromedriver", "nss", "atk", "at-spi2-atk", "gtk3", "libdrm", "libxcomposite", "libxdamage", "libxrandr", "libgbm", "libxss", "libasound2"]
 
 [phases.install]
 cmds = ["npm ci"]
@@ -13,3 +13,4 @@ cmd = "npm start"
 [env]
 PUPPETEER_EXECUTABLE_PATH = "/nix/store/*-chromium-*/bin/chromium"
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+DISPLAY = ":99"
