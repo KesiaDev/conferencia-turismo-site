@@ -6,3 +6,5 @@ buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
 startCommand = "cd apps/web && npx serve dist -p $PORT -s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
+
+# FORCE DEPLOY - Frontend deve ser servido no domínio principal
