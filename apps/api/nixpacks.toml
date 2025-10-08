@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["chromium", "chromedriver", "nss", "atk", "at-spi2-atk", "gtk3", "libdrm", "libxcomposite", "libxdamage", "libxrandr", "libgbm", "libxss", "libasound2"]
+nixPkgs = ["chromium", "chromedriver", "nss", "atk", "at-spi2-atk", "gtk3", "libdrm", "libxcomposite", "libxdamage", "libxrandr", "libgbm", "libxss", "libasound2", "xorg.libX11", "xorg.libXcomposite", "xorg.libXdamage", "xorg.libXext", "xorg.libXfixes", "xorg.libXrandr", "xorg.libXrender", "xorg.libXScrnSaver", "xorg.libXtst", "xorg.libXi", "xorg.libXcursor", "xorg.libXinerama"]
 
 [phases.install]
 cmds = ["npm ci"]
