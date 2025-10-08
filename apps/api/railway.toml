@@ -9,3 +9,5 @@ restartPolicyMaxRetries = 10
 [env]
 NODE_ENV = "production"
 PORT = "3001"
+PUPPETEER_EXECUTABLE_PATH = "/nix/store/*-chromium-*/bin/chromium"
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
