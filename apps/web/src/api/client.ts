@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_BASE_URL =
-  import.meta.env.VITE_API_URL || "https://conferenciaapi-producao.up.railway.app/api";
+  import.meta.env.VITE_API_URL || "https://conferenciaapi-production.up.railway.app/api";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
