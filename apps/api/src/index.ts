@@ -4,7 +4,6 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import path from "path";
-import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -69,27 +68,9 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
-// Determine frontend path based on environment
-// Try multiple possible paths for frontend location
-const possiblePaths = [
-  path.resolve(process.cwd(), "..", "web", "dist"), // Development & Railway monorepo
-  path.resolve(process.cwd(), "dist"), // If frontend is built inside API folder
-  path.resolve(process.cwd(), "../../web/dist"), // Alternative structure
-];
-
-let frontendPath = possiblePaths[0];
-
-// Find the correct path
-for (const testPath of possiblePaths) {
-  const indexPath = path.join(testPath, "index.html");
-  if (fs.existsSync(indexPath)) {
-    frontendPath = testPath;
-    console.log("✅ Found frontend at:", frontendPath);
-    break;
-  }
-}
-
-console.log("🔍 Frontend path:", frontendPath);
+// Caminho do frontend correto após build (apps/api/dist/ -> apps/web/dist/)
+const frontendPath = path.resolve(__dirname, "../../web/dist");
+console.log("📁 Servindo frontend de:", frontendPath);
 console.log("🔍 Current working directory:", process.cwd());
 console.log("🔍 __dirname:", __dirname);
 
