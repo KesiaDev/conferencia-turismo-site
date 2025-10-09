@@ -370,13 +370,11 @@ export default function Call() {
                 <select
                   id="language"
                   required
-                  value={formData.language}
-                  onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  value="pt"
+                  className="w-full border border-gray-300 rounded-lg p-3 bg-gray-100"
+                  disabled
                 >
                   <option value="pt">Português</option>
-                  <option value="en">English</option>
-                  <option value="es">Español</option>
                 </select>
               </div>
 
