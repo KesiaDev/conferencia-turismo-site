@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
+import path from "path";
 
 import metaRouter from "./routes/meta.js";
 import speakersRouter from "./routes/speakers.js";
@@ -44,6 +45,10 @@ const limiter = rateLimit({
 
 app.use("/api/", limiter);
 
+// Serve static files from frontend
+const frontendPath = path.join(process.cwd(), "..", "web", "dist");
+app.use(express.static(frontendPath));
+
 // Health check
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
@@ -63,9 +68,16 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: "Not found" });
+// Serve React app for all non-API routes (SPA fallback)
+app.get("*", (req, res) => {
+  // Skip API routes
+  if (req.path.startsWith("/api/")) {
+    return res.status(404).json({ error: "API route not found" });
+  }
+
+  // Serve React app
+  const indexPath = path.join(process.cwd(), "..", "web", "dist", "index.html");
+  res.sendFile(indexPath);
 });
 
 // Error handler
