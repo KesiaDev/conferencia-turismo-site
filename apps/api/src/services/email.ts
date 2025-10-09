@@ -18,6 +18,16 @@ const createTransporter = () => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS, // Senha de App do Gmail
     },
+    connectionTimeout: 60000, // 60 segundos
+    greetingTimeout: 30000, // 30 segundos
+    socketTimeout: 60000, // 60 segundos
+    pool: true, // Usar connection pool
+    maxConnections: 5,
+    maxMessages: 100,
+    rateDelta: 1000,
+    rateLimit: 5,
+    debug: true, // Habilitar debug
+    logger: true, // Habilitar logger
   });
 };
 
@@ -90,8 +100,8 @@ export const emailService = {
             ]
           : [];
 
-        // Email para a organização
-        await transporter.sendMail({
+        // Email para a organização (com retry)
+        await this.sendEmailWithRetry(transporter, {
           from: process.env.EMAIL_USER,
           to: destinationEmail,
           replyTo: data.email,
@@ -132,8 +142,8 @@ export const emailService = {
         });
         console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
 
-        // Email de confirmação para o candidato
-        await transporter.sendMail({
+        // Email de confirmação para o candidato (com retry)
+        await this.sendEmailWithRetry(transporter, {
           from: process.env.EMAIL_USER,
           to: data.email,
           subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
@@ -389,6 +399,30 @@ export const emailService = {
       }
     } catch (error) {
       console.error("❌ Erro ao gerar documentos do painel:", error);
+    }
+  },
+
+  // Função auxiliar para enviar email com retry
+  sendEmailWithRetry: async (transporter: any, mailOptions: any, maxRetries = 3) => {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`📤 Tentativa ${attempt}/${maxRetries} de envio de email...`);
+        const result = await transporter.sendMail(mailOptions);
+        console.log(`✅ Email enviado com sucesso na tentativa ${attempt}`);
+        return result;
+      } catch (error: any) {
+        console.error(`❌ Tentativa ${attempt} falhou:`, error.message);
+
+        if (attempt === maxRetries) {
+          console.error(`❌ Todas as ${maxRetries} tentativas falharam`);
+          throw error;
+        }
+
+        // Aguardar antes da próxima tentativa (backoff exponencial)
+        const delay = Math.pow(2, attempt) * 1000; // 2s, 4s, 8s...
+        console.log(`⏳ Aguardando ${delay}ms antes da próxima tentativa...`);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
     }
   },
 };
