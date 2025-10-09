@@ -43,11 +43,8 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           ) : (
             <img
               src={speaker.photo}
-              alt={speaker.name}
-              className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110 speaker-photo"
-              style={{
-                objectPosition: "50% 10%",
-              }}
+              alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 speaker-photo object-[50%_10%]"
               loading="lazy"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =

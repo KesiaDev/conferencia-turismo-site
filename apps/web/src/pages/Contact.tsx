@@ -65,6 +65,7 @@ export default function Contact() {
                   <a
                     href="mailto:litfilmtourismconferenceucs@gmail.com"
                     className="text-accent hover:underline"
+                    rel="noopener noreferrer"
                   >
                     litfilmtourismconferenceucs@gmail.com
                   </a>

@@ -58,12 +58,8 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
               <div className="aspect-square rounded-full overflow-hidden shadow-lg">
                 <img
                   src={speaker.photoModal || speaker.photo}
-                  alt={speaker.name}
-                  className="w-full h-full object-cover"
-                  style={{
-                    imageRendering: "crisp-edges" as any,
-                    filter: "contrast(1.05) brightness(1.02) saturate(1.02)",
-                  }}
+                  alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
+                  className="w-full h-full object-cover speaker-photo"
                   loading="eager"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src =

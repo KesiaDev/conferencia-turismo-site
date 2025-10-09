@@ -33,14 +33,40 @@ export default function Call() {
     apiService.getCallInfo().then(setCallInfo);
   }, []);
 
+  // Função para contar palavras
+  const countWords = (text: string): number => {
+    return text
+      .trim()
+      .split(/\s+/)
+      .filter((word) => word.length > 0).length;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validação de palavras no resumo (300 palavras)
+    const wordCount = countWords(formData.abstract);
+    if (wordCount > 300) {
+      setSubmitStatus("error");
+      alert(`O resumo deve ter no máximo 300 palavras. Atualmente: ${wordCount} palavras.`);
+      return;
+    }
+
+    // Validação de keywords (3-5)
+    const keywordsArray = formData.keywords
+      .split(",")
+      .map((k) => k.trim())
+      .filter((k) => k.length > 0);
+    if (keywordsArray.length < 3 || keywordsArray.length > 5) {
+      setSubmitStatus("error");
+      alert(`Informe entre 3 e 5 palavras-chave. Atualmente: ${keywordsArray.length}`);
+      return;
+    }
+
     setSubmitStatus("loading");
 
     try {
-      console.log("🚀 Enviando dados:", formData);
-      const result = await apiService.submitAbstract(formData);
-      console.log("✅ Resposta recebida:", result);
+      await apiService.submitAbstract(formData);
       setSubmitStatus("success");
       setFormData({
         name: "",
@@ -57,7 +83,6 @@ export default function Call() {
         language: "pt",
       });
     } catch (error) {
-      console.error("❌ Erro no envio:", error);
       setSubmitStatus("error");
     }
   };
@@ -130,8 +155,8 @@ export default function Call() {
                       3. Resumo (até 300 palavras):
                     </p>
                     <p className="ml-4 text-base">
-                      No campo "resumo", redija o texto em um único parágrafo, observando as partes
-                      que devem compor o resumo:
+                      No campo &ldquo;resumo&rdquo;, redija o texto em um único parágrafo,
+                      observando as partes que devem compor o resumo:
                     </p>
                     <ul className="ml-8 mt-2 space-y-1.5 text-sm">
                       <li>• Objetivos da pesquisa</li>
@@ -403,7 +428,7 @@ export default function Call() {
 
               <div>
                 <label htmlFor="abstract" className="block font-semibold mb-2">
-                  {t("call.abstract")} * (300 palavras)
+                  {t("call.abstract")} * (máximo 300 palavras)
                 </label>
                 <textarea
                   id="abstract"
@@ -411,17 +436,28 @@ export default function Call() {
                   rows={6}
                   value={formData.abstract}
                   onChange={(e) => {
-                    const text = e.target.value;
-                    if (text.length <= 2000) {
-                      setFormData({ ...formData, abstract: text });
-                    }
+                    setFormData({ ...formData, abstract: e.target.value });
                   }}
                   className="w-full border border-gray-300 rounded-lg p-3"
-                  placeholder="Resumo geral do trabalho (máximo 2000 caracteres)"
+                  placeholder="Resumo geral do trabalho (objetivos, metodologia, resultados e conclusões)"
                 />
-                <div className="text-sm text-gray-500 mt-1">
-                  {formData.abstract.length}/2000 caracteres
+                <div className="text-sm mt-1 flex justify-between">
+                  <span
+                    className={
+                      countWords(formData.abstract) > 300
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-500"
+                    }
+                  >
+                    {countWords(formData.abstract)}/300 palavras
+                  </span>
+                  <span className="text-gray-400">{formData.abstract.length} caracteres</span>
                 </div>
+                {countWords(formData.abstract) > 300 && (
+                  <p className="text-xs text-red-600 mt-1">
+                    ⚠️ O resumo excede o limite de 300 palavras
+                  </p>
+                )}
               </div>
 
               <div>
@@ -441,7 +477,7 @@ export default function Call() {
 
               <div>
                 <label htmlFor="keywords" className="block font-semibold mb-2">
-                  {t("call.keywords")} *
+                  {t("call.keywords")} * (3 a 5 palavras-chave)
                 </label>
                 <input
                   type="text"
@@ -452,6 +488,15 @@ export default function Call() {
                   onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
                   className="w-full border border-gray-300 rounded-lg p-3"
                 />
+                <div className="text-xs text-gray-500 mt-1">
+                  {
+                    formData.keywords
+                      .split(",")
+                      .map((k) => k.trim())
+                      .filter((k) => k.length > 0).length
+                  }{" "}
+                  palavras-chave informadas (mínimo 3, máximo 5)
+                </div>
               </div>
 
               <div>

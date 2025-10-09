@@ -9,6 +9,7 @@ import Fees from "./pages/Fees";
 import Committees from "./pages/Committees";
 import Contact from "./pages/Contact";
 import Accessibility from "./pages/Accessibility";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/committees" element={<Committees />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/accessibility" element={<Accessibility />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Layout>
   );

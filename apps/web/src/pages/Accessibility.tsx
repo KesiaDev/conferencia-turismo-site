@@ -244,6 +244,7 @@ export default function Accessibility() {
                     <a
                       href="mailto:litfilmtourismconferenceucs@gmail.com"
                       className="text-[#e0a085] font-semibold hover:underline"
+                      rel="noopener noreferrer"
                     >
                       litfilmtourismconferenceucs@gmail.com
                     </a>

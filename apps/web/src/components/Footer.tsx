@@ -55,6 +55,7 @@ export default function Footer() {
               <a
                 href="mailto:litfilmtourismconferenceucs@gmail.com"
                 className="hover:text-white transition-colors"
+                rel="noopener noreferrer"
               >
                 litfilmtourismconferenceucs@gmail.com
               </a>

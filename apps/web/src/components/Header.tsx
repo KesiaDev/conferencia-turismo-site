@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import LanguageSelector from "./LanguageSelector";
 
 dayjs.extend(duration);
 
@@ -78,11 +79,7 @@ export default function Header() {
             <img
               src="/logo.svg"
               alt="LITFILM 2026"
-              className="h-10 sm:h-12 md:h-14 w-auto"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(75%) sepia(28%) saturate(545%) hue-rotate(328deg) brightness(95%) contrast(89%)",
-              }}
+              className="h-10 sm:h-12 md:h-14 w-auto logo-filter"
             />
           </Link>
         </div>
@@ -98,10 +95,17 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
+          <div className="border-l border-gray-700 pl-6 ml-2">
+            <LanguageSelector />
+          </div>
         </div>
 
         {/* Contador regressivo - responsivo */}
-        <div className="hidden md:flex lg:hidden items-center gap-2 absolute right-4">
+        <div
+          className="hidden md:flex lg:hidden items-center gap-2 absolute right-4"
+          role="timer"
+          aria-label="Contagem regressiva para a conferência"
+        >
           {[
             { value: timeLeft.days, label: "DIAS" },
             { value: timeLeft.hours, label: "HRS" },
@@ -117,7 +121,12 @@ export default function Header() {
         </div>
 
         {/* Desktop Contador regressivo - posicionado à direita */}
-        <div className="hidden lg:flex items-center gap-3 absolute right-20">
+        <div
+          className="hidden lg:flex items-center gap-3 absolute right-20"
+          role="timer"
+          aria-label="Contagem regressiva para a conferência"
+          aria-live="off"
+        >
           {[
             { value: timeLeft.days, label: "DIAS" },
             { value: timeLeft.hours, label: "HRS" },
@@ -139,7 +148,10 @@ export default function Header() {
         <button
           className="lg:hidden absolute right-4 p-2 text-white z-10"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+          {...(isMenuOpen && { "aria-expanded": true })}
+          aria-controls="mobile-menu"
+          type="button"
         >
           <svg
             className="w-6 h-6 sm:w-7 sm:h-7"
@@ -149,6 +161,7 @@ export default function Header() {
             strokeWidth="2"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
           </svg>
@@ -156,7 +169,12 @@ export default function Header() {
 
         {/* Mobile Menu - melhorado */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800">
+          <div
+            id="mobile-menu"
+            className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800"
+            role="navigation"
+            aria-label="Menu de navegação mobile"
+          >
             <div className="px-4 py-6 space-y-3">
               {navigation.map((item) => (
                 <Link
@@ -170,7 +188,11 @@ export default function Header() {
               ))}
 
               {/* Mobile Countdown */}
-              <div className="pt-4 mt-4 border-t border-gray-700">
+              <div
+                className="pt-4 mt-4 border-t border-gray-700"
+                role="timer"
+                aria-label="Contagem regressiva para a conferência"
+              >
                 <div className="flex justify-center gap-3">
                   {[
                     { value: timeLeft.days, label: "DIAS" },
@@ -188,6 +210,11 @@ export default function Header() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* Mobile Language Selector */}
+              <div className="pt-4 flex justify-center">
+                <LanguageSelector />
               </div>
             </div>
           </div>
