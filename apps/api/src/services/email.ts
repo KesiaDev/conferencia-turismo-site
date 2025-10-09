@@ -1,9 +1,9 @@
-import nodemailer from "nodemailer";
+import nodemailer, { Transporter } from "nodemailer";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
 import { panelDocumentGenerator, PanelSubmissionData } from "./panelDocumentGenerator.js";
 
 // Configuração do transporter
-const createTransporter = () => {
+const createTransporter = (): Transporter | null => {
   // Se as credenciais não estiverem configuradas, retorna null
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.warn(
@@ -18,13 +18,7 @@ const createTransporter = () => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS, // Senha de App do Gmail
     },
-    connectionTimeout: 10000, // 10 segundos (reduzido para deploy mais rápido)
-    greetingTimeout: 5000, // 5 segundos (reduzido)
-    socketTimeout: 10000, // 10 segundos (reduzido)
-    pool: false, // Desabilitar pool para Railway
-    debug: false, // Desabilitar debug em produção
-    logger: false, // Desabilitar logger em produção
-  });
+  } as any);
 };
 
 export const emailService = {
@@ -97,7 +91,7 @@ export const emailService = {
           : [];
 
         // Email para a organização (com retry)
-        await this.sendEmailWithRetry(transporter, {
+        await emailService.sendEmailWithRetry(transporter, {
           from: process.env.EMAIL_USER,
           to: destinationEmail,
           replyTo: data.email,
@@ -139,7 +133,7 @@ export const emailService = {
         console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
 
         // Email de confirmação para o candidato (com retry)
-        await this.sendEmailWithRetry(transporter, {
+        await emailService.sendEmailWithRetry(transporter, {
           from: process.env.EMAIL_USER,
           to: data.email,
           subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
