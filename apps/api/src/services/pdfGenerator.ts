@@ -47,7 +47,6 @@ export class PDFGenerator {
           "--disable-renderer-backgrounding",
           "--disable-extensions",
           "--disable-plugins",
-          "--disable-images",
           "--disable-javascript",
           "--disable-default-apps",
           "--disable-sync",
@@ -65,10 +64,10 @@ export class PDFGenerator {
         const page = await browser.newPage();
         await page.setViewport({ width: 1200, height: 800 });
         await page.setContent(html, {
-          waitUntil: "domcontentloaded",
-          timeout: 30000,
+          waitUntil: "networkidle0",
+          timeout: 60000,
         });
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         const pdfBuffer = await page.pdf({
           format: "A4",
           margin: {
