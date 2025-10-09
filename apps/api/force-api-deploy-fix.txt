@@ -1,0 +1,13 @@
+🚨 URGENT API FIX - Railway serving frontend instead of API
+
+ISSUE: https://conferenciaapi-production.up.railway.app was serving the frontend HTML instead of API JSON responses
+
+FIXED:
+- Corrected apps/api/railway.json configuration
+- Changed buildCommand from frontend to API build
+- Changed startCommand from frontend preview to API start
+
+This file forces Railway to redeploy the API with correct configuration.
+
+Timestamp: $(Get-Date)
+Commit: Force API deploy fix
