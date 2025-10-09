@@ -1,0 +1,17 @@
+🚨 FORÇAR REDEPLOY RAILWAY - URGENTE
+
+Data: $(Get-Date)
+Commit: c084c50 - fix: incluir build do frontend no deploy do Railway
+
+MUDANÇAS APLICADAS:
+✅ Corrigido railway.toml para buildar frontend antes da API
+✅ Comando: pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build
+✅ Garantir que apps/web/dist existe no container da Railway
+✅ Resolver problema do Express não encontrar index.html
+
+PROBLEMA RESOLVIDO:
+- O Railway agora vai incluir o build do frontend no deploy
+- O Express vai encontrar o index.html em /app/apps/web/dist/
+- O site vai parar de retornar {"error":"Not found"}
+
+STATUS: READY FOR IMMEDIATE REDEPLOY
