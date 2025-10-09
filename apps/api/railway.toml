@@ -1,16 +1,17 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm run build"
+buildCommand = "npm ci --only=production && npm run build"
 
 [deploy]
 startCommand = "npm start"
 restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 10
+restartPolicyMaxRetries = 3
 
 [env]
 NODE_ENV = "production"
 PORT = "3001"
 PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
+PUPPETEER_SKIP_DOWNLOAD = "true"
 EMAIL_USER = "litfilmtourismconferenceucs@gmail.com"
 EMAIL_PASS = "ownzmecmczapbxfb"
 CONFERENCE_EMAIL = "litfilmtourismconferenceucs@gmail.com"

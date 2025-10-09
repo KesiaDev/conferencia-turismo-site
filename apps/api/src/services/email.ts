@@ -18,16 +18,12 @@ const createTransporter = () => {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS, // Senha de App do Gmail
     },
-    connectionTimeout: 60000, // 60 segundos
-    greetingTimeout: 30000, // 30 segundos
-    socketTimeout: 60000, // 60 segundos
-    pool: true, // Usar connection pool
-    maxConnections: 5,
-    maxMessages: 100,
-    rateDelta: 1000,
-    rateLimit: 5,
-    debug: true, // Habilitar debug
-    logger: true, // Habilitar logger
+    connectionTimeout: 10000, // 10 segundos (reduzido para deploy mais rápido)
+    greetingTimeout: 5000, // 5 segundos (reduzido)
+    socketTimeout: 10000, // 10 segundos (reduzido)
+    pool: false, // Desabilitar pool para Railway
+    debug: false, // Desabilitar debug em produção
+    logger: false, // Desabilitar logger em produção
   });
 };
 
