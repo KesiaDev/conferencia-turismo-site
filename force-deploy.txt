@@ -1,1 +1,8 @@
-Force deploy - $(date)
+FORCE DEPLOY - $(date)
+Deploy forçado para aplicar correções de email
+- Timeout SMTP aumentado para 60s
+- Retry automático implementado  
+- Connection pooling ativado
+- Debug habilitado
+
+Timestamp: $(date +%s)
