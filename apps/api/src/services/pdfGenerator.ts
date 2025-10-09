@@ -137,34 +137,7 @@ export class PDFGenerator {
       console.error("❌ Erro:", error);
     }
 
-    // Header da Conferência (texto - fallback se imagem não carregar)
-    children.push(
-      new Paragraph({
-        text: "III Conferência Internacional sobre Turismo Literário e Cinematográfico",
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 100 },
-        children: [
-          new TextRun({
-            text: "III Conferência Internacional sobre Turismo Literário e Cinematográfico",
-            bold: true,
-            size: 24,
-            color: "e0a085",
-          }),
-        ],
-      }),
-      new Paragraph({
-        text: "Economia Criativa, Inovação e Desenvolvimento Territorial",
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 400 },
-        children: [
-          new TextRun({
-            text: "Economia Criativa, Inovação e Desenvolvimento Territorial",
-            size: 20,
-            color: "666666",
-          }),
-        ],
-      })
-    );
+    // Texto da conferência removido - informações já estão no banner visual
 
     // Título
     children.push(
