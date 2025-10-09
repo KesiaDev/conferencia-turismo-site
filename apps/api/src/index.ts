@@ -5,6 +5,12 @@ import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+// ES Module compatibility - __dirname equivalent
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 import metaRouter from "./routes/meta.js";
 import speakersRouter from "./routes/speakers.js";
