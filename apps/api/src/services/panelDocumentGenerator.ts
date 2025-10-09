@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import puppeteer from "puppeteer";
-import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel } from "docx";
+import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, ImageRun } from "docx";
 import type { PanelSubmission } from "../schemas/submission.js";
 
 export interface PanelSubmissionData extends PanelSubmission {
@@ -10,13 +10,13 @@ export interface PanelSubmissionData extends PanelSubmission {
 }
 
 export class PanelDocumentGenerator {
-  private async loadHeroImageAsBase64(): Promise<string> {
+  private async getHeroImagePath(): Promise<string | null> {
     try {
       // Tentar diferentes caminhos possíveis para a imagem
       const possiblePaths = [
-        path.join(process.cwd(), "public", "hero.png"),
         path.join(process.cwd(), "apps", "web", "public", "hero.png"),
         path.join(process.cwd(), "..", "web", "public", "hero.png"),
+        path.join(process.cwd(), "web", "public", "hero.png"),
       ];
 
       let heroImagePath = null;
@@ -29,6 +29,22 @@ export class PanelDocumentGenerator {
 
       if (!heroImagePath) {
         throw new Error("Imagem hero.png não encontrada em nenhum dos caminhos possíveis");
+      }
+
+      console.log("🎨 Banner oficial encontrado para painel:", heroImagePath);
+      return heroImagePath;
+    } catch (error) {
+      console.warn("⚠️  Não foi possível encontrar o banner oficial para painel.");
+      console.error("❌ Erro:", error);
+      return null;
+    }
+  }
+
+  private async loadHeroImageAsBase64(): Promise<string> {
+    try {
+      const heroImagePath = await this.getHeroImagePath();
+      if (!heroImagePath) {
+        throw new Error("Banner não encontrado");
       }
 
       console.log("🎨 Carregando banner oficial do evento para painel:", heroImagePath);
@@ -340,7 +356,39 @@ export class PanelDocumentGenerator {
     // Criar documento Word usando a biblioteca docx
     const children: Paragraph[] = [];
 
-    // Header da Conferência (texto)
+    // Banner visual igual ao PDF
+    try {
+      const heroImagePath = await this.getHeroImagePath();
+      if (heroImagePath) {
+        console.log("🎨 Adicionando banner visual ao documento Word do painel:", heroImagePath);
+        const imageBuffer = await fs.promises.readFile(heroImagePath);
+
+        // Adicionar imagem do banner
+        children.push(
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 200, before: 0 },
+            children: [
+              new ImageRun({
+                data: imageBuffer,
+                transformation: {
+                  width: 600,
+                  height: 200,
+                },
+                type: "png",
+              }),
+            ],
+          })
+        );
+      }
+    } catch (error) {
+      console.warn(
+        "⚠️ Não foi possível adicionar banner ao Word do painel. Usando texto alternativo."
+      );
+      console.error("❌ Erro:", error);
+    }
+
+    // Header da Conferência (texto - fallback se imagem não carregar)
     children.push(
       new Paragraph({
         text: "III Conferência Internacional sobre Turismo Literário e Cinematográfico",
