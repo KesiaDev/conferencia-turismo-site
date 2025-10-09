@@ -4,6 +4,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "fs";
 
 import metaRouter from "./routes/meta.js";
 import speakersRouter from "./routes/speakers.js";
@@ -17,8 +18,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-console.log("🔍 DEBUG - PORT:", PORT);
-console.log("🔍 DEBUG - process.env.PORT:", process.env.PORT);
 
 // Middleware
 app.use(helmet());
@@ -45,11 +44,7 @@ const limiter = rateLimit({
 
 app.use("/api/", limiter);
 
-// Serve static files from frontend
-const frontendPath = path.join(process.cwd(), "..", "web", "dist");
-app.use(express.static(frontendPath));
-
-// Health check
+// Health check (before static files to ensure it's always available)
 app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
@@ -59,7 +54,7 @@ app.get("/test", (req, res) => {
   res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
 });
 
-// Routes
+// API Routes (must come BEFORE static files and fallback)
 app.use("/api/meta", metaRouter);
 app.use("/api/speakers", speakersRouter);
 app.use("/api/program", programRouter);
@@ -68,16 +63,43 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
-// Serve React app for all non-API routes (SPA fallback)
-app.get("*", (req, res) => {
-  // Skip API routes
-  if (req.path.startsWith("/api/")) {
-    return res.status(404).json({ error: "API route not found" });
-  }
+// Determine frontend path based on environment
+// Try multiple possible paths for frontend location
+const possiblePaths = [
+  path.resolve(process.cwd(), "..", "web", "dist"), // Development & Railway monorepo
+  path.resolve(process.cwd(), "dist"), // If frontend is built inside API folder
+  path.resolve(process.cwd(), "../../web/dist"), // Alternative structure
+];
 
-  // Serve React app
-  const indexPath = path.join(process.cwd(), "..", "web", "dist", "index.html");
-  res.sendFile(indexPath);
+let frontendPath = possiblePaths[0];
+
+// Find the correct path
+for (const testPath of possiblePaths) {
+  const indexPath = path.join(testPath, "index.html");
+  if (fs.existsSync(indexPath)) {
+    frontendPath = testPath;
+    console.log("✅ Found frontend at:", frontendPath);
+    break;
+  }
+}
+
+console.log("🔍 Frontend path:", frontendPath);
+console.log("🔍 Current working directory:", process.cwd());
+console.log("🔍 __dirname:", __dirname);
+
+// Serve static files from frontend (after API routes)
+app.use(express.static(frontendPath));
+
+// SPA fallback - serve index.html for all non-API routes (MUST be last)
+app.get("*", (req, res) => {
+  const indexPath = path.join(frontendPath, "index.html");
+  console.log("🔍 Serving index.html from:", indexPath);
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("❌ Error serving index.html:", err);
+      res.status(404).json({ error: "Frontend not found" });
+    }
+  });
 });
 
 // Error handler
