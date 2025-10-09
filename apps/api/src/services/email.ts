@@ -49,126 +49,145 @@ export const emailService = {
     console.log(`Data: ${new Date().toLocaleString("pt-BR")}`);
     console.log("---\n");
 
-    // Gerar documentos
+    // Gerar documentos (com fallback se falhar)
+    let pdfPath = null;
+    let wordPath = null;
+    let documentsGenerated = false;
+
     try {
       console.log("🔄 Iniciando geração de PDF...");
-      const pdfPath = await PDFGenerator.generatePDF(data);
+      pdfPath = await PDFGenerator.generatePDF(data);
       console.log("✅ PDF gerado com sucesso:", pdfPath);
 
       console.log("🔄 Iniciando geração de Word...");
-      const wordPath = await PDFGenerator.generateWord(data);
+      wordPath = await PDFGenerator.generateWord(data);
       console.log("✅ Word gerado com sucesso:", wordPath);
 
-      // Se transporter estiver configurado, envia email real
-      if (transporter) {
-        try {
-          // Email para a organização
-          await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: destinationEmail,
-            replyTo: data.email,
-            subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
-            html: `
-              <h2>Nova Submissão de Trabalho</h2>
-              <p><strong>Nome:</strong> ${data.name}</p>
-              <p><strong>Email:</strong> ${data.email}</p>
-              <p><strong>Título:</strong> ${data.title}</p>
-              <p><strong>Linha Temática:</strong> ${data.track}</p>
-              <p><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</p>
-              <p><strong>Palavras-chave:</strong> ${data.keywords}</p>
-              <p><strong>Afiliação:</strong> ${data.affiliation}</p>
-              <p><strong>Titulação:</strong> ${data.degree}</p>
-              ${data.support ? `<p><strong>Apoio:</strong> ${data.support}</p>` : ""}
-              <p><strong>Resumo:</strong></p>
-              <p>${data.abstract}</p>
-              <p><strong>Referências:</strong></p>
-              <p>${data.references}</p>
-              <hr>
+      documentsGenerated = true;
+    } catch (docError) {
+      console.error("❌ Erro ao gerar documentos:", docError);
+      console.log("⚠️ Continuando sem anexos...");
+      documentsGenerated = false;
+    }
+
+    // Se transporter estiver configurado, envia email real
+    if (transporter) {
+      try {
+        // Preparar anexos apenas se documentos foram gerados
+        const attachments = documentsGenerated
+          ? [
+              {
+                filename: `submissao_${data.name.replace(/\s+/g, "_")}_sem_autoria.pdf`,
+                path: pdfPath,
+                contentType: "application/pdf",
+              },
+              {
+                filename: `submissao_${data.name.replace(/\s+/g, "_")}_com_autoria.docx`,
+                path: wordPath,
+                contentType:
+                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              },
+            ]
+          : [];
+
+        // Email para a organização
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: destinationEmail,
+          replyTo: data.email,
+          subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
+          html: `
+            <h2>Nova Submissão de Trabalho</h2>
+            <p><strong>Nome:</strong> ${data.name}</p>
+            <p><strong>Email:</strong> ${data.email}</p>
+            <p><strong>Título:</strong> ${data.title}</p>
+            <p><strong>Linha Temática:</strong> ${data.track}</p>
+            <p><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</p>
+            <p><strong>Palavras-chave:</strong> ${data.keywords}</p>
+            <p><strong>Afiliação:</strong> ${data.affiliation}</p>
+            <p><strong>Titulação:</strong> ${data.degree}</p>
+            ${data.support ? `<p><strong>Apoio:</strong> ${data.support}</p>` : ""}
+            <p><strong>Resumo:</strong></p>
+            <p>${data.abstract}</p>
+            <p><strong>Referências:</strong></p>
+            <p>${data.references}</p>
+            <hr>
+            ${
+              documentsGenerated
+                ? `
               <p><strong>Anexos:</strong></p>
               <ul>
                 <li>Documento PDF (sem autoria) - arquivo .pdf</li>
                 <li>Documento Word (com autoria) - arquivo .docx</li>
               </ul>
-              <p><small>Data: ${new Date().toLocaleString("pt-BR")}</small></p>
-            `,
-            attachments: [
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_sem_autoria.pdf`,
-                path: pdfPath,
-                contentType: "application/pdf",
-              },
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_com_autoria.docx`,
-                path: wordPath,
-                contentType:
-                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-              },
-            ],
-          });
-          console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
+            `
+                : `
+              <p><strong>⚠️ Aviso:</strong> Documentos em anexo não foram gerados devido a erro técnico.</p>
+              <p>Os dados da submissão estão disponíveis acima.</p>
+            `
+            }
+            <p><small>Data: ${new Date().toLocaleString("pt-BR")}</small></p>
+          `,
+          attachments,
+        });
+        console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
 
-          // Email de confirmação para o candidato
-          await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: data.email,
-            subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
-            html: `
-              <h2>Confirmação de Submissão Recebida</h2>
-              <p>Prezado(a) <strong>${data.name}</strong>,</p>
-              
-              <p>Sua submissão foi recebida com sucesso pela organização da III Conferência Internacional sobre Turismo Literário e Cinematográfico.</p>
-              
-              <h3>Detalhes da Submissão:</h3>
+        // Email de confirmação para o candidato
+        await transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: data.email,
+          subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
+          html: `
+            <h2>Confirmação de Submissão Recebida</h2>
+            <p>Prezado(a) <strong>${data.name}</strong>,</p>
+            
+            <p>Sua submissão foi recebida com sucesso pela organização da III Conferência Internacional sobre Turismo Literário e Cinematográfico.</p>
+            
+            <h3>Detalhes da Submissão:</h3>
+            <ul>
+              <li><strong>Título:</strong> ${data.title}</li>
+              <li><strong>Linha Temática:</strong> ${data.track}</li>
+              <li><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</li>
+              <li><strong>Data de Envio:</strong> ${new Date().toLocaleString("pt-BR")}</li>
+            </ul>
+            
+            ${
+              documentsGenerated
+                ? `
+              <h3>Documentos Gerados:</h3>
+              <p>Em anexo, você encontrará os documentos formatados conforme as diretrizes da conferência:</p>
               <ul>
-                <li><strong>Título:</strong> ${data.title}</li>
-                <li><strong>Linha Temática:</strong> ${data.track}</li>
-                <li><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</li>
-                <li><strong>Data de Envio:</strong> ${new Date().toLocaleString("pt-BR")}</li>
+                <li><strong>Documento PDF sem autoria</strong> - Para avaliação anônima (arquivo .pdf)</li>
+                <li><strong>Documento Word com autoria</strong> - Com suas informações completas (arquivo .docx)</li>
               </ul>
-              
-                          <h3>Documentos Gerados:</h3>
-                          <p>Em anexo, você encontrará os documentos formatados conforme as diretrizes da conferência:</p>
-                          <ul>
-                            <li><strong>Documento PDF sem autoria</strong> - Para avaliação anônima (arquivo .pdf)</li>
-                            <li><strong>Documento Word com autoria</strong> - Com suas informações completas (arquivo .docx)</li>
-                          </ul>
-              
-              <h3>Próximos Passos:</h3>
-              <p>A organização entrará em contato em breve com informações sobre o processo de avaliação e próximas etapas.</p>
-              
-              <p>Obrigado por sua participação!</p>
-              
-              <hr>
-              <p><small>
-                <strong>III Conferência Internacional sobre Turismo Literário e Cinematográfico</strong><br>
-                Economia Criativa, Inovação e Desenvolvimento Territorial<br>
-                26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
-                Serra Gaúcha - Brasil
-              </small></p>
-            `,
-            attachments: [
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_sem_autoria.pdf`,
-                path: pdfPath,
-                contentType: "application/pdf",
-              },
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_com_autoria.docx`,
-                path: wordPath,
-                contentType:
-                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-              },
-            ],
-          });
-          console.log("✅ Email de confirmação enviado para o candidato:", data.email);
-        } catch (error) {
-          console.error("❌ Erro ao enviar email:", error);
-        }
+            `
+                : `
+              <h3>⚠️ Aviso sobre Documentos:</h3>
+              <p>Houve um problema técnico na geração dos documentos em anexo. Sua submissão foi registrada com sucesso e a organização recebeu todos os dados.</p>
+              <p>Se necessário, entre em contato conosco para receber os documentos formatados.</p>
+            `
+            }
+            
+            <h3>Próximos Passos:</h3>
+            <p>A organização entrará em contato em breve com informações sobre o processo de avaliação e próximas etapas.</p>
+            
+            <p>Obrigado por sua participação!</p>
+            
+            <hr>
+            <p><small>
+              <strong>III Conferência Internacional sobre Turismo Literário e Cinematográfico</strong><br>
+              Economia Criativa, Inovação e Desenvolvimento Territorial<br>
+              26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
+              Serra Gaúcha - Brasil
+            </small></p>
+          `,
+          attachments,
+        });
+        console.log("✅ Email de confirmação enviado para o candidato:", data.email);
+      } catch (error) {
+        console.error("❌ Erro ao enviar email:", error);
+        throw error;
       }
-    } catch (error) {
-      console.error("❌ Erro ao gerar documentos:", error);
-      console.error("❌ Stack trace:", error instanceof Error ? error.stack : "No stack trace");
-      throw error;
     }
   },
 
