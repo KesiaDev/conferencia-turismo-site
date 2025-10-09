@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 import path from "path";
-import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel } from "docx";
+import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, ImageRun } from "docx";
 
 export interface SubmissionData {
   name: string;
@@ -107,7 +107,37 @@ export class PDFGenerator {
 
     const children: Paragraph[] = [];
 
-    // Header da Conferência (texto)
+    // Banner visual igual ao PDF
+    try {
+      const heroImagePath = await this.getHeroImagePath();
+      if (heroImagePath) {
+        console.log("🎨 Adicionando banner visual ao documento Word:", heroImagePath);
+        const imageBuffer = await fs.promises.readFile(heroImagePath);
+
+        // Adicionar imagem do banner
+        children.push(
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            spacing: { after: 200, before: 0 },
+            children: [
+              new ImageRun({
+                data: imageBuffer,
+                transformation: {
+                  width: 600,
+                  height: 200,
+                },
+                type: "png",
+              }),
+            ],
+          })
+        );
+      }
+    } catch (error) {
+      console.warn("⚠️ Não foi possível adicionar banner ao Word. Usando texto alternativo.");
+      console.error("❌ Erro:", error);
+    }
+
+    // Header da Conferência (texto - fallback se imagem não carregar)
     children.push(
       new Paragraph({
         text: "III Conferência Internacional sobre Turismo Literário e Cinematográfico",
@@ -377,7 +407,7 @@ export class PDFGenerator {
     return footnotes;
   }
 
-  private static async loadHeroImageAsBase64(): Promise<string> {
+  private static async getHeroImagePath(): Promise<string | null> {
     try {
       // Tentar diferentes caminhos possíveis para a imagem
       const possiblePaths = [
@@ -396,6 +426,22 @@ export class PDFGenerator {
 
       if (!heroImagePath) {
         throw new Error("Imagem hero.png não encontrada em nenhum dos caminhos possíveis");
+      }
+
+      console.log("🎨 Banner oficial encontrado:", heroImagePath);
+      return heroImagePath;
+    } catch (error) {
+      console.warn("⚠️  Não foi possível encontrar o banner oficial.");
+      console.error("❌ Erro:", error);
+      return null;
+    }
+  }
+
+  private static async loadHeroImageAsBase64(): Promise<string> {
+    try {
+      const heroImagePath = await this.getHeroImagePath();
+      if (!heroImagePath) {
+        throw new Error("Banner não encontrado");
       }
 
       console.log("🎨 Carregando banner oficial do evento:", heroImagePath);
