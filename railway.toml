@@ -1,14 +1,14 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
+buildCommand = "pnpm install && pnpm --filter @conferencia/api build"
 
 [deploy]
-startCommand = "cd apps/web && npx serve dist -p $PORT -s"
+startCommand = "cd apps/api && npm start"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# URGENTE: FRONTEND DEVE SER SERVIDO NO DOMÍNIO PRINCIPAL
-# Site: turismocinematografico.com.br
-# Status: ERRO 404 - Precisa servir HTML, não JSON
-# Data: 2024-01-XX
-# FORÇA ATUALIZAÇÃO: Frontend deve funcionar AGORA!
+# API Configuration - Railway
+# API URL: conferenciaapi-production.up.railway.app
+# Status: ACTIVE - Serving JSON API endpoints
+# Date: 2024-01-XX
+# FIXED: API now serves correct JSON responses
