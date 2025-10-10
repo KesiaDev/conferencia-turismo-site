@@ -60,6 +60,13 @@ app.get("/test", (req, res) => {
   res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
 });
 
+// Test endpoint - serve HTML diretamente
+app.get("/html", (req, res) => {
+  const indexPath = path.join(frontendPath, "index.html");
+  console.log("🔍 Serving HTML directly from:", indexPath);
+  res.sendFile(indexPath);
+});
+
 // Debug endpoint - verificar se frontend existe
 app.get("/debug", (req, res) => {
   const indexPath = path.join(frontendPath, "index.html");
