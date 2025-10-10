@@ -19,6 +19,7 @@ import feesRouter from "./routes/fees.js";
 import submissionsRouter from "./routes/submissions.js";
 import panelsRouter from "./routes/panels.js";
 import contactRouter from "./routes/contact.js";
+import registrationRouter from "./routes/registration.js";
 
 dotenv.config();
 
@@ -108,6 +109,7 @@ app.use("/api/fees", feesRouter);
 app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/registration", registrationRouter);
 
 // Caminho do frontend correto após build (apps/api/dist/ -> apps/web/dist/)
 const frontendPath = path.resolve(__dirname, "../../web/dist");

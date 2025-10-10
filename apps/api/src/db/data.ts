@@ -1,6 +1,7 @@
 import type { Speaker } from "../schemas/speaker.js";
 import type { ProgramDay } from "../schemas/session.js";
 import type { FeeCategory } from "../schemas/fee.js";
+import type { RegistrationWithId } from "../schemas/registration.js";
 
 export const meta = {
   title:
@@ -349,3 +350,16 @@ export const committees = {
 
 // In-memory storage for submissions
 export const submissions: any[] = [];
+
+// In-memory storage for registrations
+export const registrations: RegistrationWithId[] = [];
+
+// Functions for managing registrations
+export const storeRegistration = async (registration: RegistrationWithId): Promise<void> => {
+  registrations.push(registration);
+  console.log(`📝 Inscrição armazenada: ${registration.id}`);
+};
+
+export const getRegistrations = async (): Promise<RegistrationWithId[]> => {
+  return [...registrations];
+};

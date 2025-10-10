@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import FeeTable from "../components/FeeTable";
+import RegistrationForm from "../components/RegistrationForm";
 import Alert from "../components/Alert";
 import Seo from "../components/Seo";
 import apiService from "../api/client";
@@ -16,38 +17,30 @@ export default function Fees() {
       .getFees()
       .then(setFees)
       .catch(() => {
-        // Fallback com dados estáticos se a API falhar
+        // Fallback com dados estáticos se a API falhar - Preços corretos conforme especificado
         const staticFees: FeeCategory[] = [
           {
             category: "Estudante de Graduação",
             windows: [
-              { label: "Early Bird", value: 150.0 },
-              { label: "Regular", value: 200.0 },
-              { label: "Late", value: 250.0 },
+              { label: "até 05/01/2026", value: 60.0 },
+              { label: "06-31/01/2026", value: 70.0 },
+              { label: "01/02-23/03/2026", value: 100.0 },
             ],
           },
           {
-            category: "Estudante de Pós-Graduação",
+            category: "Pós-graduandos",
             windows: [
-              { label: "Early Bird", value: 200.0 },
-              { label: "Regular", value: 250.0 },
-              { label: "Late", value: 300.0 },
+              { label: "até 05/01/2026", value: 150.0 },
+              { label: "06-31/01/2026", value: 180.0 },
+              { label: "01/02-23/03/2026", value: 214.0 },
             ],
           },
           {
-            category: "Profissional",
+            category: "Professores, Pesquisadores ou Profissionais",
             windows: [
-              { label: "Early Bird", value: 300.0 },
-              { label: "Regular", value: 400.0 },
-              { label: "Late", value: 500.0 },
-            ],
-          },
-          {
-            category: "Professor/Pesquisador",
-            windows: [
-              { label: "Early Bird", value: 250.0 },
-              { label: "Regular", value: 300.0 },
-              { label: "Late", value: 350.0 },
+              { label: "até 05/01/2026", value: 220.0 },
+              { label: "06-31/01/2026", value: 250.0 },
+              { label: "01/02-23/03/2026", value: 325.0 },
             ],
           },
         ];
@@ -131,6 +124,21 @@ export default function Fees() {
         </div>
 
         <FeeTable fees={fees} />
+
+        {/* Formulário de Inscrição */}
+        <div className="mt-12">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#e0a085] mb-4">
+              Realize sua Inscrição
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Preencha o formulário abaixo para se inscrever na conferência. As instruções de
+              pagamento serão enviadas para seu e-mail após o preenchimento.
+            </p>
+          </div>
+
+          <RegistrationForm />
+        </div>
 
         <div className="mt-12 max-w-4xl mx-auto prose prose-lg">
           <h3>{t("fees.included")}</h3>

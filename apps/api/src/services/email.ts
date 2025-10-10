@@ -1,6 +1,7 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
 import { panelDocumentGenerator, PanelSubmissionData } from "./panelDocumentGenerator.js";
+import type { RegistrationWithId } from "../schemas/registration.js";
 
 // Configuração do transporter
 const createTransporter = (): Transporter | null => {
@@ -415,4 +416,102 @@ export const emailService = {
       }
     }
   },
+};
+
+// Função para enviar email de confirmação de inscrição
+export const sendRegistrationConfirmation = async (data: RegistrationWithId) => {
+  const transporter = createTransporter();
+
+  if (!transporter) {
+    console.log("⚠️ Email service não disponível. Logando dados da inscrição:");
+    console.log("📝 INSCRIÇÃO REALIZADA:");
+    console.log(`Nome: ${data.fullName}`);
+    console.log(`Email: ${data.email}`);
+    console.log(`Categoria: ${data.category}`);
+    console.log(`Valor: R$ ${data.priceInfo.currentPrice.toFixed(2)}`);
+    console.log(`Período: ${data.priceInfo.period}`);
+    return;
+  }
+
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: data.email,
+      subject:
+        "Confirmação de Inscrição - III Conferência Internacional de Turismo Literário e Cinematográfico",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: linear-gradient(135deg, #e0a085, #f4c490); padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px;">
+            <h1 style="color: white; margin: 0; font-size: 24px;">
+              🎉 Inscrição Confirmada!
+            </h1>
+          </div>
+          
+          <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #e0a085; margin-top: 0;">Olá, ${data.fullName}!</h2>
+            
+            <p>Sua inscrição para a <strong>III Conferência Internacional de Turismo Literário e Cinematográfico</strong> foi realizada com sucesso!</p>
+            
+            <h3 style="color: #333;">📋 Detalhes da Inscrição:</h3>
+            <ul style="list-style: none; padding: 0;">
+              <li style="margin-bottom: 8px;"><strong>Nome:</strong> ${data.fullName}</li>
+              <li style="margin-bottom: 8px;"><strong>E-mail:</strong> ${data.email}</li>
+              <li style="margin-bottom: 8px;"><strong>Categoria:</strong> ${data.category}</li>
+              <li style="margin-bottom: 8px;"><strong>Afiliação:</strong> ${data.affiliation}</li>
+              <li style="margin-bottom: 8px;"><strong>Período de Inscrição:</strong> ${data.priceInfo.period}</li>
+            </ul>
+            
+            <div style="background: #e8f5e8; border-left: 4px solid #4caf50; padding: 15px; margin: 20px 0;">
+              <h3 style="color: #2e7d32; margin-top: 0;">💰 Valor da Inscrição</h3>
+              <p style="font-size: 24px; font-weight: bold; color: #2e7d32; margin: 0;">
+                R$ ${data.priceInfo.currentPrice.toFixed(2)}
+              </p>
+              <p style="margin: 5px 0 0 0; color: #666;">
+                Método de pagamento preferido: ${data.paymentMethod}
+              </p>
+            </div>
+          </div>
+          
+          <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px;">
+            <h3 style="color: #856404; margin-top: 0;">📧 Próximos Passos</h3>
+            <p style="margin: 0; color: #856404;">
+              <strong>Importante:</strong> As instruções detalhadas de pagamento serão enviadas em breve para este e-mail. 
+              Fique atento à sua caixa de entrada e também à pasta de spam.
+            </p>
+          </div>
+          
+          <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="color: #e0a085; margin-top: 0;">🎯 O que está incluído na sua inscrição:</h3>
+            <ul style="color: #333;">
+              <li>Acesso a todas as sessões da conferência</li>
+              <li>Materiais do evento</li>
+              <li>Coffee breaks</li>
+              <li>Certificado de participação</li>
+              <li>Networking com pesquisadores internacionais</li>
+            </ul>
+          </div>
+          
+          <div style="text-align: center; margin-top: 30px; padding: 20px; background: #e0a085; border-radius: 8px;">
+            <h3 style="color: white; margin-top: 0;">📅 Informações do Evento</h3>
+            <p style="color: white; margin: 5px 0;"><strong>Data:</strong> 26 a 28 de março de 2026</p>
+            <p style="color: white; margin: 5px 0;"><strong>Local:</strong> Universidade de Caxias do Sul - UCS</p>
+            <p style="color: white; margin: 5px 0;"><strong>Serra Gaúcha - Brasil</strong></p>
+          </div>
+          
+          <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">
+            <p>
+              <strong>III Conferência Internacional de Turismo Literário e Cinematográfico</strong><br>
+              Economia Criativa, Inovação e Desenvolvimento Territorial<br>
+              Universidade de Caxias do Sul - UCS
+            </p>
+          </div>
+        </div>
+      `,
+    });
+
+    console.log("✅ Email de confirmação de inscrição enviado para:", data.email);
+  } catch (error) {
+    console.error("❌ Erro ao enviar email de confirmação:", error);
+    throw error;
+  }
 };

@@ -22,6 +22,7 @@ export const apiService = {
   submitPanel: (data: any) => api.post("/panels", data).then((res) => res.data),
   sendContactMessage: (data: { name: string; email: string; message: string }) =>
     api.post("/contact", data).then((res) => res.data),
+  submitRegistration: (data: any) => api.post("/registration", data).then((res) => res.data),
 };
 
 export default apiService;
