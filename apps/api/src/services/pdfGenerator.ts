@@ -22,14 +22,24 @@ export class PDFGenerator {
   private static readonly OUTPUT_DIR = path.join(process.cwd(), "apps/api/output");
 
   static async generatePDF(data: SubmissionData): Promise<string> {
+    console.log("🔄 PDFGenerator.generatePDF iniciado");
     await this.ensureDirectories();
 
     const timestamp = Date.now();
     const fileName = `submission_${timestamp}_sem_autoria.pdf`;
     const pdfPath = path.join(this.OUTPUT_DIR, fileName);
+    console.log("📁 PDF será salvo em:", pdfPath);
 
     try {
+      console.log("🔄 Gerando HTML...");
       const html = await this.generateHTML(data);
+      console.log("✅ HTML gerado com sucesso");
+
+      console.log("🔄 Iniciando Puppeteer...");
+      console.log(
+        "🔧 PUPPETEER_EXECUTABLE_PATH:",
+        process.env.PUPPETEER_EXECUTABLE_PATH || "undefined"
+      );
 
       const browser = await puppeteer.launch({
         headless: true,
@@ -61,13 +71,19 @@ export class PDFGenerator {
       });
 
       try {
+        console.log("🔄 Criando nova página...");
         const page = await browser.newPage();
+        console.log("🔄 Configurando viewport...");
         await page.setViewport({ width: 1200, height: 800 });
+        console.log("🔄 Carregando conteúdo HTML...");
         await page.setContent(html, {
           waitUntil: "networkidle0",
           timeout: 60000,
         });
+        console.log("✅ Conteúdo HTML carregado");
+        console.log("🔄 Aguardando 3 segundos para renderização...");
         await new Promise((resolve) => setTimeout(resolve, 3000));
+        console.log("🔄 Gerando PDF...");
         const pdfBuffer = await page.pdf({
           format: "A4",
           margin: {
@@ -80,16 +96,25 @@ export class PDFGenerator {
           displayHeaderFooter: false,
           preferCSSPageSize: true,
         });
+        console.log("✅ PDF gerado em buffer, tamanho:", pdfBuffer.length, "bytes");
+        console.log("🔄 Salvando arquivo PDF...");
         fs.writeFileSync(pdfPath, pdfBuffer);
         console.log(`📄 PDF REAL gerado: ${pdfPath}`);
         return pdfPath;
       } finally {
+        console.log("🔄 Fechando browser...");
         await browser.close();
+        console.log("✅ Browser fechado");
       }
     } catch (error) {
       console.error("❌ Erro ao gerar PDF:", error);
+      console.error("❌ Stack trace:", error instanceof Error ? error.stack : "No stack trace");
+      console.error("❌ Tipo do erro:", typeof error);
+      console.error("❌ Nome do erro:", error instanceof Error ? error.name : "Unknown");
+
       const htmlFileName = `submission_${timestamp}_sem_autoria.html`;
       const htmlPath = path.join(this.OUTPUT_DIR, htmlFileName);
+      console.log("🔄 Gerando HTML como fallback...");
       const html = await this.generateHTML(data);
       fs.writeFileSync(htmlPath, html);
       console.log(`📄 HTML gerado como fallback: ${htmlPath}`);
