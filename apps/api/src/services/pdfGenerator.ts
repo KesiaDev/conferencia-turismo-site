@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer, { executablePath } from "puppeteer";
 import fs from "fs";
 import path from "path";
 import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, ImageRun } from "docx";
@@ -49,25 +49,18 @@ export class PDFGenerator {
         "🔧 PUPPETEER_EXECUTABLE_PATH:",
         process.env.PUPPETEER_EXECUTABLE_PATH || "undefined"
       );
-      console.log("🔧 Verificando caminhos do Chromium...");
+      console.log("🔧 Puppeteer vai usar seu próprio Chromium baixado");
+      console.log("🔧 Caminho do Chromium do Puppeteer:", executablePath());
 
-      // Testar se o Chromium está disponível
-      const possiblePaths = [
-        "/usr/bin/chromium-browser",
-        "/usr/bin/chromium",
-        "/usr/bin/google-chrome",
-        "/usr/bin/google-chrome-stable",
-      ];
-
-      for (const chromiumPath of possiblePaths) {
-        try {
-          if (fs.existsSync(chromiumPath)) {
-            console.log("✅ Chromium encontrado em:", chromiumPath);
-            break;
-          }
-        } catch (e) {
-          console.log("❌ Chromium não encontrado em:", chromiumPath);
+      // Verificar se o Chromium do Puppeteer existe
+      try {
+        if (fs.existsSync(executablePath())) {
+          console.log("✅ Chromium do Puppeteer encontrado:", executablePath());
+        } else {
+          console.log("❌ Chromium do Puppeteer NÃO encontrado em:", executablePath());
         }
+      } catch (e) {
+        console.log("❌ Erro ao verificar Chromium do Puppeteer:", e);
       }
 
       const browser = await puppeteer.launch({
@@ -95,10 +88,7 @@ export class PDFGenerator {
           "--no-first-run",
           "--disable-ipc-flooding-protection",
         ],
-        executablePath:
-          process.env.PUPPETEER_EXECUTABLE_PATH ||
-          "/usr/bin/chromium-browser" ||
-          "/usr/bin/chromium",
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || executablePath(),
         timeout: 30000, // Reduzido de 60s para 30s
       });
 

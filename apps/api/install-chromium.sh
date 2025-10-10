@@ -47,14 +47,7 @@ apt-get install -y \
 
 echo "✅ Dependências do Chromium instaladas com sucesso!"
 
-# Instalar Chromium
-echo "🔧 Instalando Chromium..."
-apt-get install -y chromium-browser
-
-echo "✅ Chromium instalado com sucesso!"
-
-# Verificar instalação
-echo "🔍 Verificando instalação do Chromium..."
-chromium-browser --version
+# Chromium será instalado via npx puppeteer browsers install chrome
+echo "🔧 Chromium será instalado via Puppeteer no build command"
 
 echo "🎉 Setup do Chromium concluído!"
