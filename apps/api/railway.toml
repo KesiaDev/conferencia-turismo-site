@@ -1,9 +1,10 @@
 [build]
 builder = "nixpacks"
-buildCommand = "npm ci --only=production && npm run build"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build"
+
 
 [deploy]
-startCommand = "npm start"
+startCommand = "cd apps/api && node dist/index.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
 
