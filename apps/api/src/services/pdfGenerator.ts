@@ -66,7 +66,7 @@ export class PDFGenerator {
           "--no-first-run",
           "--disable-ipc-flooding-protection",
         ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium-browser",
         timeout: 60000,
       });
 
