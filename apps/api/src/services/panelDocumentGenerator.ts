@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import puppeteer from "puppeteer";
+import puppeteer, { executablePath } from "puppeteer";
 import { Document, Packer, Paragraph, TextRun, AlignmentType, HeadingLevel, ImageRun } from "docx";
 import type { PanelSubmission } from "../schemas/submission.js";
 
@@ -161,6 +161,8 @@ export class PanelDocumentGenerator {
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
+            page-break-inside: avoid; /* Evitar quebra de página dentro de cada comunicação */
+            break-inside: avoid; /* Suporte moderno para evitar quebra */
         }
 
         .communication-number {
@@ -313,7 +315,31 @@ export class PanelDocumentGenerator {
   async generatePanelPDF(data: PanelSubmissionData, outputPath: string): Promise<void> {
     const browser = await puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--disable-web-security",
+        "--disable-features=VizDisplayCompositor",
+        "--single-process",
+        "--no-zygote",
+        "--disable-background-timer-throttling",
+        "--disable-backgrounding-occluded-windows",
+        "--disable-renderer-backgrounding",
+        "--disable-extensions",
+        "--disable-plugins",
+        "--disable-javascript",
+        "--disable-default-apps",
+        "--disable-sync",
+        "--disable-translate",
+        "--hide-scrollbars",
+        "--mute-audio",
+        "--no-first-run",
+        "--disable-ipc-flooding-protection",
+      ],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || executablePath(),
+      timeout: 30000,
     });
 
     try {
@@ -333,6 +359,9 @@ export class PanelDocumentGenerator {
           }
         }, heroImageBase64);
       }
+
+      // Aguardar um pouco para garantir que tudo seja renderizado
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       await page.pdf({
         path: outputPath,
