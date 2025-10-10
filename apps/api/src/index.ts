@@ -4,6 +4,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -57,6 +58,23 @@ app.get("/health", (req, res) => {
 // Test endpoint
 app.get("/test", (req, res) => {
   res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
+});
+
+// Debug endpoint - verificar se frontend existe
+app.get("/debug", (req, res) => {
+  const indexPath = path.join(frontendPath, "index.html");
+  const frontendExists = fs.existsSync(frontendPath);
+  const indexExists = fs.existsSync(indexPath);
+
+  res.json({
+    frontendPath,
+    currentDir: process.cwd(),
+    __dirname,
+    frontendExists,
+    indexExists,
+    indexPath,
+    timestamp: new Date().toISOString(),
+  });
 });
 
 // API Routes (must come BEFORE static files and fallback)
