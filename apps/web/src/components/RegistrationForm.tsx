@@ -41,8 +41,8 @@ export default function RegistrationForm() {
 
   // Preços baseados nas datas fornecidas
   const pricing = {
-    "Estudante de Graduação": { until_05_01: 60, until_31_01: 70, until_23_03: 100 },
-    "Pós-graduandos": { until_05_01: 150, until_31_01: 180, until_23_03: 214 },
+    Graduação: { until_05_01: 60, until_31_01: 70, until_23_03: 100 },
+    "Pós Graduação": { until_05_01: 150, until_31_01: 180, until_23_03: 214 },
     "Professores, Pesquisadores ou Profissionais": {
       until_05_01: 220,
       until_31_01: 250,
@@ -369,8 +369,8 @@ export default function RegistrationForm() {
                   }`}
                 >
                   <option value="">Selecione sua categoria</option>
-                  <option value="Estudante de Graduação">Estudante de Graduação</option>
-                  <option value="Pós-graduandos">Pós-graduandos</option>
+                  <option value="Graduação">Graduação</option>
+                  <option value="Pós Graduação">Pós Graduação</option>
                   <option value="Professores, Pesquisadores ou Profissionais">
                     Professores, Pesquisadores ou Profissionais
                   </option>
@@ -445,7 +445,8 @@ export default function RegistrationForm() {
                 name="paymentMethod"
                 value={formData.paymentMethod}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#e0a085]"
+                disabled
+                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-500 cursor-not-allowed"
               >
                 <option value="PIX">PIX</option>
                 <option value="Cartão de Crédito">Cartão de Crédito</option>

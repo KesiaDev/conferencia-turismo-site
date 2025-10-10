@@ -7,8 +7,8 @@ const router = express.Router();
 
 // Preços baseados nas datas fornecidas
 const pricing = {
-  "Estudante de Graduação": { until_05_01: 60, until_31_01: 70, until_23_03: 100 },
-  "Pós-graduandos": { until_05_01: 150, until_31_01: 180, until_23_03: 214 },
+  Graduação: { until_05_01: 60, until_31_01: 70, until_23_03: 100 },
+  "Pós Graduação": { until_05_01: 150, until_31_01: 180, until_23_03: 214 },
   "Professores, Pesquisadores ou Profissionais": {
     until_05_01: 220,
     until_31_01: 250,

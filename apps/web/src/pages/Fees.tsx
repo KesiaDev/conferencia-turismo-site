@@ -20,7 +20,7 @@ export default function Fees() {
         // Fallback com dados estáticos se a API falhar - Preços corretos conforme especificado
         const staticFees: FeeCategory[] = [
           {
-            category: "Estudante de Graduação",
+            category: "Graduação",
             windows: [
               { label: "até 05/01/2026", value: 60.0 },
               { label: "06-31/01/2026", value: 70.0 },
@@ -28,7 +28,7 @@ export default function Fees() {
             ],
           },
           {
-            category: "Pós-graduandos",
+            category: "Pós Graduação",
             windows: [
               { label: "até 05/01/2026", value: 150.0 },
               { label: "06-31/01/2026", value: 180.0 },

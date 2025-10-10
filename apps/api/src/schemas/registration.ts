@@ -7,11 +7,7 @@ export const registrationSchema = z.object({
   documentType: z.enum(["CPF", "RG", "Passaporte", "CNH"]),
   email: z.string().email("E-mail inválido"),
   phone: z.string().min(1, "Telefone é obrigatório"),
-  category: z.enum([
-    "Estudante de Graduação",
-    "Pós-graduandos",
-    "Professores, Pesquisadores ou Profissionais",
-  ]),
+  category: z.enum(["Graduação", "Pós Graduação", "Professores, Pesquisadores ou Profissionais"]),
   affiliation: z.string().min(1, "Afiliação/Instituição é obrigatória"),
   paymentMethod: z.enum(["PIX", "Cartão de Crédito", "Boleto Bancário", "Transferência Bancária"]),
 });

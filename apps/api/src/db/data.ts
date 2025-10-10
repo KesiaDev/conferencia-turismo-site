@@ -234,7 +234,7 @@ export const program: ProgramDay[] = [
 
 export const fees: FeeCategory[] = [
   {
-    category: "Estudantes de Graduação",
+    category: "Graduação",
     windows: [
       { label: "até 05/01/2026", value: 60 },
       { label: "06–31/01/2026", value: 70 },
@@ -242,7 +242,7 @@ export const fees: FeeCategory[] = [
     ],
   },
   {
-    category: "Pós-graduandos",
+    category: "Pós Graduação",
     windows: [
       { label: "até 05/01/2026", value: 150 },
       { label: "06–31/01/2026", value: 180 },
