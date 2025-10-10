@@ -97,12 +97,24 @@ app.use(express.static(frontendPath));
 
 // SPA fallback - serve index.html for all non-API routes (MUST be last)
 app.get("*", (req, res) => {
+  console.log("🔍 SPA Fallback - Request path:", req.path);
+
+  // Skip API routes
+  if (req.path.startsWith("/api/")) {
+    console.log("🔍 Skipping API route:", req.path);
+    return res.status(404).json({ error: "API route not found" });
+  }
+
   const indexPath = path.join(frontendPath, "index.html");
   console.log("🔍 Serving index.html from:", indexPath);
+
   res.sendFile(indexPath, (err) => {
     if (err) {
       console.error("❌ Error serving index.html:", err);
-      res.status(404).json({ error: "Frontend not found" });
+      console.error("❌ Error details:", err.message);
+      res.status(404).json({ error: "Frontend not found", details: err.message });
+    } else {
+      console.log("✅ Successfully served index.html");
     }
   });
 });
