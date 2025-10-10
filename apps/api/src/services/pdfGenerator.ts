@@ -30,7 +30,14 @@ export class PDFGenerator {
     const pdfPath = path.join(this.OUTPUT_DIR, fileName);
     console.log("📁 PDF será salvo em:", pdfPath);
     console.log("📁 OUTPUT_DIR existe?", fs.existsSync(this.OUTPUT_DIR));
-    console.log("📁 Permissão de escrita?", fs.accessSync ? "testando..." : "não testável");
+
+    // Testar permissão de escrita
+    try {
+      fs.accessSync(this.OUTPUT_DIR, fs.constants.W_OK);
+      console.log("📁 Permissão de escrita: ✅ OK");
+    } catch (e) {
+      console.log("📁 Permissão de escrita: ❌ Sem permissão");
+    }
 
     try {
       console.log("🔄 Gerando HTML...");
