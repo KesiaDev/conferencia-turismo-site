@@ -19,7 +19,7 @@ export interface SubmissionData {
 }
 
 export class PDFGenerator {
-  private static readonly OUTPUT_DIR = path.join(process.cwd(), "apps/api/output");
+  private static readonly OUTPUT_DIR = "/tmp"; // Usar /tmp no Railway
 
   static async generatePDF(data: SubmissionData): Promise<string> {
     console.log("🔄 PDFGenerator.generatePDF iniciado");
@@ -29,6 +29,8 @@ export class PDFGenerator {
     const fileName = `submission_${timestamp}_sem_autoria.pdf`;
     const pdfPath = path.join(this.OUTPUT_DIR, fileName);
     console.log("📁 PDF será salvo em:", pdfPath);
+    console.log("📁 OUTPUT_DIR existe?", fs.existsSync(this.OUTPUT_DIR));
+    console.log("📁 Permissão de escrita?", fs.accessSync ? "testando..." : "não testável");
 
     try {
       console.log("🔄 Gerando HTML...");
@@ -40,6 +42,26 @@ export class PDFGenerator {
         "🔧 PUPPETEER_EXECUTABLE_PATH:",
         process.env.PUPPETEER_EXECUTABLE_PATH || "undefined"
       );
+      console.log("🔧 Verificando caminhos do Chromium...");
+
+      // Testar se o Chromium está disponível
+      const possiblePaths = [
+        "/usr/bin/chromium-browser",
+        "/usr/bin/chromium",
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+      ];
+
+      for (const chromiumPath of possiblePaths) {
+        try {
+          if (fs.existsSync(chromiumPath)) {
+            console.log("✅ Chromium encontrado em:", chromiumPath);
+            break;
+          }
+        } catch (e) {
+          console.log("❌ Chromium não encontrado em:", chromiumPath);
+        }
+      }
 
       const browser = await puppeteer.launch({
         headless: true,
@@ -66,8 +88,11 @@ export class PDFGenerator {
           "--no-first-run",
           "--disable-ipc-flooding-protection",
         ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium-browser",
-        timeout: 60000,
+        executablePath:
+          process.env.PUPPETEER_EXECUTABLE_PATH ||
+          "/usr/bin/chromium-browser" ||
+          "/usr/bin/chromium",
+        timeout: 30000, // Reduzido de 60s para 30s
       });
 
       try {
@@ -81,8 +106,8 @@ export class PDFGenerator {
           timeout: 60000,
         });
         console.log("✅ Conteúdo HTML carregado");
-        console.log("🔄 Aguardando 3 segundos para renderização...");
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        console.log("🔄 Aguardando 1 segundo para renderização...");
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // Reduzido de 3s para 1s
         console.log("🔄 Gerando PDF...");
         const pdfBuffer = await page.pdf({
           format: "A4",

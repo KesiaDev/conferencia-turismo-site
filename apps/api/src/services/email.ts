@@ -77,12 +77,12 @@ export const emailService = {
         const attachments = documentsGenerated
           ? [
               {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_sem_autoria.pdf`,
+                filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_sem_autoria.pdf`,
                 path: pdfPath,
                 contentType: "application/pdf",
               },
               {
-                filename: `submissao_${data.name.replace(/\s+/g, "_")}_com_autoria.docx`,
+                filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_com_autoria.docx`,
                 path: wordPath,
                 contentType:
                   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
