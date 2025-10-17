@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -8,66 +7,43 @@ export default function Footer() {
   return (
     <footer className="bg-black text-gray-300 py-12 mt-20">
       <div className="container-custom">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">{t("footer.about")}</h3>
-            <p className="text-sm leading-relaxed">{t("footer.aboutText")}</p>
-          </div>
-
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">{t("footer.quickLinks")}</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link to="/keynotes" className="hover:text-white transition-colors">
-                  {t("nav.keynotes")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/program" className="hover:text-white transition-colors">
-                  {t("nav.program")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/call" className="hover:text-white transition-colors">
-                  {t("nav.call")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/fees" className="hover:text-white transition-colors">
-                  {t("nav.fees")}
-                </Link>
-              </li>
-              <li>
-                <Link to="/accessibility" className="hover:text-white transition-colors">
-                  ♿ Acessibilidade
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-white font-bold text-lg mb-4">{t("footer.contact")}</h3>
-            <p className="text-sm leading-relaxed">
-              Universidade de Caxias do Sul
-              <br />
-              Caxias do Sul/RS, Brasil
-              <br />
-              <a
-                href="mailto:litfilmtourismconferenceucs@gmail.com"
-                className="hover:text-white transition-colors"
-                rel="noopener noreferrer"
-              >
-                litfilmtourismconferenceucs@gmail.com
-              </a>
-            </p>
-          </div>
-        </div>
-
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
+        {/* Copyright section */}
+        <div className="text-sm text-center mb-8">
           <p>
             © {currentYear} III Conferência Internacional de Turismo Literário e Cinematográfico.{" "}
             {t("footer.rights")}
           </p>
+        </div>
+
+        {/* Collaboration section */}
+        <div className="border-t border-gray-800 pt-8">
+          <div className="text-center">
+            <p className="text-gray-400 text-sm mb-6">
+              um <span className="text-white font-semibold">COLLAB</span> orgulhosamente
+              desenvolvido por
+            </p>
+
+            {/* Company logos */}
+            <div className="flex justify-center items-center gap-8 flex-wrap">
+              {/* Nandi Dev Logo */}
+              <div className="flex-shrink-0">
+                <img
+                  src="/nandi-dev-logo.svg"
+                  alt="Nandi Dev - Web & App Developer"
+                  className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </div>
+
+              {/* Interação Logo */}
+              <div className="flex-shrink-0">
+                <img
+                  src="/interacao-logo.svg"
+                  alt="Interação - marketing • cultura • turismo"
+                  className="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
