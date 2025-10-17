@@ -1,14 +1,14 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
 
 [deploy]
-startCommand = "cd apps/api && npm start"
+startCommand = "cd apps/web && npx serve dist -p $PORT -s"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# API Configuration - Railway
-# API URL: conferenciaapi-production.up.railway.app
-# Status: ACTIVE - Serving JSON API endpoints
-# Date: 2024-01-XX
-# FIXED: API now serves correct JSON responses
+# Frontend Configuration - Railway
+# Site URL: turismocinematografico.com.br
+# Status: ACTIVE - Serving frontend with new footer
+# Date: 2025-01-XX
+# FIXED: Frontend now serves with company logos in footer
