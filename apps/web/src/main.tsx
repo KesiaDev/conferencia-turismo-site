@@ -6,6 +6,9 @@ import App from "./App";
 import "./i18n";
 import "./index.css";
 
+// RAILWAY DEPLOY FIX - FORCE REBUILD
+console.log("🚀 RAILWAY DEPLOY FIX - FORCE REBUILD");
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <HelmetProvider>
@@ -16,4 +19,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   </React.StrictMode>
 );
 
-// Force rebuild trigger - Railway deploy fix
+// FORCE REBUILD TRIGGER - RAILWAY DEPLOY FIX
