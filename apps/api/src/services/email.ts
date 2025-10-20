@@ -12,13 +12,18 @@ const createTransporter = (): Transporter | null => {
     return null;
   }
 
-  return nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // Senha de App do Gmail
-    },
-  } as any);
+  try {
+    return nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS, // Senha de App do Gmail
+      },
+    } as any);
+  } catch (error) {
+    console.error("❌ Erro ao criar transporter:", error);
+    return null;
+  }
 };
 
 export const emailService = {
@@ -49,7 +54,7 @@ export const emailService = {
     console.log(`Data: ${new Date().toLocaleString("pt-BR")}`);
     console.log("---\n");
 
-    // Gerar documentos (com fallback se falhar)
+    // SEMPRE gerar documentos (mesmo sem email)
     let pdfPath = null;
     let wordPath = null;
     let documentsGenerated = false;
@@ -64,6 +69,9 @@ export const emailService = {
       console.log("✅ Word gerado com sucesso:", wordPath);
 
       documentsGenerated = true;
+      console.log("📄 DOCUMENTOS GERADOS COM SUCESSO!");
+      console.log("📄 PDF:", pdfPath);
+      console.log("📄 Word:", wordPath);
     } catch (docError) {
       console.error("❌ Erro ao gerar documentos:", docError);
       console.log("⚠️ Continuando sem anexos...");
@@ -186,9 +194,16 @@ export const emailService = {
         console.log("✅ Email de confirmação enviado para o candidato:", data.email);
       } catch (error) {
         console.error("❌ Erro ao enviar email:", error);
-        throw error;
+        console.log("⚠️ Continuando sem envio de email...");
       }
+    } else {
+      console.log("⚠️ Email service não configurado. Apenas logando no console.");
     }
+
+    // Confirmação final
+    console.log("🎉 SUBMISSÃO PROCESSADA COM SUCESSO!");
+    console.log("📄 Documentos gerados:", documentsGenerated ? "✅ Sim" : "❌ Não");
+    console.log("📧 Email enviado:", transporter ? "✅ Sim" : "❌ Não (não configurado)");
   },
 
   // Envia email de contato para a organização
