@@ -3,8 +3,6 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
-import path from "path";
-import fs from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -71,26 +69,12 @@ app.get("/test", (req, res) => {
   res.json({ message: "API funcionando!", timestamp: new Date().toISOString() });
 });
 
-// Test endpoint - serve HTML diretamente
-app.get("/html", (req, res) => {
-  const indexPath = path.join(frontendPath, "index.html");
-  console.log("🔍 Serving HTML directly from:", indexPath);
-  res.sendFile(indexPath);
-});
-
-// Debug endpoint - verificar se frontend existe
+// Debug endpoint - API only mode
 app.get("/debug", (req, res) => {
-  const indexPath = path.join(frontendPath, "index.html");
-  const frontendExists = fs.existsSync(frontendPath);
-  const indexExists = fs.existsSync(indexPath);
-
   res.json({
-    frontendPath,
+    mode: "API_ONLY",
     currentDir: process.cwd(),
     __dirname,
-    frontendExists,
-    indexExists,
-    indexPath,
     timestamp: new Date().toISOString(),
   });
 });
@@ -104,37 +88,20 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
-// Caminho do frontend correto após build (apps/api/dist/ -> apps/web/dist/)
-const frontendPath = path.resolve(__dirname, "../../web/dist");
-console.log("📁 Servindo frontend de:", frontendPath);
+// API ONLY - No frontend serving
+console.log("🔧 API MODE - Serving only JSON endpoints");
 console.log("🔍 Current working directory:", process.cwd());
 console.log("🔍 __dirname:", __dirname);
 
-// Serve static files from frontend (after API routes)
-app.use(express.static(frontendPath));
-
-// SPA fallback - serve index.html for all non-API routes (MUST be last)
+// API routes only - no frontend serving
 app.get("*", (req, res) => {
-  console.log("🔍 SPA Fallback - Request path:", req.path);
+  console.log("🔍 API route requested:", req.path);
 
-  // Skip API routes
   if (req.path.startsWith("/api/")) {
-    console.log("🔍 Skipping API route:", req.path);
     return res.status(404).json({ error: "API route not found" });
   }
 
-  const indexPath = path.join(frontendPath, "index.html");
-  console.log("🔍 Serving index.html from:", indexPath);
-
-  res.sendFile(indexPath, (err) => {
-    if (err) {
-      console.error("❌ Error serving index.html:", err);
-      console.error("❌ Error details:", err.message);
-      res.status(404).json({ error: "Frontend not found", details: err.message });
-    } else {
-      console.log("✅ Successfully served index.html");
-    }
-  });
+  return res.status(404).json({ error: "API endpoint not found" });
 });
 
 // Error handler
