@@ -45,15 +45,10 @@ app.use(
 );
 app.use(
   cors({
-    origin: [
-      "https://turismocinematografico.com.br",
-      "https://www.turismocinematografico.com.br",
-      "http://localhost:5173",
-      "http://localhost:3000",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    credentials: false,
   })
 );
 app.use(express.json());
