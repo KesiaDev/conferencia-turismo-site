@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
+import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
@@ -88,20 +89,37 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
-// API ONLY - No frontend serving
-console.log("🔧 API MODE - Serving only JSON endpoints");
+// Caminho do frontend após build
+const frontendPath = path.resolve(__dirname, "../../web/dist");
+console.log("📁 Servindo frontend de:", frontendPath);
 console.log("🔍 Current working directory:", process.cwd());
 console.log("🔍 __dirname:", __dirname);
 
-// API routes only - no frontend serving
-app.get("*", (req, res) => {
-  console.log("🔍 API route requested:", req.path);
+// Serve static files from frontend (after API routes)
+app.use(express.static(frontendPath));
 
+// SPA fallback - serve index.html for all non-API routes (MUST be last)
+app.get("*", (req, res) => {
+  console.log("🔍 SPA Fallback - Request path:", req.path);
+
+  // Skip API routes
   if (req.path.startsWith("/api/")) {
+    console.log("🔍 Skipping API route:", req.path);
     return res.status(404).json({ error: "API route not found" });
   }
 
-  return res.status(404).json({ error: "API endpoint not found" });
+  const indexPath = path.join(frontendPath, "index.html");
+  console.log("🔍 Serving index.html from:", indexPath);
+
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("❌ Error serving index.html:", err);
+      console.error("❌ Error details:", err.message);
+      res.status(404).json({ error: "Frontend not found", details: err.message });
+    } else {
+      console.log("✅ Successfully served index.html");
+    }
+  });
 });
 
 // Error handler
