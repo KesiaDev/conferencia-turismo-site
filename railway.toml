@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build && echo 'FORCE REBUILD COMPLETE'"
 
 [deploy]
 startCommand = "cd apps/api && npm start"
