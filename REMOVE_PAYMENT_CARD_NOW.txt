@@ -1,0 +1,5 @@
+REMOVE PAYMENT CARD NOW - $(Get-Date)
+The payment card with PIX and other methods MUST be removed
+This is causing confusion for users
+Only UCS links should remain
+FORCE DEPLOY THIS CHANGE

@@ -84,7 +84,7 @@ export default function Fees() {
 
         <FeeTable fees={fees} />
 
-        {/* PAYMENT SECTION COMPLETELY REMOVED - UCS LINKS WORKING */}
+        {/* PAYMENT CARD COMPLETELY REMOVED - NO MORE PIX OR OTHER PAYMENT METHODS */}
 
         <div className="mt-12 max-w-4xl mx-auto prose prose-lg">
           <h3>{t("fees.included")}</h3>
