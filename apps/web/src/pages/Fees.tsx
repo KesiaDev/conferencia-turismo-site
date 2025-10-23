@@ -118,7 +118,7 @@ export default function Fees() {
                       <p className="text-xs sm:text-sm text-gray-700 flex flex-col sm:flex-row items-start gap-2">
                         <span className="text-base sm:text-lg flex-shrink-0">✅</span>
                         <span className="text-center sm:text-left">
-                          Clique nos botões &quot;Pagar Agora&quot; na tabela acima para ser
+                          Clique nos botões &quot;Pagar Agora&quot; na tabela abaixo para ser
                           redirecionado ao sistema oficial da UCS.
                         </span>
                       </p>
