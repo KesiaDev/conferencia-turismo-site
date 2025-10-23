@@ -96,7 +96,20 @@ console.log("🔍 Current working directory:", process.cwd());
 console.log("🔍 __dirname:", __dirname);
 
 // Serve static files from frontend (after API routes)
-app.use(express.static(frontendPath));
+app.use(
+  express.static(frontendPath, {
+    // Configurações de cache para evitar problemas de atualização
+    maxAge: 0, // Sem cache para arquivos estáticos
+    etag: false, // Desabilitar ETag
+    lastModified: false, // Desabilitar Last-Modified
+    setHeaders: (res) => {
+      // Headers específicos para forçar atualização
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
+    },
+  })
+);
 
 // SPA fallback - serve index.html for all non-API routes (MUST be last)
 app.get("*", (req, res) => {
@@ -110,6 +123,11 @@ app.get("*", (req, res) => {
 
   const indexPath = path.join(frontendPath, "index.html");
   console.log("🔍 Serving index.html from:", indexPath);
+
+  // Headers para evitar cache do index.html
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
 
   res.sendFile(indexPath, (err) => {
     if (err) {

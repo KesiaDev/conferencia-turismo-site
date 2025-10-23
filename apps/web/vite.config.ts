@@ -18,5 +18,15 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    // Configurações para evitar problemas de cache
+    rollupOptions: {
+      output: {
+        // Adicionar timestamp aos nomes dos arquivos para evitar cache
+        entryFileNames: `assets/[name]-[hash].js`,
+        chunkFileNames: `assets/[name]-[hash].js`,
+        assetFileNames: `assets/[name]-[hash].[ext]`,
+      },
+    },
+  },
 });
-
