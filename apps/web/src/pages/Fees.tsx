@@ -82,15 +82,6 @@ export default function Fees() {
           </Alert>
         </div>
 
-        {/* Destaque: Formas de Pagamento */}
-        <div className="max-w-5xl mx-auto mb-12">
-          <div className="relative bg-gradient-to-br from-[#e0a085] via-[#e8a98f] to-[#f4c490] rounded-2xl shadow-2xl overflow-hidden">
-            {/* Efeito de brilho no canto */}
-            <div className="absolute top-0 right-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-white/10 rounded-full blur-3xl -mr-16 sm:-mr-24 md:-mr-32 -mt-16 sm:-mt-24 md:-mt-32"></div>
-            <div className="absolute bottom-0 left-0 w-24 sm:w-36 md:w-48 h-24 sm:h-36 md:h-48 bg-white/10 rounded-full blur-3xl -ml-12 sm:-ml-18 md:-ml-24 -mb-12 sm:-mb-18 md:-mb-24"></div>
-          </div>
-        </div>
-
         <FeeTable fees={fees} />
 
         {/* PAYMENT SECTION COMPLETELY REMOVED - UCS LINKS WORKING */}
