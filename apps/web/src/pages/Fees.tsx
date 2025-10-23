@@ -11,7 +11,7 @@ export default function Fees() {
   const { t } = useTranslation();
   const [fees, setFees] = useState<FeeCategory[]>([]);
 
-  // PAYMENT CARD REMOVED - NO MORE PIX OR OTHER METHODS - RAILWAY FORCE REBUILD
+  // PAYMENT CARD REMOVED - NO MORE PIX OR OTHER METHODS - RAILWAY FORCE REBUILD - CLEAN BUILD
 
   useEffect(() => {
     apiService
