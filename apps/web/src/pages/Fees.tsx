@@ -93,7 +93,7 @@ export default function Fees() {
 
         <FeeTable fees={fees} />
 
-        {/* Deploy trigger - $(Get-Date) */}
+        {/* Deploy trigger - $(Get-Date) - Payment section removed - UCS links working */}
 
         <div className="mt-12 max-w-4xl mx-auto prose prose-lg">
           <h3>{t("fees.included")}</h3>
