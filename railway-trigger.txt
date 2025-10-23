@@ -1,0 +1,6 @@
+RAILWAY DEPLOY TRIGGER
+Timestamp: $(Get-Date)
+Status: Payment section completely removed
+Action: Force immediate deploy
+Build: Frontend + API
+Result: Clean fees page with UCS links only
