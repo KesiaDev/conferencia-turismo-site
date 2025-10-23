@@ -111,59 +111,6 @@ export default function Fees() {
             <li>{t("fees.notIncludedItem2")}</li>
           </ul>
         </div>
-
-        <div className="mt-12 max-w-5xl mx-auto bg-white rounded-lg shadow-md p-4 sm:p-6 md:p-8 border-l-4 border-[#e0a085]">
-          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-[#e0a085] text-center sm:text-left">
-            {t("fees.payment")}
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-            {/* PIX - Seção preparada */}
-            <div className="space-y-3 sm:space-y-4">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center justify-center sm:justify-start gap-2">
-                <span className="text-xl sm:text-2xl">💳</span>
-                Pagamento via PIX
-              </h3>
-
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
-                <p className="text-sm sm:text-base font-semibold text-blue-900 mb-2 text-center sm:text-left">
-                  📢 Informações serão divulgadas em breve
-                </p>
-                <p className="text-xs sm:text-sm text-blue-800 text-center sm:text-left">
-                  Instruções de pagamento via PIX serão disponibilizadas em breve.
-                </p>
-              </div>
-            </div>
-
-            {/* Outras formas - Seção preparada */}
-            <div className="space-y-3 sm:space-y-4">
-              <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 sm:mb-4 flex items-center justify-center sm:justify-start gap-2">
-                <span className="text-xl sm:text-2xl">🏦</span>
-                Outras Formas de Pagamento
-              </h3>
-
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded">
-                <p className="text-sm sm:text-base font-semibold text-blue-900 mb-2 text-center sm:text-left">
-                  📢 Informações serão divulgadas em breve
-                </p>
-                <p className="text-xs sm:text-sm text-blue-800 text-center sm:text-left">
-                  {t("fees.paymentInfo")}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Comentários mantidos para quando houver informações
-          <div className="mt-6 text-sm text-gray-500 italic border-t pt-4">
-            <p>💡 <strong>Desenvolvedor:</strong> Quando tiver as informações de pagamento:</p>
-            <ul className="list-disc ml-6 mt-2 space-y-1">
-              <li>Para PIX: adicione o QR Code em /public/pix-qrcode.png e a chave PIX</li>
-              <li>Para outras formas: adicione link de pagamento ou dados bancários</li>
-              <li>Remova os alertas "em breve" e descomente as seções preparadas acima</li>
-            </ul>
-          </div>
-          */}
-        </div>
       </Section>
     </>
   );
