@@ -33,11 +33,11 @@ app.use(
         styleSrc: ["'self'", "'unsafe-inline'"],
         scriptSrc: ["'self'", "'unsafe-inline'"],
         connectSrc: ["'self'", "*"], // Permitir todas as conexões para requisições AJAX
-        imgSrc: ["'self'", "data:", "https:"],
-        fontSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "https:", "blob:"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
-        frameSrc: ["'none'"],
+        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
       },
     },
   })
