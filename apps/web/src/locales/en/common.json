@@ -110,6 +110,7 @@
     "description": "Information about prices and payment methods",
     "notice": "Registration includes access to all sessions, event materials, coffee breaks and participation certificate.",
     "category": "Category",
+    "payNow": "Pay Now",
     "included": "What's included",
     "includedItem1": "Access to all plenary and parallel sessions",
     "includedItem2": "Digital support material",
@@ -120,7 +121,7 @@
     "notIncludedItem1": "Accommodation and transportation",
     "notIncludedItem2": "Cultural tour (Villa Dei Troni) - separate registration",
     "payment": "Payment Methods",
-    "paymentInfo": "Registration can be done via bank transfer or credit card. Detailed instructions will be sent after completing the form."
+    "paymentInfo": "Registration can be made through the payment links below. You will be redirected to the official UCS system to complete your registration."
   },
   "committees": {
     "title": "Committees",

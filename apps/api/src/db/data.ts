@@ -235,25 +235,70 @@ export const fees: FeeCategory[] = [
   {
     category: "Estudantes de Graduação",
     windows: [
-      { label: "até 05/01/2026", value: 60 },
-      { label: "06–31/01/2026", value: 70 },
-      { label: "01/02–23/03/2026", value: 100 },
+      {
+        label: "até 05/01/2026",
+        value: 60,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-1-estudantes-de-graduacao-ext038806",
+      },
+      {
+        label: "06–31/01/2026",
+        value: 70,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-2-estudantes-de-graduacao-ext038806",
+      },
+      {
+        label: "01/02–23/03/2026",
+        value: 100,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-3-estudantes-de-graduacao-ext038806",
+      },
     ],
   },
   {
     category: "Pós-graduandos",
     windows: [
-      { label: "até 05/01/2026", value: 150 },
-      { label: "06–31/01/2026", value: 180 },
-      { label: "01/02–23/03/2026", value: 214 },
+      {
+        label: "até 05/01/2026",
+        value: 150,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-1-pos-graduandos-ext038806",
+      },
+      {
+        label: "06–31/01/2026",
+        value: 180,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-2-pos-graduandos-ext038806",
+      },
+      {
+        label: "01/02–23/03/2026",
+        value: 214,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-3-estudantes-de-pos-graduacao-ext038806",
+      },
     ],
   },
   {
     category: "Professores, Pesquisadores ou Profissionais",
     windows: [
-      { label: "até 05/01/2026", value: 220 },
-      { label: "06–31/01/2026", value: 250 },
-      { label: "01/02–23/03/2026", value: 325 },
+      {
+        label: "até 05/01/2026",
+        value: 220,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-1-professores-pesquisadores-e-profissionais-da-area-e-interessados-ext038806",
+      },
+      {
+        label: "06–31/01/2026",
+        value: 250,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-2-professores-pesquisadores-profissionais-da-area-e-interessados-ext038806",
+      },
+      {
+        label: "01/02–23/03/2026",
+        value: 325,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-3-professores-pesquisadores-profissionais-da-area-e-interessados-ext038806",
+      },
     ],
   },
 ];
@@ -348,4 +393,4 @@ export const committees = {
 };
 
 // In-memory storage for submissions
-export const submissions: any[] = [];
+export const submissions: unknown[] = [];

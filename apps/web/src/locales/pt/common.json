@@ -111,6 +111,7 @@
     "description": "Informações sobre valores e formas de pagamento",
     "notice": "As inscrições incluem acesso a todas as sessões, materiais do evento, coffee breaks e certificado de participação.",
     "category": "Categoria",
+    "payNow": "Pagar Agora",
     "included": "O que está incluído",
     "includedItem1": "Acesso a todas as sessões plenárias e paralelas",
     "includedItem2": "Material de apoio digital",
@@ -121,7 +122,7 @@
     "notIncludedItem1": "Hospedagem e transporte",
     "notIncludedItem2": "Tour cultural (Villa Dei Troni) - inscrição à parte",
     "payment": "Formas de Pagamento",
-    "paymentInfo": "As inscrições podem ser realizadas via transferência bancária ou cartão de crédito. Instruções detalhadas serão enviadas após o preenchimento do formulário."
+    "paymentInfo": "As inscrições podem ser realizadas através dos links de pagamento abaixo. Você será redirecionado para o sistema oficial da UCS para finalizar sua inscrição."
   },
   "committees": {
     "title": "Comissões",

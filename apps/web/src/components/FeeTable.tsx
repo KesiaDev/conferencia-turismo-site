@@ -29,9 +29,22 @@ export default function FeeTable({ fees }: FeeTableProps) {
               <td className="p-4 font-medium">{fee.category}</td>
               {fee.windows.map((window, i) => (
                 <td key={i} className="text-center p-4">
-                  <span className="text-lg font-bold text-accent">
-                    R$ {window.value.toFixed(2)}
-                  </span>
+                  <div className="flex flex-col items-center gap-2">
+                    <span className="text-lg font-bold text-accent">
+                      R$ {window.value.toFixed(2)}
+                    </span>
+                    {window.paymentUrl && (
+                      <a
+                        href={window.paymentUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center px-3 py-1.5 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-dark transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      >
+                        <span className="mr-1">💳</span>
+                        {t("fees.payNow", "Pagar Agora")}
+                      </a>
+                    )}
+                  </div>
                 </td>
               ))}
             </tr>

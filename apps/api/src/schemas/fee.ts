@@ -3,6 +3,7 @@ import { z } from "zod";
 export const feeWindowSchema = z.object({
   label: z.string(),
   value: z.number(),
+  paymentUrl: z.string().url().optional(),
 });
 
 export const feeCategorySchema = z.object({
@@ -12,4 +13,3 @@ export const feeCategorySchema = z.object({
 
 export type FeeWindow = z.infer<typeof feeWindowSchema>;
 export type FeeCategory = z.infer<typeof feeCategorySchema>;
-

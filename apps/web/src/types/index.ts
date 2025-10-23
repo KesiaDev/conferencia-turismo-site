@@ -26,6 +26,7 @@ export interface ProgramDay {
 export interface FeeWindow {
   label: string;
   value: number;
+  paymentUrl?: string;
 }
 
 export interface FeeCategory {
