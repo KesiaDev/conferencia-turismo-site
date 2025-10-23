@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build && pnpm --filter @conferencia/api build"
+buildCommand = "pnpm install && cd apps/web && pnpm build && cd ../api && pnpm build && cd ../.."
 
 [deploy]
 startCommand = "cd apps/api && npm start"
