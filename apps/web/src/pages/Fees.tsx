@@ -88,45 +88,6 @@ export default function Fees() {
             {/* Efeito de brilho no canto */}
             <div className="absolute top-0 right-0 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-white/10 rounded-full blur-3xl -mr-16 sm:-mr-24 md:-mr-32 -mt-16 sm:-mt-24 md:-mt-32"></div>
             <div className="absolute bottom-0 left-0 w-24 sm:w-36 md:w-48 h-24 sm:h-36 md:h-48 bg-white/10 rounded-full blur-3xl -ml-12 sm:-ml-18 md:-ml-24 -mb-12 sm:-mb-18 md:-mb-24"></div>
-
-            <div className="relative p-4 sm:p-6 md:p-8 lg:p-10">
-              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-                <div className="flex-shrink-0 mx-auto sm:mx-0">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-3xl sm:text-5xl shadow-lg border border-white/30">
-                    💳
-                  </div>
-                </div>
-
-                <div className="flex-1 w-full">
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg text-center sm:text-left">
-                    {t("fees.payment")}
-                  </h2>
-
-                  <div className="bg-white rounded-xl shadow-xl p-4 sm:p-6 border-2 border-white/50">
-                    <div className="flex flex-col sm:flex-row items-start gap-3 mb-4">
-                      <div className="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-lg sm:text-2xl mx-auto sm:mx-0">
-                        💳
-                      </div>
-                      <div className="flex-1 text-center sm:text-left">
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                          {t("fees.paymentInfo")}
-                        </h3>
-                      </div>
-                    </div>
-
-                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-3 sm:p-4 border-l-4 border-green-500">
-                      <p className="text-xs sm:text-sm text-gray-700 flex flex-col sm:flex-row items-start gap-2">
-                        <span className="text-base sm:text-lg flex-shrink-0">✅</span>
-                        <span className="text-center sm:text-left">
-                          Clique nos botões &quot;Pagar Agora&quot; na tabela abaixo para ser
-                          redirecionado ao sistema oficial da UCS.
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
