@@ -7,6 +7,7 @@ import Program from "./pages/Program";
 import Call from "./pages/Call";
 import Fees from "./pages/Fees";
 import Committees from "./pages/Committees";
+import Venue from "./pages/Venue";
 import Contact from "./pages/Contact";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/call" element={<Call />} />
         <Route path="/fees" element={<Fees />} />
         <Route path="/committees" element={<Committees />} />
+        <Route path="/venue" element={<Venue />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/accessibility" element={<Accessibility />} />
         <Route path="*" element={<NotFound />} />
