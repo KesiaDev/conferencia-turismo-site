@@ -11,6 +11,8 @@ export default function Fees() {
   const { t } = useTranslation();
   const [fees, setFees] = useState<FeeCategory[]>([]);
 
+  // PAYMENT CARD REMOVED - NO MORE PIX OR OTHER METHODS
+
   useEffect(() => {
     apiService
       .getFees()
