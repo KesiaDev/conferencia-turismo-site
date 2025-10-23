@@ -107,7 +107,7 @@
   },
   "fees": {
     "title": "Registration and Fees",
-    "description": "Information about prices and payment methods",
+    "description": "Information about prices and registration",
     "notice": "Registration includes access to all sessions, event materials, coffee breaks and participation certificate.",
     "category": "Category",
     "payNow": "Pay Now",
@@ -119,9 +119,7 @@
     "includedItem5": "Access to the event's online platform",
     "notIncluded": "Not included",
     "notIncludedItem1": "Accommodation and transportation",
-    "notIncludedItem2": "Cultural tour (Villa Dei Troni) - separate registration",
-    "payment": "Payment Methods",
-    "paymentInfo": "Registration can be made through the payment links below. You will be redirected to the official UCS system to complete your registration."
+    "notIncludedItem2": "Cultural tour (Villa Dei Troni) - separate registration"
   },
   "committees": {
     "title": "Committees",

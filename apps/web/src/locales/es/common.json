@@ -107,7 +107,7 @@
   },
   "fees": {
     "title": "Inscripciones y Tasas",
-    "description": "Información sobre valores y formas de pago",
+    "description": "Información sobre valores e inscripciones",
     "notice": "Las inscripciones incluyen acceso a todas las sesiones, materiales del evento, pausas para café y certificado de participación.",
     "category": "Categoría",
     "payNow": "Pagar Ahora",
@@ -119,9 +119,7 @@
     "includedItem5": "Acceso a la plataforma en línea del evento",
     "notIncluded": "No incluido",
     "notIncludedItem1": "Alojamiento y transporte",
-    "notIncludedItem2": "Tour cultural (Villa Dei Troni) - inscripción aparte",
-    "payment": "Formas de Pago",
-    "paymentInfo": "Las inscripciones pueden realizarse a través de los enlaces de pago a continuación. Serás redirigido al sistema oficial de UCS para completar tu inscripción."
+    "notIncludedItem2": "Tour cultural (Villa Dei Troni) - inscripción aparte"
   },
   "committees": {
     "title": "Comisiones",
