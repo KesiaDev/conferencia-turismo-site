@@ -31,7 +31,7 @@ export const speakers: Speaker[] = [
     ],
     photo: "/speakers/diomira.png",
     photoModal: "/speakers/diomira-modal.png",
-    bio: "Professora, Universidade Federal de Minas Gerais, Brasil. Possui graduação em Economia pela Universidade Católica de Minas Gerais (1982), especialização em Planejamento (Fundação João Pinheiro, 1983) e estatística (UFMG, 1998). Mestre em Turismo pela Universidad de Alicante, Espanha, e doutora em Economia pelo Cedeplar/UFMG e Universidad de Alicante (2012). É professora associada do Departamento de Geografia da UFMG, Curso de Turismo. Foi Diretora Científico-Cultural do Espaço do Conhecimento UFMG (2018–2022). Suas áreas de atuação incluem economia do turismo e da cultura, turismo e pobreza, turismo literário e viabilidade econômica de projetos, com foco atual na interface entre turismo e literatura.",
+    bio: "Professora do curso de Graduação em Turismo e do curso de Pós Graduação Interdisciplinar em Estudo do Lazer, ambos na Universidade Federal de Minas Gerais (UFMG), Diomira é doutora em economia pela Universidade Federal de Minas Gerais - Brasil e pela Universidade de Alicante – Espanha. Com interesse na pesquisa e no ensino da economia da cultura e do turismo, desenvolveu elos criativos entre o turismo e a literatura a partir da participação em projetos de extensão com comunidades que trabalham a obra do escritor João Guimarães Rosa, além de compor a equipe de curadores de exposições museais e festivais. O turismo literário tem sido objeto de suas pesquisas mais recentes.",
   },
   {
     id: "deborah",
@@ -40,7 +40,7 @@ export const speakers: Speaker[] = [
     tags: ["Mesa Internacional"],
     photo: "/speakers/Deborah Castro.png",
     photoModal: "/speakers/Deborah Castro-modal.png",
-    bio: "Professora Assistente de Estudos de Mídia na Universidade de Groningen, Holanda, e co-convocadora do grupo de pesquisa Culturas de Produção de Mídia. Possui doutorado em Comunicação pela Universidade Autônoma de Barcelona (2015), com períodos de pesquisa nos EUA. Atuou como pesquisadora e docente em Portugal e na Holanda, incluindo uma bolsa Marie Skłodowska-Curie. É presidente do Centro Erasmus de Conhecimento para Cinema, Patrimônio e Turismo. Também integra a ITI-LARSyS (Portugal). Participa da FitoTO, organização premiada internacionalmente por promover práticas sustentáveis e inclusivas no cinema e turismo. Sua trajetória combina pesquisa, ensino e inovação cultural.",
+    bio: "É Professora de Estudos de Mídia na Universidade de Groningen, Holanda, e co-convocadora do grupo de pesquisa Culturas de Produção de Mídia. Possui doutorado em Comunicação pela Universidade Autônoma de Barcelona (2015), com períodos de pesquisa nos EUA. Atuou como pesquisadora e docente em Espanha, Portugal e na Holanda, incluindo uma bolsa Marie Skłodowska-Curie, da Comissão Europeia. É presidenta do Centro Erasmus de Conhecimento para Cinema, Patrimônio e Turismo (FIHETO), organização premiada internacionalmente por promover práticas sustentáveis e inclusivas no cinema e turismo.",
   },
   {
     id: "jordi",
@@ -49,7 +49,7 @@ export const speakers: Speaker[] = [
     tags: ["Mesa Internacional"],
     photo: "/speakers/Jordi.png",
     photoModal: "/speakers/Jordi-modal.png",
-    bio: "Referência internacional em turismo cultural, literário e cinematográfico, Jordi Arcos-Pumarola é professor e pesquisador do CETT – Universidade de Barcelona, centro líder mundial em educação, pesquisa e inovação em turismo. Com ampla experiência em projetos que unem cultura, inovação territorial e desenvolvimento regional, atua na criação de metodologias e produtos turísticos baseados em narrativas literárias e audiovisuais. Reconhecido por sua capacidade de aproximar academia e mercado, é hoje um dos principais nomes na Europa quando o tema é transformar histórias em experiências que movimentam destinos e fortalecem economias criativas.",
+    bio: "É professor e pesquisador do CETT – Universidade de Barcelona, instituição reconhecida por sua atuação em educação, pesquisa e inovação em turismo. Possui ampla experiência em projetos que articulam cultura, inovação territorial e desenvolvimento regional, dedicando-se à criação de metodologias e produtos turísticos baseados em narrativas literárias e audiovisuais. Sua trajetória destaca-se pela aproximação entre universidade e mercado, contribuindo para transformar histórias em experiências que fortalecem os destinos e impulsionam as economias criativas.",
   },
   {
     id: "rita",
@@ -70,7 +70,7 @@ export const speakers: Speaker[] = [
     ],
     photo: "/speakers/Andre Peritonotto.png",
     photoModal: "/speakers/Andre Peritonotto-modal.png",
-    bio: "Professor da UFDPar e UFPI / Film Commission Noronha 2B. Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
+    bio: "Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Ex-Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
   },
   {
     id: "lissandro",
@@ -82,7 +82,7 @@ export const speakers: Speaker[] = [
     ],
     photo: "/speakers/Lissandro.png",
     photoModal: "/speakers/Lissandro-modal.png",
-    bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
+    bio: "Cineasta e professor de cinema da Universidade de Caxias do Sul, Brasil. É roteirista e diretor cinematográfico. Sócio fundador da Spaghetti Filmes, produtora brasileira independente. Professor da Universidade de Caxias do Sul nos cursos de Cinema, Fotografia e Bacharelado em Artes Visuais. Com especialização em Artes Visuais e qualificações em Cinema, domina a escrita de Roteiro, processos de Direção e Produção Executiva de filmes. Dirigiu mais de 30 obras audiovisuais entre curtas, médias e longas metragens dos gêneros ficção e documentário, tendo gravado em diversos lugares do Brasil e em países como Chile e Itália.",
   },
 ];
 
