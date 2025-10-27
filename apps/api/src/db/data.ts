@@ -84,6 +84,18 @@ export const speakers: Speaker[] = [
     photoModal: "/speakers/Lissandro-modal.png",
     bio: "Cineasta e professor de cinema da Universidade de Caxias do Sul, Brasil. É roteirista e diretor cinematográfico. Sócio fundador da Spaghetti Filmes, produtora brasileira independente. Professor da Universidade de Caxias do Sul nos cursos de Cinema, Fotografia e Bacharelado em Artes Visuais. Com especialização em Artes Visuais e qualificações em Cinema, domina a escrita de Roteiro, processos de Direção e Produção Executiva de filmes. Dirigiu mais de 30 obras audiovisuais entre curtas, médias e longas metragens dos gêneros ficção e documentário, tendo gravado em diversos lugares do Brasil e em países como Chile e Itália.",
   },
+  {
+    id: "ronaldo",
+    name: "Ronaldo Leites Diaz",
+    affiliation: "Doutorando PPGTURH - UCS (Brasil)",
+    tags: [
+      "Painel Especial",
+      "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+    ],
+    photo: "/speakers/Ronaldo.png",
+    photoModal: "/speakers/Ronaldo-modal.png",
+    bio: "É doutorando e mestre em Turismo e Hospitalidade pelo Programa de Pós-Graduação em Turismo e Hospitalidade da Universidade de Caxias do Sul (UCS), onde também se graduou em Letras e em Gastronomia. Sua tese é voltada ao turismo Literário e Cinematográfico, com ênfase nos processos de representação e nas relações entre ficção, criação e realidade turística. É pesquisador do HOSPITUR – Grupo de Estudos sobre Hospitalidade, vinculado ao PPGTURH/UCS, e participa do Núcleo de Pesquisa em Desenvolvimento Humano e Social, Linguagens e Processos Educacionais, integrando o projeto Turismo essencialmente pedagógico, Cidades Educadoras e Hospitalidade (TEPHCE), voltado à reformulação de políticas públicas de turismo com foco no desenvolvimento humano e social. E-mail: rldiaz@ucs.br. ORCID: 0000-0001-5141-2505.",
+  },
 ];
 
 export const program: ProgramDay[] = [
