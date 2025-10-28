@@ -64,9 +64,11 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                   loading="eager"
                   fetchPriority="high"
                   onError={() => {
-                    console.error(
-                      `Failed to load modal photo: ${speaker.photoModal || speaker.photo}`
-                    );
+                    console.error(`Failed to load modal photo for ${speaker.name}:`, {
+                      photoModal: speaker.photoModal,
+                      photo: speaker.photo,
+                      using: speaker.photoModal || speaker.photo,
+                    });
                     // Keep original error handling but don't change src to avoid loops
                   }}
                 />
