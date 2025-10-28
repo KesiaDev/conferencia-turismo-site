@@ -29,6 +29,12 @@ export default function OptimizedImage({
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     setIsLoading(false);
     setHasError(true);
+    // Log para debug
+    const img = e.target as HTMLImageElement;
+    console.error(`Failed to load image: ${img.src}`, {
+      original: src,
+      encoded: encodedSrc,
+    });
     if (onError) {
       onError(e);
     }
@@ -45,7 +51,12 @@ export default function OptimizedImage({
     } else if (src.startsWith("/")) {
       // For relative URLs, encode each part except the leading slash
       const parts = src.split("/").filter(Boolean); // Remove empty first element
-      return "/" + parts.map(encodeURIComponent).join("/");
+      const encoded = "/" + parts.map(encodeURIComponent).join("/");
+      // Log para debug (remover em produção se necessário)
+      if (encoded.includes("%20")) {
+        console.log(`Encoding image: ${src} -> ${encoded}`);
+      }
+      return encoded;
     }
     return src;
   })();
