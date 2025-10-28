@@ -23,7 +23,7 @@ export default function Keynotes() {
             name: "Palestrante a definir (Embratur/Ancine)",
             affiliation: "Brasil",
             tags: ["Keynote", "Políticas públicas"],
-            photo: "/speakers/Aguarde.png",
+            photo: "/speakers/Embratur-Aguarde.gif",
             bio: "Representante de órgão público brasileiro relacionado ao turismo e/ou cinema.",
           },
           {
@@ -88,6 +88,18 @@ export default function Keynotes() {
             photo: "/speakers/Lissandro.gif",
             photoModal: "/speakers/Lissandro-modal.png",
             bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
+          },
+          {
+            id: "ronaldo",
+            name: "Ronaldo Leites Diaz",
+            affiliation: "Doutorando PPGTURH - UCS (Brasil)",
+            tags: [
+              "Painel Especial",
+              "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+            ],
+            photo: "/speakers/Ronaldo.gif",
+            photoModal: "/speakers/Ronaldo-modal.gif",
+            bio: "É doutorando e mestre em Turismo e Hospitalidade pelo Programa de Pós-Graduação em Turismo e Hospitalidade da Universidade de Caxias do Sul (UCS), onde também se graduou em Letras e em Gastronomia. Sua tese é voltada ao turismo Literário e Cinematográfico, com ênfase nos processos de representação e nas relações entre ficção, criação e realidade turística. É pesquisador do HOSPITUR – Grupo de Estudos sobre Hospitalidade, vinculado ao PPGTURH/UCS, e participa do Núcleo de Pesquisa em Desenvolvimento Humano e Social, Linguagens e Processos Educacionais, integrando o projeto Turismo essencialmente pedagógico, Cidades Educadoras e Hospitalidade (TEPHCE), voltado à reformulação de políticas públicas de turismo com foco no desenvolvimento humano e social. E-mail: rldiaz@ucs.br. ORCID: 0000-0001-5141-2505.",
           },
           {
             id: "duda-rocha",

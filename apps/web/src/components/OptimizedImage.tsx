@@ -52,9 +52,9 @@ export default function OptimizedImage({
       // For relative URLs, encode each part except the leading slash
       const parts = src.split("/").filter(Boolean); // Remove empty first element
       const encoded = "/" + parts.map(encodeURIComponent).join("/");
-      // Log para debug quando há espaços
-      if (encoded.includes("%20")) {
-        console.log(`[OptimizedImage] Encoding: ${src} -> ${encoded}`);
+      // Log para debug quando há espaços ou é modal
+      if (encoded.includes("%20") || src.includes("modal")) {
+        console.log(`[OptimizedImage] Loading modal image: ${src} -> ${encoded}`);
       }
       return encoded;
     }

@@ -12,6 +12,12 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      // Debug: verificar dados do palestrante
+      console.log(`[SpeakerModal] Modal aberto para ${speaker.name}:`, {
+        photoModal: speaker.photoModal,
+        photo: speaker.photo,
+        willUse: speaker.photoModal || speaker.photo,
+      });
     } else {
       document.body.style.overflow = "unset";
     }
@@ -19,7 +25,7 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [isOpen]);
+  }, [isOpen, speaker]);
 
   if (!isOpen) return null;
 
