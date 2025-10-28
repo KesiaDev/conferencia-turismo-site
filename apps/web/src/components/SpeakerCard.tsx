@@ -50,8 +50,8 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 speaker-photo object-[50%_10%]"
               loading="lazy"
               fetchPriority="low"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = "/speakers/Aguarde.png";
+              onError={() => {
+                console.error(`Failed to load speaker photo: ${speaker.photo}`);
               }}
             />
           )}

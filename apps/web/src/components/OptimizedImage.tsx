@@ -88,7 +88,6 @@ export default function OptimizedImage({
           });
         }}
         onError={handleError}
-        style={{ display: isLoading ? "none" : "block" }}
       />
     </div>
   );
