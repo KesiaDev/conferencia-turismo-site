@@ -56,7 +56,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
             />
           )}
         </div>
-        {speaker.id !== "keynote-tbd" && (
+        {speaker.bio && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 sm:pb-6 md:pb-8">
             <span className="text-white text-sm sm:text-base md:text-lg font-semibold tracking-wide px-4 text-center">
               <span className="hidden sm:inline">Clique para ver detalhes</span>

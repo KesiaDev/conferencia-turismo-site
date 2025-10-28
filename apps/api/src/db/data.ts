@@ -18,7 +18,7 @@ export const speakers: Speaker[] = [
     name: "Palestrante a definir (Embratur/Ancine)",
     affiliation: "Brasil",
     tags: ["Keynote", "Políticas públicas"],
-    photo: "/speakers/Aguarde.png",
+    photo: "/speakers/Embratur-Aguarde.gif",
     bio: "Representante de órgão público brasileiro relacionado ao turismo e/ou cinema.",
   },
   {
