@@ -34,6 +34,15 @@ export default function OptimizedImage({
     }
   };
 
+  // Encode URL to handle spaces in filenames
+  const encodedSrc =
+    src.startsWith("/") || src.startsWith("http")
+      ? src
+          .split("/")
+          .map((part, index) => (index === 0 ? part : encodeURIComponent(part)))
+          .join("/")
+      : src;
+
   return (
     <div className="relative overflow-hidden">
       {/* Skeleton placeholder durante carregamento */}
@@ -43,7 +52,7 @@ export default function OptimizedImage({
 
       {/* Imagem */}
       <img
-        src={hasError ? fallbackSrc : src}
+        src={hasError ? fallbackSrc : encodedSrc}
         alt={alt}
         loading={loading}
         decoding="async"
