@@ -9,6 +9,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Clear cache timestamp
+  cacheDir: ".vite",
   server: {
     port: 5173,
     proxy: {
