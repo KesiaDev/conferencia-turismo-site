@@ -4,6 +4,7 @@ import Section from "../components/Section";
 import FeeTable from "../components/FeeTable";
 import Alert from "../components/Alert";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 import apiService from "../api/client";
 import type { FeeCategory } from "../types";
 
@@ -62,10 +63,12 @@ export default function Fees() {
       <Seo title={t("nav.fees")} description={t("fees.description")} />
 
       <div className="w-full aspect-[16/5]">
-        <img
+        <OptimizedImage
           src="/hero.png"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
 

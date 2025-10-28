@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import SpeakerCard from "../components/SpeakerCard";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 import apiService from "../api/client";
 import type { Speaker } from "../types";
 
@@ -99,10 +100,12 @@ export default function Home() {
       <Seo />
 
       <div className="w-full aspect-[16/5]">
-        <img
+        <OptimizedImage
           src="/hero.png"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
 
@@ -142,7 +145,7 @@ export default function Home() {
       </Section>
 
       <Section title={t("home.featuredSpeakers")} background="gray">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10 max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-7xl mx-auto px-4">
           {speakers.map((speaker) => (
             <SpeakerCard key={speaker.id} speaker={speaker} />
           ))}

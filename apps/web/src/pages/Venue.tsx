@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 
 export default function Venue() {
   const { t } = useTranslation();
@@ -10,10 +11,12 @@ export default function Venue() {
       <Seo title={t("nav.venue")} description={t("venue.description")} />
 
       <div className="w-full aspect-[16/5]">
-        <img
+        <OptimizedImage
           src="/hero.png"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
+          loading="eager"
+          fetchPriority="high"
         />
       </div>
 

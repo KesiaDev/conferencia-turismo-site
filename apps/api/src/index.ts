@@ -24,6 +24,26 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Force HTTPS in production (Railway edge terminates SSL)
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    // Check if request came through HTTPS at Railway edge
+    const isSecure =
+      req.secure ||
+      req.headers["x-forwarded-proto"] === "https" ||
+      req.headers["x-forwarded-proto"] === "https,http"; // Railway can send multiple
+
+    // Redirect HTTP to HTTPS for custom domains
+    if (!isSecure && req.hostname !== "localhost" && !req.hostname.includes("railway.app")) {
+      return res.redirect(301, `https://${req.hostname}${req.url}`);
+    }
+
+    // Set security headers
+    res.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
+    next();
+  });
+}
+
 // Middleware
 app.use(
   helmet({
@@ -38,7 +58,13 @@ app.use(
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
         frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
+        upgradeInsecureRequests: process.env.NODE_ENV === "production" ? [] : null,
       },
+    },
+    hsts: {
+      maxAge: 31536000,
+      includeSubDomains: true,
+      preload: true,
     },
   })
 );
