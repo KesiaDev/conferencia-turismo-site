@@ -96,6 +96,18 @@ export const speakers: Speaker[] = [
     photoModal: "/speakers/Ronaldo-modal.png",
     bio: "É doutorando e mestre em Turismo e Hospitalidade pelo Programa de Pós-Graduação em Turismo e Hospitalidade da Universidade de Caxias do Sul (UCS), onde também se graduou em Letras e em Gastronomia. Sua tese é voltada ao turismo Literário e Cinematográfico, com ênfase nos processos de representação e nas relações entre ficção, criação e realidade turística. É pesquisador do HOSPITUR – Grupo de Estudos sobre Hospitalidade, vinculado ao PPGTURH/UCS, e participa do Núcleo de Pesquisa em Desenvolvimento Humano e Social, Linguagens e Processos Educacionais, integrando o projeto Turismo essencialmente pedagógico, Cidades Educadoras e Hospitalidade (TEPHCE), voltado à reformulação de políticas públicas de turismo com foco no desenvolvimento humano e social. E-mail: rldiaz@ucs.br. ORCID: 0000-0001-5141-2505.",
   },
+  {
+    id: "duda-rocha",
+    name: "Duda Rocha",
+    affiliation: "UCS (Brasil)",
+    tags: [
+      "Painel Especial",
+      "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+    ],
+    photo: "/speakers/Duda Rocha.png",
+    photoModal: "/speakers/Duda Rocha-modal.png",
+    bio: "Duda Rocha é Bacharel, Mestra e Doutoranda em Turismo e Hospitalidade pela Universidade de Caxias do Sul (UCS), com formação em Comunicação Social – Publicidade e Propaganda. Possui especialização em Cultural Heritage Enhancement pela Università La Sapienza di Roma e realizou intercâmbio de pesquisa na Universidade de Coimbra (Portugal), com foco em turismo, território e patrimônio. Com mais de duas décadas de experiência nos campos da comunicação, cultura e turismo, consolidou trajetória em produção audiovisual, direção e curadoria de curtas-metragens e documentários, explorando narrativas que articulam memória, identidade e desenvolvimento regional. É pesquisadora dos grupos HOSPITUR – Turismo e Hospitalidade: Desenvolvimento Humano e Social, Linguagem e Processos Educacionais – e do Núcleo de Estudos Migratórios (CNPq/UCS), onde desenvolve estudos interdisciplinares sobre memória, etnicidade, hospitalidade e cultura, contribuindo para o debate contemporâneo sobre economia criativa e políticas culturais como dimensões estratégicas do desenvolvimento sustentável dos territórios.",
+  },
 ];
 
 export const program: ProgramDay[] = [
