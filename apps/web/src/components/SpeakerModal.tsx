@@ -63,8 +63,11 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                   className="w-full h-full object-cover speaker-photo rounded-full"
                   loading="eager"
                   fetchPriority="high"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/speakers/Aguarde.png";
+                  onError={() => {
+                    console.error(
+                      `Failed to load modal photo: ${speaker.photoModal || speaker.photo}`
+                    );
+                    // Keep original error handling but don't change src to avoid loops
                   }}
                 />
               </div>

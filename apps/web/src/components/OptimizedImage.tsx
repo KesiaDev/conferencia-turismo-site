@@ -17,7 +17,7 @@ export default function OptimizedImage({
   loading = "lazy",
   fetchPriority = "auto",
   onError,
-  fallbackSrc = "/speakers/Aguarde.png",
+  fallbackSrc = undefined,
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
