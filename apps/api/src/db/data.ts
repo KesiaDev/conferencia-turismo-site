@@ -30,7 +30,7 @@ export const speakers: Speaker[] = [
       "O impacto regional do turismo literário e cinematográfico no território",
     ],
     photo: "/speakers/diomira.gif",
-    photoModal: "/speakers/diomira-modal.gif",
+    photoModal: "/speakers/diomira-modal.png",
     bio: "Professora do curso de Graduação em Turismo e do curso de Pós Graduação Interdisciplinar em Estudo do Lazer, ambos na Universidade Federal de Minas Gerais (UFMG), Diomira é doutora em economia pela Universidade Federal de Minas Gerais - Brasil e pela Universidade de Alicante – Espanha. Com interesse na pesquisa e no ensino da economia da cultura e do turismo, desenvolveu elos criativos entre o turismo e a literatura a partir da participação em projetos de extensão com comunidades que trabalham a obra do escritor João Guimarães Rosa, além de compor a equipe de curadores de exposições museais e festivais. O turismo literário tem sido objeto de suas pesquisas mais recentes.",
   },
   {
@@ -39,7 +39,7 @@ export const speakers: Speaker[] = [
     affiliation: "RUG (Países Baixos)",
     tags: ["Mesa Internacional"],
     photo: "/speakers/Deborah Castro.gif",
-    photoModal: "/speakers/Deborah Castro-modal.gif",
+    photoModal: "/speakers/Deborah Castro-modal.png",
     bio: "É Professora de Estudos de Mídia na Universidade de Groningen, Holanda, e co-convocadora do grupo de pesquisa Culturas de Produção de Mídia. Possui doutorado em Comunicação pela Universidade Autônoma de Barcelona (2015), com períodos de pesquisa nos EUA. Atuou como pesquisadora e docente em Espanha, Portugal e na Holanda, incluindo uma bolsa Marie Skłodowska-Curie, da Comissão Europeia. É presidenta do Centro Erasmus de Conhecimento para Cinema, Patrimônio e Turismo (FIHETO), organização premiada internacionalmente por promover práticas sustentáveis e inclusivas no cinema e turismo.",
   },
   {
@@ -48,7 +48,7 @@ export const speakers: Speaker[] = [
     affiliation: "CETT-UB",
     tags: ["Mesa Internacional"],
     photo: "/speakers/Jordi.gif",
-    photoModal: "/speakers/Jordi-modal.gif",
+    photoModal: "/speakers/Jordi-modal.png",
     bio: "É professor e pesquisador do CETT – Universidade de Barcelona, instituição reconhecida por sua atuação em educação, pesquisa e inovação em turismo. Possui ampla experiência em projetos que articulam cultura, inovação territorial e desenvolvimento regional, dedicando-se à criação de metodologias e produtos turísticos baseados em narrativas literárias e audiovisuais. Sua trajetória destaca-se pela aproximação entre universidade e mercado, contribuindo para transformar histórias em experiências que fortalecem os destinos e impulsionam as economias criativas.",
   },
   {
@@ -57,7 +57,7 @@ export const speakers: Speaker[] = [
     affiliation: "UAlg (Portugal)",
     tags: ["Mesa Internacional"],
     photo: "/speakers/RitaBaleiro.gif",
-    photoModal: "/speakers/RitaBaleiro-modal.gif",
+    photoModal: "/speakers/RitaBaleiro-modal.png",
     bio: "Rita Baleiro é professora coordenadora na Escola Superior de Gestão, Hotelaria e Turismo, da Universidade do Algarve (Portugal), é doutorada em Estudos Literários pela Universidade Nova de Lisboa e mestre em Estudos Anglo-Portugueses pela mesma universidade. É investigadora integrada no Centre for Research, Development and Innovation in Tourism (CITUR), e no Centro de Investigação sobre Turismo Literário (TULE). É coeditora da revista académica Journal of Tourism & Arts. Na última década, tem desenvolvido investigação na área dos estudos em turismo e literatura, organizado diversos encontros científicos sobre este tema e publicado trabalhos nesta área. É coeditora do E-Dictionary of Literary Tourism (2023). ORCID 0000-0002-3188-5150",
   },
   {
@@ -69,7 +69,7 @@ export const speakers: Speaker[] = [
       "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
     ],
     photo: "/speakers/Andre Peritonotto.gif",
-    photoModal: "/speakers/Andre Peritonotto-modal.gif",
+    photoModal: "/speakers/Andre Peritonotto-modal.png",
     bio: "Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Ex-Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
   },
   {
@@ -81,7 +81,7 @@ export const speakers: Speaker[] = [
       "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
     ],
     photo: "/speakers/Lissandro.gif",
-    photoModal: "/speakers/Lissandro-modal.gif",
+    photoModal: "/speakers/Lissandro-modal.png",
     bio: "Cineasta e professor de cinema da Universidade de Caxias do Sul, Brasil. É roteirista e diretor cinematográfico. Sócio fundador da Spaghetti Filmes, produtora brasileira independente. Professor da Universidade de Caxias do Sul nos cursos de Cinema, Fotografia e Bacharelado em Artes Visuais. Com especialização em Artes Visuais e qualificações em Cinema, domina a escrita de Roteiro, processos de Direção e Produção Executiva de filmes. Dirigiu mais de 30 obras audiovisuais entre curtas, médias e longas metragens dos gêneros ficção e documentário, tendo gravado em diversos lugares do Brasil e em países como Chile e Itália.",
   },
   {
