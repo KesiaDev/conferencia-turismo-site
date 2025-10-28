@@ -35,13 +35,20 @@ export default function OptimizedImage({
   };
 
   // Encode URL to handle spaces in filenames
-  const encodedSrc =
-    src.startsWith("/") || src.startsWith("http")
-      ? src
-          .split("/")
-          .map((part, index) => (index === 0 ? part : encodeURIComponent(part)))
-          .join("/")
-      : src;
+  const encodedSrc = (() => {
+    if (src.startsWith("http")) {
+      // For absolute URLs, encode each part except the protocol
+      const [protocol, ...rest] = src.split("://");
+      const path = rest.join("://");
+      const [domain, ...pathParts] = path.split("/");
+      return `${protocol}://${domain}${pathParts.length > 0 ? "/" : ""}${pathParts.map(encodeURIComponent).join("/")}`;
+    } else if (src.startsWith("/")) {
+      // For relative URLs, encode each part except the leading slash
+      const parts = src.split("/").filter(Boolean); // Remove empty first element
+      return "/" + parts.map(encodeURIComponent).join("/");
+    }
+    return src;
+  })();
 
   return (
     <div className="relative overflow-hidden">
