@@ -62,7 +62,7 @@ export default function OptimizedImage({
   })();
 
   return (
-    <div className="relative overflow-hidden">
+    <span className="relative block w-full h-full">
       {/* Skeleton placeholder durante carregamento */}
       {isLoading && !hasError && (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse z-10" />
@@ -89,6 +89,6 @@ export default function OptimizedImage({
         }}
         onError={handleError}
       />
-    </div>
+    </span>
   );
 }
