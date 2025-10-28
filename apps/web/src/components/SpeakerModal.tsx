@@ -67,25 +67,45 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                     const src = speaker.photoModal || speaker.photo;
                     if (src.startsWith("/")) {
                       const parts = src.split("/").filter(Boolean);
-                      return "/" + parts.map(encodeURIComponent).join("/");
+                      const encoded = "/" + parts.map(encodeURIComponent).join("/");
+                      console.log(`[SpeakerModal] Loading image for ${speaker.name}:`, {
+                        original: src,
+                        encoded: encoded,
+                      });
+                      return encoded;
                     }
                     return src;
                   })()}
                   alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="eager"
-                  onError={(e) => {
-                    console.error(`Failed to load modal photo for ${speaker.name}:`, {
-                      photoModal: speaker.photoModal,
-                      photo: speaker.photo,
-                      using: speaker.photoModal || speaker.photo,
-                    });
+                  onLoad={(e) => {
                     const img = e.target as HTMLImageElement;
+                    console.log(`[SpeakerModal] ✓ Image loaded for ${speaker.name}:`, {
+                      src: img.src,
+                      naturalWidth: img.naturalWidth,
+                      naturalHeight: img.naturalHeight,
+                    });
+                  }}
+                  onError={(e) => {
+                    const img = e.target as HTMLImageElement;
+                    console.error(
+                      `[SpeakerModal] ✗ Failed to load modal photo for ${speaker.name}:`,
+                      {
+                        photoModal: speaker.photoModal,
+                        photo: speaker.photo,
+                        attemptedSrc: img.src,
+                      }
+                    );
                     if (speaker.photo && speaker.photo !== speaker.photoModal) {
                       const fallbackSrc = speaker.photo.startsWith("/")
                         ? "/" +
                           speaker.photo.split("/").filter(Boolean).map(encodeURIComponent).join("/")
                         : speaker.photo;
+                      console.log(
+                        `[SpeakerModal] Trying fallback for ${speaker.name}:`,
+                        fallbackSrc
+                      );
                       img.src = fallbackSrc;
                     }
                   }}
