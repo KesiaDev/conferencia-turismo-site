@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface OptimizedImageProps {
   src: string;
@@ -21,6 +21,7 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -39,6 +40,23 @@ export default function OptimizedImage({
       onError(e);
     }
   };
+
+  // Verificar se a imagem já está em cache e carregada
+  useEffect(() => {
+    const checkLoaded = () => {
+      if (imgRef.current?.complete && imgRef.current?.naturalHeight !== 0) {
+        setIsLoading(false);
+      }
+    };
+
+    // Verificar imediatamente
+    checkLoaded();
+
+    // Verificar após um pequeno delay para dar tempo do DOM atualizar
+    const timer = setTimeout(checkLoaded, 0);
+
+    return () => clearTimeout(timer);
+  }, [src]);
 
   // Encode URL to handle spaces in filenames
   const encodedSrc = (() => {
@@ -62,7 +80,7 @@ export default function OptimizedImage({
   })();
 
   return (
-    <span className="relative block w-full h-full">
+    <div className="relative w-full h-full">
       {/* Skeleton placeholder durante carregamento */}
       {isLoading && !hasError && (
         <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse z-10" />
@@ -70,12 +88,13 @@ export default function OptimizedImage({
 
       {/* Imagem */}
       <img
+        ref={imgRef}
         src={hasError ? fallbackSrc : encodedSrc}
         alt={alt}
         loading={loading}
         decoding="async"
         fetchPriority={fetchPriority}
-        className={`w-full h-full transition-opacity duration-300 ${
+        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
         onLoad={(e) => {
@@ -89,6 +108,6 @@ export default function OptimizedImage({
         }}
         onError={handleError}
       />
-    </span>
+    </div>
   );
 }

@@ -62,11 +62,11 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
         <div className="grid md:grid-cols-5 gap-6 p-6">
           <div className="md:col-span-2 flex items-start justify-center">
             <div className="sticky top-6 w-full max-w-[300px]">
-              <div className="aspect-square rounded-full overflow-hidden shadow-lg relative">
+              <div className="aspect-square rounded-full overflow-hidden shadow-lg relative bg-white">
                 <OptimizedImage
                   src={speaker.photoModal || speaker.photo}
                   alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
-                  className="w-full h-full object-cover speaker-photo"
+                  className="speaker-photo"
                   loading="eager"
                   fetchPriority="high"
                   onError={() => {
