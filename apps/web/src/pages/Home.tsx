@@ -20,6 +20,18 @@ export default function Home() {
         // Fallback com dados estáticos se a API falhar
         const staticSpeakers: Speaker[] = [
           {
+            id: "duda-rocha",
+            name: "Duda Rocha",
+            affiliation: "UCS (Brasil)",
+            tags: [
+              "Painel Especial",
+              "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+            ],
+            photo: "/speakers/DudaRocha.gif",
+            photoModal: "/speakers/DudaRocha-modal.gif",
+            bio: "Duda Rocha é Bacharel, Mestra e Doutoranda em Turismo e Hospitalidade pela Universidade de Caxias do Sul (UCS), com formação em Comunicação Social – Publicidade e Propaganda. Possui especialização em Cultural Heritage Enhancement pela Università La Sapienza di Roma e realizou intercâmbio de pesquisa na Universidade de Coimbra (Portugal), com foco em turismo, território e patrimônio. Com mais de duas décadas de experiência nos campos da comunicação, cultura e turismo, consolidou trajetória em produção audiovisual, direção e curadoria de curtas-metragens e documentários, explorando narrativas que articulam memória, identidade e desenvolvimento regional. É pesquisadora dos grupos HOSPITUR – Turismo e Hospitalidade: Desenvolvimento Humano e Social, Linguagem e Processos Educacionais – e do Núcleo de Estudos Migratórios (CNPq/UCS), onde desenvolve estudos interdisciplinares sobre memória, etnicidade, hospitalidade e cultura, contribuindo para o debate contemporâneo sobre economia criativa e políticas culturais como dimensões estratégicas do desenvolvimento sustentável dos territórios.",
+          },
+          {
             id: "keynote-tbd",
             name: "Palestrante a definir (Embratur/Ancine)",
             affiliation: "Brasil",
@@ -89,18 +101,6 @@ export default function Home() {
             photo: "/speakers/Lissandro.png",
             photoModal: "/speakers/Lissandro-modal.png",
             bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
-          },
-          {
-            id: "duda-rocha",
-            name: "Duda Rocha",
-            affiliation: "UCS (Brasil)",
-            tags: [
-              "Painel Especial",
-              "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
-            ],
-            photo: "/speakers/DudaRocha.gif",
-            photoModal: "/speakers/DudaRocha-modal.gif",
-            bio: "Duda Rocha é Bacharel, Mestra e Doutoranda em Turismo e Hospitalidade pela Universidade de Caxias do Sul (UCS), com formação em Comunicação Social – Publicidade e Propaganda. Possui especialização em Cultural Heritage Enhancement pela Università La Sapienza di Roma e realizou intercâmbio de pesquisa na Universidade de Coimbra (Portugal), com foco em turismo, território e patrimônio. Com mais de duas décadas de experiência nos campos da comunicação, cultura e turismo, consolidou trajetória em produção audiovisual, direção e curadoria de curtas-metragens e documentários, explorando narrativas que articulam memória, identidade e desenvolvimento regional. É pesquisadora dos grupos HOSPITUR – Turismo e Hospitalidade: Desenvolvimento Humano e Social, Linguagem e Processos Educacionais – e do Núcleo de Estudos Migratórios (CNPq/UCS), onde desenvolve estudos interdisciplinares sobre memória, etnicidade, hospitalidade e cultura, contribuindo para o debate contemporâneo sobre economia criativa e políticas culturais como dimensões estratégicas do desenvolvimento sustentável dos territórios.",
           },
         ];
         setSpeakers(staticSpeakers.slice(0, 9));
