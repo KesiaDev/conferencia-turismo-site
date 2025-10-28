@@ -64,8 +64,7 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                   loading="eager"
                   fetchPriority="high"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      "https://via.placeholder.com/400x400?text=Speaker";
+                    (e.target as HTMLImageElement).src = "/speakers/Aguarde.png";
                   }}
                 />
               </div>

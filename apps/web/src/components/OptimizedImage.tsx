@@ -17,7 +17,7 @@ export default function OptimizedImage({
   loading = "lazy",
   fetchPriority = "auto",
   onError,
-  fallbackSrc = "https://via.placeholder.com/400x400?text=Image",
+  fallbackSrc = "/speakers/Aguarde.png",
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -52,9 +52,9 @@ export default function OptimizedImage({
       // For relative URLs, encode each part except the leading slash
       const parts = src.split("/").filter(Boolean); // Remove empty first element
       const encoded = "/" + parts.map(encodeURIComponent).join("/");
-      // Log para debug (remover em produção se necessário)
+      // Log para debug quando há espaços
       if (encoded.includes("%20")) {
-        console.log(`Encoding image: ${src} -> ${encoded}`);
+        console.log(`[OptimizedImage] Encoding: ${src} -> ${encoded}`);
       }
       return encoded;
     }
@@ -78,7 +78,12 @@ export default function OptimizedImage({
         className={`w-full h-full transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
-        onLoad={handleLoad}
+        onLoad={() => {
+          if (encodedSrc.includes("%20") || encodedSrc.includes(".gif")) {
+            console.log(`[OptimizedImage] Loaded successfully: ${encodedSrc}`);
+          }
+          handleLoad();
+        }}
         onError={handleError}
       />
     </div>

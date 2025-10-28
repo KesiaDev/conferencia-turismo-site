@@ -51,8 +51,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
               loading="lazy"
               fetchPriority="low"
               onError={(e) => {
-                (e.target as HTMLImageElement).src =
-                  "https://via.placeholder.com/400x400?text=Speaker";
+                (e.target as HTMLImageElement).src = "/speakers/Aguarde.png";
               }}
             />
           )}
