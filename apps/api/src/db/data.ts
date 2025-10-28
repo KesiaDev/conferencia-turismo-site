@@ -47,7 +47,7 @@ export const speakers: Speaker[] = [
     name: "Jordi Arcos-Pumarola",
     affiliation: "CETT-UB",
     tags: ["Mesa Internacional"],
-    photo: "/speakers/Jordi.png",
+    photo: "/speakers/Jordi.gif",
     photoModal: "/speakers/Jordi-modal.png",
     bio: "É professor e pesquisador do CETT – Universidade de Barcelona, instituição reconhecida por sua atuação em educação, pesquisa e inovação em turismo. Possui ampla experiência em projetos que articulam cultura, inovação territorial e desenvolvimento regional, dedicando-se à criação de metodologias e produtos turísticos baseados em narrativas literárias e audiovisuais. Sua trajetória destaca-se pela aproximação entre universidade e mercado, contribuindo para transformar histórias em experiências que fortalecem os destinos e impulsionam as economias criativas.",
   },
