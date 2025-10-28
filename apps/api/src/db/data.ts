@@ -92,8 +92,8 @@ export const speakers: Speaker[] = [
       "Painel Especial",
       "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
     ],
-    photo: "/speakers/Ronaldo.png",
-    photoModal: "/speakers/Ronaldo-modal.png",
+    photo: "/speakers/Ronaldo.gif",
+    photoModal: "/speakers/Ronaldo-modal.gif",
     bio: "É doutorando e mestre em Turismo e Hospitalidade pelo Programa de Pós-Graduação em Turismo e Hospitalidade da Universidade de Caxias do Sul (UCS), onde também se graduou em Letras e em Gastronomia. Sua tese é voltada ao turismo Literário e Cinematográfico, com ênfase nos processos de representação e nas relações entre ficção, criação e realidade turística. É pesquisador do HOSPITUR – Grupo de Estudos sobre Hospitalidade, vinculado ao PPGTURH/UCS, e participa do Núcleo de Pesquisa em Desenvolvimento Humano e Social, Linguagens e Processos Educacionais, integrando o projeto Turismo essencialmente pedagógico, Cidades Educadoras e Hospitalidade (TEPHCE), voltado à reformulação de políticas públicas de turismo com foco no desenvolvimento humano e social. E-mail: rldiaz@ucs.br. ORCID: 0000-0001-5141-2505.",
   },
   {
