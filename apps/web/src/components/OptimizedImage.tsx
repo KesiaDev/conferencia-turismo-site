@@ -65,7 +65,7 @@ export default function OptimizedImage({
     <div className="relative overflow-hidden">
       {/* Skeleton placeholder durante carregamento */}
       {isLoading && !hasError && (
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse z-0" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse z-10" />
       )}
 
       {/* Imagem */}
@@ -78,13 +78,17 @@ export default function OptimizedImage({
         className={`w-full h-full transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
-        onLoad={() => {
-          if (encodedSrc.includes("%20") || encodedSrc.includes(".gif")) {
-            console.log(`[OptimizedImage] Loaded successfully: ${encodedSrc}`);
-          }
+        onLoad={(e) => {
           handleLoad();
+          const img = e.target as HTMLImageElement;
+          console.log(`[OptimizedImage] Image loaded: ${img.src}`, {
+            complete: img.complete,
+            naturalWidth: img.naturalWidth,
+            naturalHeight: img.naturalHeight,
+          });
         }}
         onError={handleError}
+        style={{ display: isLoading ? "none" : "block" }}
       />
     </div>
   );
