@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Speaker } from "../types";
-import OptimizedImage from "./OptimizedImage";
 
 interface SpeakerModalProps {
   speaker: Speaker;
@@ -62,20 +61,33 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
         <div className="grid md:grid-cols-5 gap-6 p-6">
           <div className="md:col-span-2 flex items-start justify-center">
             <div className="sticky top-6 w-full max-w-[300px]">
-              <div className="aspect-square rounded-full overflow-hidden shadow-lg relative bg-white">
-                <OptimizedImage
-                  src={speaker.photoModal || speaker.photo}
+              <div className="aspect-square rounded-full overflow-hidden shadow-lg relative bg-gray-100">
+                <img
+                  src={(() => {
+                    const src = speaker.photoModal || speaker.photo;
+                    if (src.startsWith("/")) {
+                      const parts = src.split("/").filter(Boolean);
+                      return "/" + parts.map(encodeURIComponent).join("/");
+                    }
+                    return src;
+                  })()}
                   alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
-                  className="speaker-photo"
+                  className="absolute inset-0 w-full h-full object-cover"
                   loading="eager"
-                  fetchPriority="high"
-                  onError={() => {
+                  onError={(e) => {
                     console.error(`Failed to load modal photo for ${speaker.name}:`, {
                       photoModal: speaker.photoModal,
                       photo: speaker.photo,
                       using: speaker.photoModal || speaker.photo,
                     });
-                    // Keep original error handling but don't change src to avoid loops
+                    const img = e.target as HTMLImageElement;
+                    if (speaker.photo && speaker.photo !== speaker.photoModal) {
+                      const fallbackSrc = speaker.photo.startsWith("/")
+                        ? "/" +
+                          speaker.photo.split("/").filter(Boolean).map(encodeURIComponent).join("/")
+                        : speaker.photo;
+                      img.src = fallbackSrc;
+                    }
                   }}
                 />
               </div>
