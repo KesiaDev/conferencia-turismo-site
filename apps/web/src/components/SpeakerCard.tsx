@@ -28,33 +28,16 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
         }}
       >
         <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px]">
-          {speaker.id === "keynote-tbd" ? (
-            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex flex-col items-center justify-center border-2 border-dashed border-gray-300 p-4 sm:p-6 md:p-8">
-              <div className="text-center text-gray-600">
-                <div className="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-5 opacity-60">⏳</div>
-                <div className="text-sm sm:text-base md:text-lg font-semibold mb-2 sm:mb-3 px-2">
-                  {speaker.name}
-                </div>
-                <div className="text-sm sm:text-base text-gray-500 mb-3 sm:mb-4 px-2">
-                  {speaker.affiliation}
-                </div>
-                <div className="text-sm sm:text-base md:text-lg font-medium text-[#e0a085]">
-                  Em breve
-                </div>
-              </div>
-            </div>
-          ) : (
-            <OptimizedImage
-              src={speaker.photo}
-              alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 speaker-photo object-[50%_10%]"
-              loading="lazy"
-              fetchPriority="low"
-              onError={() => {
-                console.error(`Failed to load speaker photo: ${speaker.photo}`);
-              }}
-            />
-          )}
+          <OptimizedImage
+            src={speaker.photo}
+            alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 speaker-photo object-[50%_10%]"
+            loading="lazy"
+            fetchPriority="low"
+            onError={() => {
+              console.error(`Failed to load speaker photo: ${speaker.photo}`);
+            }}
+          />
         </div>
         {speaker.bio && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 sm:pb-6 md:pb-8">
