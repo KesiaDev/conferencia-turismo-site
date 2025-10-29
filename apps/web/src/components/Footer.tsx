@@ -63,11 +63,19 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-sm text-center">
-          <p>
-            © {currentYear} III Conferência Internacional de Turismo Literário e Cinematográfico.{" "}
-            {t("footer.rights")}
-          </p>
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          {/* Logo do rodapé */}
+          <div className="flex justify-center mb-6">
+            <img src="/footer-logo.svg" alt="Logo da Conferência" className="h-12 md:h-16 w-auto" />
+          </div>
+
+          {/* Copyright */}
+          <div className="text-sm text-center">
+            <p>
+              © {currentYear} III Conferência Internacional de Turismo Literário e Cinematográfico.{" "}
+              {t("footer.rights")}
+            </p>
+          </div>
         </div>
       </div>
     </footer>
