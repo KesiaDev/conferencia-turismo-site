@@ -65,11 +65,11 @@ export default function Footer() {
 
         <div className="border-t border-gray-800 mt-8 pt-8">
           {/* Logo do rodapé */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-8 py-6">
             <img
               src="/footer-logo.svg"
               alt="Logo da Conferência"
-              className="h-24 md:h-32 lg:h-40 w-auto max-w-full"
+              className="h-40 md:h-56 lg:h-72 xl:h-80 w-auto max-w-[90%] md:max-w-[85%] lg:max-w-[80%]"
             />
           </div>
 
