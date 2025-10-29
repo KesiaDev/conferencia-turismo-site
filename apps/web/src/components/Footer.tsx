@@ -62,18 +62,16 @@ export default function Footer() {
             </p>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          {/* Logo do rodapé */}
-          <div className="flex justify-center mb-8 py-6">
-            <img
-              src="/footer-logo.svg"
-              alt="Logo da Conferência"
-              className="w-[1000px] h-auto max-w-full"
-            />
-          </div>
+      {/* Logo do rodapé - Fora do container para poder ter 1000px */}
+      <div className="border-t border-gray-800 mt-8 pt-8">
+        <div className="flex justify-center mb-8 py-6 px-4">
+          <img src="/footer-logo.svg" alt="Logo da Conferência" className="footer-logo" />
+        </div>
 
-          {/* Copyright */}
+        {/* Copyright */}
+        <div className="container-custom">
           <div className="text-sm text-center">
             <p>
               © {currentYear} III Conferência Internacional de Turismo Literário e Cinematográfico.{" "}
