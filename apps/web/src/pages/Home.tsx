@@ -36,7 +36,7 @@ export default function Home() {
               "O impacto regional do turismo literário e cinematográfico no território",
             ],
             photo: "/speakers/diomira.gif",
-            photoModal: "/speakers/diomira-modal.png",
+            photoModal: "/speakers/diomira-modal.gif",
             bio: "Professora, Universidade Federal de Minas Gerais, Brasil. Possui graduação em Economia pela Universidade Católica de Minas Gerais (1982), especialização em Planejamento (Fundação João Pinheiro, 1983) e estatística (UFMG, 1998). Mestre em Turismo pela Universidad de Alicante, Espanha, e doutora em Economia pelo Cedeplar/UFMG e Universidad de Alicante (2012). É professora associada do Departamento de Geografia da UFMG, Curso de Turismo. Foi Diretora Científico-Cultural do Espaço do Conhecimento UFMG (2018–2022). Suas áreas de atuação incluem economia do turismo e da cultura, turismo e pobreza, turismo literário e viabilidade econômica de projetos, com foco atual na interface entre turismo e literatura.",
           },
           {
@@ -45,7 +45,7 @@ export default function Home() {
             affiliation: "RUG (Países Baixos)",
             tags: ["Mesa Internacional"],
             photo: "/speakers/Deborah Castro.gif",
-            photoModal: "/speakers/Deborah Castro-modal.png",
+            photoModal: "/speakers/Deborah Castro-modal.gif",
             bio: "Professora Assistente de Estudos de Mídia na Universidade de Groningen, Holanda, e co-convocadora do grupo de pesquisa Culturas de Produção de Mídia. Possui doutorado em Comunicação pela Universidade Autônoma de Barcelona (2015), com períodos de pesquisa nos EUA. Atuou como pesquisadora e docente em Portugal e na Holanda, incluindo uma bolsa Marie Skłodowska-Curie. É presidente do Centro Erasmus de Conhecimento para Cinema, Patrimônio e Turismo. Também integra a ITI-LARSyS (Portugal). Participa da FitoTO, organização premiada internacionalmente por promover práticas sustentáveis e inclusivas no cinema e turismo. Sua trajetória combina pesquisa, ensino e inovação cultural.",
           },
           {
@@ -54,7 +54,7 @@ export default function Home() {
             affiliation: "CETT-UB",
             tags: ["Mesa Internacional"],
             photo: "/speakers/Jordi.gif",
-            photoModal: "/speakers/Jordi-modal.png",
+            photoModal: "/speakers/Jordi-modal.gif",
             bio: "Referência internacional em turismo cultural, literário e cinematográfico, Jordi Arcos-Pumarola é professor e pesquisador do CETT – Universidade de Barcelona, centro líder mundial em educação, pesquisa e inovação em turismo. Com ampla experiência em projetos que unem cultura, inovação territorial e desenvolvimento regional, atua na criação de metodologias e produtos turísticos baseadas em narrativas literárias e audiovisuais. Reconhecido por sua capacidade de aproximar academia e mercado, é hoje um dos principais nomes na Europa quando o tema é transformar histórias em experiências que movimentam destinos e fortalecem economias criativas.",
           },
           {
@@ -63,7 +63,7 @@ export default function Home() {
             affiliation: "UAlg (Portugal)",
             tags: ["Mesa Internacional"],
             photo: "/speakers/RitaBaleiro.gif",
-            photoModal: "/speakers/RitaBaleiro-modal.png",
+            photoModal: "/speakers/RitaBalero-modal.gif",
             bio: "Rita Baleiro é professora coordenadora na Escola Superior de Gestão, Hotelaria e Turismo, da Universidade do Algarve (Portugal), é doutorada em Estudos Literários pela Universidade Nova de Lisboa e mestre em Estudos Anglo-Portugueses pela mesma universidade. É investigadora integrada no Centre for Research, Development and Innovation in Tourism (CITUR), e no Centro de Investigação sobre Turismo Literário (TULE). É coeditora da revista académica Journal of Tourism & Arts. Na última década, tem desenvolvido investigação na área dos estudos em turismo e literatura, organizado diversos encontros científicos sobre este tema e publicado trabalhos nesta área. É coeditora do E-Dictionary of Literary Tourism (2023). ORCID 0000-0002-3188-5150",
           },
           {
@@ -75,7 +75,7 @@ export default function Home() {
               "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
             ],
             photo: "/speakers/Andre Peritonotto.gif",
-            photoModal: "/speakers/Andre Peritonotto-modal.png",
+            photoModal: "/speakers/Andre Peritonotto-modal.gif",
             bio: "Professor da UFDPar e UFPI / Film Commission Noronha 2B. Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
           },
           {
@@ -87,7 +87,7 @@ export default function Home() {
               "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
             ],
             photo: "/speakers/Lissandro.gif",
-            photoModal: "/speakers/Lissandro-modal.png",
+            photoModal: "/speakers/Lissandro-modal.gif",
             bio: "Cineasta e professor de cinema. É jornalista, produtor e diretor cinematográfico. Atuou por oito anos em jornal e televisão antes de fundar, em 2003, a Spaghetti Filmes, produtora brasileira especializada em comunicação digital. Dirigiu mais de 30 obras entre longas, curtas e médias-metragens, além de produzir mais de cem filmes comerciais, institucionais e publicitários. Especialista em artes plásticas com foco em arte digital e novas mídias, segue pesquisando fotografia e cinema. Atualmente é professor da Universidade de Caxias do Sul nos cursos de Produção Audiovisual – Cinema, Fotografia e Artes Visuais.",
           },
           {
