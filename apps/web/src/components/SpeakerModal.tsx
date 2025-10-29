@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Speaker } from "../types";
 
 interface SpeakerModalProps {
@@ -8,14 +8,35 @@ interface SpeakerModalProps {
 }
 
 export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalProps) {
+  // Estado para controlar qual imagem usar (tenta modal primeiro, depois fallback)
+  const [imageSrc, setImageSrc] = useState(() => {
+    const primary = speaker.photoModal || speaker.photo;
+    if (primary.startsWith("/")) {
+      const parts = primary.split("/").filter(Boolean);
+      return "/" + parts.map(encodeURIComponent).join("/");
+    }
+    return primary;
+  });
+  const [hasTriedFallback, setHasTriedFallback] = useState(false);
+
+  // Reset quando o modal abre ou o speaker muda
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
-      // Debug: verificar dados do palestrante
+      // Reset para tentar a imagem modal novamente
+      const primary = speaker.photoModal || speaker.photo;
+      if (primary.startsWith("/")) {
+        const parts = primary.split("/").filter(Boolean);
+        setImageSrc("/" + parts.map(encodeURIComponent).join("/"));
+      } else {
+        setImageSrc(primary);
+      }
+      setHasTriedFallback(false);
+
       console.log(`[SpeakerModal] Modal aberto para ${speaker.name}:`, {
         photoModal: speaker.photoModal,
         photo: speaker.photo,
-        willUse: speaker.photoModal || speaker.photo,
+        willUse: imageSrc,
       });
     } else {
       document.body.style.overflow = "unset";
@@ -63,20 +84,8 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
             <div className="sticky top-6 w-full max-w-[300px]">
               <div className="aspect-square rounded-full overflow-hidden shadow-lg relative bg-gray-100">
                 <img
-                  src={(() => {
-                    const src = speaker.photoModal || speaker.photo;
-                    if (src.startsWith("/")) {
-                      const parts = src.split("/").filter(Boolean);
-                      const encoded = "/" + parts.map(encodeURIComponent).join("/");
-                      console.log(`[SpeakerModal] Loading image for ${speaker.name}:`, {
-                        original: src,
-                        encoded: encoded,
-                      });
-                      return encoded;
-                    }
-                    return src;
-                  })()}
-                  key={`${speaker.id}-${speaker.photoModal || speaker.photo}`}
+                  src={imageSrc}
+                  key={`${speaker.id}-${imageSrc}`}
                   alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="eager"
@@ -86,19 +95,23 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                       src: img.src,
                       naturalWidth: img.naturalWidth,
                       naturalHeight: img.naturalHeight,
+                      isFallback: hasTriedFallback,
                     });
                   }}
                   onError={(e) => {
                     const img = e.target as HTMLImageElement;
-                    console.error(
-                      `[SpeakerModal] ✗ Failed to load modal photo for ${speaker.name}:`,
-                      {
-                        photoModal: speaker.photoModal,
-                        photo: speaker.photo,
-                        attemptedSrc: img.src,
-                      }
-                    );
-                    if (speaker.photo && speaker.photo !== speaker.photoModal) {
+                    console.error(`[SpeakerModal] ✗ Failed to load image for ${speaker.name}:`, {
+                      photoModal: speaker.photoModal,
+                      photo: speaker.photo,
+                      attemptedSrc: img.src,
+                      hasTriedFallback,
+                    });
+                    // Se ainda não tentou fallback e há foto diferente, tenta fallback
+                    if (
+                      !hasTriedFallback &&
+                      speaker.photo &&
+                      speaker.photo !== speaker.photoModal
+                    ) {
                       const fallbackSrc = speaker.photo.startsWith("/")
                         ? "/" +
                           speaker.photo.split("/").filter(Boolean).map(encodeURIComponent).join("/")
@@ -107,7 +120,8 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                         `[SpeakerModal] Trying fallback for ${speaker.name}:`,
                         fallbackSrc
                       );
-                      img.src = fallbackSrc;
+                      setImageSrc(fallbackSrc);
+                      setHasTriedFallback(true);
                     }
                   }}
                 />
