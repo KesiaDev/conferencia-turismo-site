@@ -64,16 +64,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Logo do rodapé - Fora do container para poder ter 1000px */}
+      {/* Logo do rodapé */}
       <div className="border-t border-gray-800 mt-8 pt-8">
         <div className="flex justify-center mb-8 py-6 px-4 w-full overflow-x-auto">
           <img
-            src="/footer-logo.svg?v=3"
+            src="/footer-logo.svg?v=4"
             alt="Logo da Conferência"
             className="footer-logo"
             style={{
-              minWidth: "1000px",
-              width: "1000px",
+              minWidth: "600px",
+              width: "600px",
               height: "auto",
             }}
             onLoad={(e) => {

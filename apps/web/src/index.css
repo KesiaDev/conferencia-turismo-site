@@ -135,10 +135,10 @@
       brightness(95%) contrast(89%);
   }
 
-  /* Logo do rodapé - Tamanho fixo de 1000px */
+  /* Logo do rodapé - Tamanho fixo de 600px */
   .footer-logo {
-    width: 1000px !important;
-    min-width: 1000px !important;
+    width: 600px !important;
+    min-width: 600px !important;
     height: auto !important;
     max-width: none !important;
     display: block !important;
@@ -148,11 +148,11 @@
     flex-shrink: 0 !important;
   }
 
-  @media (max-width: 1040px) {
+  @media (max-width: 640px) {
     .footer-logo {
       width: 100% !important;
       min-width: unset !important;
-      max-width: 1000px !important;
+      max-width: 600px !important;
     }
   }
 }
