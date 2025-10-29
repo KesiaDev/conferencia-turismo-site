@@ -70,7 +70,6 @@ export default function Footer() {
               src="/footer-logo.svg"
               alt="Logo da Conferência"
               className="w-[1000px] h-auto max-w-full"
-              style={{ width: "1000px", height: "auto", maxWidth: "100%" }}
             />
           </div>
 
