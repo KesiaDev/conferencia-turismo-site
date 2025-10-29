@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { existsSync } from "fs";
 
 // ES Module compatibility - __dirname equivalent
 const __filename = fileURLToPath(import.meta.url);
@@ -137,7 +138,12 @@ app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 
 // Caminho do frontend após build
-const frontendPath = path.resolve(__dirname, "../../web/dist");
+// Tenta primeiro o caminho copiado durante o build (web/dist dentro de dist/)
+// Se não existir, tenta o caminho relativo (../../web/dist)
+let frontendPath = path.resolve(__dirname, "web/dist");
+if (!existsSync(frontendPath)) {
+  frontendPath = path.resolve(__dirname, "../../web/dist");
+}
 console.log("📁 Servindo frontend de:", frontendPath);
 console.log("🔍 Current working directory:", process.cwd());
 console.log("🔍 __dirname:", __dirname);
