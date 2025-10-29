@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import LanguageSelector from "./LanguageSelector";
 
 dayjs.extend(duration);
 
@@ -95,9 +94,6 @@ export default function Header() {
               {item.name}
             </Link>
           ))}
-          <div className="border-l border-gray-700 pl-6 ml-2">
-            <LanguageSelector />
-          </div>
         </div>
 
         {/* Contador regressivo - responsivo */}
@@ -210,11 +206,6 @@ export default function Header() {
                     </div>
                   ))}
                 </div>
-              </div>
-
-              {/* Mobile Language Selector */}
-              <div className="pt-4 flex justify-center">
-                <LanguageSelector />
               </div>
             </div>
           </div>
