@@ -66,19 +66,28 @@ export default function Footer() {
 
       {/* Logo do rodapé - Fora do container para poder ter 1000px */}
       <div className="border-t border-gray-800 mt-8 pt-8">
-        <div className="flex justify-center mb-8 py-6 px-4">
+        <div className="flex justify-center mb-8 py-6 px-4 w-full overflow-x-auto">
           <img
-            src="/footer-logo.svg"
+            src="/footer-logo.svg?v=2"
             alt="Logo da Conferência"
             className="footer-logo"
+            style={{
+              minWidth: "1000px",
+              width: "1000px",
+              height: "auto",
+            }}
             onLoad={(e) => {
               const img = e.target as HTMLImageElement;
+              const computed = window.getComputedStyle(img);
               console.log("[Footer] Logo carregada:", {
                 src: img.src,
-                width: img.naturalWidth,
-                height: img.naturalHeight,
-                computedWidth: window.getComputedStyle(img).width,
-                computedHeight: window.getComputedStyle(img).height,
+                naturalWidth: img.naturalWidth,
+                naturalHeight: img.naturalHeight,
+                computedWidth: computed.width,
+                computedHeight: computed.height,
+                display: computed.display,
+                visibility: computed.visibility,
+                opacity: computed.opacity,
               });
             }}
             onError={(e) => {
