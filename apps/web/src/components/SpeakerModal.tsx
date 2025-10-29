@@ -106,22 +106,30 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                       attemptedSrc: img.src,
                       hasTriedFallback,
                     });
-                    // Se ainda não tentou fallback e há foto diferente, tenta fallback
+                    // Apenas Duda e Ronaldo devem usar fallback para GIF
+                    // Os demais devem usar PNG (não fazer fallback)
                     if (
                       !hasTriedFallback &&
                       speaker.photo &&
-                      speaker.photo !== speaker.photoModal
+                      speaker.photo !== speaker.photoModal &&
+                      (speaker.id === "duda-rocha" || speaker.id === "ronaldo")
                     ) {
                       const fallbackSrc = speaker.photo.startsWith("/")
                         ? "/" +
                           speaker.photo.split("/").filter(Boolean).map(encodeURIComponent).join("/")
                         : speaker.photo;
                       console.log(
-                        `[SpeakerModal] Trying fallback for ${speaker.name}:`,
+                        `[SpeakerModal] Trying fallback GIF for ${speaker.name}:`,
                         fallbackSrc
                       );
                       setImageSrc(fallbackSrc);
                       setHasTriedFallback(true);
+                    } else if (speaker.photoModal && speaker.photoModal.includes(".png")) {
+                      // Para PNGs: não fazer fallback, mas alertar no console
+                      console.error(
+                        `[SpeakerModal] PNG modal failed for ${speaker.name}. PNG file may not be deployed:`,
+                        speaker.photoModal
+                      );
                     }
                   }}
                 />
