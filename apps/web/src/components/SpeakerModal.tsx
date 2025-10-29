@@ -68,17 +68,15 @@ export default function SpeakerModal({ speaker, isOpen, onClose }: SpeakerModalP
                     if (src.startsWith("/")) {
                       const parts = src.split("/").filter(Boolean);
                       const encoded = "/" + parts.map(encodeURIComponent).join("/");
-                      // Adicionar timestamp para evitar cache
-                      const timestamp = `?v=${Date.now()}`;
                       console.log(`[SpeakerModal] Loading image for ${speaker.name}:`, {
                         original: src,
                         encoded: encoded,
-                        withCacheBust: encoded + timestamp,
                       });
-                      return encoded + timestamp;
+                      return encoded;
                     }
                     return src;
                   })()}
+                  key={`${speaker.id}-${speaker.photoModal || speaker.photo}`}
                   alt={`Fotografia profissional de ${speaker.name}, ${speaker.affiliation}`}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="eager"
