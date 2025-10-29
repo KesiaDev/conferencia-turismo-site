@@ -68,9 +68,30 @@ app.use(
     },
   })
 );
+// CORS configuration - aceita ambos www e não-www
+const corsOrigin = process.env.CORS_ORIGIN;
+const allowedOrigins = corsOrigin
+  ? corsOrigin.split(",").map((origin) => origin.trim())
+  : [
+      "https://turismocinematografico.com.br",
+      "https://www.turismocinematografico.com.br",
+      "http://localhost:5173",
+      "http://localhost:3000",
+    ];
+
 app.use(
   cors({
-    origin: "*",
+    origin: (origin, callback) => {
+      // Permitir requisições sem origin (mobile apps, Postman, etc.)
+      if (!origin) return callback(null, true);
+
+      // Verificar se a origin está na lista permitida
+      if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+        callback(null, true);
+      } else {
+        callback(null, true); // Por enquanto, permitir todas para evitar bloqueios
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: false,
