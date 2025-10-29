@@ -1,1 +1,1 @@
-version=20250128-footer-logo-large
+version=20250128-footer-logo-large-v3
