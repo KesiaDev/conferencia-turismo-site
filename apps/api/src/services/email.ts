@@ -82,21 +82,22 @@ export const emailService = {
     if (transporter) {
       try {
         // Preparar anexos apenas se documentos foram gerados
-        const attachments = documentsGenerated
-          ? [
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_sem_autoria.pdf`,
-                path: pdfPath,
-                contentType: "application/pdf",
-              },
-              {
-                filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_com_autoria.docx`,
-                path: wordPath,
-                contentType:
-                  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-              },
-            ]
-          : [];
+        const attachments =
+          documentsGenerated && pdfPath && wordPath
+            ? [
+                {
+                  filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_sem_autoria.pdf`,
+                  path: pdfPath,
+                  contentType: "application/pdf",
+                },
+                {
+                  filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_com_autoria.docx`,
+                  path: wordPath,
+                  contentType:
+                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                },
+              ]
+            : [];
 
         // Email para a organização (com retry)
         await emailService.sendEmailWithRetry(transporter, {
