@@ -27,13 +27,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           }
         }}
       >
-        <div
-          className={
-            `w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative ` +
-            // Adiciona uma pequena margem interna na arte do André para evitar corte nas bordas.
-            (speaker.id === "andre" ? "p-3 md:p-4" : "")
-          }
-        >
+        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative">
           <OptimizedImage
             src={speaker.photo}
             alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
@@ -42,7 +36,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
               // Para artes que já possuem texto incorporado (como a do André),
               // usamos object-contain para evitar cortes nas bordas.
               (speaker.id === "andre"
-                ? "object-contain group-hover:scale-100 bg-[#f5e7dc]"
+                ? "object-contain group-hover:scale-100 object-center"
                 : "group-hover:scale-110 object-[50%_10%]")
             }
             loading="lazy"
