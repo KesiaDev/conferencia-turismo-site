@@ -1,1 +1,1 @@
-version=20250128-footer-logo-large-v3
+version=20251104-force-deploy-v1
