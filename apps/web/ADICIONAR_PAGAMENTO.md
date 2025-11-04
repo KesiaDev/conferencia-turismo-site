@@ -95,5 +95,3 @@ Tudo já está preparado para funcionar em:
 ---
 
 **Arquivo:** `apps/web/src/pages/Fees.tsx` (linhas ~43-75)
-
-

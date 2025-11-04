@@ -7,5 +7,3 @@ export const contactSchema = z.object({
 });
 
 export type Contact = z.infer<typeof contactSchema>;
-
-

@@ -61,5 +61,3 @@ No seu provedor de DNS (Registro.br, GoDaddy, etc.), configure:
 ---
 
 **Configure o DNS com o valor correto (`mypln8yx.up.railway.app`) e depois me avise!**
-
-

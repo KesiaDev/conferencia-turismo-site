@@ -49,5 +49,3 @@ Se realmente não conseguir configurar agora:
 ---
 
 **Tente clicar em "Configurar endereçamento" → "MODO AVANÇADO" novamente e me diga se consegue ver a lista de registros DNS!**
-
-

@@ -31,7 +31,14 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           <OptimizedImage
             src={speaker.photo}
             alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
-            className="transition-transform duration-500 group-hover:scale-110 speaker-photo object-[50%_10%]"
+            className={
+              `transition-transform duration-500 speaker-photo ` +
+              // Para artes que já possuem texto incorporado (como a do André),
+              // usamos object-contain para evitar cortes nas bordas.
+              (speaker.id === "andre"
+                ? "object-contain group-hover:scale-100 bg-[#f5e7dc]"
+                : "group-hover:scale-110 object-[50%_10%]")
+            }
             loading="lazy"
             fetchPriority="low"
             onError={() => {
