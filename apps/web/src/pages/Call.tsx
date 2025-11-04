@@ -519,8 +519,8 @@ export default function Call() {
                 {submitStatus === "loading" ? t("call.submitting") : t("call.submit")}
               </button>
 
-              <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                <p className="text-sm text-yellow-800">
+              <div className="mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
+                <p className="text-base text-yellow-900 font-medium">
                   Atenção: Assim que o envio for concluído, você receberá uma cópia da sua submissão
                   no e-mail informado. Fique atento à sua caixa de entrada e à pasta de spam. Caso
                   não receba o e-mail, entre em contato com nossa equipe.
