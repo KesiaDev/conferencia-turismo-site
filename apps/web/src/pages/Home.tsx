@@ -74,8 +74,8 @@ export default function Home() {
               "Painel Especial",
               "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
             ],
-            photo: "/speakers/Andre Peritonotto.gif",
-            photoModal: "/speakers/Andre Peritonotto-modal.gif",
+            photo: "/speakers/Andre Peritonotto.png",
+            photoModal: "/speakers/Andre Peritonotto-modal.png",
             bio: "Professor da UFDPar e UFPI / Film Commission Noronha 2B. Doutor em Ciências da Comunicação (UNISINOS) e Mestre em Geografia (UNESP), com especialização em Docência para o Ensino Superior (SENAC) e graduação em Turismo (UNIMEP). Professor da UFDPar desde 2008 e docente permanente dos mestrados em Turismo (UFPR) e Psicologia (UFDPar). Bolsista produtividade CNPq e Pesquisador Destaque ANPTUR 2022. Líder do grupo MiComT e colaborador em grupos nacionais e internacionais. Atuou em cargos de gestão e assessoria na UFDPar e na ABRATUR. Publica e pesquisa temas ligados a Turismo, Comunicação, Educação, Tecnologias e Imagens. Chefe editorial da EDUFDPar e membro de conselhos e governanças institucionais e estaduais.",
           },
           {
