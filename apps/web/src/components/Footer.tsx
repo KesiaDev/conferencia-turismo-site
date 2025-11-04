@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-black text-gray-300 py-10 mt-20">
+    <footer className="bg-black text-gray-300 py-14 mt-20">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -66,14 +66,14 @@ export default function Footer() {
 
       {/* Logo do rodapé */}
       <div className="border-t border-gray-800 mt-4 pt-4">
-        <div className="flex justify-center mb-2 py-4 px-4 w-full overflow-x-auto">
+        <div className="flex justify-center mb-4 py-6 px-4 w-full overflow-x-auto">
           <img
             src="/footer-logo.svg?v=4"
             alt="Logo da Conferência"
             className="footer-logo"
             style={{
-              minWidth: "760px",
-              width: "760px",
+              minWidth: "960px",
+              width: "960px",
               height: "auto",
             }}
             onLoad={(e) => {

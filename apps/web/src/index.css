@@ -135,10 +135,10 @@
       brightness(95%) contrast(89%);
   }
 
-  /* Logo do rodapé - Aumentado para melhor legibilidade */
+  /* Logo do rodapé - Aumentado novamente para melhor legibilidade */
   .footer-logo {
-    width: 760px !important;
-    min-width: 760px !important;
+    width: 960px !important;
+    min-width: 960px !important;
     height: auto !important;
     max-width: none !important;
     display: block !important;
@@ -152,7 +152,7 @@
     .footer-logo {
       width: 100% !important;
       min-width: unset !important;
-      max-width: 760px !important;
+      max-width: 960px !important;
     }
   }
 }
