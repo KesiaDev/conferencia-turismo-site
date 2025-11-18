@@ -54,7 +54,7 @@ export default function Call() {
 
     // Validação de keywords (3-5)
     const keywordsArray = formData.keywords
-      .split(",")
+      .split(";")
       .map((k) => k.trim())
       .filter((k) => k.length > 0);
     if (keywordsArray.length < 3 || keywordsArray.length > 5) {
@@ -187,7 +187,7 @@ export default function Call() {
                     <p className="font-medium text-gray-700 text-base">6. Palavras-chave:</p>
                     <p className="ml-4 text-base">
                       Escolha de 3 a 5 palavras-chave que representem o conteúdo do seu trabalho,
-                      separadas por vírgula.
+                      separadas por ponto e vírgula.
                     </p>
                   </div>
                 </div>
@@ -489,7 +489,7 @@ export default function Call() {
                 <div className="text-xs text-gray-500 mt-1">
                   {
                     formData.keywords
-                      .split(",")
+                      .split(";")
                       .map((k) => k.trim())
                       .filter((k) => k.length > 0).length
                   }{" "}
