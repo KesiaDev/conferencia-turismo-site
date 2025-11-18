@@ -41,6 +41,14 @@ export default function Call() {
       .filter((word) => word.length > 0).length;
   };
 
+  // Função para processar palavras-chave aceitando vírgula ou ponto e vírgula
+  const parseKeywords = (keywords: string): string[] => {
+    return keywords
+      .split(/[;,]/) // Aceita tanto vírgula quanto ponto e vírgula
+      .map((k) => k.trim())
+      .filter((k) => k.length > 0);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -52,11 +60,8 @@ export default function Call() {
       return;
     }
 
-    // Validação de keywords (3-5)
-    const keywordsArray = formData.keywords
-      .split(";")
-      .map((k) => k.trim())
-      .filter((k) => k.length > 0);
+    // Validação de keywords (3-5) - aceita vírgula ou ponto e vírgula
+    const keywordsArray = parseKeywords(formData.keywords);
     if (keywordsArray.length < 3 || keywordsArray.length > 5) {
       setSubmitStatus("error");
       alert(`Informe entre 3 e 5 palavras-chave. Atualmente: ${keywordsArray.length}`);
@@ -487,13 +492,8 @@ export default function Call() {
                   className="w-full border border-gray-300 rounded-lg p-3"
                 />
                 <div className="text-xs text-gray-500 mt-1">
-                  {
-                    formData.keywords
-                      .split(";")
-                      .map((k) => k.trim())
-                      .filter((k) => k.length > 0).length
-                  }{" "}
-                  palavras-chave informadas (mínimo 3, máximo 5)
+                  {parseKeywords(formData.keywords).length} palavras-chave informadas (mínimo 3,
+                  máximo 5)
                 </div>
               </div>
 
