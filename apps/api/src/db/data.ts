@@ -325,6 +325,29 @@ export const fees: FeeCategory[] = [
       },
     ],
   },
+  {
+    category: "Ouvintes",
+    windows: [
+      {
+        label: "até 05/01/2026",
+        value: 100,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-1-comunidade-em-geral-ext038806",
+      },
+      {
+        label: "06–31/01/2026",
+        value: 120,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-2-comunidade-em-geral-ext038806",
+      },
+      {
+        label: "01/02–23/03/2026",
+        value: 150,
+        paymentUrl:
+          "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-lote-3-comunidade-em-geral-ext038806",
+      },
+    ],
+  },
 ];
 
 export const callForPapers = {
