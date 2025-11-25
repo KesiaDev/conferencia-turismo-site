@@ -51,6 +51,15 @@ export default function Call() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validação de caracteres no resumo (máximo 2000 caracteres)
+    if (formData.abstract.length > 2000) {
+      setSubmitStatus("error");
+      alert(
+        `O resumo deve ter no máximo 2000 caracteres. Atualmente: ${formData.abstract.length} caracteres.`
+      );
+      return;
+    }
+
     // Validação de palavras no resumo (300 palavras)
     const wordCount = countWords(formData.abstract);
     if (wordCount > 300) {
@@ -86,8 +95,27 @@ export default function Call() {
         support: "",
         language: "pt",
       });
-    } catch (error) {
+    } catch (error: any) {
+      console.error("Erro ao enviar submissão:", error);
       setSubmitStatus("error");
+
+      // Mostrar detalhes do erro de validação se disponível
+      if (error?.response?.data?.details) {
+        const validationErrors = error.response.data.details;
+        const errorMessages = validationErrors
+          .map((err: any) => {
+            const field = err.path?.join(".") || "campo";
+            return `${field}: ${err.message}`;
+          })
+          .join("\n");
+        alert(
+          `Erro de validação:\n\n${errorMessages}\n\nPor favor, verifique os campos e tente novamente.`
+        );
+      } else if (error?.response?.data?.error) {
+        alert(`Erro: ${error.response.data.error}`);
+      } else if (error?.message) {
+        alert(`Erro ao enviar: ${error.message}`);
+      }
     }
   };
 
@@ -430,12 +458,13 @@ export default function Call() {
 
               <div>
                 <label htmlFor="abstract" className="block font-semibold mb-2">
-                  {t("call.abstract")} * (máximo 300 palavras)
+                  {t("call.abstract")} * (máximo 300 palavras ou 2000 caracteres)
                 </label>
                 <textarea
                   id="abstract"
                   required
                   rows={6}
+                  maxLength={2000}
                   value={formData.abstract}
                   onChange={(e) => {
                     setFormData({ ...formData, abstract: e.target.value });
@@ -453,11 +482,26 @@ export default function Call() {
                   >
                     {countWords(formData.abstract)}/300 palavras
                   </span>
-                  <span className="text-gray-400">{formData.abstract.length} caracteres</span>
+                  <span
+                    className={
+                      formData.abstract.length > 2000
+                        ? "text-red-600 font-semibold"
+                        : formData.abstract.length > 1800
+                          ? "text-yellow-600"
+                          : "text-gray-400"
+                    }
+                  >
+                    {formData.abstract.length}/2000 caracteres
+                  </span>
                 </div>
                 {countWords(formData.abstract) > 300 && (
                   <p className="text-xs text-red-600 mt-1">
                     ⚠️ O resumo excede o limite de 300 palavras
+                  </p>
+                )}
+                {formData.abstract.length > 2000 && (
+                  <p className="text-xs text-red-600 mt-1">
+                    ⚠️ O resumo excede o limite de 2000 caracteres
                   </p>
                 )}
               </div>
