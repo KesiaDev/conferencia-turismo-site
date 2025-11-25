@@ -73,3 +73,4 @@ Após "Setup complete":
 **Quando a transição terminar, volte aqui e siga os passos acima!** 🚀
 
 Se precisar de ajuda depois, é só avisar!
+

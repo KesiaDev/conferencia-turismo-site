@@ -35,3 +35,4 @@ Após adicionar, você deve ver **dois cards**:
 2. ✅ `www.turismocinematografico.com.br` (novo!)
 
 Ambos devem mostrar "Setup complete" depois de alguns minutos!
+
