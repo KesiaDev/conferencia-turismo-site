@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import Section from "../components/Section";
 import Alert from "../components/Alert";
 import Seo from "../components/Seo";
-import PanelForm from "../components/PanelForm";
 import apiService from "../api/client";
 import type { CallInfo } from "../types";
 
@@ -527,61 +526,6 @@ export default function Call() {
                 </p>
               </div>
             </form>
-          </div>
-
-          {/* Regras dos Painéis */}
-          <div className="mt-12 bg-gradient-to-r from-[#e0a085]/10 to-white p-8 rounded-lg mb-8 border-l-4 border-[#e0a085] shadow-sm">
-            <h4 className="text-xl font-bold mb-5 text-[#e0a085] flex items-center gap-2">
-              <span className="text-2xl">👥</span>
-              {t("call.panelTitle")}
-            </h4>
-            <div className="bg-white p-6 rounded-lg border border-[#e0a085]/20">
-              <p className="text-base text-gray-700 leading-relaxed text-justify mb-4">
-                {t("call.panelDescription")}
-              </p>
-              <div className="mt-4 pt-4 border-t border-[#e0a085]/20">
-                <p className="text-sm font-semibold text-[#e0a085] mb-3">
-                  📋 Informações necessárias:
-                </p>
-                <ul className="list-none space-y-2 text-sm text-gray-700">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Mínimo de 4 e máximo de 6 comunicações</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Duração máxima: 2 horas</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Título do painel</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Resumo de 300 palavras</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Lista de 5 a 10 referências bibliográficas</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#e0a085] font-bold">•</span>
-                    <span>Lista dos autores e afiliações dos membros do painel</span>
-                  </li>
-                </ul>
-                <div className="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 rounded">
-                  <p className="text-sm text-yellow-800">
-                    <strong>⚠️ Importante:</strong> Cada membro do painel deve fazer sua própria
-                    inscrição.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Formulário de Painéis */}
-          <div className="mt-8">
-            <PanelForm />
           </div>
         </div>
       </Section>
