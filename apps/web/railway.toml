@@ -1,0 +1,13 @@
+[build]
+builder = "nixpacks"
+buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
+
+[deploy]
+startCommand = "cd apps/web && npx serve dist -s -l $PORT"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+# Frontend-only configuration - Railway
+# This service only builds and serves the frontend
+# No API build, no Chromium installation
+
