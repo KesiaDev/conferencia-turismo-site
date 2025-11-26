@@ -8,10 +8,16 @@ const router = Router();
 router.post("/", async (req, res) => {
   try {
     console.log("📥 Dados recebidos:", req.body);
+    console.log("📏 Tamanho do abstract recebido:", req.body.abstract?.length || 0, "caracteres");
     console.log("🔧 Headers:", req.headers);
     console.log("🔧 Content-Type:", req.get("Content-Type"));
 
     const validated = submissionSchema.parse(req.body);
+    console.log(
+      "📏 Tamanho do abstract após normalização:",
+      validated.abstract.length,
+      "caracteres"
+    );
     console.log("✅ Dados validados com sucesso:", validated);
 
     // Add to in-memory storage

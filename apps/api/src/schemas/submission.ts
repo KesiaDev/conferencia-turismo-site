@@ -1,17 +1,32 @@
 import { z } from "zod";
 
 export const submissionSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  title: z.string().min(5),
-  track: z.string(),
-  authors: z.string().min(3),
-  abstract: z.string().max(2000, "O resumo deve ter no máximo 2000 caracteres"),
-  references: z.string().min(20),
-  keywords: z.string().min(3),
-  affiliation: z.string().min(2),
-  degree: z.string().min(2),
-  support: z.string().optional(),
+  name: z.string().min(2).trim(),
+  email: z.string().email().trim(),
+  title: z.string().min(5).trim(),
+  track: z.string().trim(),
+  authors: z.string().min(3).trim(),
+  abstract: z
+    .string()
+    .transform((val) => {
+      // Remove espaços extras no início e fim
+      // Normaliza múltiplas quebras de linha para uma única
+      // Remove espaços extras no final de linhas
+      return val
+        .trim()
+        .replace(/\n{3,}/g, "\n\n") // Máximo 2 quebras de linha consecutivas
+        .replace(/[ \t]+$/gm, "") // Remove espaços no final de cada linha
+        .replace(/\r\n/g, "\n"); // Normaliza quebras de linha
+    })
+    .pipe(z.string().max(2000, "O resumo deve ter no máximo 2000 caracteres")),
+  references: z.string().min(20).trim(),
+  keywords: z.string().min(3).trim(),
+  affiliation: z.string().min(2).trim(),
+  degree: z.string().min(2).trim(),
+  support: z
+    .string()
+    .optional()
+    .transform((val) => val?.trim() || ""),
   language: z.enum(["pt", "en", "es"]),
 });
 
