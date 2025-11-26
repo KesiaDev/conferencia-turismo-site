@@ -27,6 +27,7 @@ export default function Call() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle"
   );
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     apiService.getCallInfo().then(setCallInfo);
@@ -48,35 +49,94 @@ export default function Call() {
       .filter((k) => k.length > 0);
   };
 
+  // Função para validar todos os campos
+  const validateForm = (): boolean => {
+    const errors: Record<string, string> = {};
+
+    // Validação de nome
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      errors.name = "O nome deve ter pelo menos 2 caracteres";
+    }
+
+    // Validação de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email)) {
+      errors.email = "Por favor, insira um e-mail válido";
+    }
+
+    // Validação de título
+    if (!formData.title.trim() || formData.title.trim().length < 5) {
+      errors.title = "O título deve ter pelo menos 5 caracteres";
+    }
+
+    // Validação de linha temática
+    if (!formData.track.trim()) {
+      errors.track = "Por favor, selecione uma linha temática";
+    }
+
+    // Validação de autores
+    if (!formData.authors.trim() || formData.authors.trim().length < 3) {
+      errors.authors = "Informe pelo menos um autor (mínimo 3 caracteres)";
+    }
+
+    // Validação de afiliação
+    if (!formData.affiliation.trim() || formData.affiliation.trim().length < 2) {
+      errors.affiliation = "A afiliação deve ter pelo menos 2 caracteres";
+    }
+
+    // Validação de titulação
+    if (!formData.degree.trim() || formData.degree.trim().length < 2) {
+      errors.degree = "A titulação deve ter pelo menos 2 caracteres";
+    }
+
+    // Validação de resumo
+    if (!formData.abstract.trim()) {
+      errors.abstract = "O resumo é obrigatório";
+    } else {
+      if (formData.abstract.length > 2000) {
+        errors.abstract = `O resumo deve ter no máximo 2000 caracteres. Atualmente: ${formData.abstract.length} caracteres.`;
+      }
+      const wordCount = countWords(formData.abstract);
+      if (wordCount > 300) {
+        errors.abstract = `O resumo deve ter no máximo 300 palavras. Atualmente: ${wordCount} palavras.`;
+      }
+    }
+
+    // Validação de referências
+    if (!formData.references.trim() || formData.references.trim().length < 20) {
+      errors.references = "As referências devem ter pelo menos 20 caracteres";
+    }
+
+    // Validação de palavras-chave
+    const keywordsArray = parseKeywords(formData.keywords);
+    if (!formData.keywords.trim() || keywordsArray.length < 3) {
+      errors.keywords = "Informe pelo menos 3 palavras-chave";
+    } else if (keywordsArray.length > 5) {
+      errors.keywords = "Informe no máximo 5 palavras-chave";
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validação de caracteres no resumo (máximo 2000 caracteres)
-    if (formData.abstract.length > 2000) {
+    // Validar todos os campos antes de enviar
+    if (!validateForm()) {
       setSubmitStatus("error");
-      alert(
-        `O resumo deve ter no máximo 2000 caracteres. Atualmente: ${formData.abstract.length} caracteres.`
-      );
-      return;
-    }
-
-    // Validação de palavras no resumo (300 palavras)
-    const wordCount = countWords(formData.abstract);
-    if (wordCount > 300) {
-      setSubmitStatus("error");
-      alert(`O resumo deve ter no máximo 300 palavras. Atualmente: ${wordCount} palavras.`);
-      return;
-    }
-
-    // Validação de keywords (3-5) - aceita vírgula ou ponto e vírgula
-    const keywordsArray = parseKeywords(formData.keywords);
-    if (keywordsArray.length < 3 || keywordsArray.length > 5) {
-      setSubmitStatus("error");
-      alert(`Informe entre 3 e 5 palavras-chave. Atualmente: ${keywordsArray.length}`);
+      // Scroll para o primeiro erro
+      const firstErrorField = Object.keys(fieldErrors)[0];
+      if (firstErrorField) {
+        const element = document.getElementById(firstErrorField);
+        element?.scrollIntoView({ behavior: "smooth", block: "center" });
+        element?.focus();
+      }
       return;
     }
 
     setSubmitStatus("loading");
+    setFieldErrors({});
 
     try {
       await apiService.submitAbstract(formData);
@@ -99,22 +159,45 @@ export default function Call() {
       console.error("Erro ao enviar submissão:", error);
       setSubmitStatus("error");
 
-      // Mostrar detalhes do erro de validação se disponível
+      // Processar erros de validação da API
+      const apiErrors: Record<string, string> = {};
       if (error?.response?.data?.details) {
         const validationErrors = error.response.data.details;
-        const errorMessages = validationErrors
-          .map((err: any) => {
-            const field = err.path?.join(".") || "campo";
-            return `${field}: ${err.message}`;
-          })
-          .join("\n");
-        alert(
-          `Erro de validação:\n\n${errorMessages}\n\nPor favor, verifique os campos e tente novamente.`
-        );
+        validationErrors.forEach((err: any) => {
+          const fieldName = err.path?.[0] || "campo";
+          // Mapear nomes de campos da API para nomes do formulário
+          const fieldMap: Record<string, string> = {
+            name: "name",
+            email: "email",
+            title: "title",
+            track: "track",
+            authors: "authors",
+            abstract: "abstract",
+            references: "references",
+            keywords: "keywords",
+            affiliation: "affiliation",
+            degree: "degree",
+          };
+          const formField = fieldMap[fieldName] || fieldName;
+          apiErrors[formField] = err.message || "Campo inválido";
+        });
+        setFieldErrors(apiErrors);
+
+        // Scroll para o primeiro erro
+        const firstErrorField = Object.keys(apiErrors)[0];
+        if (firstErrorField) {
+          const element = document.getElementById(firstErrorField);
+          element?.scrollIntoView({ behavior: "smooth", block: "center" });
+          element?.focus();
+        }
       } else if (error?.response?.data?.error) {
-        alert(`Erro: ${error.response.data.error}`);
+        setFieldErrors({ _general: error.response.data.error });
       } else if (error?.message) {
-        alert(`Erro ao enviar: ${error.message}`);
+        setFieldErrors({ _general: `Erro ao enviar: ${error.message}` });
+      } else {
+        setFieldErrors({
+          _general: "Ocorreu um erro ao enviar sua submissão. Por favor, tente novamente.",
+        });
       }
     }
   };
@@ -272,7 +355,49 @@ export default function Call() {
             {submitStatus === "error" && (
               <Alert type="error">
                 <strong>{t("call.errorTitle")}</strong>
-                <p>{t("call.errorMessage")}</p>
+                {fieldErrors._general ? (
+                  <p>{fieldErrors._general}</p>
+                ) : (
+                  <p>{t("call.errorMessage")}</p>
+                )}
+                {Object.keys(fieldErrors).filter((k) => k !== "_general").length > 0 && (
+                  <div className="mt-3">
+                    <p className="font-semibold mb-2">Por favor, corrija os seguintes campos:</p>
+                    <ul className="list-disc list-inside space-y-1">
+                      {Object.entries(fieldErrors)
+                        .filter(([key]) => key !== "_general")
+                        .map(([key, message]) => (
+                          <li key={key} className="text-sm">
+                            <strong>
+                              {key === "name"
+                                ? "Nome"
+                                : key === "email"
+                                  ? "E-mail"
+                                  : key === "title"
+                                    ? "Título"
+                                    : key === "track"
+                                      ? "Linha temática"
+                                      : key === "authors"
+                                        ? "Autores"
+                                        : key === "abstract"
+                                          ? "Resumo"
+                                          : key === "references"
+                                            ? "Referências"
+                                            : key === "keywords"
+                                              ? "Palavras-chave"
+                                              : key === "affiliation"
+                                                ? "Afiliação"
+                                                : key === "degree"
+                                                  ? "Titulação"
+                                                  : key}
+                              :
+                            </strong>{" "}
+                            {message}
+                          </li>
+                        ))}
+                    </ul>
+                  </div>
+                )}
               </Alert>
             )}
 
@@ -286,9 +411,19 @@ export default function Call() {
                   id="name"
                   required
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, name: e.target.value });
+                    if (fieldErrors.name) {
+                      setFieldErrors({ ...fieldErrors, name: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.name ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.name && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.name}</p>
+                )}
               </div>
 
               <div>
@@ -300,9 +435,19 @@ export default function Call() {
                   id="email"
                   required
                   value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, email: e.target.value });
+                    if (fieldErrors.email) {
+                      setFieldErrors({ ...fieldErrors, email: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.email ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.email && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.email}</p>
+                )}
               </div>
 
               <div>
@@ -314,9 +459,19 @@ export default function Call() {
                   id="title"
                   required
                   value={formData.title}
-                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, title: e.target.value });
+                    if (fieldErrors.title) {
+                      setFieldErrors({ ...fieldErrors, title: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.title ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.title && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.title}</p>
+                )}
               </div>
 
               <div>
@@ -327,8 +482,15 @@ export default function Call() {
                   id="track"
                   required
                   value={formData.track}
-                  onChange={(e) => setFormData({ ...formData, track: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, track: e.target.value });
+                    if (fieldErrors.track) {
+                      setFieldErrors({ ...fieldErrors, track: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.track ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 >
                   <option value="">{t("call.selectTrack")}</option>
                   <option value="1. Envolvimento da comunidade local no turismo literário e cinematográfico">
@@ -393,6 +555,9 @@ export default function Call() {
                     17. Inovação, tendências e propostas
                   </option>
                 </select>
+                {fieldErrors.track && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.track}</p>
+                )}
               </div>
 
               <div>
@@ -419,13 +584,23 @@ export default function Call() {
                   required
                   rows={3}
                   value={formData.authors}
-                  onChange={(e) => setFormData({ ...formData, authors: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, authors: e.target.value });
+                    if (fieldErrors.authors) {
+                      setFieldErrors({ ...fieldErrors, authors: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.authors ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                   placeholder="Liste todos os autores do trabalho (apenas nomes completos)"
                 />
                 <div className="text-sm text-gray-500 mt-1">
                   Exemplo: João Silva, Maria Santos, Pedro Oliveira
                 </div>
+                {fieldErrors.authors && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.authors}</p>
+                )}
               </div>
 
               <div>
@@ -437,9 +612,19 @@ export default function Call() {
                   id="affiliation"
                   required
                   value={formData.affiliation}
-                  onChange={(e) => setFormData({ ...formData, affiliation: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, affiliation: e.target.value });
+                    if (fieldErrors.affiliation) {
+                      setFieldErrors({ ...fieldErrors, affiliation: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.affiliation ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.affiliation && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.affiliation}</p>
+                )}
               </div>
 
               <div>
@@ -451,9 +636,19 @@ export default function Call() {
                   id="degree"
                   required
                   value={formData.degree}
-                  onChange={(e) => setFormData({ ...formData, degree: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, degree: e.target.value });
+                    if (fieldErrors.degree) {
+                      setFieldErrors({ ...fieldErrors, degree: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.degree ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.degree && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.degree}</p>
+                )}
               </div>
 
               <div>
@@ -468,8 +663,13 @@ export default function Call() {
                   value={formData.abstract}
                   onChange={(e) => {
                     setFormData({ ...formData, abstract: e.target.value });
+                    if (fieldErrors.abstract) {
+                      setFieldErrors({ ...fieldErrors, abstract: "" });
+                    }
                   }}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.abstract ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                   placeholder="Resumo geral do trabalho (objetivos, metodologia, resultados e conclusões)"
                 />
                 <div className="text-sm mt-1 flex justify-between">
@@ -504,6 +704,9 @@ export default function Call() {
                     ⚠️ O resumo excede o limite de 2000 caracteres
                   </p>
                 )}
+                {fieldErrors.abstract && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.abstract}</p>
+                )}
               </div>
 
               <div>
@@ -516,9 +719,19 @@ export default function Call() {
                   rows={4}
                   placeholder={t("call.referencesPlaceholder")}
                   value={formData.references}
-                  onChange={(e) => setFormData({ ...formData, references: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, references: e.target.value });
+                    if (fieldErrors.references) {
+                      setFieldErrors({ ...fieldErrors, references: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.references ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
+                {fieldErrors.references && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.references}</p>
+                )}
               </div>
 
               <div>
@@ -531,13 +744,23 @@ export default function Call() {
                   required
                   placeholder={t("call.keywordsPlaceholder")}
                   value={formData.keywords}
-                  onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
-                  className="w-full border border-gray-300 rounded-lg p-3"
+                  onChange={(e) => {
+                    setFormData({ ...formData, keywords: e.target.value });
+                    if (fieldErrors.keywords) {
+                      setFieldErrors({ ...fieldErrors, keywords: "" });
+                    }
+                  }}
+                  className={`w-full border rounded-lg p-3 ${
+                    fieldErrors.keywords ? "border-red-500 bg-red-50" : "border-gray-300"
+                  }`}
                 />
                 <div className="text-xs text-gray-500 mt-1">
                   {parseKeywords(formData.keywords).length} palavras-chave informadas (mínimo 3,
                   máximo 5)
                 </div>
+                {fieldErrors.keywords && (
+                  <p className="text-red-600 text-sm mt-1">{fieldErrors.keywords}</p>
+                )}
               </div>
 
               <div>
