@@ -53,6 +53,6 @@ export default {
   plugins: [
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
-    require("@tailwindcss/line-clamp"),
+    // @tailwindcss/line-clamp removido - incluído nativamente no Tailwind v3.3+
   ],
 };

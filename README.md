@@ -5,6 +5,7 @@ Economia Criativa, Inovação e Desenvolvimento Territorial | 26-28 Mar 2026 | C
 ## 🚀 Stack Tecnológico
 
 ### Backend
+
 - **Node.js 20** + **Express** + **TypeScript**
 - **Zod** para validação de dados
 - **CORS** e **Helmet** para segurança
@@ -12,15 +13,17 @@ Economia Criativa, Inovação e Desenvolvimento Territorial | 26-28 Mar 2026 | C
 - **Nodemon** para desenvolvimento
 
 ### Frontend
+
 - **React 18** + **Vite** + **TypeScript**
 - **React Router** para navegação
 - **i18next** para internacionalização (PT/EN/ES)
-- **Tailwind CSS** + plugins (typography, forms, line-clamp)
+- **Tailwind CSS** + plugins (typography, forms) + line-clamp nativo
 - **Axios** para requisições HTTP
 - **Day.js** para manipulação de datas
 - **React Helmet Async** para SEO
 
 ### Infraestrutura
+
 - **pnpm workspaces** para monorepo
 - **Docker** + **Docker Compose**
 - **Nginx** como reverse proxy
@@ -61,6 +64,7 @@ conferencia-site/
 ## 🛠️ Instalação e Desenvolvimento
 
 ### Pré-requisitos
+
 - Node.js >= 20
 - pnpm >= 8
 
@@ -73,6 +77,7 @@ pnpm install
 ### 2. Configurar variáveis de ambiente
 
 **Backend** (`apps/api/.env`):
+
 ```env
 PORT=3001
 NODE_ENV=development
@@ -80,6 +85,7 @@ CORS_ORIGIN=http://localhost:5173
 ```
 
 **Frontend** (`apps/web/.env`):
+
 ```env
 VITE_API_URL=http://localhost:3001/api
 VITE_GA_ID=G-XXXXXXXXXX
@@ -134,29 +140,36 @@ Acesse: http://localhost
 ## 📡 API Endpoints
 
 ### Meta
+
 - `GET /api/meta` - Informações gerais da conferência
 - `GET /api/meta/call` - Informações da chamada de trabalhos
 - `GET /api/meta/committees` - Membros dos comitês
 - `GET /api/meta/hackathon` - Informações do hackathon
 
 ### Speakers
+
 - `GET /api/speakers` - Lista de palestrantes
 - `GET /api/speakers/:id` - Detalhes de um palestrante
 
 ### Programa
+
 - `GET /api/program` - Programação completa do evento
 
 ### Taxas
+
 - `GET /api/fees` - Tabela de valores de inscrição
 
 ### Notícias
+
 - `GET /api/news?lang=pt` - Lista de notícias (filtro opcional por idioma)
 - `GET /api/news/:id` - Detalhes de uma notícia
 
 ### Submissões
+
 - `POST /api/submissions` - Enviar proposta de trabalho
 
 **Exemplo de payload**:
+
 ```json
 {
   "name": "João Silva",
@@ -170,6 +183,7 @@ Acesse: http://localhost
 ## 🌍 Internacionalização
 
 O site suporta 3 idiomas:
+
 - **Português (PT)** - padrão
 - **Inglês (EN)**
 - **Espanhol (ES)**
@@ -179,16 +193,19 @@ Os arquivos de tradução estão em `apps/web/src/locales/{pt,en,es}/common.json
 ## 🎨 Design System
 
 ### Breakpoints
+
 - **Mobile**: 360-767px (container 328px)
 - **Tablet**: 768-1023px (container 672px)
 - **Desktop**: 1024-1279px (container 1200px)
 - **XL**: 1280px+ (container 1200px)
 
 ### Cores
+
 - **Primary**: `#1e40af` (azul)
 - **Secondary**: `#7c3aed` (roxo)
 
 ### Componentes
+
 - Hero
 - Section
 - Countdown
@@ -247,6 +264,7 @@ git commit -m "docs: atualiza README"
 ### Variáveis de ambiente obrigatórias
 
 **Produção**:
+
 ```env
 # Backend
 NODE_ENV=production
@@ -268,6 +286,7 @@ VITE_GA_ID=G-XXXXXXXXXX
 ## 📝 Scripts Disponíveis
 
 ### Root
+
 - `pnpm dev` - Executa backend e frontend em modo dev
 - `pnpm build` - Build de todos os pacotes
 - `pnpm start` - Executa versão de produção
@@ -275,11 +294,13 @@ VITE_GA_ID=G-XXXXXXXXXX
 - `pnpm format` - Formata código com Prettier
 
 ### Backend (`apps/api`)
+
 - `pnpm dev` - Nodemon com hot reload
 - `pnpm build` - Compila TypeScript
 - `pnpm start` - Executa versão compilada
 
 ### Frontend (`apps/web`)
+
 - `pnpm dev` - Vite dev server
 - `pnpm build` - Build para produção
 - `pnpm preview` - Preview da build
@@ -305,4 +326,3 @@ VITE_GA_ID=G-XXXXXXXXXX
 ---
 
 Desenvolvido para a III Conferência Internacional de Turismo Literário e Cinematográfico 🎬📚
-

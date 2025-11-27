@@ -13,7 +13,7 @@
     "start": "pnpm -r --parallel start",
     "lint": "pnpm -r lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "prepare": "husky install"
+    "prepare": "husky install || true"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
@@ -39,4 +39,3 @@
     ]
   }
 }
-
