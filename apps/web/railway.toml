@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install && pnpm --filter @conferencia/web build"
+buildCommand = "rm -rf node_modules .vite dist apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist .pnpm-store 2>/dev/null || true && pnpm store prune && pnpm install --force --no-frozen-lockfile && pnpm --filter @conferencia/web build"
 
 [deploy]
 startCommand = "cd apps/web && npx serve dist -s -l $PORT"

@@ -164,7 +164,9 @@ export default function Home() {
 
       <Section title={t("home.aboutTitle")}>
         <div className="max-w-4xl mx-auto prose prose-lg">
-          <p className="text-justify text-gray-700 leading-relaxed">{t("home.aboutText")}</p>
+          <p className="text-justify text-gray-700 leading-relaxed whitespace-pre-line">
+            {t("home.aboutText")}
+          </p>
         </div>
       </Section>
 

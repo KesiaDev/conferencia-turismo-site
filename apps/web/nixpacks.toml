@@ -2,10 +2,17 @@
 nixPkgs = ["nodejs_20", "pnpm"]
 
 [phases.install]
-cmds = ["pnpm install --frozen-lockfile"]
+cmds = [
+  "rm -rf node_modules .vite dist .pnpm-store 2>/dev/null || true",
+  "pnpm store prune || true",
+  "pnpm install --force --no-frozen-lockfile"
+]
 
 [phases.build]
-cmds = ["pnpm build"]
+cmds = [
+  "rm -rf dist .vite 2>/dev/null || true",
+  "pnpm build"
+]
 
 [start]
 cmd = "npx serve dist -s -l $PORT"

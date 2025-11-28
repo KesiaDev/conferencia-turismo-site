@@ -1,0 +1,11 @@
+# Railway Cache Bust File
+# Este arquivo força o Railway a fazer rebuild completo
+# Última atualização: $(date)
+# Timestamp: $(date +%s)
+
+# Este arquivo é atualizado a cada rebuild forçado
+# O Railway detecta mudanças neste arquivo e faz rebuild completo
+
+TIMESTAMP=$(date +%s)
+BUILD_ID=FORCE_REBUILD_${TIMESTAMP}
+

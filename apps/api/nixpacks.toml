@@ -3,14 +3,15 @@ nixPkgs = ["chromium"]
 
 [phases.install]
 cmds = [
-  "cd ../.. && npm ci || pnpm install",
-  "cd apps/api && npm ci"
+  "rm -rf node_modules dist .pnpm-store apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist 2>/dev/null || true",
+  "cd ../.. && (pnpm store prune || true) && (npm ci || pnpm install --force --no-frozen-lockfile)",
+  "cd apps/api && (npm ci || pnpm install --force --no-frozen-lockfile)"
 ]
 
 [phases.build]
 cmds = [
-  "cd ../web && npm ci && npm run build",
-  "cd ../api && npm run build",
+  "cd ../web && rm -rf dist .vite && (npm ci || pnpm install --force) && npm run build",
+  "cd ../api && rm -rf dist && npm run build",
   "mkdir -p ../api/dist/web/dist || true",
   "cp -r ../web/dist/* ../api/dist/web/dist/ 2>/dev/null || true"
 ]
