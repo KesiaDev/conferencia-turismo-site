@@ -186,7 +186,7 @@ export default function Home() {
           </div>
           <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
             <span className="font-semibold">{t("home.earlyBird")}</span>
-            <span className="text-accent font-bold">05 Jan 2026</span>
+            <span className="text-accent font-bold">31 Jan 2026</span>
           </div>
           <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
             <span className="font-semibold">{t("home.conference")}</span>
