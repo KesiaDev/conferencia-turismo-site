@@ -9,7 +9,7 @@ export const meta = {
   venue: "Universidade de Caxias do Sul — Blocos H, E e F (Caxias do Sul/RS, Brasil)",
   languages: ["Português", "Espanhol", "Inglês"],
   emailSubmission: "litfilmtourismconferenceucs@gmail.com",
-  submissionDeadline: "2025-12-03",
+  submissionDeadline: "2026-01-15",
 };
 
 export const speakers: Speaker[] = [
@@ -352,7 +352,7 @@ export const fees: FeeCategory[] = [
 
 export const callForPapers = {
   email: "litfilmtourismconferenceucs@gmail.com",
-  deadlineISO: "2025-12-03",
+  deadlineISO: "2026-01-15",
   languages: ["PT", "ES", "EN"],
   formats: [
     {
