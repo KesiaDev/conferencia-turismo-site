@@ -1,4 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
+import fs from "fs";
+import path from "path";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
 import { panelDocumentGenerator, PanelSubmissionData } from "./panelDocumentGenerator.js";
 
@@ -81,121 +83,187 @@ export const emailService = {
     // Se transporter estiver configurado, envia email real
     if (transporter) {
       try {
-        // Preparar anexos apenas se documentos foram gerados
-        const attachments =
-          documentsGenerated && pdfPath && wordPath
-            ? [
+        // Preparar anexos lendo arquivos como buffers
+        let attachments = [];
+
+        if (documentsGenerated && pdfPath && wordPath) {
+          try {
+            // Resolver caminhos (suporta absolutos e relativos)
+            const resolvedPdfPath = path.isAbsolute(pdfPath)
+              ? pdfPath
+              : path.resolve(process.cwd(), pdfPath);
+            const resolvedWordPath = path.isAbsolute(wordPath)
+              ? wordPath
+              : path.resolve(process.cwd(), wordPath);
+
+            // Verificar se os arquivos existem
+            const pdfExists = fs.existsSync(resolvedPdfPath);
+            const wordExists = fs.existsSync(resolvedWordPath);
+
+            console.log(`🔍 Verificando arquivos: PDF=${pdfExists}, Word=${wordExists}`);
+            console.log(`📁 PDF path original: ${pdfPath}`);
+            console.log(`📁 PDF path resolvido: ${resolvedPdfPath}`);
+            console.log(`📁 Word path original: ${wordPath}`);
+            console.log(`📁 Word path resolvido: ${resolvedWordPath}`);
+
+            // Verificar se são arquivos válidos (PDF e DOCX, não HTML)
+            const isPdf = resolvedPdfPath.toLowerCase().endsWith(".pdf");
+            const isDocx = resolvedWordPath.toLowerCase().endsWith(".docx");
+
+            if (pdfExists && wordExists && isPdf && isDocx) {
+              // Ler arquivos como buffers
+              console.log("📖 Lendo PDF como buffer...");
+              const pdfBuffer = fs.readFileSync(resolvedPdfPath);
+              console.log(`✅ PDF lido: ${pdfBuffer.length} bytes`);
+
+              console.log("📖 Lendo Word como buffer...");
+              const wordBuffer = fs.readFileSync(resolvedWordPath);
+              console.log(`✅ Word lido: ${wordBuffer.length} bytes`);
+
+              const safeName = data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "");
+
+              attachments = [
                 {
-                  filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_sem_autoria.pdf`,
-                  path: pdfPath,
+                  filename: `submissao_${safeName}_sem_autoria.pdf`,
+                  content: pdfBuffer,
                   contentType: "application/pdf",
                 },
                 {
-                  filename: `submissao_${data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "")}_com_autoria.docx`,
-                  path: wordPath,
+                  filename: `submissao_${safeName}_com_autoria.docx`,
+                  content: wordBuffer,
                   contentType:
                     "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                 },
-              ]
-            : [];
+              ];
 
-        // Email para a organização (com retry)
-        await emailService.sendEmailWithRetry(transporter, {
-          from: process.env.EMAIL_USER,
-          to: destinationEmail,
-          replyTo: data.email,
-          subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
-          html: `
-            <h2>Nova Submissão de Trabalho</h2>
-            <p><strong>Nome:</strong> ${data.name}</p>
-            <p><strong>Email:</strong> ${data.email}</p>
-            <p><strong>Título:</strong> ${data.title}</p>
-            <p><strong>Linha Temática:</strong> ${data.track}</p>
-            <p><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</p>
-            <p><strong>Palavras-chave:</strong> ${data.keywords}</p>
-            <p><strong>Afiliação:</strong> ${data.affiliation}</p>
-            <p><strong>Titulação:</strong> ${data.degree}</p>
-            ${data.support ? `<p><strong>Apoio:</strong> ${data.support}</p>` : ""}
-            <p><strong>Resumo:</strong></p>
-            <p>${data.abstract}</p>
-            <p><strong>Referências:</strong></p>
-            <p>${data.references}</p>
-            <hr>
-            ${
-              documentsGenerated
-                ? `
-              <p><strong>Anexos:</strong></p>
-              <ul>
-                <li>Documento PDF (sem autoria) - arquivo .pdf</li>
-                <li>Documento Word (com autoria) - arquivo .docx</li>
-              </ul>
-            `
-                : `
-              <p><strong>⚠️ Aviso:</strong> Documentos em anexo não foram gerados devido a erro técnico.</p>
-              <p>Os dados da submissão estão disponíveis acima.</p>
-            `
+              console.log("✅ Anexos preparados com sucesso usando buffers");
+            } else {
+              console.warn("⚠️ Arquivos não encontrados ou inválidos. Enviando email sem anexos.");
+              if (!pdfExists) console.warn(`❌ PDF não existe: ${resolvedPdfPath}`);
+              if (!wordExists) console.warn(`❌ Word não existe: ${resolvedWordPath}`);
+              if (!isPdf) console.warn(`❌ Arquivo PDF não é um PDF válido: ${resolvedPdfPath}`);
+              if (!isDocx)
+                console.warn(`❌ Arquivo Word não é um DOCX válido: ${resolvedWordPath}`);
             }
-            <p><small>Data: ${new Date().toLocaleString("pt-BR")}</small></p>
-          `,
-          attachments,
-        });
-        console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
+          } catch (attachError) {
+            console.error("❌ Erro ao preparar anexos:", attachError);
+            console.log("⚠️ Continuando sem anexos...");
+            attachments = [];
+          }
+        }
 
-        // Email de confirmação para o candidato (com retry)
-        await emailService.sendEmailWithRetry(transporter, {
-          from: process.env.EMAIL_USER,
-          to: data.email,
-          subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
-          html: `
-            <h2>Confirmação de Submissão Recebida</h2>
-            <p>Prezado(a) <strong>${data.name}</strong>,</p>
-            
-            <p>Sua submissão foi recebida com sucesso pela organização da III Conferência Internacional sobre Turismo Literário e Cinematográfico.</p>
-            
-            <h3>Detalhes da Submissão:</h3>
-            <ul>
-              <li><strong>Título:</strong> ${data.title}</li>
-              <li><strong>Linha Temática:</strong> ${data.track}</li>
-              <li><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</li>
-              <li><strong>Data de Envio:</strong> ${new Date().toLocaleString("pt-BR")}</li>
-            </ul>
-            
-            ${
-              documentsGenerated
-                ? `
-              <h3>Documentos Gerados:</h3>
-              <p>Em anexo, você encontrará os documentos formatados conforme as diretrizes da conferência:</p>
+        // Email para a organização (com retry) - enviado independentemente
+        try {
+          console.log("📧 Preparando email para organização...");
+          await emailService.sendEmailWithRetry(transporter, {
+            from: process.env.EMAIL_USER,
+            to: destinationEmail,
+            replyTo: data.email,
+            subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
+            html: `
+              <h2>Nova Submissão de Trabalho</h2>
+              <p><strong>Nome:</strong> ${data.name}</p>
+              <p><strong>Email:</strong> ${data.email}</p>
+              <p><strong>Título:</strong> ${data.title}</p>
+              <p><strong>Linha Temática:</strong> ${data.track}</p>
+              <p><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</p>
+              <p><strong>Palavras-chave:</strong> ${data.keywords}</p>
+              <p><strong>Afiliação:</strong> ${data.affiliation}</p>
+              <p><strong>Titulação:</strong> ${data.degree}</p>
+              ${data.support ? `<p><strong>Apoio:</strong> ${data.support}</p>` : ""}
+              <p><strong>Resumo:</strong></p>
+              <p>${data.abstract}</p>
+              <p><strong>Referências:</strong></p>
+              <p>${data.references}</p>
+              <hr>
+              ${
+                attachments.length > 0
+                  ? `
+                <p><strong>Anexos:</strong></p>
+                <ul>
+                  <li>Documento PDF (sem autoria) - arquivo .pdf</li>
+                  <li>Documento Word (com autoria) - arquivo .docx</li>
+                </ul>
+              `
+                  : `
+                <p><strong>⚠️ Aviso:</strong> Documentos em anexo não foram gerados devido a erro técnico.</p>
+                <p>Os dados da submissão estão disponíveis acima.</p>
+              `
+              }
+              <p><small>Data: ${new Date().toLocaleString("pt-BR")}</small></p>
+            `,
+            attachments,
+          });
+          console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
+        } catch (orgError: any) {
+          console.error("❌ ERRO ao enviar email para organização:", orgError?.message || orgError);
+          console.error("❌ Stack trace:", orgError?.stack);
+          // Continua para tentar enviar email para o usuário mesmo se falhar para organização
+        }
+
+        // Email de confirmação para o candidato (com retry) - enviado independentemente
+        try {
+          console.log("📧 Preparando email de confirmação para candidato...");
+          await emailService.sendEmailWithRetry(transporter, {
+            from: process.env.EMAIL_USER,
+            to: data.email,
+            subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
+            html: `
+              <h2>Confirmação de Submissão Recebida</h2>
+              <p>Prezado(a) <strong>${data.name}</strong>,</p>
+              
+              <p>Sua submissão foi recebida com sucesso pela organização da III Conferência Internacional sobre Turismo Literário e Cinematográfico.</p>
+              
+              <h3>Detalhes da Submissão:</h3>
               <ul>
-                <li><strong>Documento PDF sem autoria</strong> - Para avaliação anônima (arquivo .pdf)</li>
-                <li><strong>Documento Word com autoria</strong> - Com suas informações completas (arquivo .docx)</li>
+                <li><strong>Título:</strong> ${data.title}</li>
+                <li><strong>Linha Temática:</strong> ${data.track}</li>
+                <li><strong>Idioma:</strong> ${data.language === "pt" ? "Português" : data.language === "en" ? "English" : "Español"}</li>
+                <li><strong>Data de Envio:</strong> ${new Date().toLocaleString("pt-BR")}</li>
               </ul>
-            `
-                : `
-              <h3>⚠️ Aviso sobre Documentos:</h3>
-              <p>Houve um problema técnico na geração dos documentos em anexo. Sua submissão foi registrada com sucesso e a organização recebeu todos os dados.</p>
-              <p>Se necessário, entre em contato conosco para receber os documentos formatados.</p>
-            `
-            }
-            
-            <h3>Próximos Passos:</h3>
-            <p>A organização entrará em contato em breve com informações sobre o processo de avaliação e próximas etapas.</p>
-            
-            <p>Obrigado por sua participação!</p>
-            
-            <hr>
-            <p><small>
-              <strong>III Conferência Internacional sobre Turismo Literário e Cinematográfico</strong><br>
-              Economia Criativa, Inovação e Desenvolvimento Territorial<br>
-              26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
-              Serra Gaúcha - Brasil
-            </small></p>
-          `,
-          attachments,
-        });
-        console.log("✅ Email de confirmação enviado para o candidato:", data.email);
-      } catch (error) {
-        console.error("❌ Erro ao enviar email:", error);
-        console.log("⚠️ Continuando sem envio de email...");
+              
+              ${
+                attachments.length > 0
+                  ? `
+                <h3>Documentos Gerados:</h3>
+                <p>Em anexo, você encontrará os documentos formatados conforme as diretrizes da conferência:</p>
+                <ul>
+                  <li><strong>Documento PDF sem autoria</strong> - Para avaliação anônima (arquivo .pdf)</li>
+                  <li><strong>Documento Word com autoria</strong> - Com suas informações completas (arquivo .docx)</li>
+                </ul>
+              `
+                  : `
+                <h3>⚠️ Aviso sobre Documentos:</h3>
+                <p>Houve um problema técnico na geração dos documentos em anexo. Sua submissão foi registrada com sucesso e a organização recebeu todos os dados.</p>
+                <p>Se necessário, entre em contato conosco para receber os documentos formatados.</p>
+              `
+              }
+              
+              <h3>Próximos Passos:</h3>
+              <p>A organização entrará em contato em breve com informações sobre o processo de avaliação e próximas etapas.</p>
+              
+              <p>Obrigado por sua participação!</p>
+              
+              <hr>
+              <p><small>
+                <strong>III Conferência Internacional sobre Turismo Literário e Cinematográfico</strong><br>
+                Economia Criativa, Inovação e Desenvolvimento Territorial<br>
+                26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
+                Serra Gaúcha - Brasil
+              </small></p>
+            `,
+            attachments,
+          });
+          console.log("✅ Email de confirmação enviado para o candidato:", data.email);
+        } catch (userError: any) {
+          console.error("❌ ERRO ao enviar email para candidato:", userError?.message || userError);
+          console.error("❌ Stack trace:", userError?.stack);
+          // Email para organização já foi enviado (ou tentado), então continua
+        }
+      } catch (error: any) {
+        console.error("❌ Erro geral no processo de envio de email:", error?.message || error);
+        console.error("❌ Stack trace:", error?.stack);
+        console.log("⚠️ Continuando...");
       }
     } else {
       console.log("⚠️ Email service não configurado. Apenas logando no console.");
