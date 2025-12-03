@@ -28,10 +28,22 @@ export default function Call() {
     "idle"
   );
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     apiService.getCallInfo().then(setCallInfo);
   }, []);
+
+  // Funções para controlar o modal
+  const openModal = () => {
+    setIsModalOpen(true);
+    document.body.style.overflow = "hidden"; // Prevenir scroll do body
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    document.body.style.overflow = ""; // Restaurar scroll do body
+  };
 
   // Função para contar palavras
   const countWords = (text: string): number => {
@@ -141,6 +153,8 @@ export default function Call() {
     try {
       await apiService.submitAbstract(formData);
       setSubmitStatus("success");
+      // Abrir modal de confirmação
+      openModal();
       setFormData({
         name: "",
         email: "",
@@ -350,6 +364,50 @@ export default function Call() {
                 <strong>{t("call.successTitle")}</strong>
                 <p>{t("call.successMessage")}</p>
               </Alert>
+            )}
+
+            {/* Modal de Confirmação */}
+            {isModalOpen && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+                onClick={closeModal}
+              >
+                <div
+                  className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="text-center">
+                    <div className="mb-4">
+                      <svg
+                        className="mx-auto h-12 w-12 text-green-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      Sua submissão foi enviada com sucesso!
+                    </h3>
+                    <p className="text-gray-700 mb-6">
+                      Se você não receber a cópia da sua submissão por e-mail até o final do dia,
+                      entre em contato conosco.
+                    </p>
+                    <button
+                      onClick={closeModal}
+                      className="w-full bg-[#e0a085] hover:bg-[#d49070] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                    >
+                      Entendi
+                    </button>
+                  </div>
+                </div>
+              </div>
             )}
 
             {submitStatus === "error" && (
