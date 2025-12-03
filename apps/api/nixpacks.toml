@@ -3,21 +3,16 @@ nixPkgs = ["chromium"]
 
 [phases.install]
 cmds = [
-  "rm -rf node_modules dist .pnpm-store apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist 2>/dev/null || true",
-  "cd ../.. && (pnpm store prune || true) && (npm ci || pnpm install --force --no-frozen-lockfile)",
-  "cd apps/api && (npm ci || pnpm install --force --no-frozen-lockfile)"
+  "pnpm install --filter @conferencia/api --force || pnpm install --force"
 ]
 
 [phases.build]
 cmds = [
-  "cd ../web && rm -rf dist .vite && (npm ci || pnpm install --force) && npm run build",
-  "cd ../api && rm -rf dist && npm run build",
-  "mkdir -p ../api/dist/web/dist || true",
-  "cp -r ../web/dist/* ../api/dist/web/dist/ 2>/dev/null || true"
+  "cd apps/api && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true pnpm build"
 ]
 
 [start]
-cmd = "npm start"
+cmd = "cd apps/api && node dist/index.js"
 
 [env]
 PUPPETEER_EXECUTABLE_PATH = "/nix/store/*-chromium-*/bin/chromium"

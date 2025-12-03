@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "lint": "eslint src --ext .ts",
-    "postinstall": "npx puppeteer browsers install chrome"
+    "postinstall": "node -e \"if (!process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD && !process.env.RAILWAY_ENVIRONMENT) { try { require('child_process').execSync('npx puppeteer browsers install chrome', {stdio: 'inherit'}); } catch(e) { console.log('Skipping Puppeteer Chrome install (Chromium will be used)'); } }\""
   },
   "dependencies": {
     "cors": "^2.8.5",
