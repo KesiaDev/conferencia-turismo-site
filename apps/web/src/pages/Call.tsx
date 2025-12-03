@@ -34,12 +34,19 @@ export default function Call() {
     apiService.getCallInfo().then(setCallInfo);
   }, []);
 
-  // Funções para controlar o modal
-  const openModal = () => {
-    setIsModalOpen(true);
-    document.body.style.overflow = "hidden"; // Prevenir scroll do body
-  };
+  // Abrir modal automaticamente quando a submissão for bem-sucedida
+  useEffect(() => {
+    if (submitStatus === "success") {
+      // Pequeno delay para garantir que o estado seja atualizado
+      const timer = setTimeout(() => {
+        setIsModalOpen(true);
+        document.body.style.overflow = "hidden";
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
+  // Função para fechar o modal
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.style.overflow = ""; // Restaurar scroll do body
@@ -153,8 +160,6 @@ export default function Call() {
     try {
       await apiService.submitAbstract(formData);
       setSubmitStatus("success");
-      // Abrir modal de confirmação
-      openModal();
       setFormData({
         name: "",
         email: "",
@@ -364,50 +369,6 @@ export default function Call() {
                 <strong>{t("call.successTitle")}</strong>
                 <p>{t("call.successMessage")}</p>
               </Alert>
-            )}
-
-            {/* Modal de Confirmação */}
-            {isModalOpen && (
-              <div
-                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-                onClick={closeModal}
-              >
-                <div
-                  className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <div className="text-center">
-                    <div className="mb-4">
-                      <svg
-                        className="mx-auto h-12 w-12 text-green-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
-                      Sua submissão foi enviada com sucesso!
-                    </h3>
-                    <p className="text-gray-700 mb-6">
-                      Se você não receber a cópia da sua submissão por e-mail até o final do dia,
-                      entre em contato conosco.
-                    </p>
-                    <button
-                      onClick={closeModal}
-                      className="w-full bg-[#e0a085] hover:bg-[#d49070] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
-                    >
-                      Entendi
-                    </button>
-                  </div>
-                </div>
-              </div>
             )}
 
             {submitStatus === "error" && (
@@ -854,6 +815,52 @@ export default function Call() {
           </div>
         </div>
       </Section>
+
+      {/* Modal de Confirmação - Fora do formulário para garantir que apareça */}
+      {isModalOpen && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-60"
+          onClick={closeModal}
+          style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0 }}
+        >
+          <div
+            className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-6 transform transition-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center">
+              <div className="mb-4">
+                <svg
+                  className="mx-auto h-12 w-12 text-green-500"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                Sua submissão foi enviada com sucesso!
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Se você não receber a cópia da sua submissão por e-mail até o final do dia, entre em
+                contato conosco.
+              </p>
+              <button
+                onClick={closeModal}
+                className="w-full bg-[#e0a085] hover:bg-[#d49070] text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 shadow-md"
+              >
+                Entendi
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
