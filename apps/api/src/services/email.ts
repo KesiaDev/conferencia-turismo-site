@@ -1,4 +1,5 @@
 import nodemailer, { Transporter } from "nodemailer";
+import type { Attachment } from "nodemailer/lib/mailer";
 import fs from "fs";
 import path from "path";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
@@ -84,7 +85,7 @@ export const emailService = {
     if (transporter) {
       try {
         // Preparar anexos lendo arquivos como buffers
-        let attachments = [];
+        let attachments: Attachment[] = [];
 
         if (documentsGenerated && pdfPath && wordPath) {
           try {
