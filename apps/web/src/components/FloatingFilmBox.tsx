@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const STROKE = "#E8A37B";
 
-export default function FloatingFilmBox(): JSX.Element {
+export default function FloatingFilmBox() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
