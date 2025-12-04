@@ -17,6 +17,7 @@ interface FloatingFilmBoxProps {
   children?: ReactNode;
   className?: string;
   animate?: boolean;
+  useAbsolute?: boolean; // Para posicionar dentro de container relativo
 }
 
 export default function FloatingFilmBox({
@@ -27,6 +28,7 @@ export default function FloatingFilmBox({
   children,
   className = "",
   animate = true,
+  useAbsolute = false,
 }: FloatingFilmBoxProps) {
   // Position classes
   const positionClasses = {
@@ -35,7 +37,7 @@ export default function FloatingFilmBox({
     "bottom-left": "bottom-4 md:bottom-8 left-4 md:left-8",
     "bottom-right": "bottom-4 md:bottom-8 right-4 md:right-8",
     center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-    "hero-overlay": "top-[50%] left-4 md:left-8 -translate-y-1/2",
+    "hero-overlay": "top-1/2 left-4 md:left-8 -translate-y-1/2",
   };
 
   // Size classes
@@ -82,17 +84,19 @@ export default function FloatingFilmBox({
       : "-translate-y-1/2"
     : "";
 
+  const positionType = useAbsolute ? "absolute" : "fixed";
+
   return (
     <div
       className={`
-        fixed ${positionClasses[position]}
+        ${positionType} ${positionClasses[position]}
         ${transformClasses}
         ${sizeClasses[size]}
         ${currentVariant.container}
         ${currentVariant.shadow}
         rounded-2xl md:rounded-3xl
         flex items-center justify-center
-        z-50
+        z-[100]
         transition-all duration-300
         ${animationClasses}
         hover:scale-110 hover:rotate-3

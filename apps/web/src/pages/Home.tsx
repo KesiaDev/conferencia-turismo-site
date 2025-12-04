@@ -132,7 +132,13 @@ export default function Home() {
           loading="eager"
           fetchPriority="high"
         />
-        <FloatingFilmBox variant="elegant" position="hero-overlay" size="medium" animate={true} />
+        <FloatingFilmBox
+          variant="elegant"
+          position="hero-overlay"
+          size="medium"
+          animate={true}
+          useAbsolute={true}
+        />
       </div>
 
       <div className="py-8 md:py-12">
