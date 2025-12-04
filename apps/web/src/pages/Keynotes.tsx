@@ -124,7 +124,7 @@ export default function Keynotes() {
 
       <div className="w-full aspect-[16/5]">
         <OptimizedImage
-          src="/hero.png"
+          src="/hero-novo.png"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
           loading="eager"

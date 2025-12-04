@@ -35,7 +35,7 @@ export default function ThematicLines() {
 
       <div className="w-full aspect-[16/5]">
         <img
-          src="/hero.png"
+          src="/hero-novo.png"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
         />

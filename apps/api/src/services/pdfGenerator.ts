@@ -430,6 +430,9 @@ export class PDFGenerator {
     try {
       // Tentar diferentes caminhos possíveis para a imagem
       const possiblePaths = [
+        path.join(process.cwd(), "apps", "web", "public", "hero-novo.png"),
+        path.join(process.cwd(), "..", "web", "public", "hero-novo.png"),
+        path.join(process.cwd(), "web", "public", "hero-novo.png"),
         path.join(process.cwd(), "apps", "web", "public", "hero.png"),
         path.join(process.cwd(), "..", "web", "public", "hero.png"),
         path.join(process.cwd(), "web", "public", "hero.png"),
@@ -444,7 +447,9 @@ export class PDFGenerator {
       }
 
       if (!heroImagePath) {
-        throw new Error("Imagem hero.png não encontrada em nenhum dos caminhos possíveis");
+        throw new Error(
+          "Imagem hero-novo.png ou hero.png não encontrada em nenhum dos caminhos possíveis"
+        );
       }
 
       console.log("🎨 Banner oficial encontrado:", heroImagePath);
