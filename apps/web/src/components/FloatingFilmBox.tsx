@@ -6,29 +6,82 @@ export default function FloatingFilmBox() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setVisible(true), 50);
-
-    // Remove cartões duplicados automaticamente
-    const id = "floter-online-card";
-    const nodes = document.querySelectorAll(`#${id}`);
-    if (nodes.length > 1) {
-      nodes.forEach((n, i) => {
-        if (i < nodes.length - 1) n.remove();
+    // Função AGressiva para remover QUALQUER card antigo
+    const removeOldCards = () => {
+      // Remove todos os cards com film-camera.svg
+      document.querySelectorAll('img[src="/film-camera.svg"]').forEach((img) => {
+        const container =
+          img.closest('[role="presentation"]') ||
+          img.closest('[class*="absolute"]') ||
+          img.closest('[class*="fixed"]') ||
+          img.parentElement;
+        if (container) {
+          container.remove();
+        }
       });
-    }
 
-    // Remove card antigo com film-camera.svg se ainda existir no DOM
-    const oldCards = document.querySelectorAll(
-      'img[src="/film-camera.svg"], [aria-label*="Decorative film camera"], [class*="top-1/2"][class*="left-4"]'
-    );
-    oldCards.forEach((card) => {
-      const container = card.closest('[role="presentation"]') || card.parentElement;
-      if (container && !container.id?.includes("floter-online-card")) {
-        container.remove();
+      // Remove cards com aria-label antigo
+      document
+        .querySelectorAll('[aria-label*="Decorative film camera"], [aria-label*="film camera"]')
+        .forEach((card) => {
+          if (!card.id?.includes("floter-online-card")) {
+            card.remove();
+          }
+        });
+
+      // Remove cards com classes antigas
+      document
+        .querySelectorAll(
+          '[class*="top-1/2"][class*="left-4"], [class*="hero-overlay"], [class*="animate-float-center"]'
+        )
+        .forEach((card) => {
+          if (!card.id?.includes("floter-online-card")) {
+            card.remove();
+          }
+        });
+
+      // Remove qualquer elemento com z-index que pareça ser um card antigo
+      document.querySelectorAll('[role="presentation"]').forEach((card) => {
+        const hasOldIcon = card.querySelector('img[src*="film-camera"]');
+        const hasOldClasses =
+          card.className.includes("top-1/2") || card.className.includes("hero-overlay");
+        if ((hasOldIcon || hasOldClasses) && !card.id?.includes("floter-online-card")) {
+          card.remove();
+        }
+      });
+    };
+
+    // Remove imediatamente
+    removeOldCards();
+
+    // Remove após um delay para garantir
+    const t1 = setTimeout(removeOldCards, 100);
+    const t2 = setTimeout(removeOldCards, 500);
+    const t3 = setTimeout(removeOldCards, 1000);
+
+    // Mostra o novo card
+    const tVisible = setTimeout(() => setVisible(true), 50);
+
+    // Remove cartões duplicados do novo card
+    const id = "floter-online-card";
+    const removeDuplicates = () => {
+      const nodes = document.querySelectorAll(`#${id}`);
+      if (nodes.length > 1) {
+        nodes.forEach((n, i) => {
+          if (i < nodes.length - 1) n.remove();
+        });
       }
-    });
+    };
 
-    return () => clearTimeout(t);
+    const tDuplicates = setTimeout(removeDuplicates, 200);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(tVisible);
+      clearTimeout(tDuplicates);
+    };
   }, []);
 
   return (
