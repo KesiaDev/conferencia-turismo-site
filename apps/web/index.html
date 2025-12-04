@@ -18,6 +18,44 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // REMOVE CARD ANTIGO ANTES DE QUALQUER COISA CARREGAR
+      (function() {
+        function removeOldCard() {
+          // Remove qualquer card antigo com film-camera.svg
+          var oldCards = document.querySelectorAll('img[src="/film-camera.svg"], img[src*="film-camera"], [aria-label*="Decorative film camera"], [aria-label*="film camera"], [class*="top-1/2"][class*="left-4"], [class*="hero-overlay"], [class*="animate-float-center"]');
+          oldCards.forEach(function(el) {
+            if (!el.id || !el.id.includes("floter-online-card")) {
+              var container = el.closest('[role="presentation"]') || el.closest('[class*="absolute"]') || el.parentElement;
+              if (container) container.remove();
+              else el.remove();
+            }
+          });
+          
+          // Remove divs com classes do card antigo
+          var divs = document.querySelectorAll('div[class*="absolute"]');
+          divs.forEach(function(div) {
+            var classes = div.className || '';
+            var hasOld = (classes.includes('top-1/2') && classes.includes('left-4')) || 
+                        classes.includes('hero-overlay') ||
+                        div.querySelector('img[src*="film-camera"]');
+            if (hasOld && (!div.id || !div.id.includes("floter-online-card"))) {
+              div.remove();
+            }
+          });
+        }
+        
+        // Remove imediatamente
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', removeOldCard);
+        } else {
+          removeOldCard();
+        }
+        
+        // Remove continuamente
+        setInterval(removeOldCard, 100);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
