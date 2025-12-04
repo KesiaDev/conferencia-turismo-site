@@ -104,12 +104,40 @@
     }
   }
 
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes floatWithCenter {
+    0%,
+    100% {
+      transform: translate(-50%, 0px);
+    }
+    50% {
+      transform: translate(-50%, -10px);
+    }
+  }
+
   .animate-fadeIn {
     animation: fadeIn 0.3s ease-out;
   }
 
   .animate-slideUp {
     animation: slideUp 0.4s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-float-center {
+    animation: floatWithCenter 3s ease-in-out infinite;
   }
 
   /* Melhorias na qualidade das imagens */

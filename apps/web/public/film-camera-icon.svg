@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 70" fill="none">
+  <!-- Simplified Film Reel (Left) -->
+  <circle cx="15" cy="35" r="10" fill="#8B4513" stroke="#654321" stroke-width="1.5"/>
+  <circle cx="15" cy="35" r="6" fill="#A0522D" opacity="0.6"/>
+  <circle cx="15" cy="35" r="3" fill="#654321"/>
+  <line x1="15" y1="25" x2="15" y2="45" stroke="#654321" stroke-width="1"/>
+  <line x1="5" y1="35" x2="25" y2="35" stroke="#654321" stroke-width="1"/>
+  
+  <!-- Simplified Camera Body -->
+  <rect x="25" y="22" width="50" height="26" rx="2" fill="#A0522D" stroke="#654321" stroke-width="1.5"/>
+  <rect x="27" y="24" width="46" height="22" rx="1" fill="#8B4513" opacity="0.8"/>
+  
+  <!-- Simplified Lens -->
+  <circle cx="60" cy="35" r="9" fill="#654321" stroke="#4A2C1A" stroke-width="1.5"/>
+  <circle cx="60" cy="35" r="6" fill="#2C1810" opacity="0.8"/>
+  <circle cx="60" cy="35" r="4" fill="#1A0E08"/>
+  
+  <!-- Simplified Film Strip -->
+  <rect x="35" y="27" width="30" height="16" fill="none" stroke="#D2B48C" stroke-width="1" stroke-dasharray="2 2" opacity="0.4"/>
+  
+  <!-- Simplified Film Reel (Right) -->
+  <circle cx="85" cy="35" r="10" fill="#8B4513" stroke="#654321" stroke-width="1.5"/>
+  <circle cx="85" cy="35" r="6" fill="#A0522D" opacity="0.6"/>
+  <circle cx="85" cy="35" r="3" fill="#654321"/>
+  <line x1="85" y1="25" x2="85" y2="45" stroke="#654321" stroke-width="1"/>
+  <line x1="75" y1="35" x2="95" y2="35" stroke="#654321" stroke-width="1"/>
+  
+  <!-- Simplified Base -->
+  <rect x="47" y="48" width="6" height="10" fill="#654321" stroke="#4A2C1A" stroke-width="1"/>
+  <rect x="42" y="58" width="16" height="4" rx="1" fill="#8B4513" stroke="#654321" stroke-width="1"/>
+</svg>
+

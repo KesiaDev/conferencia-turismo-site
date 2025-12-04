@@ -5,6 +5,7 @@ import Section from "../components/Section";
 import SpeakerCard from "../components/SpeakerCard";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
+import FloatingFilmBox from "../components/FloatingFilmBox";
 import apiService from "../api/client";
 import type { Speaker } from "../types";
 
@@ -123,7 +124,7 @@ export default function Home() {
     <>
       <Seo />
 
-      <div className="w-full aspect-[16/5]">
+      <div className="w-full aspect-[16/5] relative">
         <OptimizedImage
           src="/hero.png"
           alt="Banner da Conferência"
@@ -131,6 +132,7 @@ export default function Home() {
           loading="eager"
           fetchPriority="high"
         />
+        <FloatingFilmBox variant="elegant" position="hero-overlay" size="medium" animate={true} />
       </div>
 
       <div className="py-8 md:py-12">

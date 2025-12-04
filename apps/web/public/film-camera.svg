@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none">
+  <!-- Film Reel (Left) -->
+  <circle cx="30" cy="70" r="20" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <circle cx="30" cy="70" r="12" fill="#A0522D" opacity="0.6"/>
+  <circle cx="30" cy="70" r="6" fill="#654321"/>
+  <!-- Reel spokes -->
+  <line x1="30" y1="50" x2="30" y2="90" stroke="#654321" stroke-width="1.5"/>
+  <line x1="10" y1="70" x2="50" y2="70" stroke="#654321" stroke-width="1.5"/>
+  <line x1="18.536" y1="51.464" x2="41.464" y2="88.536" stroke="#654321" stroke-width="1.5"/>
+  <line x1="41.464" y1="51.464" x2="18.536" y2="88.536" stroke="#654321" stroke-width="1.5"/>
+  
+  <!-- Camera Body -->
+  <rect x="50" y="45" width="100" height="50" rx="4" fill="#A0522D" stroke="#654321" stroke-width="2"/>
+  <rect x="52" y="47" width="96" height="46" rx="2" fill="#8B4513" opacity="0.8"/>
+  
+  <!-- Camera Lens/Objective -->
+  <circle cx="120" cy="70" r="18" fill="#654321" stroke="#4A2C1A" stroke-width="2"/>
+  <circle cx="120" cy="70" r="14" fill="#2C1810" opacity="0.8"/>
+  <circle cx="120" cy="70" r="10" fill="#1A0E08"/>
+  <circle cx="115" cy="68" r="2" fill="#D2B48C" opacity="0.3"/>
+  
+  <!-- Viewfinder -->
+  <rect x="145" y="50" width="12" height="8" rx="1" fill="#654321" stroke="#4A2C1A" stroke-width="1"/>
+  <rect x="146" y="51" width="10" height="6" fill="#2C1810"/>
+  
+  <!-- Film Strip (through camera) -->
+  <rect x="70" y="55" width="60" height="30" fill="none" stroke="#D2B48C" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.5"/>
+  <rect x="72" y="62" width="8" height="6" fill="#E8D5B7" opacity="0.3"/>
+  <rect x="84" y="62" width="8" height="6" fill="#E8D5B7" opacity="0.3"/>
+  <rect x="96" y="62" width="8" height="6" fill="#E8D5B7" opacity="0.3"/>
+  <rect x="108" y="62" width="8" height="6" fill="#E8D5B7" opacity="0.3"/>
+  <rect x="120" y="62" width="8" height="6" fill="#E8D5B7" opacity="0.3"/>
+  
+  <!-- Film Reel (Right) -->
+  <circle cx="170" cy="70" r="20" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <circle cx="170" cy="70" r="12" fill="#A0522D" opacity="0.6"/>
+  <circle cx="170" cy="70" r="6" fill="#654321"/>
+  <!-- Reel spokes -->
+  <line x1="170" y1="50" x2="170" y2="90" stroke="#654321" stroke-width="1.5"/>
+  <line x1="150" y1="70" x2="190" y2="70" stroke="#654321" stroke-width="1.5"/>
+  <line x1="158.536" y1="51.464" x2="181.464" y2="88.536" stroke="#654321" stroke-width="1.5"/>
+  <line x1="181.464" y1="51.464" x2="158.536" y2="88.536" stroke="#654321" stroke-width="1.5"/>
+  
+  <!-- Camera Base/Stand -->
+  <rect x="95" y="95" width="10" height="20" fill="#654321" stroke="#4A2C1A" stroke-width="1.5"/>
+  <rect x="85" y="115" width="30" height="8" rx="2" fill="#8B4513" stroke="#654321" stroke-width="1.5"/>
+  <circle cx="92" cy="119" r="1.5" fill="#D2B48C" opacity="0.6"/>
+  <circle cx="108" cy="119" r="1.5" fill="#D2B48C" opacity="0.6"/>
+  
+  <!-- Highlight/Reflection on camera body -->
+  <rect x="54" y="49" width="40" height="8" rx="1" fill="#D2B48C" opacity="0.2"/>
+</svg>
+
