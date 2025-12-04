@@ -126,7 +126,7 @@ export default function Home() {
 
       <div className="w-full aspect-[16/5] relative">
         <OptimizedImage
-          src="/hero.png"
+          src="/hero.png?v=20251204"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
           loading="eager"
