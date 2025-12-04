@@ -5,7 +5,7 @@ import Section from "../components/Section";
 import SpeakerCard from "../components/SpeakerCard";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
-import FloatingFilmBox from "../components/FloatingFilmBox";
+import FloatingFilmBox from "@/components/FloatingFilmBox";
 import apiService from "../api/client";
 import type { Speaker } from "../types";
 
