@@ -1,121 +1,99 @@
-import { ReactNode } from "react";
-
-export type FloatingFilmBoxVariant = "default" | "minimal" | "elegant" | "bold";
-export type FloatingFilmBoxPosition =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right"
-  | "center"
-  | "hero-overlay"; // Special position for hero banner overlay
-
-interface FloatingFilmBoxProps {
-  variant?: FloatingFilmBoxVariant;
-  position?: FloatingFilmBoxPosition;
-  size?: "small" | "medium" | "large";
-  showIcon?: boolean;
-  children?: ReactNode;
-  className?: string;
-  animate?: boolean;
-  useAbsolute?: boolean; // Para posicionar dentro de container relativo
-}
-
-export default function FloatingFilmBox({
-  variant = "default",
-  position = "top-right",
-  size = "medium",
-  showIcon = true,
-  children,
-  className = "",
-  animate = true,
-  useAbsolute = false,
-}: FloatingFilmBoxProps) {
-  // Position classes
-  const positionClasses = {
-    "top-left": "top-4 md:top-8 left-4 md:left-8",
-    "top-right": "top-4 md:top-8 right-4 md:right-8",
-    "bottom-left": "bottom-4 md:bottom-8 left-4 md:left-8",
-    "bottom-right": "bottom-4 md:bottom-8 right-4 md:right-8",
-    center: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-    "hero-overlay": "top-1/2 left-4 md:left-8 -translate-y-1/2",
-  };
-
-  // Size classes
-  const sizeClasses = {
-    small: "w-20 h-20 md:w-24 md:h-24",
-    medium: "w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40",
-    large: "w-36 h-36 md:w-48 md:h-48 lg:w-52 lg:h-52",
-  };
-
-  const iconSizeClasses = {
-    small: "w-10 h-10 md:w-12 md:h-12",
-    medium: "w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24",
-    large: "w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36",
-  };
-
-  // Variant styles
-  const variantStyles = {
-    default: {
-      container: "bg-[rgba(139,69,19,0.85)] backdrop-blur-md border-2 border-[#A0522D]",
-      shadow: "shadow-2xl shadow-[rgba(139,69,19,0.4)]",
-    },
-    minimal: {
-      container: "bg-[rgba(210,180,140,0.75)] backdrop-blur-sm border border-[#D2B48C]",
-      shadow: "shadow-lg shadow-[rgba(139,69,19,0.2)]",
-    },
-    elegant: {
-      container:
-        "bg-gradient-to-br from-[rgba(160,82,45,0.9)] to-[rgba(139,69,19,0.9)] backdrop-blur-md border border-[#C19A6B]",
-      shadow: "shadow-xl shadow-[rgba(101,67,33,0.5)]",
-    },
-    bold: {
-      container: "bg-[rgba(101,67,33,0.95)] backdrop-blur-lg border-2 border-[#8B4513]",
-      shadow: "shadow-2xl shadow-black/50",
-    },
-  };
-
-  const currentVariant = variantStyles[variant];
-
-  const isCentered = position === "center" || position === "hero-overlay";
-  const animationClasses = animate ? (isCentered ? "animate-float-center" : "animate-float") : "";
-  const transformClasses = isCentered
-    ? position === "center"
-      ? "-translate-x-1/2 -translate-y-1/2"
-      : "-translate-y-1/2"
-    : "";
-
-  const positionType = useAbsolute ? "absolute" : "fixed";
-
+export default function FloatingFilmBox() {
   return (
     <div
-      className={`
-        ${positionType} ${positionClasses[position]}
-        ${transformClasses}
-        ${sizeClasses[size]}
-        ${currentVariant.container}
-        ${currentVariant.shadow}
-        rounded-2xl md:rounded-3xl
-        flex items-center justify-center
-        z-[100]
-        transition-all duration-300
-        ${animationClasses}
-        hover:scale-110 hover:rotate-3
-        ${className}
-      `}
+      className="absolute top-6 left-6 md:top-8 md:left-8 z-[100] animate-fadeInSlide"
       role="presentation"
-      aria-label="Decorative film camera icon"
+      aria-label="Card informativo sobre participação online"
     >
-      {showIcon && (
-        <img
-          src="/film-camera.svg"
-          alt="Vintage film camera"
-          className={`${iconSizeClasses[size]} object-contain drop-shadow-lg`}
-          loading="eager"
-        />
-      )}
-      {children && (
-        <div className="absolute inset-0 flex items-center justify-center p-2">{children}</div>
-      )}
+      <div
+        className="
+          relative
+          bg-gradient-to-br from-black via-[#1a0d05] to-[#2d1a0a]
+          rounded-[24px]
+          px-5 py-4
+          md:px-6 md:py-5
+          shadow-[0_8px_32px_rgba(0,0,0,0.6)]
+          border border-[rgba(232,163,123,0.2)]
+          backdrop-blur-sm
+          w-[240px]
+          md:w-[280px]
+          transition-all duration-300
+          hover:shadow-[0_12px_40px_rgba(232,163,123,0.25)]
+        "
+      >
+        {/* Sparkle decorative elements - top right (faíscas) */}
+        <div className="absolute top-3 right-3 flex flex-col gap-1.5 opacity-75">
+          <svg width="11" height="11" viewBox="0 0 11 11" fill="none" className="text-[#e8a37b]">
+            <path
+              d="M5.5 0L6.3 4.1L10.4 4.9L6.3 5.6L5.5 9.7L4.7 5.6L0.6 4.9L4.7 4.1L5.5 0Z"
+              fill="currentColor"
+            />
+          </svg>
+          <svg width="8" height="8" viewBox="0 0 8 8" fill="none" className="text-[#e8a37b] ml-1.5">
+            <path
+              d="M4 0L4.5 2.8L7.3 3.3L4.5 3.7L4 6.5L3.5 3.7L0.7 3.3L3.5 2.8L4 0Z"
+              fill="currentColor"
+              opacity="0.8"
+            />
+          </svg>
+        </div>
+
+        {/* Content container */}
+        <div className="relative pr-8">
+          {/* Camera icon and "online" text row */}
+          <div className="flex items-start gap-3 mb-3">
+            {/* Camera icon */}
+            <div className="flex-shrink-0 mt-0.5">
+              <img
+                src="/film-camera-icon.svg"
+                alt="Câmera de cinema"
+                className="w-7 h-7 md:w-8 md:h-8 opacity-90"
+                loading="eager"
+              />
+            </div>
+
+            {/* "online" text with curved underline */}
+            <div className="flex-1 min-w-0">
+              <div className="relative inline-block">
+                <span className="text-white text-[28px] md:text-[34px] font-bold tracking-tight leading-none block">
+                  online
+                </span>
+                {/* Curved underline SVG - linha curva */}
+                <svg
+                  className="absolute -bottom-1 left-0 w-[100px] md:w-[115px] h-3.5"
+                  viewBox="0 0 115 14"
+                  preserveAspectRatio="none"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M 2 10 Q 28 4, 54 6 T 110 8"
+                    stroke="#e8a37b"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Description text */}
+          <p className="text-white text-[11px] md:text-xs leading-relaxed font-normal">
+            nova modalidade de participação para pesquisadores estrangeiros
+          </p>
+        </div>
+
+        {/* Additional small sparkle decoration - bottom right */}
+        <div className="absolute bottom-3 right-3 opacity-60">
+          <svg width="6" height="6" viewBox="0 0 6 6" fill="none" className="text-[#e8a37b]">
+            <path
+              d="M3 0L3.3 1.8L5.1 2.1L3.3 2.3L3 4.1L2.7 2.3L0.9 2.1L2.7 1.8L3 0Z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   );
 }
