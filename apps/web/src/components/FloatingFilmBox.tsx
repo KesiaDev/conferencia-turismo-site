@@ -128,7 +128,7 @@ export default function FloatingFilmBox() {
       role="presentation"
       aria-label="online-card"
       style={{ zIndex: 1000 }}
-      className={`fixed top-32 md:top-40 left-6 w-36 h-36 md:w-44 md:h-44 rounded-[20px] shadow-xl backdrop-blur-md overflow-hidden bg-gradient-to-br from-black/80 to-[rgba(160,82,45,0.9)] p-4 flex flex-col justify-center items-start gap-1 transform-gpu transition-all duration-400 ${visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-2 scale-95"}`}
+      className={`fixed top-48 md:top-56 left-6 w-36 h-36 md:w-44 md:h-44 rounded-[20px] shadow-xl backdrop-blur-md overflow-hidden bg-gradient-to-br from-black/80 to-[rgba(160,82,45,0.9)] p-4 flex flex-col justify-center items-start gap-1 transform-gpu transition-all duration-400 ${visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-2 scale-95"}`}
     >
       <div className="flex flex-col gap-2">
         <span className="text-white text-[28px] md:text-[32px] font-bold animate-pulse-online">
