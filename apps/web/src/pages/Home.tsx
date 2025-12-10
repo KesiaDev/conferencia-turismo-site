@@ -136,8 +136,10 @@ export default function Home() {
         <FloatingFilmBox />
       </div>
 
-      <div className="container-custom px-4 pt-8">
-        <ImportantNotice />
+      <div className="w-full">
+        <div className="container-custom px-4 pt-8 pb-4">
+          <ImportantNotice />
+        </div>
       </div>
 
       <div className="py-8 md:py-12">

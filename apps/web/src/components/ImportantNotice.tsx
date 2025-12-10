@@ -1,17 +1,22 @@
 export default function ImportantNotice() {
   return (
     <div
-      className="mb-5"
+      className="mb-5 w-full"
       style={{
         background: "#FFF3CD",
         border: "1px solid #FFDD99",
         padding: "16px",
         borderRadius: "6px",
         color: "#5A3E00",
+        display: "block",
+        visibility: "visible",
+        opacity: 1,
       }}
     >
-      <h3 className="font-bold mb-3 text-lg">AVISO IMPORTANTE</h3>
-      <div className="leading-relaxed">
+      <h3 className="font-bold mb-3 text-lg" style={{ color: "#5A3E00" }}>
+        AVISO IMPORTANTE
+      </h3>
+      <div className="leading-relaxed" style={{ color: "#5A3E00" }}>
         <p className="mb-2">
           <strong>Atenção</strong>
         </p>
