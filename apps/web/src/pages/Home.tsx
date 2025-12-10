@@ -6,6 +6,7 @@ import SpeakerCard from "../components/SpeakerCard";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
 import FloatingFilmBox from "@/components/FloatingFilmBox";
+import ImportantNotice from "../components/ImportantNotice";
 import apiService from "../api/client";
 import type { Speaker } from "../types";
 
@@ -133,6 +134,10 @@ export default function Home() {
           fetchPriority="high"
         />
         <FloatingFilmBox />
+      </div>
+
+      <div className="container-custom px-4 pt-8">
+        <ImportantNotice />
       </div>
 
       <div className="py-8 md:py-12">
