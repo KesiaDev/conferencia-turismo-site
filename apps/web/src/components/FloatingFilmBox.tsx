@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Build timestamp: 2025-01-15 - Force rebuild for card position update
 export default function FloatingFilmBox() {
   const [visible, setVisible] = useState(false);
 
