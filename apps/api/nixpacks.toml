@@ -3,12 +3,15 @@ nixPkgs = ["chromium"]
 
 [phases.install]
 cmds = [
-  "pnpm install --filter @conferencia/api --force || pnpm install --force"
+  "rm -rf node_modules .vite dist apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist .pnpm-store 2>/dev/null || true",
+  "pnpm store prune",
+  "pnpm install --force --no-frozen-lockfile"
 ]
 
 [phases.build]
 cmds = [
-  "cd apps/api && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true pnpm build"
+  "cd apps/web && rm -rf dist .vite && pnpm build",
+  "cd ../api && rm -rf dist && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true pnpm build"
 ]
 
 [start]

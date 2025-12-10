@@ -1,12 +1,14 @@
 [build]
 builder = "nixpacks"
-buildCommand = "pnpm install --filter @conferencia/api --force && cd apps/api && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true pnpm build"
+buildCommand = "rm -rf node_modules .vite dist apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist .pnpm-store 2>/dev/null || true && pnpm store prune && pnpm install --force --no-frozen-lockfile && cd apps/web && rm -rf dist .vite && pnpm build && cd ../api && rm -rf dist && PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true pnpm build && cd ../.."
 
 [deploy]
 startCommand = "cd apps/api && node dist/index.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
-# API-only configuration - Railway
-# This service only builds the API
-# Chromium is provided by nixpacks (nixpacks.toml)
+# Full Stack Configuration - Railway
+# Frontend + API serving from same domain
+# Frontend: turismocinematografico.com.br
+# API: turismocinematografico.com.br/api/*
+# This service builds BOTH frontend and API, then serves frontend via Express
