@@ -326,6 +326,11 @@ export default function Call() {
                   </div>
                 </div>
 
+                <p className="mt-6 text-base text-gray-700">
+                  Cada participante poderá constar como autor em até duas submissões,
+                  independentemente da ordem de autoria.
+                </p>
+
                 <p className="mt-6 text-base">
                   Após preencher o formulário e enviar, você receberá automaticamente uma cópia
                   contendo todas as informações que foram submetidas.
