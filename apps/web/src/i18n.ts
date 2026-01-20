@@ -5,11 +5,10 @@ import commonPT from "./locales/pt/common.json";
 import commonEN from "./locales/en/common.json";
 import commonES from "./locales/es/common.json";
 
-// Detectar idioma do navegador ou usar localStorage
+// Usar idioma salvo ou português como padrão
 const savedLanguage = localStorage.getItem("language");
-const browserLanguage = navigator.language.split("-")[0]; // 'pt-BR' -> 'pt'
-const supportedLanguages = ["pt", "en", "es"];
-const defaultLanguage = supportedLanguages.includes(browserLanguage) ? browserLanguage : "pt";
+// Sempre usar português como padrão, independente do idioma do navegador
+const defaultLanguage = "pt";
 
 i18n.use(initReactI18next).init({
   resources: {
