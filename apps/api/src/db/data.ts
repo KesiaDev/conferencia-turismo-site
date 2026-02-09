@@ -1,6 +1,7 @@
 import type { Speaker } from "../schemas/speaker.js";
 import type { ProgramDay } from "../schemas/session.js";
 import type { FeeCategory } from "../schemas/fee.js";
+import type { Submission } from "../schemas/submission.js";
 
 export const meta = {
   title:
@@ -107,6 +108,18 @@ export const speakers: Speaker[] = [
     photo: "/speakers/DudaRocha.gif",
     photoModal: "/speakers/Duda-modal.gif",
     bio: "Duda Rocha é Bacharel, Mestra e Doutoranda em Turismo e Hospitalidade pela Universidade de Caxias do Sul (UCS), com formação em Comunicação Social – Publicidade e Propaganda. Possui especialização em Cultural Heritage Enhancement pela Università La Sapienza di Roma e realizou intercâmbio de pesquisa na Universidade de Coimbra (Portugal), com foco em turismo, território e patrimônio. Com mais de duas décadas de experiência nos campos da comunicação, cultura e turismo, consolidou trajetória em produção audiovisual, direção e curadoria de curtas-metragens e documentários, explorando narrativas que articulam memória, identidade e desenvolvimento regional. É pesquisadora dos grupos HOSPITUR – Turismo e Hospitalidade: Desenvolvimento Humano e Social, Linguagem e Processos Educacionais – e do Núcleo de Estudos Migratórios (CNPq/UCS), onde desenvolve estudos interdisciplinares sobre memória, etnicidade, hospitalidade e cultura, contribuindo para o debate contemporâneo sobre economia criativa e políticas culturais como dimensões estratégicas do desenvolvimento sustentável dos territórios.",
+  },
+  {
+    id: "zeca-brito",
+    name: "Zeca Brito",
+    affiliation: "Noronha2B - Film Commission",
+    tags: [
+      "Painel Especial",
+      "Turismo Cinematográfico e dos Conteúdos: conversando de economia do turismo",
+    ],
+    photo: "/speakers/Zeca-Brito.gif",
+    photoModal: "/speakers/Zeca-Brito-modal.gif",
+    bio: 'Zeca Brito é cineasta. Mestre em Artes Visuais pela UFRGS, graduado em Realização Audiovisual pela Unisinos e Poéticas Visuais pela UFRGS. Dirigiu curtas e longas-metragens exibidos no Brasil e no exterior, como a ficção "Legalidade", e os documentários "Trinta Povos", "Hamlet" e "Arte da Diplomacia". Foi diretor do IECINE - Instituto Estadual de Cinema do Rio Grande do Sul (2019/2022). Programador do Festival Internacional de Cinema da Fronteira (BR/UY) e do Noronha2B Film Commission Forum (Fernando de Noronha). Atual Secretário Municipal de Cultura de Bagé, RS, Brasil (2025, 2026).',
   },
 ];
 
@@ -440,4 +453,23 @@ export const committees = {
 };
 
 // In-memory storage for submissions
-export const submissions: unknown[] = [];
+export type SubmissionWithId = Submission & {
+  id: string;
+  createdAt: string;
+  emailStatus?: {
+    organization: {
+      sent: boolean;
+      sentAt?: string;
+      error?: string;
+      service?: "resend" | "gmail";
+    };
+    user: {
+      sent: boolean;
+      sentAt?: string;
+      error?: string;
+      service?: "resend" | "gmail";
+    };
+  };
+};
+
+export const submissions: SubmissionWithId[] = [];
