@@ -339,7 +339,7 @@ export const fees: FeeCategory[] = [
     ],
   },
   {
-    category: "Ouvintes",
+    category: "Comunidade Geral / Ouvintes",
     windows: [
       {
         label: "até 31/01/2026",
