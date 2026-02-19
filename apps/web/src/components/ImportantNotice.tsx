@@ -19,7 +19,7 @@ export default function ImportantNotice() {
       </p>
       <Link
         to="/fees"
-        className="inline-block bg-[#e0a085] hover:bg-[#c88567] text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-md"
+        className="inline-block bg-[#c8632d] hover:bg-[#b55525] text-white font-bold py-2.5 px-6 rounded-lg transition-colors shadow-md"
       >
         Pagar inscrição
       </Link>
