@@ -32,7 +32,7 @@ export default function Program() {
                 title: "Abertura Oficial",
                 description:
                   "Representantes: Ministério do Turismo, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
-                location: "UCS Teatro",
+                location: "Auditório do Bloco H",
                 kind: "plenary",
               },
               {
@@ -41,7 +41,7 @@ export default function Program() {
                 description:
                   "Turismo Literário e Cinematográfico como vetor de desenvolvimento territorial, inovação e internacionalização do Brasil",
                 speaker: "Representante da Embratur ou Ancine (a definir)",
-                location: "UCS Teatro",
+                location: "Auditório do Bloco H",
                 kind: "keynote",
               },
               {
@@ -76,7 +76,7 @@ export default function Program() {
                 description:
                   "Entre palavras: o impacto regional do turismo literário e cinematográfico no território",
                 speaker: "Profa. Diomira Maria Cicci Pinto Faria (UFMG)",
-                location: "UCS Teatro",
+                location: "Auditório do Bloco H",
                 kind: "keynote",
               },
               {
@@ -145,7 +145,7 @@ export default function Program() {
               {
                 time: "17h15 – 18h00",
                 title: "Encerramento das atividades acadêmicas + Networking",
-                location: "UCS Teatro",
+                location: "Auditório do Bloco H",
                 kind: "networking",
               },
             ],
