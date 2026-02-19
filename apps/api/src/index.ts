@@ -25,6 +25,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Trust proxy (Railway/reverse proxy) - required for express-rate-limit and X-Forwarded-For
+app.set("trust proxy", 1);
+
 // Force HTTPS in production (Railway edge terminates SSL)
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
@@ -205,6 +208,7 @@ app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`🔧 API Routes configured:`);
   console.log(`   - GET /health`);
   console.log(`   - GET /test`);
+  console.log(`   - GET /api/submissions`);
   console.log(`   - POST /api/submissions`);
   console.log(`   - POST /api/panels`);
   console.log(`   - POST /api/contact`);
