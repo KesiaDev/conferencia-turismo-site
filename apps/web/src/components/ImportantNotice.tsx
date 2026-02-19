@@ -14,21 +14,12 @@ export default function ImportantNotice() {
       }}
     >
       <h3 className="font-bold mb-3 text-lg" style={{ color: "#5A3E00" }}>
-        AVISO IMPORTANTE
+        ATENÇÃO
       </h3>
-      <div className="leading-relaxed" style={{ color: "#5A3E00" }}>
-        <p className="mb-2">
-          <strong>Atenção</strong>
-        </p>
-        <p className="mb-2">
-          Devido à instabilidade enfrentada em nosso sistema, algumas submissões não foram
-          recebidas.
-        </p>
-        <p>
-          Se você submeteu um trabalho e não recebeu o e-mail de confirmação, por favor, entre em
-          contato conosco pelo e-mail oficial do evento.
-        </p>
-      </div>
+      <p className="leading-relaxed" style={{ color: "#5A3E00" }}>
+        O evento está se aproximando. Faça sua inscrição e lembre-se de realizar o pagamento para
+        garantir sua participação.
+      </p>
     </div>
   );
 }
