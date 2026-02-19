@@ -202,8 +202,7 @@ export default function Home() {
       <Section title={t("home.importantDates")}>
         <div className="max-w-2xl mx-auto space-y-4">
           <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
-            <span className="font-semibold">{t("home.submissionDeadline")}</span>
-            <span className="text-accent font-bold">15/01/2026</span>
+            <span className="font-semibold text-accent">{t("home.submissionDeadline")}</span>
           </div>
           <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
             <span className="font-semibold">{t("home.earlyBird")}</span>
