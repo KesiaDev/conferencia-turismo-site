@@ -20,17 +20,17 @@ export default function RegistrationBanner() {
 
   return (
     <div
-      className="relative z-30 flex items-center justify-between gap-4 px-4 py-2.5 text-white"
+      className="relative z-30 flex items-center justify-center sm:justify-between gap-3 px-3 py-2.5 sm:px-4 text-white"
       style={{ backgroundColor: "#c8632d" }}
     >
-      <div className="container-custom flex flex-1 flex-wrap items-center justify-center gap-2 sm:justify-between sm:gap-4">
-        <p className="text-center text-sm font-medium sm:text-left">
+      <div className="container-custom flex flex-1 flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4">
+        <p className="text-center text-xs sm:text-sm font-medium order-2 sm:order-1">
           Garanta sua vaga — inscrições até 23 de março
         </p>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 order-1 sm:order-2 flex-shrink-0">
           <Link
             to="/fees"
-            className="rounded-lg bg-white px-4 py-2 text-sm font-bold text-[#c8632d] transition hover:bg-gray-100"
+            className="rounded-lg bg-white px-3 py-2 sm:px-4 text-xs sm:text-sm font-bold text-[#c8632d] transition hover:bg-gray-100 whitespace-nowrap"
           >
             Pagar inscrição
           </Link>

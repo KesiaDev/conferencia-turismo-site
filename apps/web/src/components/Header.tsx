@@ -172,16 +172,16 @@ export default function Header() {
         {isMenuOpen && (
           <div
             id="mobile-menu"
-            className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800"
+            className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800 max-h-[calc(100vh-90px)] overflow-y-auto"
             role="navigation"
             aria-label="Menu de navegação mobile"
           >
-            <div className="px-4 py-6 space-y-3">
+            <div className="px-4 py-5 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.href}
                   to={item.href}
-                  className="flex items-center gap-2 py-3 text-lg text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800 last:border-b-0"
+                  className="flex items-center gap-2 py-3 px-2 text-base text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800 last:border-b-0"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -193,24 +193,27 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* Mobile Countdown */}
+              {/* Mobile Countdown - não sobrepõe FAB (FAB oculto em mobile) */}
               <div
-                className="pt-4 mt-4 border-t border-gray-700"
+                className="pt-4 mt-4 pb-6 border-t border-gray-700"
                 role="timer"
                 aria-label="Contagem regressiva para a conferência"
               >
-                <div className="flex justify-center gap-3">
+                <div className="flex justify-center gap-2 sm:gap-3 flex-wrap">
                   {[
                     { value: timeLeft.days, label: "DIAS" },
                     { value: timeLeft.hours, label: "HRS" },
                     { value: timeLeft.minutes, label: "MIN" },
                     { value: timeLeft.seconds, label: "SEG" },
                   ].map((item, i) => (
-                    <div key={i} className="flex flex-col items-center w-[55px]">
-                      <div className="bg-[#e0a085] text-white text-lg font-bold rounded-lg py-2 w-full text-center shadow-lg">
+                    <div
+                      key={i}
+                      className="flex flex-col items-center min-w-[52px] flex-1 max-w-[70px]"
+                    >
+                      <div className="bg-[#e0a085] text-white text-base sm:text-lg font-bold rounded-lg py-2 w-full text-center shadow-lg">
                         {String(item.value).padStart(2, "0")}
                       </div>
-                      <div className="text-[11px] text-[#e0a085] font-semibold mt-1">
+                      <div className="text-[10px] sm:text-[11px] text-[#e0a085] font-semibold mt-1">
                         {item.label}
                       </div>
                     </div>
