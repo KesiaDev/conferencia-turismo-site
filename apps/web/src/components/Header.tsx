@@ -89,9 +89,14 @@ export default function Header() {
             <Link
               key={item.href}
               to={item.href}
-              className="text-lg xl:text-xl font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
+              className="flex items-center gap-2 text-lg xl:text-xl font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
             >
               {item.name}
+              {item.href === "/program" && (
+                <span className="badge-novo text-[10px] xl:text-xs font-bold text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
+                  Novo
+                </span>
+              )}
             </Link>
           ))}
         </div>
@@ -176,10 +181,15 @@ export default function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className="block py-3 text-lg text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800 last:border-b-0"
+                  className="flex items-center gap-2 py-3 text-lg text-gray-300 font-medium hover:text-[#e0a085] transition-colors border-b border-gray-800 last:border-b-0"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
+                  {item.href === "/program" && (
+                    <span className="badge-novo text-xs font-bold text-white px-2.5 py-1 rounded-full uppercase tracking-wide">
+                      Novo
+                    </span>
+                  )}
                 </Link>
               ))}
 

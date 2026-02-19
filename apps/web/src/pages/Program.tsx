@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import ProgramTable from "../components/ProgramTable";
+import ProgramacaoProvisoria from "../components/ProgramacaoProvisoria";
 import Seo from "../components/Seo";
 import apiService from "../api/client";
 import type { ProgramDay } from "../types";
@@ -193,6 +194,10 @@ export default function Program() {
         </div>
 
         {program.length > 0 && <ProgramTable program={program} />}
+
+        <div className="max-w-6xl mx-auto mt-16">
+          <ProgramacaoProvisoria />
+        </div>
       </Section>
     </>
   );
