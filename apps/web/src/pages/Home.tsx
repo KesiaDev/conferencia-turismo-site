@@ -17,18 +17,10 @@ export default function Home() {
   useEffect(() => {
     apiService
       .getSpeakers()
-      .then((data) => setSpeakers(data.slice(0, 9)))
+      .then((data) => setSpeakers(data.slice(0, 12)))
       .catch(() => {
         // Fallback com dados estáticos se a API falhar
         const staticSpeakers: Speaker[] = [
-          {
-            id: "keynote-tbd",
-            name: "Palestrante a definir (Embratur/Ancine)",
-            affiliation: "Brasil",
-            tags: ["Keynote", "Políticas públicas"],
-            photo: "/speakers/Embratur-Aguarde.gif",
-            bio: "Representante de órgão público brasileiro relacionado ao turismo e/ou cinema.",
-          },
           {
             id: "diomira",
             name: "Diomira Maria Cicci Pinto Faria",

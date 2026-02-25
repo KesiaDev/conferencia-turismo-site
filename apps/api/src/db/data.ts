@@ -15,14 +15,6 @@ export const meta = {
 
 export const speakers: Speaker[] = [
   {
-    id: "keynote-tbd",
-    name: "Palestrante a definir (Embratur/Ancine)",
-    affiliation: "Brasil",
-    tags: ["Keynote", "Políticas públicas"],
-    photo: "/speakers/Embratur-Aguarde.gif",
-    bio: "Representante de órgão público brasileiro relacionado ao turismo e/ou cinema.",
-  },
-  {
     id: "diomira",
     name: "Diomira Maria Cicci Pinto Faria",
     affiliation: "UFMG",

@@ -13,16 +13,13 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
   return (
     <>
       <div
-        className={`relative overflow-hidden transition-all duration-300 group ${
-          speaker.id === "keynote-tbd"
-            ? "cursor-default"
-            : "cursor-pointer hover:shadow-2xl hover:scale-105 active:scale-95"
-        }`}
-        onClick={() => speaker.id !== "keynote-tbd" && setIsModalOpen(true)}
+        className="relative overflow-hidden transition-all duration-300 group cursor-pointer hover:shadow-2xl hover:scale-105 active:scale-95"
+        onClick={() => setIsModalOpen(true)}
         role="button"
         tabIndex={0}
-        onKeyPress={(e) => {
-          if ((e.key === "Enter" || e.key === " ") && speaker.id !== "keynote-tbd") {
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
             setIsModalOpen(true);
           }
         }}
