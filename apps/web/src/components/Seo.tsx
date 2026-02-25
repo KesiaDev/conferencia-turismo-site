@@ -55,7 +55,7 @@ export default function Seo({
       {image && <meta name="twitter:image" content={image} />}
 
       {/* Preload hero banner for better LCP */}
-      <link rel="preload" as="image" href="/hero-novo.png" fetchPriority="high" />
+      <link rel="preload" as="image" href="/hero-novo.gif" fetchPriority="high" />
 
       {/* JSON-LD Event Schema */}
       <script type="application/ld+json">

@@ -227,7 +227,7 @@ export default function Call() {
 
       <div className="w-full aspect-[16/5]">
         <img
-          src="/hero-novo.png"
+          src="/hero-novo.gif"
           alt="Banner da Conferência"
           className="w-full h-full object-cover block"
         />
