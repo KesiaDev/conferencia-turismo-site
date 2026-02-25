@@ -94,7 +94,7 @@ export default function OptimizedImage({
         loading={loading}
         decoding="async"
         fetchPriority={fetchPriority}
-        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+        className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${
           isLoading ? "opacity-0" : "opacity-100"
         } ${className}`}
         onLoad={(e) => {
