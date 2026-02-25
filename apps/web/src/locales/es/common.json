@@ -10,6 +10,7 @@
     "hackathon": "Maratón de Innovación",
     "access": "Accesibilidad",
     "venue": "Lugar",
+    "villaDeiTroni": "Villa Dei Troni",
     "news": "Noticias",
     "contact": "Contacto"
   },
@@ -166,7 +167,30 @@
     "accommodationTitle": "Alojamiento",
     "accommodationText": "Caxias do Sul ofrece diversas opciones de alojamiento para todos los perfiles. La lista de hoteles asociados estará disponible próximamente.",
     "transportTitle": "Cómo Llegar",
-    "transportText": "La ciudad tiene aeropuerto propio y está a 120km de Porto Alegre. Transporte público y taxis están disponibles."
+    "transportOption1Title": "1. Directo a la ciudad del evento – Caxias do Sul RS",
+    "transportOption1Text": "El Aeropuerto Regional Hugo Cantergiani (CXJ) es la forma más práctica de llegar directamente a Caxias do Sul. Ubicado a pocos minutos del centro de la ciudad y de la Universidad de Caxias do Sul (UCS), recibe vuelos diarios desde São Paulo, por los aeropuertos de Congonhas y Guarulhos, operados por compañías como Gol, Latam y Azul. Esta es la opción más rápida y conveniente para quienes buscan comodidad y desean llegar directamente al destino de la conferencia.",
+    "transportOption2Title": "2. Vía Porto Alegre (POA)",
+    "transportOption2Text": "El Aeropuerto Internacional Salgado Filho (POA), ubicado en Porto Alegre, capital de Rio Grande do Sul, es una de las principales puertas de entrada para quienes vienen a Caxias do Sul. Situado a aproximadamente 125 km de la ciudad, el aeropuerto ofrece conexiones nacionales e internacionales, siendo una alternativa muy utilizada por los participantes de la conferencia. Desde allí, es posible continuar hasta Caxias do Sul, la segunda ciudad más grande del estado, en autobús intermunicipal, traslados, vans o alquiler de vehículos, en un trayecto que combina practicidad y bellos paisajes de la sierra gaúcha.",
+    "hotelTitle": "Hotel Oficial",
+    "hotelIntro": "¡Facilite su estadía durante el evento! (cerca de la UCS)",
+    "hotelText": "Para hacer su experiencia aún más agradable, recomendamos el Hotel Blue Tree Towers, que ofrece excelente infraestructura y diversas categorías de servicios para satisfacer sus necesidades. Como Hotel Oficial de nuestro evento, Blue Tree Towers proporciona confort, practicidad y calidad, garantizando una estadía tranquila y agradable.",
+    "hotelCta": "Contacte directamente con el hotel y reserve su alojamiento. No pierda la oportunidad de hospedarse en una ubicación estratégica, ideal para quienes participan en nuestro evento.",
+    "hotelWhatsapp": "Ver información en WhatsApp"
+  },
+  "villaDeiTroni": {
+    "title": "Villa Dei Troni",
+    "description": "El cierre de la Conferencia será un recorrido por el Mayor Parque Temático de la Inmigración Italiana en Brasil. Adquiera su entrada.",
+    "didYouKnow": "¿Sabías?",
+    "closingTour": "¡El cierre de la Conferencia, el día 28, será un recorrido por el Mayor Parque Temático de la Inmigración Italiana en Brasil!",
+    "parkDescription": "Un pedacito de Italia en el sur de Brasil. Al cruzar sus puertas, el tiempo se desacelera. Ubicada en Caxias do Sul, en el encantador barrio histórico de Ana Rech, la Villa dei Troni es el primer parque temático de la inmigración italiana en Brasil. En medio de 25 hectáreas de naturaleza y memoria preservada, el visitante encuentra una verdadera colonia imperial del siglo XIX, con 40 construcciones originales y réplicas fieles.",
+    "parkDescription2": "Más que un rescate histórico, la Villa dei Troni es un lugar de pertenencia. Aquí, la historia no solo se cuenta, se vive. Cultura, ocio, gastronomía, historia y contacto con la naturaleza se unen para crear una experiencia única — de aquellas que quedan en la memoria y en el corazón.",
+    "limitedSpots": "Vagas limitadas",
+    "ctaText": "Adquiera su entrada y vivamos juntos esta experiencia",
+    "buyTickets": "Comprar entrada",
+    "hours": "Horarios",
+    "hoursText": "De viernes a domingo, de 10h a 18h",
+    "address": "Dirección",
+    "openInMaps": "Abrir en Maps"
   },
   "news": {
     "title": "Noticias",

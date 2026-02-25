@@ -10,6 +10,7 @@
     "hackathon": "Innovation Marathon",
     "access": "Accessibility",
     "venue": "Venue",
+    "villaDeiTroni": "Villa Dei Troni",
     "news": "News",
     "contact": "Contact"
   },
@@ -166,7 +167,30 @@
     "accommodationTitle": "Accommodation",
     "accommodationText": "Caxias do Sul offers several accommodation options for all profiles. A list of partner hotels will be available soon.",
     "transportTitle": "How to Get There",
-    "transportText": "The city has its own airport and is 120km from Porto Alegre. Public transport and taxis are available."
+    "transportOption1Title": "1. Direct to the event city – Caxias do Sul RS",
+    "transportOption1Text": "The Hugo Cantergiani Regional Airport (CXJ) is the most practical way to get directly to Caxias do Sul. Located a few minutes from the city center and the University of Caxias do Sul (UCS), it receives daily flights from São Paulo (Congonhas and Guarulhos airports), operated by airlines such as Gol, Latam and Azul. This is the fastest and most convenient option for those seeking comfort and wishing to arrive directly at the conference destination.",
+    "transportOption2Title": "2. Via Porto Alegre (POA)",
+    "transportOption2Text": "Salgado Filho International Airport (POA), located in Porto Alegre, capital of Rio Grande do Sul, is one of the main gateways for those traveling to Caxias do Sul. Located approximately 125 km from the city, the airport offers national and international connections, being a widely used alternative for conference participants. From there, you can continue to Caxias do Sul, the state's second largest city, by intercity bus, transfers, vans or car rental, on a route that combines practicality and beautiful landscapes of the Serra Gaúcha.",
+    "hotelTitle": "Official Hotel",
+    "hotelIntro": "Make your stay easier during the event! (near UCS)",
+    "hotelText": "To make your experience even more pleasant, we recommend the Blue Tree Towers Hotel, which offers excellent infrastructure and various service categories to meet your needs. As the Official Hotel of our event, Blue Tree Towers provides comfort, convenience and quality, ensuring a pleasant stay.",
+    "hotelCta": "Contact the hotel directly and make your reservation to secure your accommodation. Don't miss the opportunity to stay in a strategic location, ideal for those attending our event.",
+    "hotelWhatsapp": "View information on WhatsApp"
+  },
+  "villaDeiTroni": {
+    "title": "Villa Dei Troni",
+    "description": "The Conference closing will be a tour of the Largest Italian Immigration Theme Park in Brazil. Purchase your ticket.",
+    "didYouKnow": "Did you know?",
+    "closingTour": "The Conference closing, on the 28th, will be a tour of the Largest Italian Immigration Theme Park in Brazil!",
+    "parkDescription": "A little piece of Italy in southern Brazil. As you cross its gates, time slows down. Located in Caxias do Sul, in the charming historic neighborhood of Ana Rech, Villa dei Troni is the first Italian immigration theme park in Brazil. Amid 25 hectares of preserved nature and memory, visitors find a true 19th century imperial colony, with 40 original buildings and faithful replicas.",
+    "parkDescription2": "More than a historical rescue, Villa dei Troni is a place of belonging. Here, history is not just told, it is lived. Culture, leisure, gastronomy, history and contact with nature come together to create a unique experience — one that stays in memory and heart.",
+    "limitedSpots": "Limited spots",
+    "ctaText": "Purchase your ticket and let's experience this together",
+    "buyTickets": "Buy ticket",
+    "hours": "Hours",
+    "hoursText": "Friday to Sunday, 10am to 6pm",
+    "address": "Address",
+    "openInMaps": "Open in Maps"
   },
   "news": {
     "title": "News",

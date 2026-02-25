@@ -10,6 +10,7 @@
     "hackathon": "Maratona de Inovação",
     "access": "Acessibilidade",
     "venue": "Local",
+    "villaDeiTroni": "Villa Dei Troni",
     "news": "Notícias",
     "contact": "Contato"
   },
@@ -167,7 +168,30 @@
     "accommodationTitle": "Hospedagem",
     "accommodationText": "Caxias do Sul oferece diversas opções de hospedagem para todos os perfis. Lista de hotéis parceiros será disponibilizada em breve.",
     "transportTitle": "Como Chegar",
-    "transportText": "A cidade possui aeroporto próprio e está a 120km de Porto Alegre. Transporte público e táxis estão disponíveis."
+    "transportOption1Title": "1. Direto à cidade do evento – Caxias do Sul RS",
+    "transportOption1Text": "O Aeroporto Regional Hugo Cantergiani (CXJ) é a forma mais prática de chegar diretamente a Caxias do Sul. Localizado a poucos minutos do centro da cidade e da Universidade de Caxias do Sul (UCS), ele recebe voos diários de São Paulo, pelos aeroportos de Congonhas e Guarulhos, operados por companhias como Gol, Latam e Azul. Essa é a opção mais rápida e conveniente para quem busca comodidade e deseja chegar diretamente ao destino da conferência.",
+    "transportOption2Title": "2. Via Porto Alegre (POA)",
+    "transportOption2Text": "O Aeroporto Internacional Salgado Filho (POA), localizado em Porto Alegre, capital do Rio Grande do Sul, é uma das principais portas de entrada para quem vem a Caxias do Sul. Situado a aproximadamente 125 km da cidade, o aeroporto oferece conexões nacionais e internacionais, sendo uma alternativa bastante utilizada para os participantes da conferência. De lá, é possível seguir até Caxias do Sul, a segunda maior cidade do estado, por meio de ônibus intermunicipais, traslados, vans ou locação de veículos, em um trajeto que combina praticidade e belas paisagens da serra gaúcha.",
+    "hotelTitle": "Hotel Oficial",
+    "hotelIntro": "Facilite sua estadia durante o evento! (próximo à UCS)",
+    "hotelText": "Para tornar sua experiência ainda mais agradável, indicamos o Hotel Blue Tree Towers, que oferece excelente infraestrutura e diversas categorias de serviços para atender às suas necessidades. Como o Hotel Oficial do nosso evento, o Blue Tree Towers proporciona conforto, praticidade e qualidade, garantindo uma estadia tranquila e agradável.",
+    "hotelCta": "Entre em contato diretamente com o hotel e faça sua reserva para garantir sua acomodação. Não perca a oportunidade de se hospedar em um local estratégico, ideal para quem vai participar de nosso evento.",
+    "hotelWhatsapp": "Ver informações no WhatsApp"
+  },
+  "villaDeiTroni": {
+    "title": "Villa Dei Troni",
+    "description": "O encerramento da Conferência será um tour no Maior Parque Temático da Imigração Italiana do Brasil. Adquira seu ingresso.",
+    "didYouKnow": "Tá sabedo?",
+    "closingTour": "O encerramento da Conferência, dia 28, será em um tour no Maior Parque Temático da Imigração Italiana do Brasil!",
+    "parkDescription": "Um pedacinho da Itália no Sul do Brasil. Ao atravessar seus portões, o tempo desacelera. Localizada em Caxias do Sul, no charmoso bairro histórico de Ana Rech, a Villa dei Troni é o primeiro parque temático da imigração italiana no Brasil. Em meio a 25 hectares de natureza e memória preservada, o visitante encontra uma verdadeira colônia imperial do século XIX, com 40 construções originais e réplicas fiéis.",
+    "parkDescription2": "Mais do que um resgate histórico, a Villa dei Troni é um lugar de pertencimento. Aqui, a história não é apenas contada, é vivida. Cultura, lazer, gastronomia, história e contato com a natureza se unem para criar uma experiência única — daquelas que ficam na memória e no coração.",
+    "limitedSpots": "Vagas limitadas",
+    "ctaText": "Adquira seu ingresso e vamos viver juntos essa experiência",
+    "buyTickets": "Comprar ingresso",
+    "hours": "Horários",
+    "hoursText": "De sexta-feira à domingo, das 10h às 18h",
+    "address": "Endereço",
+    "openInMaps": "Abrir no Maps"
   },
   "news": {
     "title": "Notícias",
