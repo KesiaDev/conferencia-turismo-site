@@ -25,14 +25,6 @@ export default function VillaDeiTroni() {
         />
       </div>
 
-      <div className="py-8 bg-[#e0a085] border-t-0 shadow-none">
-        <div className="container-custom">
-          <h1 className="text-2xl md:text-3xl font-semibold text-center text-white">
-            {t("villaDeiTroni.title")}
-          </h1>
-        </div>
-      </div>
-
       <Section>
         <div className="max-w-4xl mx-auto">
           {/* Tá sabedo? - Tour no encerramento */}
@@ -125,9 +117,9 @@ export default function VillaDeiTroni() {
                   {t("villaDeiTroni.joinWhatsAppGroup")}
                 </a>
                 <img
-                  src="/qr-villa-dei-troni-whatsapp.jpeg"
+                  src="/qr-villa-dei-troni-whatsapp.png"
                   alt="QR Code para entrar no grupo do WhatsApp - Tour guiado Villa Dei Troni"
-                  className="w-44 h-44 md:w-52 md:h-52 object-contain"
+                  className="w-72 h-72 md:w-96 md:h-96 object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
