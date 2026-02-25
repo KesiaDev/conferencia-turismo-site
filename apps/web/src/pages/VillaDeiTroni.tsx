@@ -127,7 +127,7 @@ export default function VillaDeiTroni() {
                 <img
                   src="/qr-villa-dei-troni-whatsapp.jpeg"
                   alt="QR Code para entrar no grupo do WhatsApp - Tour guiado Villa Dei Troni"
-                  className="w-28 h-28 object-contain"
+                  className="w-44 h-44 md:w-52 md:h-52 object-contain"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = "none";
                   }}
