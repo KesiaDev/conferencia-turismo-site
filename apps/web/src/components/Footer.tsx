@@ -28,11 +28,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/call" className="hover:text-white transition-colors">
-                  {t("nav.call")}
-                </Link>
-              </li>
-              <li>
                 <Link to="/fees" className="hover:text-white transition-colors">
                   {t("nav.fees")}
                 </Link>

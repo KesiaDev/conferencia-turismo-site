@@ -68,9 +68,6 @@ export default function NotFound() {
               <Link to="/program" className="text-[#e0a085] hover:underline font-medium">
                 Programação
               </Link>
-              <Link to="/call" className="text-[#e0a085] hover:underline font-medium">
-                Submeter Trabalho
-              </Link>
               <Link to="/fees" className="text-[#e0a085] hover:underline font-medium">
                 Inscrições
               </Link>

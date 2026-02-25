@@ -22,7 +22,6 @@ export default function Header() {
     { name: t("nav.keynotes"), href: "/keynotes" },
     { name: t("nav.program"), href: "/program" },
     { name: t("nav.thematicLines"), href: "/thematic-lines" },
-    { name: t("nav.call"), href: "/call" },
     { name: t("nav.fees"), href: "/fees" },
     { name: t("nav.committees"), href: "/committees" },
     { name: t("nav.contact"), href: "/contact" },

@@ -157,9 +157,6 @@ export default function Home() {
       <div className="py-8 md:py-12">
         <div className="container-custom text-center">
           <div className="flex gap-3 md:gap-4 justify-center flex-wrap px-4">
-            <Link to="/call" className="btn-primary flex-1 sm:flex-initial min-w-[200px]">
-              {t("home.submitWork")}
-            </Link>
             <Link
               to="/fees"
               className="group relative inline-flex items-center justify-center gap-2 bg-white hover:bg-[#e0a085] text-[#e0a085] hover:text-white font-bold py-4 px-8 rounded-xl min-h-[56px] transition-all duration-300 shadow-xl hover:shadow-2xl border-2 border-[#e0a085] flex-1 sm:flex-initial min-w-[220px] transform hover:scale-105"

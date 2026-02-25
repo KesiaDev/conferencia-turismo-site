@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
 
@@ -75,21 +74,11 @@ export default function ThematicLines() {
         </div>
 
         <div className="mt-12 bg-gray-50 rounded-lg p-8">
-          <h2 className="text-2xl font-bold text-center mb-4">Submeta seu Trabalho</h2>
+          <h2 className="text-2xl font-bold text-center mb-4">Linhas Temáticas do Evento</h2>
           <p className="text-center text-gray-700 max-w-3xl mx-auto mb-6">
-            As submissões de trabalhos podem ser realizadas em qualquer uma das linhas temáticas.
-            Escolha a linha que melhor se alinha com sua pesquisa e contribua para as discussões
-            durante o evento.
+            As submissões de trabalhos encerraram. Consulte as linhas temáticas abaixo para conhecer
+            as áreas de interesse do evento.
           </p>
-          <div className="text-center">
-            <Link
-              to="/call"
-              className="inline-flex items-center gap-2 bg-[#e0a085] text-white px-6 py-3 rounded-lg hover:bg-[#e0a085]/90 transition-colors duration-200 font-medium text-lg"
-            >
-              <span>Acessar Formulário de Submissão</span>
-              <span>→</span>
-            </Link>
-          </div>
         </div>
       </Section>
     </>
