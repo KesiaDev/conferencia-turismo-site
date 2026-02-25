@@ -3,7 +3,8 @@ import Section from "../components/Section";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
 
-const TICKET_URL = "https://ingresso.villadeitroni.com/produto/vitrine/ingressos";
+// Parâmetro ?date= pode pré-selecionar o dia 28/03 (se o sistema suportar)
+const TICKET_URL = "https://ingresso.villadeitroni.com/produto/vitrine/ingressos?date=2026-03-28";
 const VILLA_URL = "https://www.villadeitroni.com/";
 
 export default function VillaDeiTroni() {
@@ -83,6 +84,9 @@ export default function VillaDeiTroni() {
 
           {/* Vagas limitadas + CTA */}
           <div className="bg-gray-50 p-8 rounded-xl text-center mb-10">
+            <div className="inline-block bg-[#e0a085]/20 text-primary font-bold px-4 py-2 rounded-lg mb-4">
+              {t("villaDeiTroni.tourDate")}
+            </div>
             <p className="text-lg font-semibold text-primary mb-2">
               {t("villaDeiTroni.limitedSpots")}
             </p>
@@ -111,7 +115,11 @@ export default function VillaDeiTroni() {
               <h3 className="font-semibold text-lg text-primary mb-3">
                 {t("villaDeiTroni.hours")}
               </h3>
-              <p className="text-gray-700">{t("villaDeiTroni.hoursText")}</p>
+              <p className="text-gray-700 mb-2">
+                <strong>{t("villaDeiTroni.tourHoursTitle")}:</strong>{" "}
+                {t("villaDeiTroni.tourHoursText")}
+              </p>
+              <p className="text-gray-600 text-sm">{t("villaDeiTroni.hoursText")}</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="font-semibold text-lg text-primary mb-3">
