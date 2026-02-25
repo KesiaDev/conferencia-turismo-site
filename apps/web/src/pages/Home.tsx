@@ -120,6 +120,18 @@ export default function Home() {
             photoModal: "/speakers/Zeca-Brito-modal.gif",
             bio: 'Zeca Brito é cineasta. Mestre em Artes Visuais pela UFRGS, graduado em Realização Audiovisual pela Unisinos e Poéticas Visuais pela UFRGS. Dirigiu curtas e longas-metragens exibidos no Brasil e no exterior, como a ficção "Legalidade", e os documentários "Trinta Povos", "Hamlet" e "Arte da Diplomacia". Foi diretor do IECINE - Instituto Estadual de Cinema do Rio Grande do Sul (2019/2022). Programador do Festival Internacional de Cinema da Fronteira (BR/UY) e do Noronha2B Film Commission Forum (Fernando de Noronha). Atual Secretário Municipal de Cultura de Bagé, RS, Brasil (2025, 2026).',
           },
+          {
+            id: "joana-braga",
+            name: "Joana Braga",
+            affiliation: "Prefeitura de Porto Alegre (Brasil)",
+            tags: [
+              "Painel Especial",
+              "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+            ],
+            photo: "/speakers/Joana-Braga.gif",
+            photoModal: "/speakers/Joana-Braga-modal.gif",
+            bio: "Coordenadora de Economia Criativa na Secretaria de Desenvolvimento Econômico, Turismo e Eventos de Porto Alegre. Bacharel em Turismo. Especialista em Patrimônio Cultural e Arquitetura do Brasil. Servidora da Prefeitura de Porto Alegre desde 2009, atuou no planejamento turístico, como gerente de oferta turística, no desenvolvimento de segmentos e na gestão de contratos e convênios para estruturação da infraestrutura turística. Implantou a Porto Alegre Film Commission e o programa POA Criativa.",
+          },
         ];
         setSpeakers(staticSpeakers.slice(0, 9));
       });
