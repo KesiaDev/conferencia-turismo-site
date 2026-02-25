@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const STORAGE_KEY = "registration-banner-dismissed";
 
 export default function RegistrationBanner() {
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem(STORAGE_KEY);
     if (!dismissed) setIsVisible(true);
   }, []);
+
+  // Ocultar na aba Villa Dei Troni
+  if (location.pathname === "/villa-dei-troni") return null;
 
   const handleClose = () => {
     setIsVisible(false);

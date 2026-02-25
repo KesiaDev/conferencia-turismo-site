@@ -2,6 +2,12 @@
 
 Adicione logos nesta pasta.
 
+## Villa Dei Troni - Grupo WhatsApp
+
+**QR Code:** Salve a imagem do QR code do grupo "Tour guiado Villa Dei Troni" e coloque em:
+
+- `apps/web/public/qr-villa-dei-troni-whatsapp.png`
+
 ## Villa Dei Troni
 
 **Arquivo:** Copie a logomarca do site [ingresso.villadeitroni.com](https://ingresso.villadeitroni.com/) ou [www.villadeitroni.com](https://www.villadeitroni.com/) e salve como:
