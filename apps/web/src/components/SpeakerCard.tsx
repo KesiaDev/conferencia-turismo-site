@@ -24,11 +24,11 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           }
         }}
       >
-        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative bg-stone-100">
+        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative bg-stone-100 p-4 md:p-6 box-border">
           <OptimizedImage
             src={speaker.photo}
             alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}
-            className={`transition-transform duration-500 speaker-photo group-hover:scale-110 object-contain object-top`}
+            className={`transition-transform duration-500 speaker-photo group-hover:scale-[1.02] object-contain object-top`}
             loading="lazy"
             fetchPriority="low"
             onError={() => {
