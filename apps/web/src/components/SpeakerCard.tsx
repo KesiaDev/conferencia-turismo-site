@@ -13,7 +13,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
   return (
     <>
       <div
-        className="relative overflow-hidden transition-all duration-300 group cursor-pointer hover:shadow-2xl hover:scale-105 active:scale-95"
+        className="relative overflow-hidden transition-all duration-300 group cursor-pointer hover:shadow-2xl active:scale-95"
         onClick={() => setIsModalOpen(true)}
         role="button"
         tabIndex={0}

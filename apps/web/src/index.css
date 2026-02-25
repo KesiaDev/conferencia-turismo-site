@@ -244,10 +244,12 @@
     image-rendering: high-quality;
   }
 
-  /* Filtros para melhorar a aparência das fotos dos palestrantes */
+  /* Filtros e exibição das fotos dos palestrantes - evitar corte do texto */
   .speaker-photo {
     filter: contrast(1.05) brightness(1.02) saturate(1.02);
     transition: filter 0.3s ease;
+    object-fit: contain !important;
+    object-position: top center !important;
   }
 
   .speaker-photo:hover {
