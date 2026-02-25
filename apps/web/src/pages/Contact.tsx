@@ -179,7 +179,7 @@ export default function Contact() {
               <p className="text-gray-700 mb-4">
                 <strong>Universidade de Caxias do Sul</strong>
                 <br />
-                Blocos H, E e F
+                Blocos F e H
                 <br />
                 Rua Francisco Getúlio Vargas, 1130
                 <br />

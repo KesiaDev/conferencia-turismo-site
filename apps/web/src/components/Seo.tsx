@@ -70,7 +70,7 @@ export default function Seo({
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           location: {
             "@type": "Place",
-            name: "Universidade de Caxias do Sul - Blocos H, E e F",
+            name: "Universidade de Caxias do Sul - Blocos F e H",
             address: {
               "@type": "PostalAddress",
               streetAddress: "Rua Francisco Getúlio Vargas, 1130",

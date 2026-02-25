@@ -16,8 +16,8 @@ export default function VillaDeiTroni() {
 
       <div className="w-full aspect-[16/5]">
         <OptimizedImage
-          src="/hero-novo.gif"
-          alt="Banner da Conferência"
+          src="/banner-villa-dei-troni.gif"
+          alt="Banner Villa Dei Troni - Tour de encerramento da Conferência"
           className="w-full h-full object-cover block"
           loading="eager"
           fetchPriority="high"
@@ -115,11 +115,10 @@ export default function VillaDeiTroni() {
               <h3 className="font-semibold text-lg text-primary mb-3">
                 {t("villaDeiTroni.hours")}
               </h3>
-              <p className="text-gray-700 mb-2">
+              <p className="text-gray-700">
                 <strong>{t("villaDeiTroni.tourHoursTitle")}:</strong>{" "}
                 {t("villaDeiTroni.tourHoursText")}
               </p>
-              <p className="text-gray-600 text-sm">{t("villaDeiTroni.hoursText")}</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="font-semibold text-lg text-primary mb-3">
