@@ -24,7 +24,7 @@ export default function SpeakerCard({ speaker }: SpeakerCardProps) {
           }
         }}
       >
-        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative bg-stone-100 p-1 md:p-2 box-border">
+        <div className="w-full aspect-square overflow-hidden rounded-lg shadow-lg min-h-[300px] md:min-h-[400px] lg:min-h-[450px] relative bg-white p-2 md:p-4 box-border">
           <OptimizedImage
             src={speaker.photo}
             alt={`${speaker.name}, ${speaker.affiliation}${speaker.tags.length > 0 ? ` - ${speaker.tags[0]}` : ""}`}

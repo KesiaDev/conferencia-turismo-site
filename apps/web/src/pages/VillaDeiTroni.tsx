@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
+import qrVillaWhatsApp from "../assets/qr-villa-dei-troni-whatsapp.png";
 
 // Parâmetro ?date= pode pré-selecionar o dia 28/03 (se o sistema suportar)
 const TICKET_URL = "https://ingresso.villadeitroni.com/produto/vitrine/ingressos?date=2026-03-28";
@@ -117,7 +118,7 @@ export default function VillaDeiTroni() {
                   {t("villaDeiTroni.joinWhatsAppGroup")}
                 </a>
                 <img
-                  src="/qr-villa-dei-troni-whatsapp.png"
+                  src={qrVillaWhatsApp}
                   alt="QR Code para entrar no grupo do WhatsApp - Tour guiado Villa Dei Troni"
                   className="w-72 h-72 md:w-96 md:h-96 object-contain"
                   onError={(e) => {
