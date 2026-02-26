@@ -25,6 +25,7 @@ export default function Header() {
     { name: t("nav.fees"), href: "/fees" },
     { name: t("nav.committees"), href: "/committees" },
     { name: t("nav.villaDeiTroni"), href: "/villa-dei-troni" },
+    { name: t("nav.anais"), href: "/anais" },
     { name: t("nav.contact"), href: "/contact" },
   ];
 

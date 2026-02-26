@@ -38,6 +38,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/anais" className="hover:text-white transition-colors">
+                  {t("nav.anais")}
+                </Link>
+              </li>
+              <li>
                 <Link to="/accessibility" className="hover:text-white transition-colors">
                   ♿ Acessibilidade
                 </Link>

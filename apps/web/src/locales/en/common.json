@@ -11,6 +11,7 @@
     "access": "Accessibility",
     "venue": "Venue",
     "villaDeiTroni": "Villa Dei Troni",
+    "anais": "Proceedings",
     "news": "News",
     "contact": "Contact"
   },
@@ -197,6 +198,20 @@
     "whatsappGroupText": "As soon as you register, join the WhatsApp group and stay up to date with all the information.",
     "joinWhatsAppGroup": "Join WhatsApp group",
     "qrCodeHint": "Scan the QR code with your phone camera or click the link to join this group"
+  },
+  "anais": {
+    "title": "Proceedings – III International Conference on Literary and Film Tourism",
+    "description": "Book of Abstracts of the III International Conference on Literary and Film Tourism",
+    "intro": "The Proceedings (Book of Abstracts) of the III International Conference on Literary and Film Tourism will be published after the event, bringing together the abstracts submitted and approved by the Scientific Committee, in accordance with the official template.",
+    "criteriaTitle": "Publication in the Proceedings is subject to the simultaneous fulfilment of the following criteria:",
+    "criteria1": "Actual presentation of the work during the Conference programme (presentation completed).",
+    "criteria2": "Regular registration of the author(s), with payment confirmed by March 23rd.",
+    "criteria3": "Compliance of the abstract with the template and with the data registered in the submission system (title, authorship and affiliation).",
+    "importantNote": "Important: approved works that are not presented during the Conference and/or whose registration is not paid by 23/03 will not be included in the Book of Abstracts.",
+    "publicationTitle": "Publication:",
+    "publicationText": "the Proceedings will be available in e-book format (PDF) on the official Conference website, with complete editorial information (editorial details, table of contents and bibliographic identifiers).",
+    "statusTitle": "Status:",
+    "statusText": "Please wait. The page will be updated with the download link as soon as the final edition is complete."
   },
   "news": {
     "title": "News",

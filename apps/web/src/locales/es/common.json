@@ -11,6 +11,7 @@
     "access": "Accesibilidad",
     "venue": "Lugar",
     "villaDeiTroni": "Villa Dei Troni",
+    "anais": "Actas",
     "news": "Noticias",
     "contact": "Contacto"
   },
@@ -197,6 +198,20 @@
     "whatsappGroupText": "En cuanto te inscribas, entra al grupo de WhatsApp y mantente informado de todo.",
     "joinWhatsAppGroup": "Entrar al grupo de WhatsApp",
     "qrCodeHint": "Escanea el código QR con la cámara del teléfono o haz clic en el enlace para unirte a este grupo"
+  },
+  "anais": {
+    "title": "ACTAS – III Conferencia Internacional de Turismo Literario y Cinematográfico",
+    "description": "Libro de Resúmenes de la III Conferencia Internacional de Turismo Literario y Cinematográfico",
+    "intro": "Las Actas (Libro de Resúmenes) de la III Conferencia Internacional de Turismo Literario y Cinematográfico se publicarán después del evento, reuniendo los resúmenes sometidos y aprobados por la Comisión Científica, conforme al modelo oficial.",
+    "criteriaTitle": "La publicación en las Actas está condicionada al cumplimiento simultáneo de los siguientes criterios:",
+    "criteria1": "Presentación efectiva del trabajo durante la programación de la Conferencia (presentación realizada).",
+    "criteria2": "Inscripción regular del/los autor(es), con pago confirmado hasta el 23 de marzo.",
+    "criteria3": "Conformidad del resumen con el modelo y con los datos registrados en el sistema de envíos (título, autoría y afiliación).",
+    "importantNote": "Importante: los trabajos aprobados que no sean presentados durante la Conferencia y/o cuya inscripción no esté pagada hasta el 23/03 no serán incluidos en el Libro de Resúmenes.",
+    "publicationTitle": "Publicación:",
+    "publicationText": "las Actas estarán disponibles en formato e-book (PDF) en el sitio oficial de la Conferencia, con información editorial completa (expediente, sumario e identificadores bibliográficos).",
+    "statusTitle": "Estado:",
+    "statusText": "Espere. La página se actualizará con el enlace para descarga tan pronto como la edición final esté concluida."
   },
   "news": {
     "title": "Noticias",

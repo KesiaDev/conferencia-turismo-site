@@ -11,6 +11,7 @@
     "access": "Acessibilidade",
     "venue": "Local",
     "villaDeiTroni": "Villa Dei Troni",
+    "anais": "Anais",
     "news": "Notícias",
     "contact": "Contato"
   },
@@ -198,6 +199,20 @@
     "whatsappGroupText": "Logo que fizer a inscrição, entre no grupo do WhatsApp e fique por dentro de todas as informações.",
     "joinWhatsAppGroup": "Entrar no grupo do WhatsApp",
     "qrCodeHint": "Leia o QR code com a câmera do telefone ou clique no link para entrar neste grupo"
+  },
+  "anais": {
+    "title": "ANAIS – III Conferência Internacional de Turismo Literário e Cinematográfico",
+    "description": "Livro de Resumos da III Conferência Internacional de Turismo Literário e Cinematográfico",
+    "intro": "Os Anais (Livro de Resumos) da III Conferência Internacional de Turismo Literário e Cinematográfico serão publicados após a realização do evento, reunindo os resumos submetidos e aprovados pela Comissão Científica, conforme o template oficial.",
+    "criteriaTitle": "A publicação nos Anais está condicionada ao cumprimento simultâneo dos critérios abaixo:",
+    "criteria1": "Efetiva apresentação do trabalho durante a programação da Conferência (apresentação realizada).",
+    "criteria2": "Inscrição regular do(s) autor(es), com pagamento confirmado até 23 de março.",
+    "criteria3": "Conformidade do resumo com o template e com os dados cadastrados no sistema de submissões (título, autoria e afiliação).",
+    "importantNote": "Importante: trabalhos aprovados que não forem apresentados durante a Conferência e/ou cuja inscrição não estiver quitada até 23/03 não serão incluídos no Livro de Resumos.",
+    "publicationTitle": "Publicação:",
+    "publicationText": "os Anais serão disponibilizados em formato e-book (PDF) no site oficial da Conferência, com informações editoriais completas (expediente, sumário e identificadores bibliográficos).",
+    "statusTitle": "Status:",
+    "statusText": "Aguarde. A página será atualizada com o link para download assim que a edição final estiver concluída."
   },
   "news": {
     "title": "Notícias",
