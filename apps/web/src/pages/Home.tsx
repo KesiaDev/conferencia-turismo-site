@@ -25,7 +25,10 @@ export default function Home() {
             id: "christiano",
             name: "Christiano Braga",
             affiliation: "EMBRATUR",
-            tags: ["Palestra de Abertura", "Economia criativa e turismo audiovisual"],
+            tags: [
+              "Palestra de Abertura",
+              "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",
+            ],
             photo: "/speakers/Christiano.gif",
             photoModal: "/speakers/Christiano-modal.gif",
             bio: "Economista. Doutorando em Economia. Mestrado em Economia e Política da Cultura e das Indústrias Criativas pela UFRGS. MBA em Gestão com foco em Estratégia. Especializado em Comércio Exterior, Gestão Cultural, Cultura e Desenvolvimento. Foi responsável pela criação dos programas setoriais de promoção internacional de segmentos da economia criativa brasileira na Agência de Promoção de Exportações e Investimentos (APEX-Brasil) durante a década de 2000. Criou o departamento de economia criativa da Secretaria de Cultura e Economia Criativa do Estado de São Paulo, de 2019 a 2023. Atualmente supervisiona a área de economia criativa na EMBRATUR onde também assessora a presidência para os temas do audiovisual e turismo.",

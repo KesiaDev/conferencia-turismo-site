@@ -18,7 +18,10 @@ export const speakers: Speaker[] = [
     id: "christiano",
     name: "Christiano Braga",
     affiliation: "EMBRATUR",
-    tags: ["Palestra de Abertura", "Economia criativa e turismo audiovisual"],
+    tags: [
+      "Palestra de Abertura",
+      "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",
+    ],
     photo: "/speakers/Christiano.gif",
     photoModal: "/speakers/Christiano-modal.gif",
     bio: "Economista. Doutorando em Economia. Mestrado em Economia e Política da Cultura e das Indústrias Criativas pela UFRGS. MBA em Gestão com foco em Estratégia. Especializado em Comércio Exterior, Gestão Cultural, Cultura e Desenvolvimento. Foi responsável pela criação dos programas setoriais de promoção internacional de segmentos da economia criativa brasileira na Agência de Promoção de Exportações e Investimentos (APEX-Brasil) durante a década de 2000. Nessa agência também foi executivo de exportações. Criou o departamento de economia criativa da Secretaria de Cultura e Economia Criativa do Estado de São Paulo, de 2019 a 2023, onde foi responsável por projetos de promoção da leitura, prêmio São Paulo de Literatura, iniciativas de difusão cultural, criando fundos para o desenvolvimento de atividades audiovisuais e a atração de produções cinematográficas para o Brasil. Atualmente supervisiona a área de economia criativa na Agência de Promoção Internacional do Turismo (EMBRATUR) onde também assessora a presidência para os temas do audiovisual e turismo.",
@@ -150,7 +153,7 @@ export const program: ProgramDay[] = [
         time: "09:00–10:30",
         title: "Abertura Oficial",
         description:
-          "Representantes: Ministério do Turismo, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
+          "Representantes: Embratur, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
         location: "Auditório do Bloco H",
         kind: "plenary",
       },
@@ -158,8 +161,8 @@ export const program: ProgramDay[] = [
         time: "10:30–12:00",
         title: "Palestra de Abertura",
         description:
-          "Turismo Literário e Cinematográfico como vetor de desenvolvimento territorial, inovação e internacionalização do Brasil",
-        speaker: "Representante da Embratur ou Ancine (a definir)",
+          "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",
+        speaker: "Christiano Braga, Coordenador de economia criativa e audiovisual da Embratur",
         location: "Auditório do Bloco H",
         kind: "keynote",
       },
@@ -253,7 +256,7 @@ export const program: ProgramDay[] = [
         description:
           "Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
         speaker:
-          "Lissandro Stallivieri (cineasta, professor de cinema UCS, Spaghetti Films), Representante da Film Commission Porto Alegre (a confirmar), André Perinotto (UFPI / Film Commission Noronha 2B)",
+          "Lissandro Stallivieri (cineasta, professor de cinema UCS, Spaghetti Films), Joana Braga (Film Commission Porto Alegre), André Perinotto (UFPI), Zeca Brito (Film Commission Noronha2B), Duda Rocha (PPGTURH, UCS)",
         location: "Auditório Bloco H",
         kind: "keynote",
       },
