@@ -14,8 +14,10 @@ export default function ImportantNotice() {
         ⚠️ ATENÇÃO
       </h3>
       <p className="leading-relaxed text-base sm:text-lg mb-4" style={{ color: "#5A3E00" }}>
-        O evento está se aproximando. Faça sua inscrição e lembre-se de realizar o pagamento para
-        garantir sua participação.
+        O evento está se aproximando. Faça sua inscrição para garantir sua participação.
+        <br />
+        <strong>Importante:</strong> todos os autores devem realizar o pagamento da inscrição até 23
+        de março.
       </p>
       <Link
         to="/fees"
