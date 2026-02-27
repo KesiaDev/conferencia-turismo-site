@@ -15,7 +15,9 @@ export default function ImportantNotice() {
       </div>
 
       <p className="leading-relaxed text-base sm:text-lg text-[#5A3E00] mb-3">
-        O evento está se aproximando. Faça sua inscrição para garantir sua participação.
+        O evento está se aproximando.
+        <br />
+        Faça sua inscrição para garantir sua participação.
       </p>
 
       <p className="text-base sm:text-lg text-[#5A3E00] mb-6 font-semibold bg-white/50 py-2 px-4 rounded-lg inline-block">
