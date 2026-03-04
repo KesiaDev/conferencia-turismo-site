@@ -532,6 +532,290 @@ export default function ProgramacaoProvisoria() {
         },
       ],
     },
+    {
+      title:
+        "14. Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
+      date: "26 de março de 2026",
+      time: "13h30-15h e 15h35-17h",
+      rows: [
+        {
+          time: "13h30-13h45",
+          title:
+            "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
+          author: "Myllene Medeiros de Oliveira",
+          affiliation: "Universidade Federal do Rio Grande do Norte - UFRN (Brasil)",
+        },
+        {
+          time: "13h45-14h",
+          title:
+            "Famous Film set's sense of place among locals: the case of Muhu Island in Estonia",
+          author: "Marit Piirman",
+          affiliation: "University of Tartu (Estônia)",
+        },
+        {
+          time: "14h-14h15",
+          title: "A paisagem como patrimônio cultural: representações fílmicas das tradições",
+          author: "Júlia Carneiro Silva",
+          affiliation: "Universidade do Estado da Bahia - UNEB (Brasil)",
+        },
+        {
+          time: "14h15-14h30",
+          title:
+            '"Duna", a construção do imaginário turístico e a transformação de paisagens ficcionais em desejos de viagem',
+          author: "Ronaldo Leites Diaz; Luciane Todeschini Ferreira",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "14h30-14h45",
+          title: "O Tesouro de Umberto Eco",
+          author: "Rosana Peccini",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "14h45-15h",
+          title: "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
+          author: "Thiele Aparecida Nascimento Piotto",
+          affiliation: "Universidade Cidade de São Paulo - Unicid (Brasil)",
+        },
+        { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+        {
+          time: "15h35-15h50",
+          title:
+            "Turismo Cinematográfico e destinos turísticos: uma análise da influência do audiovisual na motivação do viajante",
+          author: "Nayriane Fernanda Carvalho; Ana Angélica Fonseca Costa",
+          affiliation: "Universidade Estadual do Piauí - UESPI (Brasil)",
+        },
+        {
+          time: "15h50-16h05",
+          title:
+            "Autopesquisa, afetivações e turismo literário e cinematográfico: Verona como destino turístico afetivo",
+          author: "Simone Maria Sandi; Maria Luiza Cardinale Baptista",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "16h05-16h20",
+          title:
+            "Turismo e Literatura por Jorges: Água Preta e Ilhéus a partir dos escritos de Jorge Amado e de Jorge Medauar",
+          author: "Verena Santos Abreu; Isaías Ferreira de Oliveira",
+          affiliation: "Instituto Federal Baiano - IF Baiano (Brasil)",
+        },
+        {
+          time: "16h20-16h35",
+          title: "Literary Tourism in Ohrid, North Macedonia: the case of A. Den Doolaard",
+          author: "Jasna Potočnik Topler; Ana Marija Papaz",
+          affiliation: "Univerza v Mariboru | University of Maribor (Eslovênia)",
+        },
+        {
+          time: "16h35-16h50",
+          title:
+            "Close up em Fortaleza-CE: estudo sobre imagem e imaginário turístico por meio de produção cinematográfica",
+          author:
+            "Pedro Lucas Filgueira Pereira; Michel Jairo Vieira da Silva; Marcelo da Silva Taveira",
+          affiliation: "Universidade Federal do Rio Grande do Norte - UFRN (Brasil)",
+        },
+        {
+          time: "16h50-17h05",
+          title:
+            "Territorio, identidad y ficción: la gastronomía como lenguaje audiovisual del destino turístico",
+          author: "Eugeni Osácar; Esther Velasco",
+          affiliation: "CETT Barcelona School of Tourism, Hospitality and Gastronomy (Espanha)",
+        },
+      ],
+    },
+    {
+      title:
+        "15. O papel dos autores literários, dos cineastas e das comunidades locais na formação das experiências turísticas",
+      date: "27 de março de 2026",
+      time: "9h-10h30",
+      rows: [
+        {
+          time: "9h-9h15",
+          title:
+            "O Quatrilho como mediador de experiências turísticas: literatura, cinema e identidade no Vale dos Vinhedos",
+          author: "Cristina Löff Knapp; Samira Dall'Agnol",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "9h15-9h30",
+          title:
+            'Construindo a "emoção turística" do Rio de Janeiro: três livros da década de 1930',
+          author: "Celso Corrêa Pinto de Castro",
+          affiliation: "Fundação Getulio Vargas - Escola de Ciências Sociais FGV CPDOC (Brasil)",
+        },
+        {
+          time: "9h30-9h45",
+          title: '"Comer Rezar Amar": quando a narrativa desperta o desejo de viajar',
+          author: "Katharina Lara Giacoboni Nicoletti; Bruna Perini",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "9h45-10h",
+          title:
+            "A telenovela brasileira no Leste Europeu: um estudo da percepção do Brasil como destino turístico à luz da fenomenologia de Merleau-Ponty",
+          author: "Anastasiya Golets; Lana Magaly Pires",
+          affiliation: "Instituto Federal de Brasília (Brasil)",
+        },
+        {
+          time: "10h-10h15",
+          title: "Gracián e o Barroco Espanhol: Literatura e Turismo Literário",
+          author: "Fabio Vinicius de Araujo Passos",
+          affiliation: "Universidade da Geórgia - UGA (Geórgia, EUA)",
+        },
+        {
+          time: "10h15-10h30",
+          title:
+            "Indução pelas telas: o impacto de filmes na formação da imagem de destinos turísticos sob a ótica da teoria do nível de construal",
+          author: "Gabriel dos Santos Loch",
+          affiliation: "Universidade Regional de Blumenau - FURB (Brasil)",
+        },
+      ],
+    },
+    {
+      title: "16. Roteiros e rotas/passeios literários e cinematográficos",
+      date: "26 de março de 2026",
+      time: "13h30-15h e 15h35-17h (sessão de 10 minutos)",
+      rows: [
+        {
+          time: "13h30-13h40",
+          title: "Portuguese literary walks and routes: Practices and recommendations",
+          author: "Rita Baleiro",
+          affiliation: "ESGHT - Universidade do Algarve, CITUR-Algarve (Portugal)",
+        },
+        {
+          time: "13h40-13h50",
+          title:
+            "Correspondências como uma possibilidade de roteiro turístico literário no Brasil: as cartas de Dona Leopoldina",
+          author: "Mariana Kelen de Oliveira",
+          affiliation: "Universidade Federal de Minas Gerais – UFMG (Brasil)",
+        },
+        {
+          time: "13h50-14h",
+          title:
+            "Roteiros e rotas literárias e cinematográficas baseadas em Jorge Amado em Salvador",
+          author: "Clara Assunção da Silva Cerqueira; Anara Importa Costa",
+          affiliation: "Universidade do Estado da Bahia - UNEB (Brasil)",
+        },
+        {
+          time: "14h-14h10",
+          title:
+            "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul - RS",
+          author:
+            "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "14h10-14h20",
+          title:
+            'Influência das produções audiovisuais "Memórias de Alhambra" e "Game of Thrones" no turismo da Espanha',
+          author: "Letícia Souza de Oliveira; Cláudia Caminha Lopes Rodrigues",
+          affiliation: "Universidade Federal da Paraíba - UFPB (Brasil)",
+        },
+        {
+          time: "14h10-14h30",
+          title: "Dark Tourism e Narrativas Urbanas: um estudo sobre as lendas de Belo Horizonte",
+          author: "Vitória de Paula Amaral; Frederico Couto Marinho",
+          affiliation: "Universidade Federal de Minas Gerais - UFMG (Brasil)",
+        },
+        {
+          time: "14h30-14h40",
+          title:
+            'Da tela para a cidade: roteiro turístico em Salvador inspirado em "Trampolim do Forte"',
+          author: "Pohema Profeta de Araújo de Jesus",
+          affiliation: "Universidade do Estado da Bahia (Brasil)",
+        },
+        {
+          time: "14h40-14h50",
+          title:
+            "Punta del Este en los años 60: lugares, recorridos y prácticas de veraneo. Representaciones construídas desde la promoción turística, el cine y la literatura.",
+          author: "Victoria Lembo; Gabriela Angelo",
+          affiliation: "Universidad de la República (Uruguai)",
+        },
+        { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+        {
+          time: "15h35-15h45",
+          title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
+          author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
+          affiliation: "Universidade do Vale do Itajaí - Univali (Brasil)",
+        },
+        {
+          time: "15h45-15h55",
+          title:
+            "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
+          author: "Patricia Carvalheiro Pereira",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "15h55-16h05",
+          title:
+            "De la mirada viajeira al destino turístico: rutas literárias y construcción del imaginario de Mallorca",
+          author: "Fany Magraner-Frau",
+          affiliation: "De Fábula. Cultura sense límits (Espanha)",
+        },
+        {
+          time: "16h05-16h15",
+          title: "Roteiro Turístico literário: Caminhos de Schlee - Jaguarão/RS",
+          author: "Juliana Rose Jasper; Ângela Bento Ribeiro; Alice Leoti",
+          affiliation:
+            "Universidade Federal do Pampa - Unipampa; Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "16h15-16h25",
+          title:
+            "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
+          author: "Tathiana de Alcantara Macedo Daou",
+          affiliation:
+            "Serviço Social do Comércio - Sesc DF; Universidade de Brasília - UnB (Brasil)",
+        },
+      ],
+    },
+    {
+      title: "17. Inovação, tendências e propostas",
+      date: "27 de março de 2026",
+      time: "13h30-15h",
+      rows: [
+        {
+          time: "13h30-13h45",
+          title:
+            "Cinema, Streaming e Turismo Adolescente: a construção do desejo de visitar Salvador",
+          author: "Clara Assunção da Silva Cerqueira",
+          affiliation: "Universidade do Estado da Bahia - UNEB (Brasil)",
+        },
+        {
+          time: "13h45-14h",
+          title: "Turismo em bibliotecas: uma revisão sistemática da literatura",
+          author: "Márcia Cavalcanti Moreira; Diomira Maria Cicci Pinto Faria",
+          affiliation: "Universidade Federal de Minas Gerais - UFMG (Brasil)",
+        },
+        {
+          time: "14h-14h15",
+          title:
+            "Cinema e Comunicação: uma análise sobre a importância do audiovisual dentro da produção editorial",
+          author: "Luíza Machado Teixeira; Naura Letícia Nascimento Coelho",
+          affiliation: "Universidade Federal de Santa Maria (Brasil)",
+        },
+        {
+          time: "14h15-14h30",
+          title:
+            "O bonito encontro entre narrativas e territórios a partir de eventos sobre Turismo literário e cinematográfico",
+          author: "Marcia Speguen de Quadros Piccoli",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+        {
+          time: "14h30-14h45",
+          title:
+            "Patrimônio em jogo: representações digitais e mediações semióticas na apresentação de destinos turísticos",
+          author: "Samuel Henrique Alves dos Reis; Sergio Donizete Faria; Rosilane Ribeiro da Mota",
+          affiliation: "Universidade Federal de Minas Gerais - UFMG (Brasil)",
+        },
+        {
+          time: "14h45-15h",
+          title:
+            "Narrativas artesãs de viagens: orientação epistemológica potencializadora de turismo literário",
+          author: "Jennifer Bauer Eme; Maria Luiza Cardinale Baptista",
+          affiliation: "Universidade de Caxias do Sul - UCS (Brasil)",
+        },
+      ],
+    },
   ];
 
   return (
