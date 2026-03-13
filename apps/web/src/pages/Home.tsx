@@ -22,6 +22,18 @@ export default function Home() {
         // Fallback com dados estáticos se a API falhar
         const staticSpeakers: Speaker[] = [
           {
+            id: "ion-vilcu",
+            name: "Ion Vilcu",
+            affiliation: "UN Tourism",
+            tags: [
+              "Mesa Internacional",
+              "Diretor do Departamento de Membros Afiliados e Colaboração Público-Privada",
+            ],
+            photo: "/speakers/Ion.gif",
+            photoModal: "/speakers/Ion-modal.gif",
+            bio: "Diretor do Departamento de Membros Afiliados e Colaboração Público-Privada da UN Tourism, função em que atua na articulação entre governos, universidades, empresas e entidades do setor para fortalecer a inovação, a sustentabilidade e as parcerias estratégicas no turismo internacional. Antes de assumir essa posição, em 2018, construiu uma sólida trajetória diplomática como embaixador da Romênia em países como Chile, Argentina, Espanha e México, acumulando ampla experiência em relações internacionais, cooperação institucional e promoção de agendas multilaterais ligadas ao desenvolvimento. Também atua na área acadêmica, tendo sido professor da Universidade Antonio de Nebrija, em Madri. Com formação original em engenharia de software e doutorado em ciência política, Ion Vilcu reúne visão técnica, densidade geopolítica e forte capacidade de articulação internacional, sendo hoje uma referência nas interfaces entre turismo, governança global e colaboração público-privada.",
+          },
+          {
             id: "christiano",
             name: "Christiano Braga",
             affiliation: "EMBRATUR",
