@@ -137,6 +137,15 @@ export const speakers: Speaker[] = [
     photoModal: "/speakers/Joana-Braga-modal.gif",
     bio: "Coordenadora de Economia Criativa na Secretaria de Desenvolvimento Econômico, Turismo e Eventos de Porto Alegre. Bacharel em Turismo. Especialista em Patrimônio Cultural e Arquitetura do Brasil. Servidora da Prefeitura de Porto Alegre desde 2009, atuou no planejamento turístico, como gerente de oferta turística, no desenvolvimento de segmentos e na gestão de contratos e convênios para estruturação da infraestrutura turística. Implantou a Porto Alegre Film Commission e o programa POA Criativa.",
   },
+  {
+    id: "ligia",
+    name: "Ligia Walper",
+    affiliation: "Walper Ruas Produções",
+    tags: ["Palestrante", "Cineasta"],
+    photo: "/speakers/Ligia.gif",
+    photoModal: "/speakers/Ligia-modal.gif",
+    bio: "Ligia Walper é cineasta, jornalista e produtora audiovisual com trajetória iniciada em 1981, atuando em televisão, cinema, publicidade e projetos culturais. Formada em Jornalismo Gráfico e Audiovisual pela UFRGS, trabalha como diretora, roteirista, montadora, produtora, divulgadora e produtora executiva. É sócia da Walper Ruas Produções, sediada em Florianópolis e Porto Alegre, com reconhecida experiência no desenvolvimento de longas, curtas, séries, programas de TV e projetos editoriais. Tem Nível 4 na Ancine e registro também como distribuidora. Entre seus trabalhos de destaque estão Netto Perde Sua Alma, Brizola – Tempos de Luta, Os Senhores da Guerra e A Cabeça de Gumercindo Saraiva, além da direção de Edifício Bonfim e da codireção de Perseguição e Cerco a Juvêncio Gutierrez. Sua trajetória reúne premiações, circulação nacional e internacional e contribuição expressiva ao audiovisual brasileiro.",
+  },
 ];
 
 export const program: ProgramDay[] = [
