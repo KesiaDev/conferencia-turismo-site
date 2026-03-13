@@ -27,6 +27,15 @@ export const speakers: Speaker[] = [
     bio: "Economista. Doutorando em Economia. Mestrado em Economia e Política da Cultura e das Indústrias Criativas pela UFRGS. MBA em Gestão com foco em Estratégia. Especializado em Comércio Exterior, Gestão Cultural, Cultura e Desenvolvimento. Foi responsável pela criação dos programas setoriais de promoção internacional de segmentos da economia criativa brasileira na Agência de Promoção de Exportações e Investimentos (APEX-Brasil) durante a década de 2000. Nessa agência também foi executivo de exportações. Criou o departamento de economia criativa da Secretaria de Cultura e Economia Criativa do Estado de São Paulo, de 2019 a 2023, onde foi responsável por projetos de promoção da leitura, prêmio São Paulo de Literatura, iniciativas de difusão cultural, criando fundos para o desenvolvimento de atividades audiovisuais e a atração de produções cinematográficas para o Brasil. Atualmente supervisiona a área de economia criativa na Agência de Promoção Internacional do Turismo (EMBRATUR) onde também assessora a presidência para os temas do audiovisual e turismo.",
   },
   {
+    id: "ligia",
+    name: "Ligia Walper",
+    affiliation: "Walper Ruas Produções",
+    tags: ["Palestrante", "Cineasta"],
+    photo: "/speakers/Ligia.gif",
+    photoModal: "/speakers/Ligia-modal.gif",
+    bio: "Ligia Walper é cineasta, jornalista e produtora audiovisual com trajetória iniciada em 1981, atuando em televisão, cinema, publicidade e projetos culturais. Formada em Jornalismo Gráfico e Audiovisual pela UFRGS, trabalha como diretora, roteirista, montadora, produtora, divulgadora e produtora executiva. É sócia da Walper Ruas Produções, sediada em Florianópolis e Porto Alegre, com reconhecida experiência no desenvolvimento de longas, curtas, séries, programas de TV e projetos editoriais. Tem Nível 4 na Ancine e registro também como distribuidora. Entre seus trabalhos de destaque estão Netto Perde Sua Alma, Brizola – Tempos de Luta, Os Senhores da Guerra e A Cabeça de Gumercindo Saraiva, além da direção de Edifício Bonfim e da codireção de Perseguição e Cerco a Juvêncio Gutierrez. Sua trajetória reúne premiações, circulação nacional e internacional e contribuição expressiva ao audiovisual brasileiro.",
+  },
+  {
     id: "diomira",
     name: "Diomira Maria Cicci Pinto Faria",
     affiliation: "UFMG",
@@ -136,15 +145,6 @@ export const speakers: Speaker[] = [
     photo: "/speakers/Joana-Braga.gif",
     photoModal: "/speakers/Joana-Braga-modal.gif",
     bio: "Coordenadora de Economia Criativa na Secretaria de Desenvolvimento Econômico, Turismo e Eventos de Porto Alegre. Bacharel em Turismo. Especialista em Patrimônio Cultural e Arquitetura do Brasil. Servidora da Prefeitura de Porto Alegre desde 2009, atuou no planejamento turístico, como gerente de oferta turística, no desenvolvimento de segmentos e na gestão de contratos e convênios para estruturação da infraestrutura turística. Implantou a Porto Alegre Film Commission e o programa POA Criativa.",
-  },
-  {
-    id: "ligia",
-    name: "Ligia Walper",
-    affiliation: "Walper Ruas Produções",
-    tags: ["Palestrante", "Cineasta"],
-    photo: "/speakers/Ligia.gif",
-    photoModal: "/speakers/Ligia-modal.gif",
-    bio: "Ligia Walper é cineasta, jornalista e produtora audiovisual com trajetória iniciada em 1981, atuando em televisão, cinema, publicidade e projetos culturais. Formada em Jornalismo Gráfico e Audiovisual pela UFRGS, trabalha como diretora, roteirista, montadora, produtora, divulgadora e produtora executiva. É sócia da Walper Ruas Produções, sediada em Florianópolis e Porto Alegre, com reconhecida experiência no desenvolvimento de longas, curtas, séries, programas de TV e projetos editoriais. Tem Nível 4 na Ancine e registro também como distribuidora. Entre seus trabalhos de destaque estão Netto Perde Sua Alma, Brizola – Tempos de Luta, Os Senhores da Guerra e A Cabeça de Gumercindo Saraiva, além da direção de Edifício Bonfim e da codireção de Perseguição e Cerco a Juvêncio Gutierrez. Sua trajetória reúne premiações, circulação nacional e internacional e contribuição expressiva ao audiovisual brasileiro.",
   },
 ];
 
