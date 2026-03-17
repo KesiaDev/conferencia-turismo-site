@@ -77,8 +77,8 @@ export default function Footer() {
             alt="Logo da Conferência"
             className="footer-logo"
             style={{
-              minWidth: "960px",
-              width: "960px",
+              minWidth: "1200px",
+              width: "1200px",
               height: "auto",
             }}
             onLoad={(e) => {
