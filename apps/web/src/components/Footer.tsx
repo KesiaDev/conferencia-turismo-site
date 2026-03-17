@@ -73,7 +73,7 @@ export default function Footer() {
       <div className="border-t border-gray-800 mt-4 pt-4">
         <div className="flex justify-center mb-4 py-6 px-4 w-full overflow-x-auto">
           <img
-            src="/footer-logo.svg?v=4"
+            src="/footer-logo.png?v=4"
             alt="Logo da Conferência"
             className="footer-logo"
             style={{
