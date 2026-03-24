@@ -7,6 +7,8 @@ interface SessionRow {
   affiliation: string;
 }
 
+type CoordinatorHeading = "coordenadores" | "coordenador" | "coordenacao";
+
 interface SessionBlockProps {
   title: string;
   date: string;
@@ -15,6 +17,18 @@ interface SessionBlockProps {
   coordinators: string;
   technicalSupport: string;
   rows: SessionRow[];
+  coordinatorHeading?: CoordinatorHeading;
+}
+
+function coordinatorLabel(h: CoordinatorHeading | undefined): string {
+  switch (h) {
+    case "coordenador":
+      return "Coordenador de sessão";
+    case "coordenacao":
+      return "Coordenação";
+    default:
+      return "Coordenadores de sessão";
+  }
 }
 
 type ProgramEntry = SessionBlockProps | { heading: string };
@@ -42,10 +56,13 @@ function SessionBlock({
   coordinators,
   technicalSupport,
   rows,
+  coordinatorHeading,
 }: SessionBlockProps) {
   return (
     <div className="mb-4 p-4 md:p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
-      <h3 className="text-lg md:text-xl font-bold text-[#e0a085] mb-1.5">{title}</h3>
+      <h3 className="text-lg md:text-xl font-bold text-[#e0a085] mb-1.5 whitespace-pre-line">
+        {title}
+      </h3>
       <p className="text-sm text-gray-600 mb-0.5">
         <span className="font-semibold">Data:</span> {date}
       </p>
@@ -56,7 +73,8 @@ function SessionBlock({
         <span className="font-semibold">SALA:</span> {room}
       </p>
       <p className="text-sm text-gray-600 mb-0.5">
-        <span className="font-semibold">Coordenadores de sessão:</span> {coordinators}
+        <span className="font-semibold">{coordinatorLabel(coordinatorHeading)}:</span>{" "}
+        {coordinators}
       </p>
       <p className="text-sm text-gray-600 mb-3">
         <span className="font-semibold">Apoio técnico:</span> {technicalSupport}
@@ -93,7 +111,7 @@ export default function ProgramacaoProvisoria() {
     { heading: "26 de março de 2026" },
     {
       title:
-        "TEMÁTICA 3: Turismo Literário/Cinematográfico e Economia Criativa + TEMÁTICA 5: Estudos de casos de modelos bem-sucedidos ou pouco explorados de desenvolvimento territorial orientado para o turismo literário/cinematográfico",
+        "TEMÁTICA 3: Turismo Literário/ Cinematográfico e Economia Criativa\nTEMÁTICA 5: Estudos de casos de modelos bem-sucedidos ou pouco explorados de desenvolvimento territorial orientado para o turismo literário/cinematográfico",
       date: "26 de março de 2026",
       time: "13h30 – 15h",
       room: "401 – Bloco F – UCS",
@@ -149,11 +167,11 @@ export default function ProgramacaoProvisoria() {
     },
     {
       title:
-        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional — bloco 1",
+        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
       date: "26 de março de 2026",
-      time: "13h10 – 14h40 (faixa geral 13h30–15h)",
+      time: "13h30 – 15h",
       room: "403 – Bloco F – UCS",
-      coordinators: "Ronaldo Leites Diaz e Mariane Gomes (PPGLET)",
+      coordinators: "(13h30–15h) Ronaldo Leites Diaz e Mariane Gomes (PPGLET)",
       technicalSupport: "Rafael Bardina de Melo",
       rows: [
         {
@@ -194,7 +212,7 @@ export default function ProgramacaoProvisoria() {
     },
     {
       title:
-        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional — bloco 2",
+        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
       date: "26 de março de 2026",
       time: "15h35 – 17h",
       room: "403 – Bloco F – UCS",
@@ -233,7 +251,7 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos — bloco 1",
+      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
       date: "26 de março de 2026",
       time: "13h30 – 15h",
       room: "404 – Bloco F – UCS",
@@ -244,7 +262,7 @@ export default function ProgramacaoProvisoria() {
           time: "13h30–13h45",
           title: "Portuguese literary walks and routes: Practices and recommendations",
           author: "Rita Baleiro",
-          affiliation: "ESGHT – Universidade do Algarve, CITUR-Algarve (Portugal)",
+          affiliation: "ESGHT – Universidade do Algarve, CiTUR-Algarve (Portugal)",
         },
         {
           time: "13h45–14h",
@@ -263,9 +281,9 @@ export default function ProgramacaoProvisoria() {
         {
           time: "14h15–14h30",
           title:
-            "Punta del Este en los años 60: lugares, recorridos y prácticas de veraneo. Representaciones construídas desde la promoción turística, el cine y la literatura.",
+            "Punta del Este en los años 60: lugares, recorridos y prácticas de veraneo. Representaciones construidas desde la promoción turística, el cine y la literatura.",
           author: "Victoria Lembo",
-          affiliation: "Universidad de la República (Uruguay) — ONLINE",
+          affiliation: "Universidad de la República (Uruguai) — ONLINE",
         },
         {
           time: "14h30–14h45",
@@ -278,18 +296,18 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos — bloco 2",
+      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
       date: "26 de março de 2026",
       time: "15h35 – 17h",
       room: "404 – Bloco F – UCS",
       coordinators: "André Brayner de Farias e Ernani Vieira da Silva",
-      technicalSupport: "Patrícia Cavalheiro Pereira",
+      technicalSupport: "Patrícia Carvalheiro Pereira",
       rows: [
         {
           time: "15h35–15h50",
           title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
           author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
-          affiliation: "Universidade do Vale do Itajaí – Univali (Brasil)",
+          affiliation: "Universidade do Vale do Itajaí-Univali (Brasil)",
         },
         {
           time: "15h50–16h05",
@@ -303,15 +321,15 @@ export default function ProgramacaoProvisoria() {
           time: "16h05–16h20",
           title:
             "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
-          author: "Patrícia Cavalheiro Pereira",
+          author: "Patricia Carvalheiro Pereira",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
           time: "16h20–16h35",
           title:
-            "De la mirada viajera al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
+            "De la mirada viajeira al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
           author: "Fany Magraner-Frau",
-          affiliation: "De Fábula. Cultura sense límits (Espanha) — ONLINE",
+          affiliation: "De Fàbula. Cultura sense límits (Espanha) — ONLINE",
         },
         {
           time: "16h35–16h50",
@@ -319,7 +337,7 @@ export default function ProgramacaoProvisoria() {
             "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
           author: "Tathiana de Alcantara Macedo Daou",
           affiliation:
-            "Serviço Social do Comércio – Sesc DF / Universidade de Brasília – UnB (Brasil)",
+            "Serviço Social do Comércio – Sesc DF/ Universidade de Brasília – UnB (Brasil)",
         },
       ],
     },
@@ -357,18 +375,19 @@ export default function ProgramacaoProvisoria() {
           title:
             "Eventos Literários no destino Turístico Termal: o caso da Biblioteca Josino Bretas em Caldas Novas (GO/Brasil)",
           author: "Jean Carlos Vieira Santos; Jackson Santana da Silva; Jairo Alves Leite",
-          affiliation: "Universidade Estadual de Goiás – UEG (Brasil)",
+          affiliation: "Universidade Estadual de Goiás UEG (Brasil)",
         },
       ],
     },
     {
       title:
-        "TEMÁTICA 1: Envolvimento da comunidade local no turismo literário e cinematográfico + TEMÁTICA 4: A contribuição do turismo literário e cinematográfico para o bem-estar da comunidade de acolhimento (por exemplo, criação de emprego, oportunidades educativas)",
+        "TEMÁTICA 1: Envolvimento da comunidade local no turismo literário e cinematográfico\nTEMÁTICA 4: A contribuição do turismo literário e cinematográfico para o bem-estar da comunidade de acolhimento (por exemplo, criação de emprego, oportunidades educativas)",
       date: "26 de março de 2026",
       time: "15h35 – 17h",
       room: "401 – Bloco F – UCS",
       coordinators: "Francielle de Lima e Jenniffer Bauer Eme",
       technicalSupport: "Gabriel Machado Oliveira",
+      coordinatorHeading: "coordenador",
       rows: [
         {
           time: "15h35–15h50",
@@ -441,7 +460,7 @@ export default function ProgramacaoProvisoria() {
           time: "16h05–16h15",
           title:
             "Gastronomia, viagens e cinematografia: narrativas e processos criativos na série Chef's Table.",
-          author: "Israel Bertamoni; Gabriela Tienne Francio; Henrique Subtil Sartori",
+          author: "Israel Bertamoni; Gabriela Tieppo Francio; Henrique Subtil Sartori",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
       ],
@@ -454,13 +473,14 @@ export default function ProgramacaoProvisoria() {
       room: "401 – Bloco F – UCS",
       coordinators: "André Rianni Costa Perinotto e Vanilson Pereira Silveira",
       technicalSupport: "Patrícia Carvalheiro Pereira",
+      coordinatorHeading: "coordenador",
       rows: [
         {
           time: "9h–9h15",
           title:
             "El cine como constructor de imaginarios y motor del desarrollo turístico: articulaciones pendientes en Uruguay",
           author: "Irene Goncalves Mautone",
-          affiliation: "Universidade da República – CURE/Udelar (Uruguai) — ONLINE",
+          affiliation: "Universidade da República – CURE/ Udelar (Uruguai) — ONLINE",
         },
         {
           time: "9h15–9h30",
@@ -473,7 +493,7 @@ export default function ProgramacaoProvisoria() {
           title:
             "Film Commissions como Vetores Estratégicos do Turismo Cinematográfico: evidências e perspectivas para o Piauí",
           author: "André Riani Costa Perinotto; José Rafael Magalhães Pereira",
-          affiliation: "Universidade Federal do Paraná – UFPR (Brasil)",
+          affiliation: "Universidade Federal do Paraná – UFDPar (Brasil)",
         },
         {
           time: "9h45–10h",
@@ -486,7 +506,7 @@ export default function ProgramacaoProvisoria() {
           time: "10h–10h15",
           title:
             "Turismo e audiovisual em Antônio Prado: o potencial territorial como fator de atração de produções",
-          author: "Henrique Sottoriva; Gabriele Euzébio de Brito Noronha",
+          author: "Henrique Sottorriva; Gabriele Euzébio de Brito Noronha",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
       ],
@@ -531,7 +551,8 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title: "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — manhã",
+      title:
+        "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — manhã (9h – 10h30)",
       date: "27 de março de 2026",
       time: "9h – 10h30",
       room: "403 – Bloco F – UCS",
@@ -626,12 +647,14 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title: "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — tarde",
+      title:
+        "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — tarde (13h30 – 15h)",
       date: "27 de março de 2026",
       time: "13h30 – 15h",
       room: "401 – Bloco F – UCS",
       coordinators: "Suzana Maria De Conto e Jennifer Bauer Eme",
       technicalSupport: "Daiane de Lima Pedro",
+      coordinatorHeading: "coordenacao",
       rows: [
         {
           time: "13h30–13h45",
@@ -672,12 +695,13 @@ export default function ProgramacaoProvisoria() {
     },
     {
       title:
-        "TEMÁTICA 8: Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo + TEMÁTICA 12: Interfaces turístico-pedagógicas",
+        "TEMÁTICA 8: Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo\nTEMÁTICA 12: Interfaces turístico-pedagógicas",
       date: "27 de março de 2026",
       time: "13h30 – 15h",
       room: "403 – Bloco F – UCS",
       coordinators: "Francielle de Lima e Daniel Tomazzoni",
       technicalSupport: "Bruna Perini Novaes",
+      coordinatorHeading: "coordenacao",
       rows: [
         {
           time: "13h30–13h40",
@@ -694,18 +718,18 @@ export default function ProgramacaoProvisoria() {
           affiliation: "Universidade Federal do Pampa – Unipampa (Brasil)",
         },
         {
-          time: "13h45–14h",
-          title:
-            "A interferência da Destination Management Organization Gramadotur na competitividade do destino turístico Gramado-RS/Brasil a partir de uma gestão eficaz",
-          author: "Letícia Carvalho Vivian; Rodrigo Luis dos Santos",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
           time: "13h50–14h",
           title:
             'O turismo literário e a perspectiva do "pedestre" em Michel de Certeau e do "homem lento" em Milton Santos',
           author: "Juliano Pessanha Gonçalves",
           affiliation: "Centro Federal de Educação Tecnológica – CEFET/RJ (Brasil)",
+        },
+        {
+          time: "13h45–14h",
+          title:
+            "A interferência da Destination Management Organization Gramadotur na competitividade do destino turístico Gramado-RS/Brasil a partir de uma gestão eficaz",
+          author: "Letícia Carvalho Vivian; Rodrigo Luis dos Santos",
+          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
           time: "14h–14h10",
@@ -764,8 +788,8 @@ export default function ProgramacaoProvisoria() {
 
   return (
     <div className="mt-12">
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
-        {t("program.title")}
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center uppercase tracking-wide">
+        {t("program.officialTitle")}
       </h2>
       <div className="space-y-4">
         {sessions.map((entry, index) => (

@@ -54,6 +54,7 @@
   },
   "program": {
     "title": "Programa",
+    "officialTitle": "Programa oficial",
     "description": "Consulte la programación completa del evento",
     "intro": "El evento se desarrolla durante tres días, con sesiones plenarias, conferencias magistrales, comunicaciones científicas y actividades especiales.",
     "time": "Hora",

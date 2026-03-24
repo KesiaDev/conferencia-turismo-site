@@ -54,6 +54,7 @@
   },
   "program": {
     "title": "Program",
+    "officialTitle": "Official schedule",
     "description": "Check out the complete event schedule",
     "intro": "The event takes place over three days, with plenary sessions, keynote lectures, scientific communications and special activities.",
     "time": "Time",
