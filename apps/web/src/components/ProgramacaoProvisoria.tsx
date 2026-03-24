@@ -34,17 +34,18 @@ function coordinatorLabel(h: CoordinatorHeading | undefined): string {
 type ProgramEntry =
   | SessionBlockProps
   | { heading: string }
-  | { tematica14Pair: true; morning: SessionBlockProps; afternoon: SessionBlockProps };
+  | { splitSessionPair: true; morning: SessionBlockProps; afternoon: SessionBlockProps };
 
 function isDayHeading(entry: ProgramEntry): entry is { heading: string } {
   return "heading" in entry;
 }
 
-function isTematica14Pair(
+function isSplitSessionPair(
   entry: ProgramEntry
-): entry is { tematica14Pair: true; morning: SessionBlockProps; afternoon: SessionBlockProps } {
+): entry is { splitSessionPair: true; morning: SessionBlockProps; afternoon: SessionBlockProps } {
   return (
-    "tematica14Pair" in entry && (entry as { tematica14Pair?: boolean }).tematica14Pair === true
+    "splitSessionPair" in entry &&
+    (entry as { splitSessionPair?: boolean }).splitSessionPair === true
   );
 }
 
@@ -104,7 +105,7 @@ function SessionMeta({
   );
 }
 
-function SessionBlockT14Combined({
+function SessionBlockSplitPair({
   morning,
   afternoon,
 }: {
@@ -243,7 +244,7 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      tematica14Pair: true,
+      splitSessionPair: true,
       morning: {
         title:
           "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
@@ -332,95 +333,98 @@ export default function ProgramacaoProvisoria() {
       },
     },
     {
-      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
-      date: "26 de março de 2026",
-      time: "13h30 – 15h",
-      room: "404 – Bloco F – UCS",
-      coordinators: "André Brayner de Farias e Rita Baleiro",
-      technicalSupport: "Ernani Viana da Silva",
-      rows: [
-        {
-          time: "13h30–13h45",
-          title: "Portuguese literary walks and routes: Practices and recommendations",
-          author: "Rita Baleiro",
-          affiliation: "ESGHT – Universidade do Algarve, CiTUR-Algarve (Portugal)",
-        },
-        {
-          time: "13h45–14h",
-          title:
-            "Roteiros e rotas literárias e cinematográficas baseadas em Jorge Amado em Salvador",
-          author: "Clara Assunção da Silva Cerqueira",
-          affiliation: "Universidade do Estado da Bahia – Uneb (Brasil)",
-        },
-        {
-          time: "14h–14h15",
-          title:
-            'Da tela para a cidade: roteiro turístico em Salvador inspirado em "Trampolim do Forte"',
-          author: "Pohema Profeta de Araújo de Jesus",
-          affiliation: "Universidade do Estado da Bahia (Brasil)",
-        },
-        {
-          time: "14h15–14h30",
-          title:
-            "Punta del Este en los años 60: lugares, recorridos y prácticas de veraneo. Representaciones construidas desde la promoción turística, el cine y la literatura.",
-          author: "Victoria Lembo",
-          affiliation: "Universidad de la República (Uruguai) — ONLINE",
-        },
-        {
-          time: "14h30–14h45",
-          title: "Roteiro Turístico literário: Caminhos de Schlee - Jaguarão/RS",
-          author: "Juliana Rose Jasper; Ângela Bento Ribeiro; Alice Leoti",
-          affiliation:
-            "Universidade Federal do Pampa – Unipampa, Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
-      ],
-    },
-    {
-      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
-      date: "26 de março de 2026",
-      time: "15h35 – 17h",
-      room: "404 – Bloco F – UCS",
-      coordinators: "André Brayner de Farias e Ernani Vieira da Silva",
-      technicalSupport: "Patrícia Carvalheiro Pereira",
-      rows: [
-        {
-          time: "15h35–15h50",
-          title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
-          author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
-          affiliation: "Universidade do Vale do Itajaí-Univali (Brasil)",
-        },
-        {
-          time: "15h50–16h05",
-          title:
-            "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul – RS.",
-          author:
-            "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "16h05–16h20",
-          title:
-            "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
-          author: "Patricia Carvalheiro Pereira",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "16h20–16h35",
-          title:
-            "De la mirada viajeira al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
-          author: "Fany Magraner-Frau",
-          affiliation: "De Fàbula. Cultura sense límits (Espanha) — ONLINE",
-        },
-        {
-          time: "16h35–16h50",
-          title:
-            "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
-          author: "Tathiana de Alcantara Macedo Daou",
-          affiliation:
-            "Serviço Social do Comércio – Sesc DF/ Universidade de Brasília – UnB (Brasil)",
-        },
-      ],
+      splitSessionPair: true,
+      morning: {
+        title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
+        date: "26 de março de 2026",
+        time: "13h30 – 15h",
+        room: "404 – Bloco F – UCS",
+        coordinators: "André Brayner de Farias e Rita Baleiro",
+        technicalSupport: "Ernani Viana da Silva",
+        rows: [
+          {
+            time: "13h30–13h45",
+            title: "Portuguese literary walks and routes: Practices and recommendations",
+            author: "Rita Baleiro",
+            affiliation: "ESGHT – Universidade do Algarve, CiTUR-Algarve (Portugal)",
+          },
+          {
+            time: "13h45–14h",
+            title:
+              "Roteiros e rotas literárias e cinematográficas baseadas em Jorge Amado em Salvador",
+            author: "Clara Assunção da Silva Cerqueira",
+            affiliation: "Universidade do Estado da Bahia – Uneb (Brasil)",
+          },
+          {
+            time: "14h–14h15",
+            title:
+              'Da tela para a cidade: roteiro turístico em Salvador inspirado em "Trampolim do Forte"',
+            author: "Pohema Profeta de Araújo de Jesus",
+            affiliation: "Universidade do Estado da Bahia (Brasil)",
+          },
+          {
+            time: "14h15–14h30",
+            title:
+              "Punta del Este en los años 60: lugares, recorridos y prácticas de veraneo. Representaciones construidas desde la promoción turística, el cine y la literatura.",
+            author: "Victoria Lembo",
+            affiliation: "Universidad de la República (Uruguai) — ONLINE",
+          },
+          {
+            time: "14h30–14h45",
+            title: "Roteiro Turístico literário: Caminhos de Schlee - Jaguarão/RS",
+            author: "Juliana Rose Jasper; Ângela Bento Ribeiro; Alice Leoti",
+            affiliation:
+              "Universidade Federal do Pampa – Unipampa, Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+        ],
+      },
+      afternoon: {
+        title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
+        date: "26 de março de 2026",
+        time: "15h35 – 17h",
+        room: "404 – Bloco F – UCS",
+        coordinators: "André Brayner de Farias e Ernani Vieira da Silva",
+        technicalSupport: "Patrícia Carvalheiro Pereira",
+        rows: [
+          {
+            time: "15h35–15h50",
+            title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
+            author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
+            affiliation: "Universidade do Vale do Itajaí-Univali (Brasil)",
+          },
+          {
+            time: "15h50–16h05",
+            title:
+              "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul – RS.",
+            author:
+              "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
+            affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          {
+            time: "16h05–16h20",
+            title:
+              "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
+            author: "Patricia Carvalheiro Pereira",
+            affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          {
+            time: "16h20–16h35",
+            title:
+              "De la mirada viajeira al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
+            author: "Fany Magraner-Frau",
+            affiliation: "De Fàbula. Cultura sense límits (Espanha) — ONLINE",
+          },
+          {
+            time: "16h35–16h50",
+            title:
+              "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
+            author: "Tathiana de Alcantara Macedo Daou",
+            affiliation:
+              "Serviço Social do Comércio – Sesc DF/ Universidade de Brasília – UnB (Brasil)",
+          },
+        ],
+      },
     },
     {
       title: "TEMÁTICA 9: Preservação do patrimônio literário e cultural e da autenticidade",
@@ -877,8 +881,8 @@ export default function ProgramacaoProvisoria() {
           <div key={index}>
             {isDayHeading(entry) ? (
               <DayHeading label={entry.heading} />
-            ) : isTematica14Pair(entry) ? (
-              <SessionBlockT14Combined morning={entry.morning} afternoon={entry.afternoon} />
+            ) : isSplitSessionPair(entry) ? (
+              <SessionBlockSplitPair morning={entry.morning} afternoon={entry.afternoon} />
             ) : (
               <SessionBlock {...entry} />
             )}
