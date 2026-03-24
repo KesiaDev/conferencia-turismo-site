@@ -476,7 +476,7 @@ export default function ProgramacaoProvisoria() {
       date: "26 de março de 2026",
       time: "15h35 – 17h",
       room: "401 – Bloco F – UCS",
-      coordinators: "Francielle de Lima e Jenniffer Bauer Eme",
+      coordinators: "Francielle de Lima e Jennifer Bauer Eme",
       technicalSupport: "Gabriel Machado Oliveira",
       coordinatorHeading: "coordenador",
       rows: [
