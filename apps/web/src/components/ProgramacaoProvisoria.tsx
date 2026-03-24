@@ -738,7 +738,7 @@ export default function ProgramacaoProvisoria() {
       date: "27 de março de 2026",
       time: "13h30 – 15h",
       room: "401 – Bloco F – UCS",
-      coordinators: "Suzana Maria De Conto",
+      coordinators: "Suzana Maria De Conto e Patrícia Carvalheiro Pereira",
       technicalSupport: "Daiane de Lima Pedro",
       coordinatorHeading: "coordenacao",
       rows: [
