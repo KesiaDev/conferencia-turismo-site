@@ -552,7 +552,7 @@ export default function ProgramacaoProvisoria() {
     },
     { heading: "27 de março de 2026" },
     {
-      title: "TEMÁTICA 2: O papel das Film Commissions",
+      title: "TEMÁTICA 2 : O papel das Film Commissions",
       date: "27 de março de 2026",
       time: "9h – 10h30",
       room: "401 – Bloco F – UCS",
@@ -655,7 +655,7 @@ export default function ProgramacaoProvisoria() {
           time: "9h15–9h30",
           title:
             "Entre fronteiras e telas: representações do refúgio e conflitos de alteridade na interface entre cinema e turismo cinematográfico",
-          author: "Viviane Rocha",
+          author: "Duda Rocha",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
