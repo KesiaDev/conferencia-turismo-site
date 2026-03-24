@@ -440,7 +440,7 @@ export const callForPapers = {
     "5. Estudos de casos de modelos bem sucedidos ou pouco explorados de desenvolvimento territorial orientado para o turismo literário/cinematográfico",
     "6. Estratégias para promover a sustentabilidade e o desenvolvimento regional por meio do patrimônio literário e das produções cinematográficas",
     "7. Narração de histórias e comunidades locais no turismo literário e cinematográfico",
-    "8. Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo",
+    "8. Governança e planejamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo",
     "9. Preservação do patrimônio literário e cultural e da autenticidade",
     "10. Desenvolvimento de projetos em zonas rurais",
     "11. Percepções das comunidades locais sobre o turismo literário e cinematográfico",

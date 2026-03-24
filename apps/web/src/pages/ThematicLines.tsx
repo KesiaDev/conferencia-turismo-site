@@ -13,7 +13,7 @@ export default function ThematicLines() {
     "Estudos de casos de modelos bem sucedidos ou pouco explorados de desenvolvimento territorial orientado para o turismo literário/cinematográfico",
     "Estratégias para promover a sustentabilidade e o desenvolvimento regional por meio do patrimônio literário e das produções cinematográficas",
     "Narração de histórias e comunidades locais no turismo literário e cinematográfico",
-    "Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo",
+    "Governança e planejamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo",
     "Preservação do patrimônio literário e cultural e da autenticidade",
     "Desenvolvimento de projetos em zonas rurais",
     "Percepções das comunidades locais sobre o turismo literário e cinematográfico",

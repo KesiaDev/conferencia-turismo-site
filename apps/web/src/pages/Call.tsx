@@ -543,8 +543,8 @@ export default function Call() {
                     7. Narração de histórias e comunidades locais no turismo literário e
                     cinematográfico
                   </option>
-                  <option value="8. Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo">
-                    8. Governança e planeamento estratégico: colaboração das partes interessadas,
+                  <option value="8. Governança e planejamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo">
+                    8. Governança e planejamento estratégico: colaboração das partes interessadas,
                     mecanismos de financiamento, quadros regulamentares, governos locais,
                     instituições culturais e conselhos de turismo
                   </option>

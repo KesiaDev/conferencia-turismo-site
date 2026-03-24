@@ -780,7 +780,7 @@ export default function ProgramacaoProvisoria() {
     },
     {
       title:
-        "TEMÁTICA 8: Governança e planeamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo\nTEMÁTICA 12: Interfaces turístico-pedagógicas",
+        "TEMÁTICA 8: Governança e planejamento estratégico: colaboração das partes interessadas, mecanismos de financiamento, quadros regulamentares, governos locais, instituições culturais e conselhos de turismo\nTEMÁTICA 12: Interfaces turístico-pedagógicas",
       date: "27 de março de 2026",
       time: "13h30 – 15h",
       room: "403 – Bloco F – UCS",
