@@ -79,9 +79,8 @@ export default function ImportantNotice() {
                     {PRESENTATION_EMAIL}
                   </a>{" "}
                   a sua apresentação em <strong>PDF</strong> e <strong>PowerPoint</strong>. Assim,
-                  você ajuda na <strong>otimização do tempo</strong>{" "}
-                  <strong>em uma organização ainda melhor</strong> do evento — contamos com a sua
-                  colaboração!
+                  você ajuda na <strong>otimização do tempo</strong> e na{" "}
+                  <strong>melhor organização</strong> do evento — contamos com a sua colaboração!
                 </p>
               </div>
             </div>
