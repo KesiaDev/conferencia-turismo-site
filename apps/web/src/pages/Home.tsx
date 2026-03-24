@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import SpeakerCard from "../components/SpeakerCard";
@@ -191,32 +190,6 @@ export default function Home() {
       <div className="w-full">
         <div className="container-custom px-4 pt-8 pb-4">
           <ImportantNotice />
-        </div>
-      </div>
-
-      <div className="py-8 md:py-12">
-        <div className="container-custom text-center">
-          <div className="flex gap-3 md:gap-4 justify-center flex-wrap px-4">
-            <Link
-              to="/fees"
-              className="group relative inline-flex items-center justify-center gap-2 bg-white hover:bg-[#e0a085] text-[#e0a085] hover:text-white font-bold py-4 px-8 rounded-xl min-h-[56px] transition-all duration-300 shadow-xl hover:shadow-2xl border-2 border-[#e0a085] flex-1 sm:flex-initial min-w-[220px] transform hover:scale-105"
-            >
-              <span className="text-base md:text-lg">{t("home.register")}</span>
-              <svg
-                className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
         </div>
       </div>
 
