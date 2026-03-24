@@ -154,7 +154,7 @@ export default function ProgramacaoProvisoria() {
           time: "14h20–14h30",
           title: "O audiovisual como vetor de turismo sustentável em Nova Friburgo – RJ",
           author: "Alinne Schuenck Gama; Ambrozio Correa de Queiroz Neto",
-          affiliation: "CEFET/RJ Uned Nova Friburgo (Brasil)",
+          affiliation: "CEFET/RJ Universidade Nova Friburgo (Brasil)",
         },
         {
           time: "14h30–14h40",
