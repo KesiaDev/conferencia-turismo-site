@@ -60,7 +60,8 @@
     "time": "Hora",
     "activity": "Actividad",
     "location": "Lugar",
-    "track": "Línea"
+    "track": "Línea",
+    "floatingComputersNote": "Se dispondrán computadoras para las presentaciones"
   },
   "call": {
     "title": "Convocatoria de Trabajos",

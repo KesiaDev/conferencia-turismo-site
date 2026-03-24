@@ -60,7 +60,8 @@
     "time": "Horário",
     "activity": "Atividade",
     "location": "Local",
-    "track": "Linha"
+    "track": "Linha",
+    "floatingComputersNote": "Serão disponibilizados computadores para as apresentações"
   },
   "call": {
     "title": "Chamada de Trabalhos",

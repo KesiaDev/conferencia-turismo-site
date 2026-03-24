@@ -60,7 +60,8 @@
     "time": "Time",
     "activity": "Activity",
     "location": "Location",
-    "track": "Track"
+    "track": "Track",
+    "floatingComputersNote": "Computers will be provided for presentations"
   },
   "call": {
     "title": "Call for Papers",

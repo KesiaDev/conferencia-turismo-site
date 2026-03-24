@@ -873,23 +873,39 @@ export default function ProgramacaoProvisoria() {
   ];
 
   return (
-    <div className="mt-12">
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center uppercase tracking-wide">
-        {t("program.officialTitle")}
-      </h2>
-      <div className="space-y-4">
-        {sessions.map((entry, index) => (
-          <div key={index}>
-            {isDayHeading(entry) ? (
-              <DayHeading label={entry.heading} />
-            ) : isSplitSessionPair(entry) ? (
-              <SessionBlockSplitPair morning={entry.morning} afternoon={entry.afternoon} />
-            ) : (
-              <SessionBlock {...entry} />
-            )}
-          </div>
-        ))}
+    <>
+      <div
+        className="fixed bottom-4 left-4 right-4 z-[100] flex justify-center md:justify-end md:right-6 md:left-auto pointer-events-none"
+        aria-live="polite"
+      >
+        <div
+          className="pointer-events-auto max-w-md rounded-xl border border-[#e0a085]/40 bg-[#fdf8f2] px-4 py-3 text-center text-sm leading-snug text-[#5A3E00] shadow-lg"
+          role="status"
+        >
+          <span className="mr-1.5 inline-block" aria-hidden="true">
+            💻
+          </span>
+          {t("program.floatingComputersNote")}
+        </div>
       </div>
-    </div>
+      <div className="mt-12 pb-24 md:pb-28">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center uppercase tracking-wide">
+          {t("program.officialTitle")}
+        </h2>
+        <div className="space-y-4">
+          {sessions.map((entry, index) => (
+            <div key={index}>
+              {isDayHeading(entry) ? (
+                <DayHeading label={entry.heading} />
+              ) : isSplitSessionPair(entry) ? (
+                <SessionBlockSplitPair morning={entry.morning} afternoon={entry.afternoon} />
+              ) : (
+                <SessionBlock {...entry} />
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
