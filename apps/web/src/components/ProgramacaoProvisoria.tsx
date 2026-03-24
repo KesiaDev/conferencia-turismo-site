@@ -31,10 +31,114 @@ function coordinatorLabel(h: CoordinatorHeading | undefined): string {
   }
 }
 
-type ProgramEntry = SessionBlockProps | { heading: string };
+type ProgramEntry =
+  | SessionBlockProps
+  | { heading: string }
+  | { tematica14Pair: true; morning: SessionBlockProps; afternoon: SessionBlockProps };
 
 function isDayHeading(entry: ProgramEntry): entry is { heading: string } {
   return "heading" in entry;
+}
+
+function isTematica14Pair(
+  entry: ProgramEntry
+): entry is { tematica14Pair: true; morning: SessionBlockProps; afternoon: SessionBlockProps } {
+  return (
+    "tematica14Pair" in entry && (entry as { tematica14Pair?: boolean }).tematica14Pair === true
+  );
+}
+
+function ScheduleTable({ rows }: { rows: SessionRow[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[600px] text-sm">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="text-left p-3 font-semibold w-28">Horário</th>
+            <th className="text-left p-3 font-semibold">Trabalho Título</th>
+            <th className="text-left p-3 font-semibold w-48">Autor</th>
+            <th className="text-left p-3 font-semibold">Universidade/País</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row, i) => (
+            <tr key={i} className="border-b hover:bg-gray-50">
+              <td className="p-3 align-top font-medium text-gray-800">{row.time}</td>
+              <td className="p-3 align-top text-gray-700">{row.title}</td>
+              <td className="p-3 align-top text-gray-700">{row.author}</td>
+              <td className="p-3 align-top text-gray-700">{row.affiliation}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function SessionMeta({
+  time,
+  room,
+  coordinators,
+  technicalSupport,
+  coordinatorHeading,
+}: Pick<
+  SessionBlockProps,
+  "time" | "room" | "coordinators" | "technicalSupport" | "coordinatorHeading"
+>) {
+  return (
+    <>
+      <p className="text-sm text-gray-600 mb-0.5">
+        <span className="font-semibold">Horário:</span> {time}
+      </p>
+      <p className="text-sm text-gray-600 mb-0.5">
+        <span className="font-semibold">SALA:</span> {room}
+      </p>
+      <p className="text-sm text-gray-600 mb-0.5">
+        <span className="font-semibold">{coordinatorLabel(coordinatorHeading)}:</span>{" "}
+        {coordinators}
+      </p>
+      <p className="text-sm text-gray-600 mb-3">
+        <span className="font-semibold">Apoio técnico:</span> {technicalSupport}
+      </p>
+    </>
+  );
+}
+
+function SessionBlockT14Combined({
+  morning,
+  afternoon,
+}: {
+  morning: SessionBlockProps;
+  afternoon: SessionBlockProps;
+}) {
+  return (
+    <div className="mb-4 rounded-lg border border-gray-200 bg-white p-4 shadow-sm md:p-5">
+      <h3 className="text-lg md:text-xl font-bold text-[#e0a085] mb-1.5 whitespace-pre-line">
+        {morning.title}
+      </h3>
+      <p className="text-sm text-gray-600 mb-0.5">
+        <span className="font-semibold">Data:</span> {morning.date}
+      </p>
+      <SessionMeta
+        time={morning.time}
+        room={morning.room}
+        coordinators={morning.coordinators}
+        technicalSupport={morning.technicalSupport}
+        coordinatorHeading={morning.coordinatorHeading}
+      />
+      <ScheduleTable rows={morning.rows} />
+      <div className="mt-0 border-t border-gray-200 pt-4">
+        <SessionMeta
+          time={afternoon.time}
+          room={afternoon.room}
+          coordinators={afternoon.coordinators}
+          technicalSupport={afternoon.technicalSupport}
+          coordinatorHeading={afternoon.coordinatorHeading}
+        />
+        <ScheduleTable rows={afternoon.rows} />
+      </div>
+    </div>
+  );
 }
 
 function DayHeading({ label }: { label: string }) {
@@ -66,41 +170,14 @@ function SessionBlock({
       <p className="text-sm text-gray-600 mb-0.5">
         <span className="font-semibold">Data:</span> {date}
       </p>
-      <p className="text-sm text-gray-600 mb-0.5">
-        <span className="font-semibold">Horário:</span> {time}
-      </p>
-      <p className="text-sm text-gray-600 mb-0.5">
-        <span className="font-semibold">SALA:</span> {room}
-      </p>
-      <p className="text-sm text-gray-600 mb-0.5">
-        <span className="font-semibold">{coordinatorLabel(coordinatorHeading)}:</span>{" "}
-        {coordinators}
-      </p>
-      <p className="text-sm text-gray-600 mb-3">
-        <span className="font-semibold">Apoio técnico:</span> {technicalSupport}
-      </p>
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[600px] text-sm">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="text-left p-3 font-semibold w-28">Horário</th>
-              <th className="text-left p-3 font-semibold">Trabalho Título</th>
-              <th className="text-left p-3 font-semibold w-48">Autor</th>
-              <th className="text-left p-3 font-semibold">Universidade/País</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row, i) => (
-              <tr key={i} className="border-b hover:bg-gray-50">
-                <td className="p-3 align-top font-medium text-gray-800">{row.time}</td>
-                <td className="p-3 align-top text-gray-700">{row.title}</td>
-                <td className="p-3 align-top text-gray-700">{row.author}</td>
-                <td className="p-3 align-top text-gray-700">{row.affiliation}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <SessionMeta
+        time={time}
+        room={room}
+        coordinators={coordinators}
+        technicalSupport={technicalSupport}
+        coordinatorHeading={coordinatorHeading}
+      />
+      <ScheduleTable rows={rows} />
     </div>
   );
 }
@@ -166,89 +243,93 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title:
-        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
-      date: "26 de março de 2026",
-      time: "13h30 – 15h",
-      room: "403 – Bloco F – UCS",
-      coordinators: "(13h30–15h) Ronaldo Leites Diaz e Mariane Gomes (PPGLET)",
-      technicalSupport: "Rafael Bardina de Melo",
-      rows: [
-        {
-          time: "13h10–13h45",
-          title:
-            "Territorio, identidad y ficción: la gastronomía como lenguaje audiovisual del destino turístico",
-          author: "Eugeni Osácar; Esther Velasco",
-          affiliation:
-            "CETT Barcelona School of Tourism, Hospitality and Gastronomy (Espanha) — ONLINE",
-        },
-        {
-          time: "13h45–14h",
-          title:
-            "Famous Film set’s sense of place among locals: the case of Muhu Island in Estonia",
-          author: "Marit Piirman",
-          affiliation: "University of Tartu (Estonia) — ONLINE",
-        },
-        {
-          time: "14h–14h15",
-          title: "A paisagem como patrimônio cultural: representações fílmicas das tradições",
-          author: "Júlia Carneiro Silva",
-          affiliation: "Universidade do Estado da Bahia – UNEB (Brasil)",
-        },
-        {
-          time: "14h15–14h30",
-          title: "O Tesouro de Umberto Eco",
-          author: "Rosana Peccini",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "14h30–14h40",
-          title: "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
-          author: "Thiele Aparecida Nascimento Piotto",
-          affiliation: "Universidade Cidade de São Paulo – Unicid (Brasil)",
-        },
-        { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
-      ],
-    },
-    {
-      title:
-        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
-      date: "26 de março de 2026",
-      time: "15h35 – 17h",
-      room: "403 – Bloco F – UCS",
-      coordinators: "Ronaldo Leites Diaz e Simone Sandi",
-      technicalSupport: "Rafael Bardina de Melo",
-      rows: [
-        {
-          time: "15h35–15h50",
-          title:
-            "Autopesquisa, afetivações e turismo literário e cinematográfico: Verona como destino turístico afetivo",
-          author: "Simone Maria Sandi; Maria Luiza Cardinale Baptista",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "15h50–16h05",
-          title:
-            '"Duna", a construção do imaginário turístico e a transformação de paisagens ficcionais em desejos de viagem',
-          author: "Ronaldo Leites Diaz; Luciane Todeschini Ferreira",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "16h05–16h20",
-          title:
-            "Close up em Fortaleza-CE: estudo sobre imagem e imaginário turístico por meio de produção cinematográfica",
-          author:
-            "Pedro Lucas Filgueira Pereira; Michel Jairo Vieira da Silva; Marcelo da Silva Taveira",
-          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
-        },
-        {
-          time: "16h20–16h35",
-          title:
-            "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
-          author: "Myllene Medeiros de Oliveira",
-          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
-        },
-      ],
+      tematica14Pair: true,
+      morning: {
+        title:
+          "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
+        date: "26 de março de 2026",
+        time: "13h30 – 15h",
+        room: "403 – Bloco F – UCS",
+        coordinators: "(13h30–15h) Ronaldo Leites Diaz e Mariane Gomes (PPGLET)",
+        technicalSupport: "Rafael Bardina de Melo",
+        rows: [
+          {
+            time: "13h10–13h45",
+            title:
+              "Territorio, identidad y ficción: la gastronomía como lenguaje audiovisual del destino turístico",
+            author: "Eugeni Osácar; Esther Velasco",
+            affiliation:
+              "CETT Barcelona School of Tourism, Hospitality and Gastronomy (Espanha) — ONLINE",
+          },
+          {
+            time: "13h45–14h",
+            title:
+              "Famous Film set’s sense of place among locals: the case of Muhu Island in Estonia",
+            author: "Marit Piirman",
+            affiliation: "University of Tartu (Estonia) — ONLINE",
+          },
+          {
+            time: "14h–14h15",
+            title: "A paisagem como patrimônio cultural: representações fílmicas das tradições",
+            author: "Júlia Carneiro Silva",
+            affiliation: "Universidade do Estado da Bahia – UNEB (Brasil)",
+          },
+          {
+            time: "14h15–14h30",
+            title: "O Tesouro de Umberto Eco",
+            author: "Rosana Peccini",
+            affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          {
+            time: "14h30–14h40",
+            title:
+              "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
+            author: "Thiele Aparecida Nascimento Piotto",
+            affiliation: "Universidade Cidade de São Paulo – Unicid (Brasil)",
+          },
+          { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+        ],
+      },
+      afternoon: {
+        title:
+          "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional",
+        date: "26 de março de 2026",
+        time: "15h35 – 17h",
+        room: "403 – Bloco F – UCS",
+        coordinators: "Ronaldo Leites Diaz e Simone Sandi",
+        technicalSupport: "Rafael Bardina de Melo",
+        rows: [
+          {
+            time: "15h35–15h50",
+            title:
+              "Autopesquisa, afetivações e turismo literário e cinematográfico: Verona como destino turístico afetivo",
+            author: "Simone Maria Sandi; Maria Luiza Cardinale Baptista",
+            affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          {
+            time: "15h50–16h05",
+            title:
+              '"Duna", a construção do imaginário turístico e a transformação de paisagens ficcionais em desejos de viagem',
+            author: "Ronaldo Leites Diaz; Luciane Todeschini Ferreira",
+            affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          },
+          {
+            time: "16h05–16h20",
+            title:
+              "Close up em Fortaleza-CE: estudo sobre imagem e imaginário turístico por meio de produção cinematográfica",
+            author:
+              "Pedro Lucas Filgueira Pereira; Michel Jairo Vieira da Silva; Marcelo da Silva Taveira",
+            affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
+          },
+          {
+            time: "16h20–16h35",
+            title:
+              "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
+            author: "Myllene Medeiros de Oliveira",
+            affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
+          },
+        ],
+      },
     },
     {
       title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos",
@@ -796,6 +877,8 @@ export default function ProgramacaoProvisoria() {
           <div key={index}>
             {isDayHeading(entry) ? (
               <DayHeading label={entry.heading} />
+            ) : isTematica14Pair(entry) ? (
+              <SessionBlockT14Combined morning={entry.morning} afternoon={entry.afternoon} />
             ) : (
               <SessionBlock {...entry} />
             )}
