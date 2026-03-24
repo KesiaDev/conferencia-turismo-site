@@ -462,6 +462,12 @@ export default function ProgramacaoProvisoria() {
           author: "Jean Carlos Vieira Santos; Jackson Santana da Silva; Jairo Alves Leite",
           affiliation: "Universidade Estadual de Goiás UEG (Brasil)",
         },
+        {
+          time: "14h30–15h",
+          title: "Patrimônio habitado: o espetáculo Som e Luz como narrativa performativa",
+          author: "Rafaely da Silva Reggiori",
+          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+        },
       ],
     },
     {
@@ -637,9 +643,9 @@ export default function ProgramacaoProvisoria() {
     },
     {
       title:
-        "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — manhã (9h – 10h30)",
+        "TEMÁTICA 13: Representação cinematográfica/literária das comunidades locais — manhã (9h – 10h)",
       date: "27 de março de 2026",
-      time: "9h – 10h30",
+      time: "9h – 10h",
       room: "403 – Bloco F – UCS",
       coordinators: "Flávia Brocchetto Ramos e Simone Sandi",
       technicalSupport: "Bruna Perini Novaes",
@@ -660,19 +666,13 @@ export default function ProgramacaoProvisoria() {
         },
         {
           time: "9h30–9h45",
-          title: "Patrimônio habitado: o espetáculo Som e Luz como narrativa performativa",
-          author: "Rafaely da Silva Reggiori",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "9h45–10h",
           title:
             "No pulsar da batucada: as toadas dos bumbás no Festival Folclórico de Parintins como pontes narrativas e literárias na Amazônia",
           author: "Anny Gabrielly Peixoto de Oliveira",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
-          time: "10h–10h15",
+          time: "9h45–10h",
           title:
             "Sabores em cena: a alimentação como porta de entrada para o turismo cinematográfico",
           author: "Bruna Perini Novaes",
