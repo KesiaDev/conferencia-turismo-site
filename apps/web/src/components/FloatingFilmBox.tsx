@@ -129,14 +129,14 @@ export default function FloatingFilmBox() {
       role="presentation"
       aria-label="online-card"
       style={{ zIndex: 1000 }}
-      className={`hidden lg:flex fixed top-56 left-6 w-44 h-44 rounded-[20px] shadow-xl backdrop-blur-md overflow-hidden bg-gradient-to-br from-black/80 to-[rgba(160,82,45,0.9)] p-4 flex flex-col justify-center items-start gap-1 transform-gpu transition-all duration-400 ${visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-2 scale-95"}`}
+      className={`hidden lg:flex fixed z-[100] left-3 sm:left-4 xl:left-6 top-[10.5rem] sm:top-[11.5rem] lg:top-52 xl:top-56 size-36 xl:size-44 max-w-[min(11rem,calc(100vw-2rem))] rounded-[20px] shadow-xl backdrop-blur-md overflow-hidden bg-gradient-to-br from-black/80 to-[rgba(160,82,45,0.9)] p-3 sm:p-4 flex flex-col justify-center items-start gap-1 transform-gpu transition-all duration-400 ${visible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 -translate-y-2 scale-95"}`}
     >
-      <div className="flex flex-col gap-2">
-        <span className="text-white text-[28px] md:text-[32px] font-bold animate-pulse-online">
+      <div className="flex flex-col gap-1 sm:gap-2 min-w-0 w-full">
+        <span className="text-white text-[22px] lg:text-[26px] xl:text-[32px] font-bold animate-pulse-online leading-tight">
           Online
         </span>
 
-        <div className="text-[12px] md:text-[14px] text-[#E8A37B] leading-tight">
+        <div className="text-[10px] lg:text-[11px] xl:text-[14px] text-[#E8A37B] leading-snug">
           Nova modalidade de participação para pesquisadores estrangeiros
         </div>
       </div>

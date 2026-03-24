@@ -6,6 +6,57 @@ import duration from "dayjs/plugin/duration";
 
 dayjs.extend(duration);
 
+function CountdownBlocks({
+  timeLeft,
+  compact,
+}: {
+  timeLeft: { days: number; hours: number; minutes: number; seconds: number };
+  compact: boolean;
+}) {
+  const units = compact
+    ? [
+        { value: timeLeft.days, label: "DIAS" },
+        { value: timeLeft.hours, label: "HRS" },
+        { value: timeLeft.minutes, label: "MIN" },
+      ]
+    : [
+        { value: timeLeft.days, label: "DIAS" },
+        { value: timeLeft.hours, label: "HRS" },
+        { value: timeLeft.minutes, label: "MIN" },
+        { value: timeLeft.seconds, label: "SEG" },
+      ];
+
+  return (
+    <>
+      {units.map((item, i) => (
+        <div
+          key={i}
+          className={`flex flex-col items-center shrink-0 ${
+            compact ? "w-[34px] sm:w-[38px]" : "w-[40px] sm:w-[44px] lg:w-[46px]"
+          }`}
+        >
+          <div
+            className={`bg-[#e0a085] text-white font-bold rounded-md w-full text-center shadow-md ${
+              compact
+                ? "text-xs py-1"
+                : "text-base sm:text-lg lg:text-xl py-1.5 sm:py-2 rounded-lg shadow-lg"
+            }`}
+          >
+            {String(item.value).padStart(2, "0")}
+          </div>
+          <div
+            className={`text-[#e0a085] font-semibold mt-0.5 sm:mt-1 whitespace-nowrap ${
+              compact ? "text-[9px] sm:text-[10px]" : "text-[10px] sm:text-[11px] lg:text-[12px]"
+            }`}
+          >
+            {item.label}
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
+
 export default function Header() {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,118 +113,106 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 w-full bg-black ${
-        isMenuOpen ? "h-auto" : "h-[90px]"
+        isMenuOpen ? "h-auto" : "min-h-[72px] sm:min-h-[80px] lg:h-[90px]"
       } flex items-center ${isScrolled ? "shadow-2xl bg-black/95 backdrop-blur-md" : "shadow-lg"}`}
     >
-      <nav className="relative w-full h-full flex items-center" aria-label="Main navigation">
-        {/* Logo clicável - responsivo */}
-        <div className="absolute left-4 md:left-8 lg:left-20 z-10">
-          <Link
-            to="/"
-            className="flex items-center hover:opacity-80 transition-opacity cursor-pointer"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              setIsMenuOpen(false);
-            }}
-          >
-            <img
-              src="/logo.svg"
-              alt="LITFILM 2026"
-              className="h-10 sm:h-12 md:h-14 w-auto logo-filter"
-            />
-          </Link>
-        </div>
-
-        {/* Desktop Navigation - perfeitamente centralizado */}
-        <div className="hidden lg:flex items-center gap-8 xl:gap-10 absolute left-1/2 transform -translate-x-1/2">
-          {navigation.map((item) => (
+      <nav
+        className="relative w-full min-h-[inherit] flex flex-col lg:flex-row lg:items-center px-3 sm:px-4 md:px-6 lg:px-6 xl:px-10"
+        aria-label="Main navigation"
+      >
+        {/* Linha principal: logo | (vazio em mobile) | contador + menu — evita sobreposição */}
+        <div className="flex w-full items-center justify-between gap-2 min-h-[72px] sm:min-h-[80px] lg:min-h-[90px]">
+          <div className="flex min-w-0 shrink items-center z-10">
             <Link
-              key={item.href}
-              to={item.href}
-              className="flex items-center gap-2 text-lg xl:text-xl font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
+              to="/"
+              className="flex items-center hover:opacity-80 transition-opacity cursor-pointer"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                setIsMenuOpen(false);
+              }}
             >
-              {item.name}
-              {item.href === "/program" && (
-                <span className="badge-novo text-[10px] xl:text-xs font-bold text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
-                  Novo
-                </span>
-              )}
+              <img
+                src="/logo.svg"
+                alt="LITFILM 2026"
+                className="h-9 sm:h-10 md:h-11 lg:h-14 w-auto max-w-[min(100%,180px)] logo-filter"
+              />
             </Link>
-          ))}
-        </div>
+          </div>
 
-        {/* Contador regressivo - responsivo */}
-        <div
-          className="hidden md:flex lg:hidden items-center gap-2 absolute right-4"
-          role="timer"
-          aria-label="Contagem regressiva para a conferência"
-        >
-          {[
-            { value: timeLeft.days, label: "DIAS" },
-            { value: timeLeft.hours, label: "HRS" },
-            { value: timeLeft.minutes, label: "MIN" },
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-center w-[40px]">
-              <div className="bg-[#e0a085] text-white text-sm font-bold rounded-md py-1 w-full text-center shadow-md">
-                {String(item.value).padStart(2, "0")}
-              </div>
-              <div className="text-[10px] text-[#e0a085] font-semibold mt-1">{item.label}</div>
+          {/* Desktop: navegação central — min-w-0 permite encolher; links podem quebrar só em casos extremos */}
+          <div className="hidden lg:flex flex-1 min-w-0 justify-center items-center px-2 xl:px-4">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 xl:gap-x-6 2xl:gap-x-10 max-w-[min(100%,56rem)]">
+              {navigation.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className="flex items-center gap-1.5 text-sm xl:text-base 2xl:text-lg font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
+                >
+                  {item.name}
+                  {item.href === "/program" && (
+                    <span className="badge-novo text-[9px] xl:text-xs font-bold text-white px-1.5 py-0.5 rounded-full uppercase tracking-wide shrink-0">
+                      Novo
+                    </span>
+                  )}
+                </Link>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Desktop Contador regressivo - posicionado à direita */}
-        <div
-          className="hidden lg:flex items-center gap-3 absolute right-20"
-          role="timer"
-          aria-label="Contagem regressiva para a conferência"
-          aria-live="off"
-        >
-          {[
-            { value: timeLeft.days, label: "DIAS" },
-            { value: timeLeft.hours, label: "HRS" },
-            { value: timeLeft.minutes, label: "MIN" },
-            { value: timeLeft.seconds, label: "SEG" },
-          ].map((item, i) => (
-            <div key={i} className="flex flex-col items-center w-[46px]">
-              <div className="bg-[#e0a085] text-white text-xl font-bold rounded-lg py-2 w-full text-center shadow-lg">
-                {String(item.value).padStart(2, "0")}
-              </div>
-              <div className="text-[12px] text-[#e0a085] font-semibold mt-1.5 whitespace-nowrap">
-                {item.label}
-              </div>
+          {/* Direita: contador (tablet/desktop estreito) + botão menu — nunca no mesmo absolute */}
+          <div className="flex items-center justify-end gap-2 sm:gap-3 shrink-0">
+            {/* Tablet md–lg: contador compacto ao lado do menu (não sobrepõe links) */}
+            <div
+              className="hidden md:flex lg:hidden items-center gap-1.5 sm:gap-2"
+              role="timer"
+              aria-label="Contagem regressiva para a conferência"
+            >
+              <CountdownBlocks timeLeft={timeLeft} compact />
             </div>
-          ))}
+
+            {/* Desktop lg+: contador completo */}
+            <div
+              className="hidden lg:flex items-center gap-2 xl:gap-3"
+              role="timer"
+              aria-label="Contagem regressiva para a conferência"
+              aria-live="off"
+            >
+              <CountdownBlocks timeLeft={timeLeft} compact={false} />
+            </div>
+
+            <button
+              className="lg:hidden p-2 text-white -mr-1 sm:-mr-0 z-10 shrink-0"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+              {...(isMenuOpen && { "aria-expanded": true })}
+              aria-controls="mobile-menu"
+              type="button"
+            >
+              <svg
+                className="w-6 h-6 sm:w-7 sm:h-7"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                {isMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden absolute right-4 p-2 text-white z-10"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-          {...(isMenuOpen && { "aria-expanded": true })}
-          aria-controls="mobile-menu"
-          type="button"
-        >
-          <svg
-            className="w-6 h-6 sm:w-7 sm:h-7"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            {isMenuOpen ? <path d="M6 18L18 6M6 6l12 12" /> : <path d="M4 6h16M4 12h16M4 18h16" />}
-          </svg>
-        </button>
-
-        {/* Mobile Menu - melhorado */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div
             id="mobile-menu"
-            className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-t border-gray-800 max-h-[calc(100vh-90px)] overflow-y-auto"
+            className="lg:hidden w-full border-t border-gray-800 bg-black/95 backdrop-blur-md max-h-[calc(100vh-72px)] sm:max-h-[calc(100vh-80px)] overflow-y-auto"
             role="navigation"
             aria-label="Menu de navegação mobile"
           >
@@ -194,9 +233,8 @@ export default function Header() {
                 </Link>
               ))}
 
-              {/* Mobile Countdown - não sobrepõe FAB (FAB oculto em mobile) */}
               <div
-                className="pt-4 mt-4 pb-6 border-t border-gray-700"
+                className="pt-4 mt-4 pb-6 border-t border-gray-700 md:hidden"
                 role="timer"
                 aria-label="Contagem regressiva para a conferência"
               >
