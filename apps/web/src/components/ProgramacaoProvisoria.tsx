@@ -17,6 +17,23 @@ interface SessionBlockProps {
   rows: SessionRow[];
 }
 
+type ProgramEntry = SessionBlockProps | { heading: string };
+
+function isDayHeading(entry: ProgramEntry): entry is { heading: string } {
+  return "heading" in entry;
+}
+
+function DayHeading({ label }: { label: string }) {
+  return (
+    <div className="mt-10 mb-4 first:mt-0">
+      <p className="text-center text-sm font-semibold uppercase tracking-wide text-[#e0a085]">
+        {label}
+      </p>
+      <div className="mx-auto mt-2 h-px max-w-md bg-[#e0a085]/40" />
+    </div>
+  );
+}
+
 function SessionBlock({
   title,
   date,
@@ -72,8 +89,8 @@ function SessionBlock({
 
 export default function ProgramacaoProvisoria() {
   const { t } = useTranslation();
-  const sessions: SessionBlockProps[] = [
-    // ——— 26 de março: manhã/tarde (13h30–15h), salas em paralelo ———
+  const sessions: ProgramEntry[] = [
+    { heading: "26 de março de 2026" },
     {
       title:
         "TEMÁTICA 3: Turismo Literário/Cinematográfico e Economia Criativa + TEMÁTICA 5: Estudos de casos de modelos bem-sucedidos ou pouco explorados de desenvolvimento territorial orientado para o turismo literário/cinematográfico",
@@ -131,44 +148,6 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title: "TEMÁTICA 9: Preservação do patrimônio literário e cultural e da autenticidade",
-      date: "26 de março de 2026",
-      time: "13h30 – 15h",
-      room: "405 – Bloco F – UCS",
-      coordinators: "Jordi Arco-Pumarolla e Duda Rocha",
-      technicalSupport: "Daiane de Lima Pedro",
-      rows: [
-        {
-          time: "13h30–13h45",
-          title:
-            "Partilhando o pão que o diabo amassou: experiência memorial e de turismo literário no Campo de Concentração do Tarrafal",
-          author: "Adriana Coelho Florent",
-          affiliation: "Institut des Mondes Africains - Aix-Marseille université (França)",
-        },
-        {
-          time: "13h45–14h",
-          title:
-            "Preservação do patrimônio literário e cultural em Petrópolis/RJ: um relato biográfico visitável no Museu-Casa Stefan Zweig",
-          author: "Anderson Simões da Costa",
-          affiliation: "Universidade Federal de Juiz de Fora – UFJF (Brasil)",
-        },
-        {
-          time: "14h–14h15",
-          title:
-            "El bueno, el feo y el malo: un caso único de turismo de nostalgia en Burgos (España)",
-          author: "Beatriz Gómez-Morales",
-          affiliation: "Universitat de Lleida (Espanha) — On-line",
-        },
-        {
-          time: "14h15–14h30",
-          title:
-            "Eventos Literários no destino Turístico Termal: o caso da Biblioteca Josino Bretas em Caldas Novas (GO/Brasil)",
-          author: "Jean Carlos Vieira Santos; Jackson Santana da Silva; Jairo Alves Leite",
-          affiliation: "Universidade Estadual de Goiás – UEG (Brasil)",
-        },
-      ],
-    },
-    {
       title:
         "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional — bloco 1",
       date: "26 de março de 2026",
@@ -209,6 +188,47 @@ export default function ProgramacaoProvisoria() {
           title: "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
           author: "Thiele Aparecida Nascimento Piotto",
           affiliation: "Universidade Cidade de São Paulo – Unicid (Brasil)",
+        },
+        { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+      ],
+    },
+    {
+      title:
+        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional — bloco 2",
+      date: "26 de março de 2026",
+      time: "15h35 – 17h",
+      room: "403 – Bloco F – UCS",
+      coordinators: "Ronaldo Leites Diaz e Simone Sandi",
+      technicalSupport: "Rafael Bardina de Melo",
+      rows: [
+        {
+          time: "15h35–15h50",
+          title:
+            "Autopesquisa, afetivações e turismo literário e cinematográfico: Verona como destino turístico afetivo",
+          author: "Simone Maria Sandi; Maria Luiza Cardinale Baptista",
+          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+        },
+        {
+          time: "15h50–16h05",
+          title:
+            '"Duna", a construção do imaginário turístico e a transformação de paisagens ficcionais em desejos de viagem',
+          author: "Ronaldo Leites Diaz; Luciane Todeschini Ferreira",
+          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+        },
+        {
+          time: "16h05–16h20",
+          title:
+            "Close up em Fortaleza-CE: estudo sobre imagem e imaginário turístico por meio de produção cinematográfica",
+          author:
+            "Pedro Lucas Filgueira Pereira; Michel Jairo Vieira da Silva; Marcelo da Silva Taveira",
+          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
+        },
+        {
+          time: "16h20–16h35",
+          title:
+            "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
+          author: "Myllene Medeiros de Oliveira",
+          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
         },
       ],
     },
@@ -258,42 +278,86 @@ export default function ProgramacaoProvisoria() {
       ],
     },
     {
-      title:
-        "TEMÁTICA 14: Paisagens literárias e representações fílmicas como catalisadores de identificação regional — bloco 2",
+      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos — bloco 2",
       date: "26 de março de 2026",
       time: "15h35 – 17h",
-      room: "403 – Bloco F – UCS",
-      coordinators: "Ronaldo Leites Diaz e Simone Sandi",
-      technicalSupport: "Rafael Bardina de Melo",
+      room: "404 – Bloco F – UCS",
+      coordinators: "André Brayner de Farias e Ernani Vieira da Silva",
+      technicalSupport: "Patrícia Cavalheiro Pereira",
       rows: [
         {
           time: "15h35–15h50",
-          title:
-            "Autopesquisa, afetivações e turismo literário e cinematográfico: Verona como destino turístico afetivo",
-          author: "Simone Maria Sandi; Maria Luiza Cardinale Baptista",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
+          title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
+          author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
+          affiliation: "Universidade do Vale do Itajaí – Univali (Brasil)",
         },
         {
           time: "15h50–16h05",
           title:
-            '"Duna", a construção do imaginário turístico e a transformação de paisagens ficcionais em desejos de viagem',
-          author: "Ronaldo Leites Diaz; Luciane Todeschini Ferreira",
+            "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul – RS.",
+          author:
+            "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
           time: "16h05–16h20",
           title:
-            "Close up em Fortaleza-CE: estudo sobre imagem e imaginário turístico por meio de produção cinematográfica",
-          author:
-            "Pedro Lucas Filgueira Pereira; Michel Jairo Vieira da Silva; Marcelo da Silva Taveira",
-          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
+            "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
+          author: "Patrícia Cavalheiro Pereira",
+          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
           time: "16h20–16h35",
           title:
-            "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
-          author: "Myllene Medeiros de Oliveira",
-          affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
+            "De la mirada viajera al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
+          author: "Fany Magraner-Frau",
+          affiliation: "De Fábula. Cultura sense límits (Espanha) — ONLINE",
+        },
+        {
+          time: "16h35–16h50",
+          title:
+            "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
+          author: "Tathiana de Alcantara Macedo Daou",
+          affiliation:
+            "Serviço Social do Comércio – Sesc DF / Universidade de Brasília – UnB (Brasil)",
+        },
+      ],
+    },
+    {
+      title: "TEMÁTICA 9: Preservação do patrimônio literário e cultural e da autenticidade",
+      date: "26 de março de 2026",
+      time: "13h30 – 15h",
+      room: "405 – Bloco F – UCS",
+      coordinators: "Jordi Arco-Pumarolla e Duda Rocha",
+      technicalSupport: "Daiane de Lima Pedro",
+      rows: [
+        {
+          time: "13h30–13h45",
+          title:
+            "Partilhando o pão que o diabo amassou: experiência memorial e de turismo literário no Campo de Concentração do Tarrafal",
+          author: "Adriana Coelho Florent",
+          affiliation: "Institut des Mondes Africains - Aix-Marseille université (França)",
+        },
+        {
+          time: "13h45–14h",
+          title:
+            "Preservação do patrimônio literário e cultural em Petrópolis/RJ: um relato biográfico visitável no Museu-Casa Stefan Zweig",
+          author: "Anderson Simões da Costa",
+          affiliation: "Universidade Federal de Juiz de Fora – UFJF (Brasil)",
+        },
+        {
+          time: "14h–14h15",
+          title:
+            "El bueno, el feo y el malo: un caso único de turismo de nostalgia en Burgos (España)",
+          author: "Beatriz Gómez-Morales",
+          affiliation: "Universitat de Lleida (Espanha) — On-line",
+        },
+        {
+          time: "14h15–14h30",
+          title:
+            "Eventos Literários no destino Turístico Termal: o caso da Biblioteca Josino Bretas em Caldas Novas (GO/Brasil)",
+          author: "Jean Carlos Vieira Santos; Jackson Santana da Silva; Jairo Alves Leite",
+          affiliation: "Universidade Estadual de Goiás – UEG (Brasil)",
         },
       ],
     },
@@ -382,53 +446,7 @@ export default function ProgramacaoProvisoria() {
         },
       ],
     },
-    {
-      title: "TEMÁTICA 16: Roteiros e rotas/passeios literários e cinematográficos — bloco 2",
-      date: "26 de março de 2026",
-      time: "15h35 – 17h",
-      room: "404 – Bloco F – UCS",
-      coordinators: "André Brayner de Farias e Ernani Vieira da Silva",
-      technicalSupport: "Patrícia Cavalheiro Pereira",
-      rows: [
-        {
-          time: "15h35–15h50",
-          title: "Turismo Literário: um roteiro gastronômico com Nanetto Pipetta",
-          author: "Alexandra Marcella Zottis; Susana de Araújo Gastal",
-          affiliation: "Universidade do Vale do Itajaí – Univali (Brasil)",
-        },
-        {
-          time: "15h50–16h05",
-          title:
-            "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul – RS.",
-          author:
-            "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "16h05–16h20",
-          title:
-            "Diário de uma intercambista pela 'Ruta de Don Quijote' na Espanha: quando o intercâmbio dialoga com o Turismo Literário",
-          author: "Patrícia Cavalheiro Pereira",
-          affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
-        },
-        {
-          time: "16h20–16h35",
-          title:
-            "De la mirada viajera al destino turístico: rutas literarias y construcción del imaginario de Mallorca",
-          author: "Fany Magraner-Frau",
-          affiliation: "De Fábula. Cultura sense límits (Espanha) — ONLINE",
-        },
-        {
-          time: "16h35–16h50",
-          title:
-            "Turismo Literário no contexto do Turismo Social: desafios e potencialidades a partir de experiências do Sesc DF",
-          author: "Tathiana de Alcantara Macedo Daou",
-          affiliation:
-            "Serviço Social do Comércio – Sesc DF / Universidade de Brasília – UnB (Brasil)",
-        },
-      ],
-    },
-    // ——— 27 de março ———
+    { heading: "27 de março de 2026" },
     {
       title: "TEMÁTICA: O papel das Film Commissions",
       date: "27 de março de 2026",
@@ -750,8 +768,14 @@ export default function ProgramacaoProvisoria() {
         {t("program.title")}
       </h2>
       <div className="space-y-4">
-        {sessions.map((session, index) => (
-          <SessionBlock key={index} {...session} />
+        {sessions.map((entry, index) => (
+          <div key={index}>
+            {isDayHeading(entry) ? (
+              <DayHeading label={entry.heading} />
+            ) : (
+              <SessionBlock {...entry} />
+            )}
+          </div>
         ))}
       </div>
     </div>
