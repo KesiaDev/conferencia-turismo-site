@@ -453,7 +453,7 @@ export default function ProgramacaoProvisoria() {
           title:
             "El bueno, el feo y el malo: un caso único de turismo de nostalgia en Burgos (España)",
           author: "Beatriz Gómez-Morales",
-          affiliation: "Universitat de Lleida (Espanha) — On-line",
+          affiliation: "Universitat de Lleida (Espanha) — ONLINE",
         },
         {
           time: "14h15–14h30",
