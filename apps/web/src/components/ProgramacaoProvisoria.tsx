@@ -552,7 +552,7 @@ export default function ProgramacaoProvisoria() {
     },
     { heading: "27 de março de 2026" },
     {
-      title: "TEMÁTICA: O papel das Film Commissions",
+      title: "TEMÁTICA 2: O papel das Film Commissions",
       date: "27 de março de 2026",
       time: "9h – 10h30",
       room: "401 – Bloco F – UCS",
