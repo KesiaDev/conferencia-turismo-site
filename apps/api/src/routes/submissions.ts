@@ -5,6 +5,31 @@ import { emailService } from "../services/email.js";
 
 const router = Router();
 
+// GET route to list all submissions
+router.get("/", async (req, res) => {
+  try {
+    console.log(`📋 Listando todas as submissões. Total: ${submissions.length}`);
+
+    // Ordenar por data de criação (mais recentes primeiro)
+    const sortedSubmissions = [...submissions].sort((a: any, b: any) => {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+
+    res.json({
+      success: true,
+      count: submissions.length,
+      submissions: sortedSubmissions,
+    });
+  } catch (error: any) {
+    console.error("❌ Erro ao listar submissões:", error);
+    res.status(500).json({
+      success: false,
+      error: "Internal server error",
+      details: process.env.NODE_ENV === "development" ? error.message : undefined,
+    });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     console.log("📥 Dados recebidos:", req.body);

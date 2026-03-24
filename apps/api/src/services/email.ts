@@ -1,17 +1,29 @@
 import nodemailer, { Transporter } from "nodemailer";
 import type { Attachment } from "nodemailer/lib/mailer";
+import { Resend } from "resend";
 import fs from "fs";
 import path from "path";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
 import { panelDocumentGenerator, PanelSubmissionData } from "./panelDocumentGenerator.js";
 
-// Configuração do transporter
+// Configuração do Resend (prioritário)
+const createResendClient = (): Resend | null => {
+  if (!process.env.RESEND_API_KEY) {
+    return null;
+  }
+
+  try {
+    return new Resend(process.env.RESEND_API_KEY);
+  } catch (error) {
+    console.error("❌ Erro ao criar cliente Resend:", error);
+    return null;
+  }
+};
+
+// Configuração do transporter Gmail (fallback)
 const createTransporter = (): Transporter | null => {
   // Se as credenciais não estiverem configuradas, retorna null
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn(
-      "⚠️  Credenciais de email não configuradas. Emails serão apenas logados no console."
-    );
     return null;
   }
 
@@ -29,16 +41,29 @@ const createTransporter = (): Transporter | null => {
   }
 };
 
+// Email remetente - usar Resend ou Gmail
+const getFromEmail = (): string => {
+  // Priorizar domínio do Resend se configurado
+  if (process.env.RESEND_FROM_EMAIL) {
+    return process.env.RESEND_FROM_EMAIL;
+  }
+  // Ou usar email do Gmail
+  if (process.env.EMAIL_USER) {
+    return process.env.EMAIL_USER;
+  }
+  // Fallback padrão do Resend
+  return "onboarding@resend.dev";
+};
+
 export const emailService = {
   // Envia email de nova submissão para a organização
   sendSubmissionNotification: async (data: SubmissionData) => {
+    const resend = createResendClient();
     const transporter = createTransporter();
-    console.log("🔧 DEBUG: Transporter criado:", transporter ? "✅ Sim" : "❌ Não");
-    console.log("🔧 DEBUG: EMAIL_USER:", process.env.EMAIL_USER);
-    console.log(
-      "🔧 DEBUG: EMAIL_PASS:",
-      process.env.EMAIL_PASS ? "✅ Configurado" : "❌ Não configurado"
-    );
+
+    console.log("🔧 DEBUG: Resend configurado:", resend ? "✅ Sim" : "❌ Não");
+    console.log("🔧 DEBUG: Gmail configurado:", transporter ? "✅ Sim" : "❌ Não");
+
     const destinationEmail =
       process.env.CONFERENCE_EMAIL || "litfilmtourismconferenceucs@gmail.com";
 
@@ -81,87 +106,94 @@ export const emailService = {
       documentsGenerated = false;
     }
 
-    // Se transporter estiver configurado, envia email real
-    if (transporter) {
+    // Preparar anexos lendo arquivos como buffers
+    let attachments: Attachment[] = [];
+    let resendAttachments: Array<{ filename: string; content: Buffer }> = [];
+
+    if (documentsGenerated && pdfPath && wordPath) {
       try {
-        // Preparar anexos lendo arquivos como buffers
-        let attachments: Attachment[] = [];
+        // Resolver caminhos (suporta absolutos e relativos)
+        const resolvedPdfPath = path.isAbsolute(pdfPath)
+          ? pdfPath
+          : path.resolve(process.cwd(), pdfPath);
+        const resolvedWordPath = path.isAbsolute(wordPath)
+          ? wordPath
+          : path.resolve(process.cwd(), wordPath);
 
-        if (documentsGenerated && pdfPath && wordPath) {
-          try {
-            // Resolver caminhos (suporta absolutos e relativos)
-            const resolvedPdfPath = path.isAbsolute(pdfPath)
-              ? pdfPath
-              : path.resolve(process.cwd(), pdfPath);
-            const resolvedWordPath = path.isAbsolute(wordPath)
-              ? wordPath
-              : path.resolve(process.cwd(), wordPath);
+        // Verificar se os arquivos existem
+        const pdfExists = fs.existsSync(resolvedPdfPath);
+        const wordExists = fs.existsSync(resolvedWordPath);
 
-            // Verificar se os arquivos existem
-            const pdfExists = fs.existsSync(resolvedPdfPath);
-            const wordExists = fs.existsSync(resolvedWordPath);
+        console.log(`🔍 Verificando arquivos: PDF=${pdfExists}, Word=${wordExists}`);
+        console.log(`📁 PDF path original: ${pdfPath}`);
+        console.log(`📁 PDF path resolvido: ${resolvedPdfPath}`);
+        console.log(`📁 Word path original: ${wordPath}`);
+        console.log(`📁 Word path resolvido: ${resolvedWordPath}`);
 
-            console.log(`🔍 Verificando arquivos: PDF=${pdfExists}, Word=${wordExists}`);
-            console.log(`📁 PDF path original: ${pdfPath}`);
-            console.log(`📁 PDF path resolvido: ${resolvedPdfPath}`);
-            console.log(`📁 Word path original: ${wordPath}`);
-            console.log(`📁 Word path resolvido: ${resolvedWordPath}`);
+        // Verificar se são arquivos válidos (PDF e DOCX, não HTML)
+        const isPdf = resolvedPdfPath.toLowerCase().endsWith(".pdf");
+        const isDocx = resolvedWordPath.toLowerCase().endsWith(".docx");
 
-            // Verificar se são arquivos válidos (PDF e DOCX, não HTML)
-            const isPdf = resolvedPdfPath.toLowerCase().endsWith(".pdf");
-            const isDocx = resolvedWordPath.toLowerCase().endsWith(".docx");
+        if (pdfExists && wordExists && isPdf && isDocx) {
+          // Ler arquivos como buffers
+          console.log("📖 Lendo PDF como buffer...");
+          const pdfBuffer = fs.readFileSync(resolvedPdfPath);
+          console.log(`✅ PDF lido: ${pdfBuffer.length} bytes`);
 
-            if (pdfExists && wordExists && isPdf && isDocx) {
-              // Ler arquivos como buffers
-              console.log("📖 Lendo PDF como buffer...");
-              const pdfBuffer = fs.readFileSync(resolvedPdfPath);
-              console.log(`✅ PDF lido: ${pdfBuffer.length} bytes`);
+          console.log("📖 Lendo Word como buffer...");
+          const wordBuffer = fs.readFileSync(resolvedWordPath);
+          console.log(`✅ Word lido: ${wordBuffer.length} bytes`);
 
-              console.log("📖 Lendo Word como buffer...");
-              const wordBuffer = fs.readFileSync(resolvedWordPath);
-              console.log(`✅ Word lido: ${wordBuffer.length} bytes`);
+          const safeName = data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "");
 
-              const safeName = data.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_]/g, "");
+          attachments = [
+            {
+              filename: `submissao_${safeName}_sem_autoria.pdf`,
+              content: pdfBuffer,
+              contentType: "application/pdf",
+            },
+            {
+              filename: `submissao_${safeName}_com_autoria.docx`,
+              content: wordBuffer,
+              contentType:
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            },
+          ];
 
-              attachments = [
-                {
-                  filename: `submissao_${safeName}_sem_autoria.pdf`,
-                  content: pdfBuffer,
-                  contentType: "application/pdf",
-                },
-                {
-                  filename: `submissao_${safeName}_com_autoria.docx`,
-                  content: wordBuffer,
-                  contentType:
-                    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                },
-              ];
+          resendAttachments = [
+            {
+              filename: `submissao_${safeName}_sem_autoria.pdf`,
+              content: pdfBuffer,
+            },
+            {
+              filename: `submissao_${safeName}_com_autoria.docx`,
+              content: wordBuffer,
+            },
+          ];
 
-              console.log("✅ Anexos preparados com sucesso usando buffers");
-            } else {
-              console.warn("⚠️ Arquivos não encontrados ou inválidos. Enviando email sem anexos.");
-              if (!pdfExists) console.warn(`❌ PDF não existe: ${resolvedPdfPath}`);
-              if (!wordExists) console.warn(`❌ Word não existe: ${resolvedWordPath}`);
-              if (!isPdf) console.warn(`❌ Arquivo PDF não é um PDF válido: ${resolvedPdfPath}`);
-              if (!isDocx)
-                console.warn(`❌ Arquivo Word não é um DOCX válido: ${resolvedWordPath}`);
-            }
-          } catch (attachError) {
-            console.error("❌ Erro ao preparar anexos:", attachError);
-            console.log("⚠️ Continuando sem anexos...");
-            attachments = [];
-          }
+          console.log("✅ Anexos preparados com sucesso usando buffers");
+        } else {
+          console.warn("⚠️ Arquivos não encontrados ou inválidos. Enviando email sem anexos.");
+          if (!pdfExists) console.warn(`❌ PDF não existe: ${resolvedPdfPath}`);
+          if (!wordExists) console.warn(`❌ Word não existe: ${resolvedWordPath}`);
+          if (!isPdf) console.warn(`❌ Arquivo PDF não é um PDF válido: ${resolvedPdfPath}`);
+          if (!isDocx) console.warn(`❌ Arquivo Word não é um DOCX válido: ${resolvedWordPath}`);
         }
+      } catch (attachError) {
+        console.error("❌ Erro ao preparar anexos:", attachError);
+        console.log("⚠️ Continuando sem anexos...");
+        attachments = [];
+        resendAttachments = [];
+      }
+    }
 
+    // Se Resend ou Gmail estiverem configurados, envia email real
+    if (resend || transporter) {
+      try {
         // Email para a organização (com retry) - enviado independentemente
         try {
           console.log("📧 Preparando email para organização...");
-          await emailService.sendEmailWithRetry(transporter, {
-            from: process.env.EMAIL_USER,
-            to: destinationEmail,
-            replyTo: data.email,
-            subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
-            html: `
+          const orgHtml = `
               <h2>Nova Submissão de Trabalho</h2>
               <p><strong>Nome:</strong> ${data.name}</p>
               <p><strong>Email:</strong> ${data.email}</p>
@@ -192,10 +224,45 @@ export const emailService = {
               `
               }
               <p><small>Data: ${new Date().toLocaleString("pt-BR")}</small></p>
-            `,
-            attachments,
-          });
-          console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
+            `;
+
+          // Tentar Resend primeiro
+          let emailSent = false;
+          if (resend) {
+            try {
+              const result = await resend.emails.send({
+                from: getFromEmail(),
+                to: destinationEmail,
+                replyTo: data.email,
+                subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
+                html: orgHtml,
+                attachments: resendAttachments.length > 0 ? resendAttachments : undefined,
+              });
+
+              if (!result.error) {
+                console.log(`✅ Email enviado via Resend: ${result.data?.id}`);
+                emailSent = true;
+              }
+            } catch (resendError: any) {
+              console.error(
+                "❌ Erro ao enviar via Resend, tentando Gmail...",
+                resendError?.message
+              );
+            }
+          }
+
+          // Fallback para Gmail se Resend falhou ou não está disponível
+          if (!emailSent && transporter) {
+            await emailService.sendEmailWithRetry(transporter, {
+              from: process.env.EMAIL_USER,
+              to: destinationEmail,
+              replyTo: data.email,
+              subject: `[LITFILM 2026] Nova Submissão: ${data.title}`,
+              html: orgHtml,
+              attachments,
+            });
+            console.log("✅ Email enviado com sucesso para a organização:", destinationEmail);
+          }
         } catch (orgError: any) {
           console.error("❌ ERRO ao enviar email para organização:", orgError?.message || orgError);
           console.error("❌ Stack trace:", orgError?.stack);
@@ -205,11 +272,7 @@ export const emailService = {
         // Email de confirmação para o candidato (com retry) - enviado independentemente
         try {
           console.log("📧 Preparando email de confirmação para candidato...");
-          await emailService.sendEmailWithRetry(transporter, {
-            from: process.env.EMAIL_USER,
-            to: data.email,
-            subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
-            html: `
+          const userHtml = `
               <h2>Confirmação de Submissão Recebida</h2>
               <p>Prezado(a) <strong>${data.name}</strong>,</p>
               
@@ -252,9 +315,43 @@ export const emailService = {
                 26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
                 Serra Gaúcha - Brasil
               </small></p>
-            `,
-            attachments,
-          });
+            `;
+
+          // Tentar Resend primeiro
+          let userEmailSent = false;
+          if (resend) {
+            try {
+              const result = await resend.emails.send({
+                from: getFromEmail(),
+                to: data.email,
+                subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
+                html: userHtml,
+                attachments: resendAttachments.length > 0 ? resendAttachments : undefined,
+              });
+
+              if (!result.error) {
+                console.log(`✅ Email de confirmação enviado via Resend: ${result.data?.id}`);
+                userEmailSent = true;
+              }
+            } catch (resendError: any) {
+              console.error(
+                "❌ Erro ao enviar via Resend, tentando Gmail...",
+                resendError?.message
+              );
+            }
+          }
+
+          // Fallback para Gmail se Resend falhou ou não está disponível
+          if (!userEmailSent && transporter) {
+            await emailService.sendEmailWithRetry(transporter, {
+              from: process.env.EMAIL_USER,
+              to: data.email,
+              subject: `[LITFILM 2026] Confirmação de Submissão: ${data.title}`,
+              html: userHtml,
+              attachments,
+            });
+            console.log("✅ Email de confirmação enviado para o candidato:", data.email);
+          }
           console.log("✅ Email de confirmação enviado para o candidato:", data.email);
         } catch (userError: any) {
           console.error("❌ ERRO ao enviar email para candidato:", userError?.message || userError);
@@ -273,7 +370,10 @@ export const emailService = {
     // Confirmação final
     console.log("🎉 SUBMISSÃO PROCESSADA COM SUCESSO!");
     console.log("📄 Documentos gerados:", documentsGenerated ? "✅ Sim" : "❌ Não");
-    console.log("📧 Email enviado:", transporter ? "✅ Sim" : "❌ Não (não configurado)");
+    console.log(
+      "📧 Email service:",
+      resend ? "✅ Resend" : transporter ? "✅ Gmail" : "❌ Não configurado"
+    );
   },
 
   // Envia email de contato para a organização
