@@ -267,7 +267,7 @@ export default function ProgramacaoProvisoria() {
             title:
               "Famous Film set’s sense of place among locals: the case of Muhu Island in Estonia",
             author: "Marit Piirman",
-            affiliation: "University of Tartu (Estonia) — ONLINE",
+            affiliation: "University of Tartu (Estonia)",
           },
           {
             time: "14h–14h15",
