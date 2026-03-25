@@ -251,7 +251,7 @@ export default function ProgramacaoProvisoria() {
         date: "26 de março de 2026",
         time: "13h30 – 15h",
         room: "403 – Bloco F – UCS",
-        coordinators: "(13h30–15h) Ronaldo Leites Diaz e Mariane Gomes (PPGLET)",
+        coordinators: "(13h30–15h) Ronaldo Leites Diaz e Mariana Gomes (PPGLET)",
         technicalSupport: "Rafael Bardina de Melo",
         rows: [
           {
