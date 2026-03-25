@@ -133,43 +133,47 @@ export default function AdminAuthorizationsPanel() {
 
   if (!activePw) {
     return (
-      <div className="w-full max-w-md mx-auto rounded-lg border border-stone-200 bg-white p-8 shadow-sm">
-        <h1 className="text-xl font-semibold text-stone-900 mb-2">Área administrativa</h1>
-        <p className="text-sm text-stone-600 mb-6">Autorizações de publicação — acesso restrito.</p>
-        <form onSubmit={onLogin} className="space-y-4">
-          {error && (
-            <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
-              {error}
+      <div className="flex min-h-[calc(100vh-4rem)] w-full items-center justify-center">
+        <div className="w-full max-w-md rounded-2xl border border-stone-200/90 bg-white/95 p-8 shadow-xl ring-1 ring-black/[0.04] backdrop-blur-sm">
+          <h1 className="text-xl font-semibold text-stone-900 mb-2">Área administrativa</h1>
+          <p className="text-sm text-stone-600 mb-6">
+            Autorizações de publicação — acesso restrito.
+          </p>
+          <form onSubmit={onLogin} className="space-y-4">
+            {error && (
+              <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
+                {error}
+              </div>
+            )}
+            <div>
+              <label htmlFor="admin-pw" className="block text-sm font-medium text-stone-800 mb-1">
+                Senha
+              </label>
+              <input
+                id="admin-pw"
+                type="password"
+                autoComplete="current-password"
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                className="w-full rounded-md border border-stone-300 px-3 py-2"
+                disabled={loading}
+              />
             </div>
-          )}
-          <div>
-            <label htmlFor="admin-pw" className="block text-sm font-medium text-stone-800 mb-1">
-              Senha
-            </label>
-            <input
-              id="admin-pw"
-              type="password"
-              autoComplete="current-password"
-              value={passwordInput}
-              onChange={(e) => setPasswordInput(e.target.value)}
-              className="w-full rounded-md border border-stone-300 px-3 py-2"
+            <button
+              type="submit"
               disabled={loading}
-            />
-          </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-md bg-stone-800 px-4 py-2 text-white font-medium hover:bg-stone-900 disabled:opacity-60"
-          >
-            {loading ? "Verificando…" : "Entrar"}
-          </button>
-        </form>
+              className="w-full rounded-md bg-stone-800 px-4 py-2.5 text-white font-medium shadow-md transition hover:bg-stone-900 disabled:opacity-60"
+            >
+              {loading ? "Verificando…" : "Entrar"}
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6">
+    <div className="w-full max-w-6xl mx-auto space-y-6 rounded-2xl border border-stone-200/60 bg-white/90 p-4 shadow-xl backdrop-blur-sm ring-1 ring-black/[0.04] sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-xl font-semibold text-stone-900">Autorizações registradas</h1>
