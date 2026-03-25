@@ -811,14 +811,14 @@ export default function ProgramacaoProvisoria() {
           affiliation: "Centro Federal de Educação Tecnológica – CEFET/RJ (Brasil)",
         },
         {
-          time: "13h45–14h",
+          time: "14h00–14h10",
           title:
             "A interferência da Destination Management Organization Gramadotur na competitividade do destino turístico Gramado-RS/Brasil a partir de uma gestão eficaz",
           author: "Letícia Carvalho Vivian; Rodrigo Luis dos Santos",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
-          time: "14h–14h10",
+          time: "14h10–14h20",
           title:
             "Turismo e cinema: experiências da sala de aula como sessão de filmes, diálogos e estratégias pedagógicas",
           author: "Elizabete Sayuri Kushano; Marcos Luiz Filippim",
