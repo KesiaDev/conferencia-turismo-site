@@ -179,7 +179,7 @@ export const program: ProgramDay[] = [
         kind: "plenary",
       },
       {
-        time: "10:00–11:00",
+        time: "10:00–11:30",
         title: "Palestra de Abertura",
         description:
           "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",

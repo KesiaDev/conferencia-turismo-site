@@ -36,11 +36,12 @@ export default function Program() {
                 kind: "plenary",
               },
               {
-                time: "10h00 – 11h00",
+                time: "10h00 – 11h30",
                 title: "Palestra de Abertura",
                 description:
-                  "Turismo Literário e Cinematográfico como vetor de desenvolvimento territorial, inovação e internacionalização do Brasil",
-                speaker: "Representante da Embratur ou Ancine (a definir)",
+                  "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",
+                speaker:
+                  "Christiano Braga, Coordenador de economia criativa e audiovisual da Embratur",
                 location: "Auditório do Bloco H",
                 kind: "keynote",
               },
