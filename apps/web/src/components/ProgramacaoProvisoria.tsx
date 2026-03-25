@@ -541,7 +541,7 @@ export default function ProgramacaoProvisoria() {
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
-          time: "16h05–16h15",
+          time: "16h05–16h20",
           title:
             "Turismo religioso-cinematográfico em Salvador (BA): o longa-metragem Irmã Dulce (2014) como ferramenta de promoção do roteiro Caminho da Fé",
           author: "Milena Maria Neris de Jesus; Natalia Coimbra de Sá",
