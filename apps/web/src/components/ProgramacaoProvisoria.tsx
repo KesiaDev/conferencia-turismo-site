@@ -824,6 +824,14 @@ export default function ProgramacaoProvisoria() {
           author: "Elizabete Sayuri Kushano; Marcos Luiz Filippim",
           affiliation: "Universidade Federal do Paraná – UFPR (Brasil)",
         },
+        {
+          time: "14h20–14h30",
+          title:
+            'Da obra literária "Caxias do Sul: história e cultura nos Distritos" aos roteiros: a organização intencional de aprendizagens via turismo',
+          author: "Francielle de Lima; Marivania Lucia Sartoretto",
+          affiliation:
+            "Universidade Federal do Pampa – Unipampa (Brasil); Universidade de Caxias do Sul – UCS (Brasil)",
+        },
       ],
     },
     {
