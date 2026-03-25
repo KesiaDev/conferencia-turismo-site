@@ -117,7 +117,7 @@ export default function AuthorizationForm() {
           autoComplete="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#c47862] focus:ring-1 focus:ring-[#c47862]"
+          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#e0a085] focus:ring-1 focus:ring-[#e0a085]"
           disabled={loading}
         />
         {fieldErrors.name && <p className="mt-1 text-sm text-red-600">{fieldErrors.name}</p>}
@@ -134,7 +134,7 @@ export default function AuthorizationForm() {
           autoComplete="off"
           value={document}
           onChange={(e) => setDocument(e.target.value)}
-          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#c47862] focus:ring-1 focus:ring-[#c47862]"
+          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#e0a085] focus:ring-1 focus:ring-[#e0a085]"
           disabled={loading}
         />
         {fieldErrors.document && (
@@ -153,7 +153,7 @@ export default function AuthorizationForm() {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#c47862] focus:ring-1 focus:ring-[#c47862]"
+          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#e0a085] focus:ring-1 focus:ring-[#e0a085]"
           disabled={loading}
         />
         {fieldErrors.email && <p className="mt-1 text-sm text-red-600">{fieldErrors.email}</p>}
@@ -170,7 +170,7 @@ export default function AuthorizationForm() {
           autoComplete="off"
           value={summary}
           onChange={(e) => setSummary(e.target.value)}
-          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#c47862] focus:ring-1 focus:ring-[#c47862]"
+          className="w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 shadow-sm focus:border-[#e0a085] focus:ring-1 focus:ring-[#e0a085]"
           disabled={loading}
         />
         {fieldErrors.summary && <p className="mt-1 text-sm text-red-600">{fieldErrors.summary}</p>}
@@ -183,7 +183,7 @@ export default function AuthorizationForm() {
           type="checkbox"
           checked={accepted}
           onChange={(e) => setAccepted(e.target.checked)}
-          className="mt-1 h-4 w-4 rounded border-stone-300 text-[#c47862] focus:ring-[#c47862]"
+          className="mt-1 h-4 w-4 rounded border-stone-300 text-[#e0a085] focus:ring-[#e0a085]"
           disabled={loading}
         />
         <label htmlFor="auth-accepted" className="text-sm text-stone-700 leading-relaxed">
@@ -195,7 +195,7 @@ export default function AuthorizationForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-md bg-[#c47862] px-4 py-3 text-white font-medium shadow hover:bg-[#b56a52] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-md bg-[#e0a085] px-4 py-3 text-white font-medium shadow hover:bg-[#c47862] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? "Enviando…" : "Autorizar publicação"}
       </button>

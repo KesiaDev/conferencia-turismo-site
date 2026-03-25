@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
@@ -31,6 +32,21 @@ export default function Anais() {
       <Section>
         <div className="max-w-4xl mx-auto">
           <p className="text-gray-700 leading-relaxed mb-8">{t("anais.intro")}</p>
+
+          <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-8">
+            <h2 className="text-xl font-bold mb-3 text-[#e0a085]">
+              {t("anais.authorizationBlockTitle")}
+            </h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              {t("anais.authorizationBlockText")}
+            </p>
+            <Link
+              to="/anais/autorizacao"
+              className="inline-flex items-center font-semibold text-[#e0a085] underline underline-offset-2 hover:text-[#c47862] transition-colors"
+            >
+              {t("anais.authorizationCta")}
+            </Link>
+          </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-8">
             <h2 className="text-xl font-bold mb-4 text-[#e0a085]">{t("anais.criteriaTitle")}</h2>

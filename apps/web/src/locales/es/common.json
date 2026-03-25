@@ -213,7 +213,15 @@
     "publicationTitle": "Publicación:",
     "publicationText": "las Actas estarán disponibles en formato e-book (PDF) en el sitio oficial de la Conferencia, con información editorial completa (expediente, sumario e identificadores bibliográficos).",
     "statusTitle": "Estado:",
-    "statusText": "Espere. La página se actualizará con el enlace para descarga tan pronto como la edición final esté concluida."
+    "statusText": "Espere. La página se actualizará con el enlace para descarga tan pronto como la edición final esté concluida.",
+    "authorizationBlockTitle": "Autorización de publicación",
+    "authorizationBlockText": "Para registrar la autorización de publicación de su resumen en las actas de la conferencia, use el formulario siguiente.",
+    "authorizationCta": "Aceder al formulario de autorización",
+    "authorizationSeoTitle": "Autorización de publicación en las actas",
+    "authorizationSeoDescription": "Formulario de autorización para publicar el resumen en las actas de la III Conferencia Internacional de Turismo Literario y Cinematográfico.",
+    "authorizationBannerTitle": "AUTORIZACIÓN DE PUBLICACIÓN EN LAS ACTAS",
+    "authorizationIntro": "Complete los campos para autorizar la publicación del resumen según los términos indicados.",
+    "authorizationQrLabel": "Enlace directo a esta página (código QR)"
   },
   "news": {
     "title": "Noticias",

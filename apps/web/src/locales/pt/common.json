@@ -214,7 +214,15 @@
     "publicationTitle": "Publicação:",
     "publicationText": "os Anais serão disponibilizados em formato e-book (PDF) no site oficial da Conferência, com informações editoriais completas (expediente, sumário e identificadores bibliográficos).",
     "statusTitle": "Status:",
-    "statusText": "Aguarde. A página será atualizada com o link para download assim que a edição final estiver concluída."
+    "statusText": "Aguarde. A página será atualizada com o link para download assim que a edição final estiver concluída.",
+    "authorizationBlockTitle": "Autorização de publicação",
+    "authorizationBlockText": "Para registrar a autorização da publicação do seu resumo nos anais da conferência, use o formulário abaixo.",
+    "authorizationCta": "Acessar formulário de autorização",
+    "authorizationSeoTitle": "Autorização de publicação nos anais",
+    "authorizationSeoDescription": "Formulário de ciência e concordância para publicação de resumo nos anais da III Conferência Internacional de Turismo Literário e Cinematográfico.",
+    "authorizationBannerTitle": "AUTORIZAÇÃO DE PUBLICAÇÃO NOS ANAIS",
+    "authorizationIntro": "Preencha os campos abaixo para declarar a autorização de publicação do resumo, conforme os termos indicados.",
+    "authorizationQrLabel": "Link direto para esta página (QR Code)"
   },
   "news": {
     "title": "Notícias",

@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import ThematicLines from "./pages/ThematicLines";
@@ -19,7 +19,16 @@ import AnaisAdminAutorizacoes from "./pages/AnaisAdminAutorizacoes";
 function App() {
   return (
     <Routes>
-      <Route path="/anais/autorizacao" element={<AnaisAutorizacao />} />
+      <Route
+        path="/anais/autorizacao"
+        element={
+          <Layout>
+            <AnaisAutorizacao />
+          </Layout>
+        }
+      />
+      <Route path="/anais/autorizacoes" element={<Navigate to="/anais/autorizacao" replace />} />
+      <Route path="/anais/autorizações" element={<Navigate to="/anais/autorizacao" replace />} />
       <Route path="/anais/admin/autorizacoes" element={<AnaisAdminAutorizacoes />} />
       <Route
         path="/"

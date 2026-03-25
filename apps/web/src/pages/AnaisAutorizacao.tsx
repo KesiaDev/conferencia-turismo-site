@@ -1,32 +1,53 @@
-import { Helmet } from "react-helmet-async";
+import { useTranslation } from "react-i18next";
+import Section from "../components/Section";
+import Seo from "../components/Seo";
+import OptimizedImage from "../components/OptimizedImage";
 import AuthorizationForm from "../components/authorization/AuthorizationForm";
 import AuthorizationQr from "../components/authorization/AuthorizationQr";
 
 export default function AnaisAutorizacao() {
-  return (
-    <div className="min-h-screen bg-[#EBE3D5] flex flex-col">
-      <Helmet>
-        <title>Autorização de publicação — Anais | III Conferência</title>
-      </Helmet>
+  const { t } = useTranslation();
 
-      <div className="flex-1 flex flex-col items-center justify-center px-4 py-12">
-        <div className="w-full max-w-lg">
-          <h1 className="text-2xl md:text-3xl font-semibold text-stone-900 text-center mb-2">
-            Autorização de publicação nos anais
+  return (
+    <>
+      <Seo
+        title={t("anais.authorizationSeoTitle")}
+        description={t("anais.authorizationSeoDescription")}
+      />
+
+      <div className="w-full aspect-[16/5]">
+        <OptimizedImage
+          src="/hero-novo.gif"
+          alt="Banner da Conferência"
+          className="w-full h-full object-cover block"
+          loading="eager"
+          fetchPriority="high"
+        />
+      </div>
+
+      <div className="py-8 bg-[#e0a085]">
+        <div className="container-custom">
+          <h1 className="text-2xl md:text-3xl font-semibold text-center text-white">
+            {t("anais.authorizationBannerTitle")}
           </h1>
-          <p className="text-sm text-stone-600 text-center mb-8">
-            III Conferência Internacional de Turismo Literário e Cinematográfico
+        </div>
+      </div>
+
+      <Section>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-gray-700 leading-relaxed text-center mb-8">
+            {t("anais.authorizationIntro")}
           </p>
 
-          <div className="rounded-xl border border-stone-200/80 bg-white/90 backdrop-blur-sm p-6 md:p-8 shadow-md">
+          <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-10">
             <AuthorizationForm />
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <AuthorizationQr label="Compartilhe o link da autorização (QR Code)" />
+          <div className="flex justify-center pb-4">
+            <AuthorizationQr label={t("anais.authorizationQrLabel")} />
           </div>
         </div>
-      </div>
-    </div>
+      </Section>
+    </>
   );
 }
