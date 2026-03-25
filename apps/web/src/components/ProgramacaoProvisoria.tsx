@@ -720,7 +720,7 @@ export default function ProgramacaoProvisoria() {
           time: "10h–10h15",
           title:
             "A telenovela brasileira no Leste Europeu: um estudo da percepção do Brasil como destino turístico à luz da fenomenologia de Merleau-Ponty",
-          author: "Anastasiya Golets; Lana Magaly Pires",
+          author: "Anastasiya Golets",
           affiliation: "Instituto Federal de Brasília (Brasil)",
         },
         {
