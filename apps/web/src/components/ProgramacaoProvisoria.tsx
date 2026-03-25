@@ -429,7 +429,7 @@ export default function ProgramacaoProvisoria() {
     {
       title: "TEMÁTICA 9: Preservação do patrimônio literário e cultural e da autenticidade",
       date: "26 de março de 2026",
-      time: "13h30 – 15h",
+      time: "13h30 – 14h45",
       room: "405 – Bloco F – UCS",
       coordinators: "Jordi Arco-Pumarolla e Duda Rocha",
       technicalSupport: "Daiane de Lima Pedro",
@@ -463,7 +463,7 @@ export default function ProgramacaoProvisoria() {
           affiliation: "Universidade Estadual de Goiás UEG (Brasil)",
         },
         {
-          time: "14h30–15h",
+          time: "14h30–14h45",
           title: "Patrimônio habitado: o espetáculo Som e Luz como narrativa performativa",
           author: "Rafaely da Silva Reggiori",
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
