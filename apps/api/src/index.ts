@@ -19,6 +19,7 @@ import feesRouter from "./routes/fees.js";
 import submissionsRouter from "./routes/submissions.js";
 import panelsRouter from "./routes/panels.js";
 import contactRouter from "./routes/contact.js";
+import authorizationRouter from "./routes/authorization.js";
 
 dotenv.config();
 
@@ -97,7 +98,7 @@ app.use(
       }
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-Admin-Password"],
     credentials: false,
   })
 );
@@ -139,6 +140,7 @@ app.use("/api/fees", feesRouter);
 app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/authorization", authorizationRouter);
 
 // Caminho do frontend após build
 // Tenta primeiro o caminho copiado durante o build (web/dist dentro de dist/)
@@ -212,4 +214,6 @@ app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`   - POST /api/submissions`);
   console.log(`   - POST /api/panels`);
   console.log(`   - POST /api/contact`);
+  console.log(`   - POST /api/authorization`);
+  console.log(`   - GET /api/authorization/admin`);
 });

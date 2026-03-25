@@ -13,26 +13,119 @@ import Anais from "./pages/Anais";
 import Contact from "./pages/Contact";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
+import AnaisAutorizacao from "./pages/AnaisAutorizacao";
+import AnaisAdminAutorizacoes from "./pages/AnaisAdminAutorizacoes";
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/keynotes" element={<Keynotes />} />
-        <Route path="/program" element={<Program />} />
-        <Route path="/thematic-lines" element={<ThematicLines />} />
-        <Route path="/call" element={<Call />} />
-        <Route path="/fees" element={<Fees />} />
-        <Route path="/committees" element={<Committees />} />
-        <Route path="/venue" element={<Venue />} />
-        <Route path="/villa-dei-troni" element={<VillaDeiTroni />} />
-        <Route path="/anais" element={<Anais />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/accessibility" element={<Accessibility />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/anais/autorizacao" element={<AnaisAutorizacao />} />
+      <Route path="/anais/admin/autorizacoes" element={<AnaisAdminAutorizacoes />} />
+      <Route
+        path="/"
+        element={
+          <Layout>
+            <Home />
+          </Layout>
+        }
+      />
+      <Route
+        path="/keynotes"
+        element={
+          <Layout>
+            <Keynotes />
+          </Layout>
+        }
+      />
+      <Route
+        path="/program"
+        element={
+          <Layout>
+            <Program />
+          </Layout>
+        }
+      />
+      <Route
+        path="/thematic-lines"
+        element={
+          <Layout>
+            <ThematicLines />
+          </Layout>
+        }
+      />
+      <Route
+        path="/call"
+        element={
+          <Layout>
+            <Call />
+          </Layout>
+        }
+      />
+      <Route
+        path="/fees"
+        element={
+          <Layout>
+            <Fees />
+          </Layout>
+        }
+      />
+      <Route
+        path="/committees"
+        element={
+          <Layout>
+            <Committees />
+          </Layout>
+        }
+      />
+      <Route
+        path="/venue"
+        element={
+          <Layout>
+            <Venue />
+          </Layout>
+        }
+      />
+      <Route
+        path="/villa-dei-troni"
+        element={
+          <Layout>
+            <VillaDeiTroni />
+          </Layout>
+        }
+      />
+      <Route
+        path="/anais"
+        element={
+          <Layout>
+            <Anais />
+          </Layout>
+        }
+      />
+      <Route
+        path="/contact"
+        element={
+          <Layout>
+            <Contact />
+          </Layout>
+        }
+      />
+      <Route
+        path="/accessibility"
+        element={
+          <Layout>
+            <Accessibility />
+          </Layout>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <Layout>
+            <NotFound />
+          </Layout>
+        }
+      />
+    </Routes>
   );
 }
 
