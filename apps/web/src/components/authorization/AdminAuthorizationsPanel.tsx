@@ -173,7 +173,7 @@ export default function AdminAuthorizationsPanel() {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto space-y-6 rounded-2xl border border-stone-200/60 bg-white/90 p-4 shadow-xl backdrop-blur-sm ring-1 ring-black/[0.04] sm:p-6">
+    <div className="w-full max-w-[min(100%,90rem)] mx-auto space-y-6 rounded-2xl border border-stone-200/60 bg-white/90 p-4 shadow-xl backdrop-blur-sm ring-1 ring-black/[0.04] sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-xl font-semibold text-stone-900">Autorizações registradas</h1>
@@ -207,8 +207,8 @@ export default function AdminAuthorizationsPanel() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-8">
-        <div className="flex-1 space-y-4">
+      <div className="flex flex-col xl:flex-row gap-8 xl:items-start">
+        <div className="min-w-0 flex-1 space-y-4">
           <form
             className="flex flex-col sm:flex-row gap-2"
             onSubmit={(e) => {
@@ -235,16 +235,16 @@ export default function AdminAuthorizationsPanel() {
           )}
 
           <div className="overflow-x-auto rounded-lg border border-stone-200 bg-white shadow-sm">
-            <table className="min-w-full text-left text-sm">
+            <table className="min-w-[960px] w-full text-left text-sm">
               <thead className="bg-stone-100 text-stone-700">
                 <tr>
-                  <th className="px-3 py-2 font-medium">Nome</th>
-                  <th className="px-3 py-2 font-medium">Documento</th>
-                  <th className="px-3 py-2 font-medium">E-mail</th>
-                  <th className="px-3 py-2 font-medium">Resumo</th>
-                  <th className="px-3 py-2 font-medium">Data</th>
-                  <th className="px-3 py-2 font-medium">IP</th>
-                  <th className="px-3 py-2 font-medium w-[100px]">Ações</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap">Nome</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap">Documento</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap min-w-[220px]">E-mail</th>
+                  <th className="px-3 py-2 font-medium min-w-[200px]">Resumo</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap">Data</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap min-w-[140px]">IP</th>
+                  <th className="px-3 py-2 font-medium whitespace-nowrap w-[100px]">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -257,14 +257,16 @@ export default function AdminAuthorizationsPanel() {
                 )}
                 {items.map((r) => (
                   <tr key={r.id} className="border-t border-stone-100">
-                    <td className="px-3 py-2 align-top">{r.name}</td>
+                    <td className="px-3 py-2 align-top whitespace-nowrap">{r.name}</td>
                     <td className="px-3 py-2 align-top whitespace-nowrap">{r.document}</td>
-                    <td className="px-3 py-2 align-top break-all max-w-[180px]">{r.email}</td>
-                    <td className="px-3 py-2 align-top max-w-[220px]">{r.summary}</td>
+                    <td className="px-3 py-2 align-top whitespace-nowrap text-stone-800">
+                      {r.email}
+                    </td>
+                    <td className="px-3 py-2 align-top max-w-md break-words">{r.summary}</td>
                     <td className="px-3 py-2 align-top whitespace-nowrap">
                       {dayjs(r.createdAt).format("DD/MM/YYYY HH:mm")}
                     </td>
-                    <td className="px-3 py-2 align-top text-xs text-stone-500 break-all max-w-[120px]">
+                    <td className="px-3 py-2 align-top whitespace-nowrap font-mono text-xs text-stone-600">
                       {r.ip || "—"}
                     </td>
                     <td className="px-3 py-2 align-top whitespace-nowrap">
@@ -284,8 +286,8 @@ export default function AdminAuthorizationsPanel() {
           </div>
         </div>
 
-        <aside className="shrink-0 flex flex-col items-center lg:items-end">
-          <AuthorizationQr />
+        <aside className="shrink-0 flex w-full flex-col items-center xl:w-auto xl:min-w-[320px] xl:items-end">
+          <AuthorizationQr urlSingleLine />
         </aside>
       </div>
     </div>

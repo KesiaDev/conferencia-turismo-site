@@ -9,6 +9,8 @@ type Props = {
   label?: string;
   /** Destaque visual (texto maior, borda no QR). */
   prominent?: boolean;
+  /** URL em uma linha com scroll horizontal (útil no admin). */
+  urlSingleLine?: boolean;
 };
 
 export default function AuthorizationQr({
@@ -16,6 +18,7 @@ export default function AuthorizationQr({
   size = 160,
   label = "Acesso rápido (QR Code)",
   prominent = false,
+  urlSingleLine = false,
 }: Props) {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
@@ -58,7 +61,13 @@ export default function AuthorizationQr({
     <div className="flex flex-col items-center gap-3">
       <p className={labelClass}>{label}</p>
       <img src={dataUrl} alt="" width={size} height={size} className={imgClass} />
-      <p className={urlClass}>{url}</p>
+      {urlSingleLine ? (
+        <div className="w-full max-w-[min(100vw-2rem,32rem)] overflow-x-auto rounded-md border border-stone-200/80 bg-stone-50/80 px-3 py-2">
+          <p className="whitespace-nowrap text-center text-xs font-mono text-stone-700">{url}</p>
+        </div>
+      ) : (
+        <p className={urlClass}>{url}</p>
+      )}
     </div>
   );
 }
