@@ -28,7 +28,7 @@ export default function Program() {
                 kind: "service",
               },
               {
-                time: "09h00 – 10h30",
+                time: "09h00 – 10h00",
                 title: "Abertura Oficial",
                 description:
                   "Representantes: Ministério do Turismo, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
@@ -36,7 +36,7 @@ export default function Program() {
                 kind: "plenary",
               },
               {
-                time: "10h30 – 12h00",
+                time: "10h00 – 11h00",
                 title: "Palestra de Abertura",
                 description:
                   "Turismo Literário e Cinematográfico como vetor de desenvolvimento territorial, inovação e internacionalização do Brasil",

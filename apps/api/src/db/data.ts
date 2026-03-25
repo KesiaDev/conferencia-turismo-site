@@ -171,7 +171,7 @@ export const program: ProgramDay[] = [
         kind: "service",
       },
       {
-        time: "09:00–10:30",
+        time: "09:00–10:00",
         title: "Abertura Oficial",
         description:
           "Representantes: Embratur, Secretaria Estadual do Turismo/RS, Secretaria Municipal do Turismo de Caxias do Sul, Pró-Reitoria de Pós-Graduação UCS, Coordenações PPGTURH e PPGLET, Comissão Organizadora.",
@@ -179,7 +179,7 @@ export const program: ProgramDay[] = [
         kind: "plenary",
       },
       {
-        time: "10:30–12:00",
+        time: "10:00–11:00",
         title: "Palestra de Abertura",
         description:
           "Do Imaginário à Experiência: Como o conteúdo audiovisual move o Turismo Brasileiro",
