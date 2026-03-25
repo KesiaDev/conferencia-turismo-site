@@ -525,7 +525,7 @@ export default function ProgramacaoProvisoria() {
       technicalSupport: "Daiane de Lima Pedro",
       rows: [
         {
-          time: "15h35–15h45",
+          time: "15h35–15h50",
           title:
             "Literatura infantil, lendas urbanas e turismo literário: a ressignificação da Cabeça de Cuia em Teresina (PI)",
           author: "Célia Revilândia Costa Seabra",
@@ -533,7 +533,7 @@ export default function ProgramacaoProvisoria() {
             "Prefeitura Municipal de Teresina (Secretaria Municipal de Educação) (Brasil)",
         },
         {
-          time: "15h45–15h55",
+          time: "15h50–16h05",
           title:
             'O potencial da obra literária "Caxias do Sul: história e cultura nos distritos" na promoção do turismo étnico inclusivo e sustentável.',
           author:
@@ -541,14 +541,14 @@ export default function ProgramacaoProvisoria() {
           affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
         },
         {
-          time: "15h55–16h05",
+          time: "16h05–16h15",
           title:
             "Turismo religioso-cinematográfico em Salvador (BA): o longa-metragem Irmã Dulce (2014) como ferramenta de promoção do roteiro Caminho da Fé",
           author: "Milena Maria Neris de Jesus; Natalia Coimbra de Sá",
           affiliation: "Universidade do Estado da Bahia – UNEB (Brasil)",
         },
         {
-          time: "16h05–16h15",
+          time: "16h20–16h35",
           title:
             "Gastronomia, viagens e cinematografia: narrativas e processos criativos na série Chef's Table.",
           author: "Israel Bertamoni; Gabriela Tieppo Francio; Henrique Subtil Sartori",
