@@ -5,6 +5,7 @@
 import { Router, type Request } from "express";
 import rateLimit from "express-rate-limit";
 import { Prisma } from "@prisma/client";
+import { PrismaClientInitializationError } from "@prisma/client/runtime/library";
 import { prisma } from "../lib/prisma.js";
 import { authorizationBodySchema } from "../schemas/authorization.js";
 
@@ -68,10 +69,29 @@ router.post("/", submitLimiter, async (req, res) => {
       message: "Sua autorização foi registrada com sucesso.",
     });
   } catch (e: unknown) {
-    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
-      return res.status(409).json({
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2002") {
+        return res.status(409).json({
+          success: false,
+          error: "Já existe uma autorização para este e-mail e este título de resumo.",
+        });
+      }
+      if (e.code === "P2021") {
+        console.error(
+          "authorization POST: tabela ou schema ausente — rode prisma migrate deploy e DATABASE_URL:",
+          e
+        );
+        return res.status(503).json({
+          success: false,
+          error: "Serviço em atualização. Tente novamente em alguns minutos.",
+        });
+      }
+    }
+    if (e instanceof PrismaClientInitializationError) {
+      console.error("authorization POST: Prisma não conectou (DATABASE_URL?):", e.message);
+      return res.status(503).json({
         success: false,
-        error: "Já existe uma autorização para este e-mail e este título de resumo.",
+        error: "Serviço temporariamente indisponível. Tente mais tarde.",
       });
     }
     console.error("authorization POST:", e);

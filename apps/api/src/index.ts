@@ -23,6 +23,12 @@ import authorizationRouter from "./routes/authorization.js";
 
 dotenv.config();
 
+if (!process.env.DATABASE_URL) {
+  console.warn(
+    "⚠️ DATABASE_URL não está definida. A API de autorizações (Prisma) e migrate no start vão falhar até configurar o Postgres no Railway."
+  );
+}
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 

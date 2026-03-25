@@ -22,14 +22,19 @@ ADMIN_PASSWORD="defina_uma_senha_forte"
 
 ## Migrações Prisma
 
-Na **primeira implantação** ou após puxar este código, aplique o schema no banco:
+O script **`npm run start`** da API executa automaticamente `prisma migrate deploy` antes de `node dist/index.js`, desde que exista:
+
+- `DATABASE_URL` apontando para o Postgres (Railway)
+- Pacote `prisma` nas dependências (já incluído)
+
+Se o deploy anterior usava só `node dist/index.js` sem migrate, a tabela `Authorization` não existia e o POST `/api/authorization` retornava **500**. Após este ajuste, cada deploy aplica migrações na subida.
+
+**Manual (opcional):**
 
 ```bash
 cd apps/api
 pnpm exec prisma migrate deploy
 ```
-
-O build da API já executa `prisma generate` (`pnpm run build`). Em produção, o `migrate deploy` deve rodar **antes** de subir o processo Node (release command no Railway, ou etapa de CI).
 
 ## Railway (resumo)
 
