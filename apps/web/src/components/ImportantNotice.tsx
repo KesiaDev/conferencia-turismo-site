@@ -1,5 +1,8 @@
 const PRESENTATION_EMAIL = "litfilmtourismconferenceucs@gmail.com";
 
+const LISTENER_REGISTRATION_URL =
+  "https://sou.ucs.br/inscricoes/formulario/iii-conferencia-internacional-sobre-turismo-literario-e-cinematografico-comunidade-em-geral-ext038806";
+
 export default function ImportantNotice() {
   return (
     <div
@@ -46,7 +49,16 @@ export default function ImportantNotice() {
                   Se você ainda está interessado em participar do nosso evento como{" "}
                   <strong>ouvinte</strong>, venha para a conferência no dia{" "}
                   <strong className="text-[#c8632d]">26 de março</strong>. Serão aceitas inscrições,
-                  nessa modalidade, <strong>na hora</strong> — é só chegar!
+                  nessa modalidade, <strong>na hora</strong> — é só chegar! Também é possível{" "}
+                  <a
+                    href={LISTENER_REGISTRATION_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#c8632d] underline underline-offset-2 break-all hover:text-[#a34f24]"
+                  >
+                    fazer a inscrição pelo formulário online da UCS
+                  </a>
+                  .
                 </p>
               </div>
             </div>
