@@ -3,7 +3,6 @@ import Section from "../components/Section";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
 import AuthorizationForm from "../components/authorization/AuthorizationForm";
-import AuthorizationQr from "../components/authorization/AuthorizationQr";
 
 export default function AnaisAutorizacao() {
   const { t } = useTranslation();
@@ -39,12 +38,8 @@ export default function AnaisAutorizacao() {
             {t("anais.authorizationIntro")}
           </p>
 
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-10">
+          <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085]">
             <AuthorizationForm />
-          </div>
-
-          <div className="flex justify-center pb-4">
-            <AuthorizationQr label={t("anais.authorizationQrLabel")} />
           </div>
         </div>
       </Section>
