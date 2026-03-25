@@ -340,7 +340,7 @@ export default function ProgramacaoProvisoria() {
         time: "13h30 – 15h",
         room: "404 – Bloco F – UCS",
         coordinators: "André Brayner de Farias e Rita Baleiro",
-        technicalSupport: "Ernani Viana da Silva",
+        technicalSupport: "Ernani Vieira da Silva",
         rows: [
           {
             time: "13h30–13h45",
@@ -398,7 +398,7 @@ export default function ProgramacaoProvisoria() {
             title:
               "Turismo, memória e cinefilia: georreferenciamento dos espaços de projeção cinematográfica de Caxias do Sul – RS.",
             author:
-              "André Brayner de Farias; Ernani Viana da Silva Neto; Daniel Ignácio Vargas Gomez",
+              "André Brayner de Farias; Ernani Vieira da Silva Neto; Daniel Ignácio Vargas Gomez",
             affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
           },
           {
