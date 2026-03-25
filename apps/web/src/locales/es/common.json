@@ -221,7 +221,8 @@
     "authorizationSeoDescription": "Formulario de autorización para publicar el resumen en las actas de la III Conferencia Internacional de Turismo Literario y Cinematográfico.",
     "authorizationBannerTitle": "AUTORIZACIÓN DE PUBLICACIÓN EN LAS ACTAS",
     "authorizationIntro": "Complete los campos para autorizar la publicación del resumen según los términos indicados.",
-    "authorizationQrLabel": "Enlace directo a esta página (código QR)"
+    "authorizationQrLabel": "Enlace directo a esta página (código QR)",
+    "authorizationQrCardTitle": "Código QR — acceso rápido al formulario"
   },
   "news": {
     "title": "Noticias",

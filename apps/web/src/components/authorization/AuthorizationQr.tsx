@@ -7,12 +7,15 @@ type Props = {
   url?: string;
   size?: number;
   label?: string;
+  /** Destaque visual (texto maior, borda no QR). */
+  prominent?: boolean;
 };
 
 export default function AuthorizationQr({
   url = DEFAULT_URL,
   size = 160,
   label = "Acesso rápido (QR Code)",
+  prominent = false,
 }: Props) {
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
@@ -41,17 +44,21 @@ export default function AuthorizationQr({
     );
   }
 
+  const labelClass = prominent
+    ? "text-sm font-medium text-stone-700 text-center max-w-[280px]"
+    : "text-xs text-stone-600 text-center max-w-[200px]";
+  const imgClass = prominent
+    ? "rounded-lg border-2 border-[#e0a085] shadow-md"
+    : "rounded-md border border-stone-200";
+  const urlClass = prominent
+    ? "text-xs text-stone-600 break-all max-w-[260px] text-center leading-snug"
+    : "text-[10px] text-stone-500 break-all max-w-[220px] text-center";
+
   return (
-    <div className="flex flex-col items-center gap-2">
-      <p className="text-xs text-stone-600 text-center max-w-[200px]">{label}</p>
-      <img
-        src={dataUrl}
-        alt=""
-        width={size}
-        height={size}
-        className="rounded-md border border-stone-200"
-      />
-      <p className="text-[10px] text-stone-500 break-all max-w-[220px] text-center">{url}</p>
+    <div className="flex flex-col items-center gap-3">
+      <p className={labelClass}>{label}</p>
+      <img src={dataUrl} alt="" width={size} height={size} className={imgClass} />
+      <p className={urlClass}>{url}</p>
     </div>
   );
 }

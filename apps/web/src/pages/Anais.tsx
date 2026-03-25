@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
+import AuthorizationQr from "../components/authorization/AuthorizationQr";
 
 export default function Anais() {
   const { t } = useTranslation();
@@ -46,6 +47,15 @@ export default function Anais() {
             >
               {t("anais.authorizationCta")}
             </Link>
+
+            <div className="mt-8 flex w-full flex-col items-center border-t border-[#e0a085]/30 pt-8">
+              <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wide text-[#c47862]">
+                {t("anais.authorizationQrCardTitle")}
+              </p>
+              <div className="rounded-2xl border-2 border-[#e0a085] bg-gradient-to-b from-white to-[#fdf6f3] p-6 shadow-lg ring-2 ring-[#e0a085]/15 md:p-8">
+                <AuthorizationQr size={200} label={t("anais.authorizationQrLabel")} prominent />
+              </div>
+            </div>
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-8">

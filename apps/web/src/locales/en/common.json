@@ -221,7 +221,8 @@
     "authorizationSeoDescription": "Form to authorize publication of your abstract in the proceedings of the III International Conference on Literary and Film Tourism.",
     "authorizationBannerTitle": "AUTHORIZATION TO PUBLISH IN THE PROCEEDINGS",
     "authorizationIntro": "Fill in the fields below to authorize publication of your abstract in accordance with the stated terms.",
-    "authorizationQrLabel": "Direct link to this page (QR code)"
+    "authorizationQrLabel": "Direct link to this page (QR code)",
+    "authorizationQrCardTitle": "QR code — quick access to the form"
   },
   "news": {
     "title": "News",

@@ -1,6 +1,10 @@
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import dayjs from "dayjs";
-import { getAuthorizationsAdmin, type AuthorizationRow } from "../../lib/authorization/api";
+import {
+  deleteAuthorizationAdmin,
+  getAuthorizationsAdmin,
+  type AuthorizationRow,
+} from "../../lib/authorization/api";
 import AuthorizationQr from "./AuthorizationQr";
 
 const STORAGE_KEY = "anais_admin_pw";
@@ -41,6 +45,7 @@ export default function AdminAuthorizationsPanel() {
   const [query, setQuery] = useState("");
   const [items, setItems] = useState<AuthorizationRow[]>([]);
   const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const activePw = sessionPw;
@@ -100,6 +105,31 @@ export default function AdminAuthorizationsPanel() {
   };
 
   const filteredLabel = useMemo(() => (query ? `Busca: “${query}”` : "Todas"), [query]);
+
+  const handleDelete = async (row: AuthorizationRow) => {
+    const ok = window.confirm(
+      `Excluir o registro de "${row.name}" (${row.email})?\nEsta ação não pode ser desfeita.`
+    );
+    if (!ok) return;
+    setError(null);
+    setDeletingId(row.id);
+    try {
+      const res = await deleteAuthorizationAdmin(activePw, row.id);
+      if (!res.success) {
+        if (res.error === "Não autorizado") {
+          sessionStorage.removeItem(STORAGE_KEY);
+          setSessionPw("");
+        }
+        setError(res.error || "Não foi possível excluir.");
+        return;
+      }
+      setItems((prev) => prev.filter((x) => x.id !== row.id));
+    } catch {
+      setError("Erro de rede ao excluir.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   if (!activePw) {
     return (
@@ -210,12 +240,13 @@ export default function AdminAuthorizationsPanel() {
                   <th className="px-3 py-2 font-medium">Resumo</th>
                   <th className="px-3 py-2 font-medium">Data</th>
                   <th className="px-3 py-2 font-medium">IP</th>
+                  <th className="px-3 py-2 font-medium w-[100px]">Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {items.length === 0 && !loading && (
                   <tr>
-                    <td colSpan={6} className="px-3 py-8 text-center text-stone-500">
+                    <td colSpan={7} className="px-3 py-8 text-center text-stone-500">
                       Nenhum registro.
                     </td>
                   </tr>
@@ -231,6 +262,16 @@ export default function AdminAuthorizationsPanel() {
                     </td>
                     <td className="px-3 py-2 align-top text-xs text-stone-500 break-all max-w-[120px]">
                       {r.ip || "—"}
+                    </td>
+                    <td className="px-3 py-2 align-top whitespace-nowrap">
+                      <button
+                        type="button"
+                        onClick={() => void handleDelete(r)}
+                        disabled={deletingId !== null}
+                        className="rounded border border-red-200 bg-red-50 px-2 py-1 text-xs font-medium text-red-800 hover:bg-red-100 disabled:opacity-50"
+                      >
+                        {deletingId === r.id ? "…" : "Excluir"}
+                      </button>
                     </td>
                   </tr>
                 ))}

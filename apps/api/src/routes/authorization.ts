@@ -8,6 +8,7 @@ import { Prisma } from "@prisma/client";
 import { PrismaClientInitializationError } from "@prisma/client/runtime/library";
 import { prisma } from "../lib/prisma.js";
 import { authorizationBodySchema } from "../schemas/authorization.js";
+import { emailService } from "../services/email.js";
 
 const router = Router();
 
@@ -63,6 +64,10 @@ router.post("/", submitLimiter, async (req, res) => {
     });
 
     lastSubmitByIp.set(ip, now);
+
+    emailService
+      .sendAuthorizationConfirmation({ name, email, summary })
+      .catch((err) => console.error("Erro ao enviar e-mail de confirmação de autorização:", err));
 
     return res.status(201).json({
       success: true,
@@ -127,6 +132,30 @@ router.get("/admin", async (req, res) => {
   } catch (e) {
     console.error("authorization GET admin:", e);
     return res.status(500).json({ success: false, error: "Erro ao listar." });
+  }
+});
+
+router.delete("/admin/:id", async (req, res) => {
+  try {
+    const expected = process.env.ADMIN_PASSWORD;
+    const sent = req.headers["x-admin-password"];
+    if (!expected || String(sent) !== expected) {
+      return res.status(401).json({ success: false, error: "Não autorizado" });
+    }
+
+    const id = req.params.id?.trim();
+    if (!id) {
+      return res.status(400).json({ success: false, error: "ID inválido." });
+    }
+
+    await prisma.authorization.delete({ where: { id } });
+    return res.json({ success: true });
+  } catch (e: unknown) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2025") {
+      return res.status(404).json({ success: false, error: "Registro não encontrado." });
+    }
+    console.error("authorization DELETE admin:", e);
+    return res.status(500).json({ success: false, error: "Erro ao excluir." });
   }
 });
 

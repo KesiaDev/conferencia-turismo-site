@@ -6,6 +6,14 @@ import path from "path";
 import { PDFGenerator, SubmissionData } from "./pdfGenerator.js";
 import { panelDocumentGenerator, PanelSubmissionData } from "./panelDocumentGenerator.js";
 
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 // Configuração do Resend (prioritário)
 const createResendClient = (): Resend | null => {
   if (!process.env.RESEND_API_KEY) {
@@ -413,6 +421,79 @@ export const emailService = {
         console.log("✅ Email enviado com sucesso para:", destinationEmail);
       } catch (error) {
         console.error("❌ Erro ao enviar email:", error);
+      }
+    }
+  },
+
+  /** E-mail de agradecimento e confirmação do aceite (publicação nos anais). */
+  sendAuthorizationConfirmation: async (data: { name: string; email: string; summary: string }) => {
+    const resend = createResendClient();
+    const transporter = createTransporter();
+
+    const safeName = escapeHtml(data.name);
+    const safeSummary = escapeHtml(data.summary);
+    const safeEmail = escapeHtml(data.email);
+
+    const html = `
+      <h2>Autorização registrada</h2>
+      <p>Prezado(a) <strong>${safeName}</strong>,</p>
+      <p>Obrigado. Confirmamos o recebimento da sua <strong>autorização para publicação</strong> do resumo nos anais da <strong>III Conferência Internacional de Turismo Literário e Cinematográfico</strong>, nos termos que você aceitou no formulário (publicação gratuita e por prazo indeterminado nos anais da conferência).</p>
+      <h3>Resumo do que foi registrado</h3>
+      <ul>
+        <li><strong>Título do resumo:</strong> ${safeSummary}</li>
+        <li><strong>E-mail:</strong> ${safeEmail}</li>
+        <li><strong>Data do registro:</strong> ${new Date().toLocaleString("pt-BR")}</li>
+      </ul>
+      <p>Esta mensagem serve como comprovante do seu aceite. Em caso de dúvidas, utilize os canais oficiais da conferência.</p>
+      <hr>
+      <p><small>
+        <strong>III Conferência Internacional sobre Turismo Literário e Cinematográfico</strong><br>
+        Economia Criativa, Inovação e Desenvolvimento Territorial<br>
+        26 a 28 de março de 2026 - Universidade de Caxias do Sul - UCS<br>
+        Serra Gaúcha - Brasil
+      </small></p>
+    `;
+
+    const subject = `[LITFILM 2026] Confirmação — Autorização de publicação nos anais`;
+
+    console.log("\n📧 CONFIRMAÇÃO DE AUTORIZAÇÃO (anais) →", data.email);
+
+    if (!resend && !transporter) {
+      console.log("⚠️ Resend/Gmail não configurados. E-mail de confirmação não enviado.");
+      return;
+    }
+
+    let sent = false;
+    if (resend) {
+      try {
+        const result = await resend.emails.send({
+          from: getFromEmail(),
+          to: data.email,
+          subject,
+          html,
+        });
+        if (!result.error) {
+          console.log("✅ Confirmação de autorização enviada via Resend:", result.data?.id);
+          sent = true;
+        } else {
+          console.error("❌ Resend (autorização):", result.error);
+        }
+      } catch (e: unknown) {
+        console.error("❌ Erro Resend (autorização):", e);
+      }
+    }
+
+    if (!sent && transporter && process.env.EMAIL_USER) {
+      try {
+        await emailService.sendEmailWithRetry(transporter, {
+          from: process.env.EMAIL_USER,
+          to: data.email,
+          subject,
+          html,
+        });
+        console.log("✅ Confirmação de autorização enviada via Gmail");
+      } catch (e: unknown) {
+        console.error("❌ Erro Gmail (autorização):", e);
       }
     }
   },

@@ -222,7 +222,8 @@
     "authorizationSeoDescription": "Formulário de ciência e concordância para publicação de resumo nos anais da III Conferência Internacional de Turismo Literário e Cinematográfico.",
     "authorizationBannerTitle": "AUTORIZAÇÃO DE PUBLICAÇÃO NOS ANAIS",
     "authorizationIntro": "Preencha os campos abaixo para declarar a autorização de publicação do resumo, conforme os termos indicados.",
-    "authorizationQrLabel": "Link direto para esta página (QR Code)"
+    "authorizationQrLabel": "Link direto para esta página (QR Code)",
+    "authorizationQrCardTitle": "QR Code — acesso rápido ao formulário"
   },
   "news": {
     "title": "Notícias",
