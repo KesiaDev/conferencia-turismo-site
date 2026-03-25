@@ -255,7 +255,7 @@ export default function ProgramacaoProvisoria() {
         technicalSupport: "Rafael Bardina de Melo",
         rows: [
           {
-            time: "13h10–13h45",
+            time: "13h30–13h45",
             title:
               "Territorio, identidad y ficción: la gastronomía como lenguaje audiovisual del destino turístico",
             author: "Eugeni Osácar; Esther Velasco",
