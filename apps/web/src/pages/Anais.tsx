@@ -43,9 +43,12 @@ export default function Anais() {
             </p>
             <Link
               to="/anais/autorizacao"
-              className="inline-flex items-center font-semibold text-[#e0a085] underline underline-offset-2 hover:text-[#c47862] transition-colors"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#c47862] px-6 py-3.5 text-base font-semibold text-white shadow-md transition hover:bg-[#b56a52] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b4513] active:bg-[#a65d47] sm:text-lg"
             >
               {t("anais.authorizationCta")}
+              <span aria-hidden className="text-lg leading-none">
+                →
+              </span>
             </Link>
 
             <div className="mt-8 flex w-full flex-col items-center border-t border-[#e0a085]/30 pt-8">
