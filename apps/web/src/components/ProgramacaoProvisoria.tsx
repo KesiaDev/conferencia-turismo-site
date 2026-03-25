@@ -282,7 +282,7 @@ export default function ProgramacaoProvisoria() {
             affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
           },
           {
-            time: "14h30–14h40",
+            time: "14h30–14h45",
             title:
               "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
             author: "Thiele Aparecida Nascimento Piotto",
