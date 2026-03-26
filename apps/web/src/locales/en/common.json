@@ -26,6 +26,11 @@
     "contact": "Contact",
     "rights": "All rights reserved."
   },
+  "floatingCard": {
+    "headline": "Online",
+    "liveTextBeforeLink": "We're live!",
+    "liveLinkLabel": "Watch online"
+  },
   "countdown": {
     "days": "Days",
     "hours": "Hours",

@@ -26,6 +26,11 @@
     "contact": "Contato",
     "rights": "Todos os direitos reservados."
   },
+  "floatingCard": {
+    "headline": "Online",
+    "liveTextBeforeLink": "estamos ao vivo!",
+    "liveLinkLabel": "Assista Online"
+  },
   "countdown": {
     "days": "Dias",
     "hours": "Horas",

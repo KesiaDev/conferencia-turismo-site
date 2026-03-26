@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // Build timestamp: 2025-01-15 - Force rebuild for card position update
 export default function FloatingFilmBox() {
+  const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -133,12 +136,18 @@ export default function FloatingFilmBox() {
     >
       <div className="flex flex-col gap-1 sm:gap-2 min-w-0 w-full">
         <span className="text-white text-[22px] lg:text-[26px] xl:text-[32px] font-bold animate-pulse-online leading-tight">
-          Online
+          {t("floatingCard.headline")}
         </span>
 
-        <div className="text-[10px] lg:text-[11px] xl:text-[14px] text-[#E8A37B] leading-snug">
-          Nova modalidade de participação para pesquisadores estrangeiros
-        </div>
+        <p className="text-[10px] lg:text-[11px] xl:text-[14px] text-[#E8A37B] leading-snug">
+          {t("floatingCard.liveTextBeforeLink")}{" "}
+          <Link
+            to="/assista-online"
+            className="font-semibold text-white underline underline-offset-2 decoration-white/80 hover:text-white hover:decoration-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-sm"
+          >
+            {t("floatingCard.liveLinkLabel")}
+          </Link>
+        </p>
       </div>
     </div>
   );
