@@ -19,7 +19,8 @@ const FALLBACK: LiveStreamItem[] = [
   },
   {
     id: "fallback-next-live",
-    title: "III Conferência de Turismo Literário e Cinematográfico: próxima transmissão ao vivo",
+    title:
+      "Entre Palavras: O Impacto Regional do Turismo Literário e Cinematográfico no Território",
     youtubeUrl: "https://www.youtube.com/live/c9MsA315nmg",
     videoId: "c9MsA315nmg",
     sortOrder: 1,

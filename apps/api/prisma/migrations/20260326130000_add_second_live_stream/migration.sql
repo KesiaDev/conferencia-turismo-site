@@ -2,7 +2,7 @@
 INSERT INTO "LiveStream" ("id", "title", "youtubeUrl", "sortOrder", "createdAt")
 VALUES (
   'clseednextlive001',
-  'III Conferência de Turismo Literário e Cinematográfico: próxima transmissão ao vivo',
+  'Entre Palavras: O Impacto Regional do Turismo Literário e Cinematográfico no Território',
   'https://www.youtube.com/live/c9MsA315nmg',
   1,
   CURRENT_TIMESTAMP
