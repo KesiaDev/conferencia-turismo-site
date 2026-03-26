@@ -22,7 +22,7 @@ export default function Program() {
             day: "2026-03-26",
             slots: [
               {
-                time: "08h00 – 09h30",
+                time: "08h00 – 09h00",
                 title: "Credenciamento",
                 location: "Hall Bloco F",
                 kind: "service",

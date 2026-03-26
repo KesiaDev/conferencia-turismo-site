@@ -165,7 +165,7 @@ export const program: ProgramDay[] = [
     day: "2026-03-26",
     slots: [
       {
-        time: "08:00–09:30",
+        time: "08:00–09:00",
         title: "Credenciamento",
         location: "Hall Bloco F",
         kind: "service",
