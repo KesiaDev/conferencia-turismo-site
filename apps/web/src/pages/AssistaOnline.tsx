@@ -17,6 +17,14 @@ const FALLBACK: LiveStreamItem[] = [
     sortOrder: 0,
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "fallback-next-live",
+    title: "III Conferência de Turismo Literário e Cinematográfico: próxima transmissão ao vivo",
+    youtubeUrl: "https://www.youtube.com/live/c9MsA315nmg",
+    videoId: "c9MsA315nmg",
+    sortOrder: 1,
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 export default function AssistaOnline() {
