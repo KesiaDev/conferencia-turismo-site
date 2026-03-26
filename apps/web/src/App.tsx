@@ -15,6 +15,7 @@ import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
 import AnaisAutorizacao from "./pages/AnaisAutorizacao";
 import AnaisAdminAutorizacoes from "./pages/AnaisAdminAutorizacoes";
+import AssistaOnline from "./pages/AssistaOnline";
 
 function App() {
   return (
@@ -107,6 +108,14 @@ function App() {
         element={
           <Layout>
             <Anais />
+          </Layout>
+        }
+      />
+      <Route
+        path="/assista-online"
+        element={
+          <Layout>
+            <AssistaOnline />
           </Layout>
         }
       />

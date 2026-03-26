@@ -12,6 +12,7 @@
     "venue": "Venue",
     "villaDeiTroni": "Villa Dei Troni",
     "anais": "Proceedings",
+    "watchOnline": "Watch online",
     "news": "News",
     "contact": "Contact"
   },
@@ -223,6 +224,13 @@
     "authorizationIntro": "Fill in the fields below to authorize publication of your abstract in accordance with the stated terms.",
     "authorizationQrLabel": "Direct link to this page (QR code)",
     "authorizationQrCardTitle": "QR code — quick access to the form"
+  },
+  "watchOnline": {
+    "title": "Watch online",
+    "description": "Live streams and videos from the III International Conference on Literary and Film Tourism",
+    "intro": "Follow live streams and recordings published on the event’s official channel. Videos are embedded below; you can also open each session on YouTube using the link under the player.",
+    "fallbackNotice": "Could not load the up-to-date list from the server. Showing the reference video below. If this persists after deploy, check the API and database.",
+    "openOnYoutube": "Open on YouTube"
   },
   "news": {
     "title": "News",

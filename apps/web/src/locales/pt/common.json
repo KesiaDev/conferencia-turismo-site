@@ -12,6 +12,7 @@
     "venue": "Local",
     "villaDeiTroni": "Villa Dei Troni",
     "anais": "Anais",
+    "watchOnline": "Assista online",
     "news": "Notícias",
     "contact": "Contato"
   },
@@ -224,6 +225,13 @@
     "authorizationIntro": "Preencha os campos abaixo para declarar a autorização de publicação do resumo, conforme os termos indicados.",
     "authorizationQrLabel": "Link direto para esta página (QR Code)",
     "authorizationQrCardTitle": "QR Code — acesso rápido ao formulário"
+  },
+  "watchOnline": {
+    "title": "Assista online",
+    "description": "Transmissões e vídeos da III Conferência Internacional de Turismo Literário e Cinematográfico",
+    "intro": "Acompanhe as transmissões ao vivo e as gravações publicadas no canal oficial do evento. Os vídeos aparecem aqui com o player embutido; você também pode abrir no YouTube pelo link abaixo de cada sessão.",
+    "fallbackNotice": "Não foi possível carregar a lista atualizada no servidor. Exibindo o vídeo de referência abaixo. Se o problema persistir após o deploy, verifique a API e o banco de dados.",
+    "openOnYoutube": "Abrir no YouTube"
   },
   "news": {
     "title": "Notícias",

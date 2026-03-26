@@ -20,6 +20,7 @@ import submissionsRouter from "./routes/submissions.js";
 import panelsRouter from "./routes/panels.js";
 import contactRouter from "./routes/contact.js";
 import authorizationRouter from "./routes/authorization.js";
+import liveStreamsRouter from "./routes/liveStreams.js";
 
 dotenv.config();
 
@@ -68,7 +69,13 @@ app.use(
         fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
-        frameSrc: ["'self'", "https://www.google.com", "https://maps.google.com"],
+        frameSrc: [
+          "'self'",
+          "https://www.google.com",
+          "https://maps.google.com",
+          "https://www.youtube.com",
+          "https://www.youtube-nocookie.com",
+        ],
         upgradeInsecureRequests: process.env.NODE_ENV === "production" ? [] : null,
       },
     },
@@ -147,6 +154,7 @@ app.use("/api/submissions", submissionsRouter);
 app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 app.use("/api/authorization", authorizationRouter);
+app.use("/api/live-streams", liveStreamsRouter);
 
 // Caminho do frontend após build
 // Tenta primeiro o caminho copiado durante o build (web/dist dentro de dist/)
@@ -222,4 +230,6 @@ app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`   - POST /api/contact`);
   console.log(`   - POST /api/authorization`);
   console.log(`   - GET /api/authorization/admin`);
+  console.log(`   - GET /api/live-streams`);
+  console.log(`   - POST /api/live-streams/admin`);
 });

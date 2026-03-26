@@ -43,6 +43,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/assista-online" className="hover:text-white transition-colors">
+                  {t("nav.watchOnline")}
+                </Link>
+              </li>
+              <li>
                 <Link to="/accessibility" className="hover:text-white transition-colors">
                   ♿ Acessibilidade
                 </Link>

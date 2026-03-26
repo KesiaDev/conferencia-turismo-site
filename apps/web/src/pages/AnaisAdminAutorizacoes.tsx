@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import AdminAuthorizationsPanel from "../components/authorization/AdminAuthorizationsPanel";
+import LiveStreamsAdminSection from "../components/liveStreams/LiveStreamsAdminSection";
 
 /** Fundo com imagem da conferência (hero) em baixa opacidade + overlays cremes. */
 export default function AnaisAdminAutorizacoes() {
@@ -22,8 +23,9 @@ export default function AnaisAdminAutorizacoes() {
         <div className="absolute inset-0 backdrop-blur-[1px]" />
       </div>
 
-      <div className="relative z-10 min-h-screen px-4 py-8 sm:py-10">
+      <div className="relative z-10 min-h-screen px-4 py-8 sm:py-10 space-y-10">
         <AdminAuthorizationsPanel />
+        <LiveStreamsAdminSection />
       </div>
     </div>
   );
