@@ -241,6 +241,14 @@ export default function ProgramacaoProvisoria() {
           author: "Jacqueline Maria Corá",
           affiliation: "Universidade de Caxias do Sul (Brasil)",
         },
+        {
+          time: "14h40–14h50",
+          title:
+            "Romeu e Julieta na promoção turística de Verona: construção da imagem da cidade como destino literário",
+          author:
+            "Maria Antonia Teixeira dos Santos; Luana Fernanda de Andrade; Vanessa de Fátima da Silva",
+          affiliation: "—",
+        },
       ],
     },
     {
@@ -257,38 +265,30 @@ export default function ProgramacaoProvisoria() {
           {
             time: "13h30–13h45",
             title:
-              "Territorio, identidad y ficción: la gastronomía como lenguaje audiovisual del destino turístico",
-            author: "Eugeni Osácar; Esther Velasco",
-            affiliation:
-              "CETT Barcelona School of Tourism, Hospitality and Gastronomy (Espanha) — ONLINE",
-          },
-          {
-            time: "13h45–14h",
-            title:
               "Famous Film set’s sense of place among locals: the case of Muhu Island in Estonia",
             author: "Marit Piirman",
             affiliation: "University of Tartu (Estonia)",
           },
           {
-            time: "14h–14h15",
+            time: "13h45–14h",
             title: "A paisagem como patrimônio cultural: representações fílmicas das tradições",
             author: "Júlia Carneiro Silva",
             affiliation: "Universidade do Estado da Bahia – UNEB (Brasil)",
           },
           {
-            time: "14h15–14h30",
+            time: "14h–14h15",
             title: "O Tesouro de Umberto Eco",
             author: "Rosana Peccini",
             affiliation: "Universidade de Caxias do Sul – UCS (Brasil)",
           },
           {
-            time: "14h30–14h45",
+            time: "14h15–14h30",
             title:
               "Trincheira da imigração: o protagonismo do Malecón de Habana como eixo temático",
             author: "Thiele Aparecida Nascimento Piotto",
             affiliation: "Universidade Cidade de São Paulo – Unicid (Brasil)",
           },
-          { time: "—", title: "INTERVALO", author: "—", affiliation: "—" },
+          { time: "14h30–15h", title: "INTERVALO", author: "—", affiliation: "—" },
         ],
       },
       afternoon: {
