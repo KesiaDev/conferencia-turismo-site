@@ -94,6 +94,62 @@ router.post("/admin", async (req, res) => {
   }
 });
 
+router.patch("/admin/:id", async (req, res) => {
+  try {
+    if (!checkAdminPassword(req, res)) return;
+
+    const id = req.params.id?.trim();
+    if (!id) {
+      return res.status(400).json({ success: false, error: "ID inválido." });
+    }
+
+    const parsed = liveStreamBodySchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({
+        success: false,
+        error: "Dados inválidos",
+        details: parsed.error.flatten(),
+      });
+    }
+
+    const { title, youtubeUrl } = parsed.data;
+    const videoId = extractYouTubeVideoId(youtubeUrl);
+    if (!videoId) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "Não foi possível reconhecer o link do YouTube. Cole o link completo do vídeo ou transmissão.",
+      });
+    }
+
+    const updated = await prisma.liveStream.update({
+      where: { id },
+      data: {
+        title,
+        youtubeUrl: youtubeUrl.trim(),
+      },
+    });
+
+    return res.json({
+      success: true,
+      item: {
+        id: updated.id,
+        title: updated.title,
+        youtubeUrl: updated.youtubeUrl,
+        videoId,
+        sortOrder: updated.sortOrder,
+        createdAt: updated.createdAt.toISOString(),
+      },
+    });
+  } catch (e: unknown) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2025") {
+      return res.status(404).json({ success: false, error: "Registro não encontrado." });
+    }
+    console.error("liveStreams PATCH admin:", e);
+    return res.status(500).json({ success: false, error: "Erro ao atualizar." });
+  }
+});
+
 router.delete("/admin/:id", async (req, res) => {
   try {
     if (!checkAdminPassword(req, res)) return;

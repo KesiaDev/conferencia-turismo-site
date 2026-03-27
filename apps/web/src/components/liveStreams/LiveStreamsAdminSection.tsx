@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import {
   deleteLiveStreamAdmin,
   getLiveStreams,
+  patchLiveStreamAdmin,
   postLiveStreamAdmin,
   type LiveStreamItem,
 } from "../../lib/liveStreams/api";
@@ -18,6 +19,7 @@ export default function LiveStreamsAdminSection() {
 
   const [titleInput, setTitleInput] = useState("");
   const [urlInput, setUrlInput] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     if (!sessionPw) return;
@@ -41,16 +43,56 @@ export default function LiveStreamsAdminSection() {
     if (sessionPw) void load();
   }, [sessionPw, load]);
 
-  const onAdd = async (ev: FormEvent) => {
+  const cancelEdit = () => {
+    setEditingId(null);
+    setTitleInput("");
+    setUrlInput("");
+  };
+
+  const startEdit = (row: LiveStreamItem) => {
+    setEditingId(row.id);
+    setTitleInput(row.title);
+    setUrlInput(row.youtubeUrl);
+    setError(null);
+  };
+
+  const onSubmitForm = async (ev: FormEvent) => {
     ev.preventDefault();
     if (!sessionPw) return;
     setError(null);
     setLoading(true);
     try {
-      const res = await postLiveStreamAdmin(sessionPw, {
+      const payload = {
         title: titleInput.trim(),
         youtubeUrl: urlInput.trim(),
-      });
+      };
+
+      if (editingId) {
+        const res = await patchLiveStreamAdmin(sessionPw, editingId, payload);
+        if (!res.success) {
+          if (res.error === "Não autorizado") {
+            sessionStorage.removeItem(STORAGE_KEY);
+            setSessionPw("");
+          }
+          setError(res.error || "Não foi possível salvar as alterações.");
+          return;
+        }
+        if (res.item) {
+          setItems((prev) =>
+            prev
+              .map((x) => (x.id === res.item!.id ? res.item! : x))
+              .sort((a, b) => {
+                const d = a.sortOrder - b.sortOrder;
+                if (d !== 0) return d;
+                return a.createdAt.localeCompare(b.createdAt);
+              })
+          );
+        }
+        cancelEdit();
+        return;
+      }
+
+      const res = await postLiveStreamAdmin(sessionPw, payload);
       if (!res.success) {
         if (res.error === "Não autorizado") {
           sessionStorage.removeItem(STORAGE_KEY);
@@ -71,7 +113,7 @@ export default function LiveStreamsAdminSection() {
       setTitleInput("");
       setUrlInput("");
     } catch {
-      setError("Erro de rede ao adicionar.");
+      setError(editingId ? "Erro de rede ao salvar." : "Erro de rede ao adicionar.");
     } finally {
       setLoading(false);
     }
@@ -116,13 +158,19 @@ export default function LiveStreamsAdminSection() {
       </div>
 
       <form
-        onSubmit={onAdd}
+        onSubmit={onSubmitForm}
         className="space-y-3 rounded-xl border border-stone-200 bg-stone-50/80 p-4"
       >
         {error && (
           <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800">
             {error}
           </div>
+        )}
+        {editingId && (
+          <p className="text-sm text-stone-700">
+            Editando vídeo — ajuste o título ou o link e clique em &quot;Salvar alterações&quot;, ou
+            cancele.
+          </p>
         )}
         <div className="grid gap-3 sm:grid-cols-1 md:grid-cols-2">
           <div>
@@ -162,8 +210,18 @@ export default function LiveStreamsAdminSection() {
             disabled={loading}
             className="rounded-md bg-[#c47862] px-4 py-2 text-sm font-medium text-white shadow hover:bg-[#b56a52] disabled:opacity-60"
           >
-            {loading ? "Salvando…" : "Adicionar vídeo"}
+            {loading ? "Salvando…" : editingId ? "Salvar alterações" : "Adicionar vídeo"}
           </button>
+          {editingId && (
+            <button
+              type="button"
+              onClick={cancelEdit}
+              disabled={loading}
+              className="rounded-md border border-stone-300 bg-white px-4 py-2 text-sm font-medium text-stone-800 hover:bg-stone-50 disabled:opacity-60"
+            >
+              Cancelar edição
+            </button>
+          )}
           <button
             type="button"
             onClick={() => void load()}
@@ -183,7 +241,7 @@ export default function LiveStreamsAdminSection() {
               <th className="px-3 py-2 font-medium min-w-[220px]">Link</th>
               <th className="px-3 py-2 font-medium whitespace-nowrap">Ordem</th>
               <th className="px-3 py-2 font-medium whitespace-nowrap">Inclusão</th>
-              <th className="px-3 py-2 font-medium whitespace-nowrap w-[100px]">Ações</th>
+              <th className="px-3 py-2 font-medium whitespace-nowrap min-w-[160px]">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -212,14 +270,24 @@ export default function LiveStreamsAdminSection() {
                   {dayjs(r.createdAt).format("DD/MM/YYYY HH:mm")}
                 </td>
                 <td className="px-3 py-2 align-top whitespace-nowrap">
-                  <button
-                    type="button"
-                    onClick={() => void handleDelete(r)}
-                    disabled={deletingId !== null}
-                    className="rounded border border-red-200 bg-red-50 px-2 py-1 text-xs font-medium text-red-800 hover:bg-red-100 disabled:opacity-50"
-                  >
-                    {deletingId === r.id ? "…" : "Remover"}
-                  </button>
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => startEdit(r)}
+                      disabled={loading || deletingId !== null}
+                      className="rounded border border-stone-300 bg-white px-2 py-1 text-xs font-medium text-stone-800 hover:bg-stone-50 disabled:opacity-50"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void handleDelete(r)}
+                      disabled={deletingId !== null || loading}
+                      className="rounded border border-red-200 bg-red-50 px-2 py-1 text-xs font-medium text-red-800 hover:bg-red-100 disabled:opacity-50"
+                    >
+                      {deletingId === r.id ? "…" : "Remover"}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

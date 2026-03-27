@@ -46,6 +46,27 @@ export async function postLiveStreamAdmin(
   return res.data as { success: boolean; item?: LiveStreamItem };
 }
 
+export async function patchLiveStreamAdmin(
+  password: string,
+  id: string,
+  body: { title: string; youtubeUrl: string }
+): Promise<{ success: boolean; item?: LiveStreamItem; error?: string }> {
+  const res = await api.patch(`${PATH}/admin/${encodeURIComponent(id)}`, body, {
+    headers: { "X-Admin-Password": password },
+    validateStatus: () => true,
+  });
+  if (res.status === 401) {
+    return { success: false, error: "Não autorizado" };
+  }
+  if (res.status !== 200) {
+    return {
+      success: false,
+      error: (res.data as { error?: string })?.error || "Erro ao atualizar.",
+    };
+  }
+  return res.data as { success: boolean; item?: LiveStreamItem };
+}
+
 export async function deleteLiveStreamAdmin(
   password: string,
   id: string

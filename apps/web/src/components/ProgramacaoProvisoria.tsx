@@ -561,7 +561,7 @@ export default function ProgramacaoProvisoria() {
       title: "TEMÁTICA 2 : O papel das Film Commissions",
       date: "27 de março de 2026",
       time: "9h – 10h30",
-      room: "401 – Bloco F – UCS",
+      room: "407 – Bloco F – UCS",
       coordinators: "André Rianni Costa Perinotto e Vanilson Pereira Silveira",
       technicalSupport: "Patrícia Carvalheiro Pereira",
       coordinatorHeading: "coordenador",
@@ -607,7 +607,7 @@ export default function ProgramacaoProvisoria() {
         "TEMÁTICA 6: Estratégias para promover a sustentabilidade e o desenvolvimento regional por meio do patrimônio literário e das produções cinematográficas",
       date: "27 de março de 2026",
       time: "9h – 10h30",
-      room: "402 – Bloco F – UCS",
+      room: "411 – Bloco F – UCS",
       coordinators: "Samira Dal'Agnol e Suzana De Conto",
       technicalSupport: "Daiane Lima Pedro",
       rows: [
@@ -686,7 +686,7 @@ export default function ProgramacaoProvisoria() {
         "TEMÁTICA 15: O papel dos autores literários, dos cineastas e das comunidades locais na formação das experiências turísticas",
       date: "27 de março de 2026",
       time: "9h – 10h30",
-      room: "404 – Bloco F – UCS",
+      room: "412 – Bloco F – UCS",
       coordinators: "Cristina Löff Knapp e Luciane Todeschini Ferreira",
       technicalSupport: "Katharina Lara Giacoboni Nicoletti",
       rows: [
@@ -838,7 +838,7 @@ export default function ProgramacaoProvisoria() {
       title: "TEMÁTICA 17: Inovação, tendências e propostas",
       date: "27 de março de 2026",
       time: "13h30 – 15h",
-      room: "404 – Bloco F – UCS",
+      room: "412 – Bloco F – UCS",
       coordinators: "Marcia Speguen de Quadros Piccoli e Diomira Maria Cicci Pinto Faria",
       technicalSupport: "Jennifer Bauer Eme",
       rows: [
