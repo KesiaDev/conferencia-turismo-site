@@ -26,6 +26,15 @@ const FALLBACK: LiveStreamItem[] = [
     sortOrder: 1,
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "fallback-mesa-redonda",
+    title:
+      "Mesa-Redonda Internacional - Turismo Literário, Turismo Cinematográfico e Inovação Territorial",
+    youtubeUrl: "https://www.youtube.com/live/c0w6GbJvP1o",
+    videoId: "c0w6GbJvP1o",
+    sortOrder: 2,
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 export default function AssistaOnline() {
