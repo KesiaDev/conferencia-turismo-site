@@ -6,12 +6,17 @@
     "dev": "nodemon",
     "build": "prisma generate && tsc",
     "db:migrate": "prisma migrate deploy",
-    "start": "prisma migrate deploy && node dist/index.js",
+    "db:seed": "npx tsx prisma/seed.ts",
+    "start": "prisma migrate deploy && npx tsx prisma/seed.ts && node dist/index.js",
     "lint": "eslint src --ext .ts",
     "postinstall": "node -e \"if (!process.env.PUPPETEER_SKIP_CHROMIUM_DOWNLOAD && !process.env.RAILWAY_ENVIRONMENT) { try { require('child_process').execSync('npx puppeteer browsers install chrome', {stdio: 'inherit'}); } catch(e) { console.log('Skipping Puppeteer Chrome install (Chromium will be used)'); } }\""
   },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
+  },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "tsx": "^4.7.0",
     "cors": "^2.8.5",
     "docx": "^9.5.1",
     "dotenv": "^16.3.1",
