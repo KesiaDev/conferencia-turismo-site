@@ -66,7 +66,17 @@ export default function AssistaOnline() {
 
   const displayItems = useMemo(() => {
     if (!items || items.length === 0) return FALLBACK;
-    return items;
+
+    const allItems = [...items];
+    const existingVideoIds = new Set(items.map((item) => item.videoId));
+
+    for (const fallbackItem of FALLBACK) {
+      if (!existingVideoIds.has(fallbackItem.videoId)) {
+        allItems.push(fallbackItem);
+      }
+    }
+
+    return allItems.sort((a, b) => a.sortOrder - b.sortOrder);
   }, [items]);
 
   return (
