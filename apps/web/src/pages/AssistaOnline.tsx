@@ -35,6 +35,15 @@ const FALLBACK: LiveStreamItem[] = [
     sortOrder: 2,
     createdAt: new Date().toISOString(),
   },
+  {
+    id: "fallback-painel-especial",
+    title:
+      "Painel Especial - Turismo Cinematográfico e Film Commissions como vetores da economia do turismo",
+    youtubeUrl: "https://www.youtube.com/live/ypfNhBW__3k",
+    videoId: "ypfNhBW__3k",
+    sortOrder: 3,
+    createdAt: new Date().toISOString(),
+  },
 ];
 
 export default function AssistaOnline() {
