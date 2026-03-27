@@ -110,7 +110,7 @@ app.use(
         callback(null, true); // Por enquanto, permitir todas para evitar bloqueios
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-Admin-Password"],
     credentials: false,
   })
