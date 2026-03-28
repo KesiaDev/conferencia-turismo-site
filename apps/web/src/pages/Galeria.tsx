@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Section from "../components/Section";
@@ -22,7 +22,30 @@ interface PhotoGroup {
   photos: Photo[];
 }
 
+interface Comment {
+  id: string;
+  authorName: string;
+  content: string;
+  createdAt: string;
+}
+
+interface PhotoStats {
+  likeCount: number;
+  commentCount: number;
+  liked: boolean;
+}
+
 const POSTS_PER_PAGE = 9;
+
+// Get or create visitor ID
+const getVisitorId = (): string => {
+  let visitorId = localStorage.getItem("visitorId");
+  if (!visitorId) {
+    visitorId = "visitor_" + Math.random().toString(36).substring(2, 15);
+    localStorage.setItem("visitorId", visitorId);
+  }
+  return visitorId;
+};
 
 export default function Galeria() {
   const { t } = useTranslation();
@@ -34,6 +57,14 @@ export default function Galeria() {
   const [currentPage, setCurrentPage] = useState(1);
   const [carouselIndexes, setCarouselIndexes] = useState<Record<string, number>>({});
 
+  // Likes & Comments state
+  const [visitorId] = useState(getVisitorId);
+  const [photoStats, setPhotoStats] = useState<Record<string, PhotoStats>>({});
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [loadingComments, setLoadingComments] = useState(false);
+  const [newComment, setNewComment] = useState({ authorName: "", content: "" });
+  const [submittingComment, setSubmittingComment] = useState(false);
+
   useEffect(() => {
     loadPhotos();
   }, []);
@@ -41,13 +72,93 @@ export default function Galeria() {
   const loadPhotos = async () => {
     try {
       const response = await apiService.getPhotos("approved");
-      setPhotos(response.items || []);
+      const loadedPhotos = response.items || [];
+      setPhotos(loadedPhotos);
+
+      // Load stats for all photos
+      if (loadedPhotos.length > 0) {
+        const photoIds = loadedPhotos.map((p: Photo) => p.id);
+        try {
+          const statsResponse = await apiService.getPhotoStats(photoIds, visitorId);
+          if (statsResponse.stats) {
+            setPhotoStats(statsResponse.stats);
+          }
+        } catch (e) {
+          console.error("Error loading photo stats:", e);
+        }
+      }
     } catch (error) {
       console.error("Error loading photos:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  // Toggle like on a photo
+  const handleLike = useCallback(
+    async (photoId: string) => {
+      try {
+        const response = await apiService.toggleLike(photoId, visitorId);
+        setPhotoStats((prev) => ({
+          ...prev,
+          [photoId]: {
+            ...prev[photoId],
+            likeCount: response.likeCount,
+            liked: response.liked,
+          },
+        }));
+      } catch (error) {
+        console.error("Error toggling like:", error);
+      }
+    },
+    [visitorId]
+  );
+
+  // Load comments for a photo
+  const loadComments = useCallback(async (photoId: string) => {
+    setLoadingComments(true);
+    try {
+      const response = await apiService.getComments(photoId);
+      setComments(response.comments || []);
+    } catch (error) {
+      console.error("Error loading comments:", error);
+    } finally {
+      setLoadingComments(false);
+    }
+  }, []);
+
+  // Add a comment
+  const handleAddComment = useCallback(
+    async (photoId: string) => {
+      if (!newComment.authorName.trim() || !newComment.content.trim()) return;
+
+      setSubmittingComment(true);
+      try {
+        const response = await apiService.addComment(
+          photoId,
+          newComment.authorName.trim(),
+          newComment.content.trim()
+        );
+        if (response.comment) {
+          setComments((prev) => [response.comment, ...prev]);
+          setNewComment({ authorName: "", content: "" });
+          // Update comment count
+          setPhotoStats((prev) => ({
+            ...prev,
+            [photoId]: {
+              ...prev[photoId],
+              commentCount: (prev[photoId]?.commentCount || 0) + 1,
+            },
+          }));
+        }
+      } catch (error) {
+        console.error("Error adding comment:", error);
+      } finally {
+        setSubmittingComment(false);
+      }
+    },
+    [newComment]
+  );
 
   // Agrupar fotos por participante (carrossel)
   const photoGroups = useMemo(() => {
@@ -114,14 +225,18 @@ export default function Galeria() {
 
   // Navegação no lightbox
   const goToPrevPhoto = () => {
-    if (selectedPhotoIndex > 0) {
-      setSelectedPhotoIndex(selectedPhotoIndex - 1);
+    if (selectedGroup && selectedPhotoIndex > 0) {
+      const newIndex = selectedPhotoIndex - 1;
+      setSelectedPhotoIndex(newIndex);
+      loadComments(selectedGroup.photos[newIndex].id);
     }
   };
 
   const goToNextPhoto = () => {
     if (selectedGroup && selectedPhotoIndex < selectedGroup.photos.length - 1) {
-      setSelectedPhotoIndex(selectedPhotoIndex + 1);
+      const newIndex = selectedPhotoIndex + 1;
+      setSelectedPhotoIndex(newIndex);
+      loadComments(selectedGroup.photos[newIndex].id);
     }
   };
 
@@ -129,12 +244,16 @@ export default function Galeria() {
     setSelectedGroup(group);
     setSelectedPhotoIndex(photoIndex);
     setExpandedText(false);
+    // Load comments for the first photo in the group
+    loadComments(group.photos[photoIndex].id);
   };
 
   const closeLightbox = () => {
     setSelectedGroup(null);
     setSelectedPhotoIndex(0);
     setExpandedText(false);
+    setComments([]);
+    setNewComment({ authorName: "", content: "" });
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -410,8 +529,35 @@ export default function Galeria() {
                         )}
                       </div>
 
+                      {/* Barra de curtidas e comentários */}
+                      <div className="px-4 py-2 border-t border-gray-100 flex items-center gap-4">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleLike(currentPhoto.id);
+                          }}
+                          className="flex items-center gap-1 text-sm transition-all active:scale-95"
+                        >
+                          <span
+                            className={`text-lg ${photoStats[currentPhoto.id]?.liked ? "text-red-500" : "text-gray-400 hover:text-red-400"}`}
+                          >
+                            {photoStats[currentPhoto.id]?.liked ? "❤️" : "🤍"}
+                          </span>
+                          <span className="text-gray-600">
+                            {photoStats[currentPhoto.id]?.likeCount || 0}
+                          </span>
+                        </button>
+                        <button
+                          onClick={() => openLightbox(group, currentPhotoIndex)}
+                          className="flex items-center gap-1 text-sm text-gray-500 hover:text-[#8b4513] transition-all"
+                        >
+                          <span className="text-lg">💬</span>
+                          <span>{photoStats[currentPhoto.id]?.commentCount || 0}</span>
+                        </button>
+                      </div>
+
                       {/* Rodapé com depoimento */}
-                      <div className="px-4 py-3 border-t border-gray-100">
+                      <div className="px-4 py-2">
                         {group.descricao ? (
                           <div>
                             <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
@@ -579,9 +725,9 @@ export default function Galeria() {
             </div>
 
             {/* Sidebar com info */}
-            <div className="md:w-1/4 flex flex-col md:min-w-[280px] shrink-0">
+            <div className="md:w-1/4 flex flex-col md:min-w-[280px] shrink-0 max-h-[50vh] md:max-h-none">
               {/* Header */}
-              <div className="px-4 py-4 flex items-center gap-3 border-b">
+              <div className="px-4 py-3 flex items-center gap-3 border-b shrink-0">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold">
                   {selectedGroup.nome ? selectedGroup.nome.charAt(0).toUpperCase() : "📷"}
                 </div>
@@ -591,47 +737,118 @@ export default function Galeria() {
                   </p>
                   <p className="text-xs text-gray-500">{formatDate(selectedGroup.createdAt)}</p>
                 </div>
-                {selectedGroup.photos.length > 1 && (
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                    {selectedGroup.photos.length} fotos
+              </div>
+
+              {/* Barra de curtir */}
+              <div className="px-4 py-2 border-b flex items-center gap-4 shrink-0">
+                <button
+                  onClick={() => handleLike(selectedGroup.photos[selectedPhotoIndex].id)}
+                  className="flex items-center gap-2 transition-all active:scale-95"
+                >
+                  <span
+                    className={`text-2xl ${photoStats[selectedGroup.photos[selectedPhotoIndex].id]?.liked ? "text-red-500" : "text-gray-400 hover:text-red-400"}`}
+                  >
+                    {photoStats[selectedGroup.photos[selectedPhotoIndex].id]?.liked ? "❤️" : "🤍"}
                   </span>
-                )}
+                  <span className="text-gray-700 font-medium">
+                    {photoStats[selectedGroup.photos[selectedPhotoIndex].id]?.likeCount || 0}{" "}
+                    curtidas
+                  </span>
+                </button>
               </div>
 
-              {/* Depoimento */}
-              <div className="flex-1 px-4 py-4 overflow-y-auto min-h-[120px] md:min-h-0">
-                {selectedGroup.descricao ? (
-                  <div>
-                    <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-base">
-                      💬 Depoimento
-                    </p>
-                    <p
-                      className={`text-gray-700 leading-relaxed text-sm md:text-base ${!expandedText && selectedGroup.descricao.length > 200 ? "md:line-clamp-4" : ""}`}
-                    >
-                      {selectedGroup.descricao}
-                    </p>
-                    {selectedGroup.descricao.length > 200 && (
-                      <button
-                        onClick={() => setExpandedText(!expandedText)}
-                        className="text-[#8b4513] font-medium text-sm mt-2 hover:underline hidden md:inline-block"
-                      >
-                        {expandedText ? "← Ver menos" : "Ler mais →"}
-                      </button>
-                    )}
-                  </div>
-                ) : (
-                  <p className="text-gray-500 italic text-sm md:text-base">
-                    ✨ Momento especial da III Conferência
+              {/* Depoimento (se houver) */}
+              {selectedGroup.descricao && (
+                <div className="px-4 py-3 border-b shrink-0">
+                  <p className="font-semibold text-gray-800 mb-1 text-sm">💬 Depoimento</p>
+                  <p
+                    className={`text-gray-700 text-sm leading-relaxed ${!expandedText && selectedGroup.descricao.length > 150 ? "line-clamp-3" : ""}`}
+                  >
+                    {selectedGroup.descricao}
                   </p>
+                  {selectedGroup.descricao.length > 150 && (
+                    <button
+                      onClick={() => setExpandedText(!expandedText)}
+                      className="text-[#8b4513] font-medium text-xs mt-1 hover:underline"
+                    >
+                      {expandedText ? "Ver menos" : "Ver mais"}
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {/* Área de comentários */}
+              <div className="flex-1 overflow-y-auto px-4 py-3">
+                <p className="font-semibold text-gray-800 mb-2 text-sm">
+                  💬 Comentários (
+                  {photoStats[selectedGroup.photos[selectedPhotoIndex].id]?.commentCount ||
+                    comments.length}
+                  )
+                </p>
+
+                {loadingComments ? (
+                  <p className="text-gray-400 text-sm">Carregando...</p>
+                ) : comments.length === 0 ? (
+                  <p className="text-gray-400 text-sm italic">
+                    Nenhum comentário ainda. Seja o primeiro!
+                  </p>
+                ) : (
+                  <div className="space-y-3">
+                    {comments.map((comment) => (
+                      <div key={comment.id} className="text-sm">
+                        <p>
+                          <span className="font-semibold text-gray-800">{comment.authorName}</span>{" "}
+                          <span className="text-gray-600">{comment.content}</span>
+                        </p>
+                        <p className="text-xs text-gray-400 mt-0.5">
+                          {formatDate(comment.createdAt)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 )}
               </div>
 
-              {/* Rodapé */}
-              <div className="px-4 py-4 border-t bg-gray-50">
-                <p className="text-xs text-gray-500">
-                  📍 III Conferência Internacional de Turismo Literário e Cinematográfico
-                </p>
-                <p className="text-xs text-gray-400 mt-1">Março 2026 • Caxias do Sul/RS</p>
+              {/* Formulário de comentário */}
+              <div className="px-4 py-3 border-t bg-gray-50 shrink-0">
+                <div className="flex flex-col gap-2">
+                  <input
+                    type="text"
+                    placeholder="Seu nome"
+                    value={newComment.authorName}
+                    onChange={(e) =>
+                      setNewComment((prev) => ({ ...prev, authorName: e.target.value }))
+                    }
+                    className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
+                  />
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Escreva um comentário..."
+                      value={newComment.content}
+                      onChange={(e) =>
+                        setNewComment((prev) => ({ ...prev, content: e.target.value }))
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !submittingComment) {
+                          handleAddComment(selectedGroup.photos[selectedPhotoIndex].id);
+                        }
+                      }}
+                      className="flex-1 px-3 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#8b4513]"
+                    />
+                    <button
+                      onClick={() => handleAddComment(selectedGroup.photos[selectedPhotoIndex].id)}
+                      disabled={
+                        submittingComment ||
+                        !newComment.authorName.trim() ||
+                        !newComment.content.trim()
+                      }
+                      className="px-4 py-2 bg-[#8b4513] text-white text-sm font-medium rounded-lg hover:bg-[#6b3410] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    >
+                      {submittingComment ? "..." : "Enviar"}
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

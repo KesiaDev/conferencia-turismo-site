@@ -36,6 +36,27 @@ model Photo {
   descricao   String?
   status      PhotoStatus @default(PENDING)
   createdAt   DateTime    @default(now())
+  likes       Like[]
+  comments    Comment[]
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  visitorId String
+  photoId   String
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([visitorId, photoId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  authorName String
+  content   String
+  photoId   String
+  photo     Photo    @relation(fields: [photoId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
 }
 
 enum PhotoStatus {

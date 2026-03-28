@@ -49,6 +49,24 @@ export const apiService = {
         headers: { "X-Admin-Password": adminPassword },
       })
       .then((res) => res.data),
+
+  // Likes API
+  toggleLike: (photoId: string, visitorId: string) =>
+    api.post(`/api/photos/${photoId}/like`, { visitorId }).then((res) => res.data),
+  getLikes: (photoId: string, visitorId?: string) =>
+    api
+      .get(`/api/photos/${photoId}/likes${visitorId ? `?visitorId=${visitorId}` : ""}`)
+      .then((res) => res.data),
+
+  // Comments API
+  addComment: (photoId: string, authorName: string, content: string) =>
+    api.post(`/api/photos/${photoId}/comments`, { authorName, content }).then((res) => res.data),
+  getComments: (photoId: string) =>
+    api.get(`/api/photos/${photoId}/comments`).then((res) => res.data),
+
+  // Stats (batch likes/comments)
+  getPhotoStats: (photoIds: string[], visitorId?: string) =>
+    api.post("/api/photos/stats", { photoIds, visitorId }).then((res) => res.data),
 };
 
 export default apiService;

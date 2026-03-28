@@ -203,4 +203,166 @@ router.delete("/admin/:id", async (req, res) => {
   }
 });
 
+// ==================== LIKES ====================
+
+// Toggle like (add or remove)
+router.post("/:id/like", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { visitorId } = req.body;
+
+    if (!visitorId) {
+      return res.status(400).json({ success: false, error: "visitorId é obrigatório" });
+    }
+
+    // Check if photo exists
+    const photo = await prisma.photo.findUnique({ where: { id } });
+    if (!photo) {
+      return res.status(404).json({ success: false, error: "Foto não encontrada" });
+    }
+
+    // Check if already liked
+    const existingLike = await prisma.like.findUnique({
+      where: { visitorId_photoId: { visitorId, photoId: id } },
+    });
+
+    if (existingLike) {
+      // Unlike
+      await prisma.like.delete({ where: { id: existingLike.id } });
+      const likeCount = await prisma.like.count({ where: { photoId: id } });
+      return res.json({ success: true, liked: false, likeCount });
+    } else {
+      // Like
+      await prisma.like.create({ data: { visitorId, photoId: id } });
+      const likeCount = await prisma.like.count({ where: { photoId: id } });
+      return res.json({ success: true, liked: true, likeCount });
+    }
+  } catch (e) {
+    console.error("photos POST like:", e);
+    return res.status(500).json({ success: false, error: "Erro ao processar curtida" });
+  }
+});
+
+// Get like status and count for a photo
+router.get("/:id/likes", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const visitorId = req.query.visitorId as string | undefined;
+
+    const likeCount = await prisma.like.count({ where: { photoId: id } });
+
+    let liked = false;
+    if (visitorId) {
+      const existingLike = await prisma.like.findUnique({
+        where: { visitorId_photoId: { visitorId, photoId: id } },
+      });
+      liked = !!existingLike;
+    }
+
+    return res.json({ success: true, likeCount, liked });
+  } catch (e) {
+    console.error("photos GET likes:", e);
+    return res.status(500).json({ success: false, error: "Erro ao buscar curtidas" });
+  }
+});
+
+// ==================== COMMENTS ====================
+
+// Add comment
+router.post("/:id/comments", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { authorName, content } = req.body;
+
+    if (!authorName?.trim() || !content?.trim()) {
+      return res.status(400).json({ success: false, error: "Nome e comentário são obrigatórios" });
+    }
+
+    // Check if photo exists
+    const photo = await prisma.photo.findUnique({ where: { id } });
+    if (!photo) {
+      return res.status(404).json({ success: false, error: "Foto não encontrada" });
+    }
+
+    const comment = await prisma.comment.create({
+      data: {
+        authorName: authorName.trim(),
+        content: content.trim(),
+        photoId: id,
+      },
+    });
+
+    return res.status(201).json({
+      success: true,
+      comment: {
+        id: comment.id,
+        authorName: comment.authorName,
+        content: comment.content,
+        createdAt: comment.createdAt.toISOString(),
+      },
+    });
+  } catch (e) {
+    console.error("photos POST comment:", e);
+    return res.status(500).json({ success: false, error: "Erro ao adicionar comentário" });
+  }
+});
+
+// Get comments for a photo
+router.get("/:id/comments", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const comments = await prisma.comment.findMany({
+      where: { photoId: id },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return res.json({
+      success: true,
+      comments: comments.map((c) => ({
+        id: c.id,
+        authorName: c.authorName,
+        content: c.content,
+        createdAt: c.createdAt.toISOString(),
+      })),
+    });
+  } catch (e) {
+    console.error("photos GET comments:", e);
+    return res.status(500).json({ success: false, error: "Erro ao buscar comentários" });
+  }
+});
+
+// Get likes and comments count for multiple photos (batch)
+router.post("/stats", async (req, res) => {
+  try {
+    const { photoIds, visitorId } = req.body;
+
+    if (!Array.isArray(photoIds)) {
+      return res.status(400).json({ success: false, error: "photoIds deve ser um array" });
+    }
+
+    const stats: Record<string, { likeCount: number; commentCount: number; liked: boolean }> = {};
+
+    for (const photoId of photoIds) {
+      const likeCount = await prisma.like.count({ where: { photoId } });
+      const commentCount = await prisma.comment.count({ where: { photoId } });
+
+      let liked = false;
+      if (visitorId) {
+        const existingLike = await prisma.like.findUnique({
+          where: { visitorId_photoId: { visitorId, photoId } },
+        });
+        liked = !!existingLike;
+      }
+
+      stats[photoId] = { likeCount, commentCount, liked };
+    }
+
+    return res.json({ success: true, stats });
+  } catch (e) {
+    console.error("photos POST stats:", e);
+    return res.status(500).json({ success: false, error: "Erro ao buscar estatísticas" });
+  }
+});
+
 export default router;
