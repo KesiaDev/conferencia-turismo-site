@@ -492,7 +492,7 @@ export default function Galeria() {
                 e.stopPropagation();
                 goToPrev();
               }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+              className="absolute left-2 md:left-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
               ‹
             </button>
@@ -503,7 +503,7 @@ export default function Galeria() {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+              className="absolute right-2 md:right-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
               ›
             </button>
@@ -511,20 +511,20 @@ export default function Galeria() {
 
           {/* Card estilo Instagram no lightbox */}
           <div
-            className="bg-white rounded-2xl overflow-hidden max-w-6xl w-full mx-4 flex flex-col md:flex-row max-h-[95vh]"
+            className="bg-white rounded-2xl overflow-hidden max-w-6xl w-full mx-4 flex flex-col md:flex-row max-h-[90vh] md:max-h-[95vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Imagem */}
-            <div className="md:w-3/4 bg-black flex items-center justify-center">
+            <div className="md:w-3/4 bg-black flex items-center justify-center shrink-0">
               <img
                 src={selectedPhoto.url}
                 alt={selectedPhoto.descricao || "Foto do evento"}
-                className="max-h-[70vh] md:max-h-[90vh] w-full object-contain"
+                className="max-h-[40vh] md:max-h-[90vh] w-full object-contain"
               />
             </div>
 
             {/* Sidebar com info */}
-            <div className="md:w-1/4 flex flex-col min-w-[280px]">
+            <div className="md:w-1/4 flex flex-col md:min-w-[280px] shrink-0">
               {/* Header */}
               <div className="px-4 py-4 flex items-center gap-3 border-b">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold">
@@ -539,28 +539,30 @@ export default function Galeria() {
               </div>
 
               {/* Depoimento */}
-              <div className="flex-1 px-4 py-4 overflow-y-auto">
+              <div className="flex-1 px-4 py-4 overflow-y-auto min-h-[120px] md:min-h-0">
                 {selectedPhoto.descricao ? (
                   <div>
-                    <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                    <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-base">
                       💬 Depoimento
                     </p>
                     <p
-                      className={`text-gray-700 leading-relaxed ${!expandedText && selectedPhoto.descricao.length > 200 ? "line-clamp-4" : ""}`}
+                      className={`text-gray-700 leading-relaxed text-sm md:text-base ${!expandedText && selectedPhoto.descricao.length > 200 ? "md:line-clamp-4" : ""}`}
                     >
                       {selectedPhoto.descricao}
                     </p>
                     {selectedPhoto.descricao.length > 200 && (
                       <button
                         onClick={() => setExpandedText(!expandedText)}
-                        className="text-[#8b4513] font-medium text-sm mt-2 hover:underline"
+                        className="text-[#8b4513] font-medium text-sm mt-2 hover:underline hidden md:inline-block"
                       >
                         {expandedText ? "← Ver menos" : "Ler mais →"}
                       </button>
                     )}
                   </div>
                 ) : (
-                  <p className="text-gray-500 italic">✨ Momento especial da III Conferência</p>
+                  <p className="text-gray-500 italic text-sm md:text-base">
+                    ✨ Momento especial da III Conferência
+                  </p>
                 )}
               </div>
 
