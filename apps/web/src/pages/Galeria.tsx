@@ -14,15 +14,25 @@ interface Photo {
   createdAt: string;
 }
 
-const PHOTOS_PER_PAGE = 12;
+interface PhotoGroup {
+  participantKey: string;
+  nome: string | null;
+  descricao: string | null;
+  createdAt: string;
+  photos: Photo[];
+}
+
+const POSTS_PER_PAGE = 9;
 
 export default function Galeria() {
   const { t } = useTranslation();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedGroup, setSelectedGroup] = useState<PhotoGroup | null>(null);
+  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(0);
   const [expandedText, setExpandedText] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [carouselIndexes, setCarouselIndexes] = useState<Record<string, number>>({});
 
   useEffect(() => {
     loadPhotos();
@@ -39,23 +49,31 @@ export default function Galeria() {
     }
   };
 
-  // Processar fotos: marcar primeira de cada participante e ordenar
-  const processedPhotos = useMemo(() => {
-    const seenParticipants = new Set<string>();
+  // Agrupar fotos por participante (carrossel)
+  const photoGroups = useMemo(() => {
+    const groups = new Map<string, PhotoGroup>();
 
-    // Marcar quais fotos mostram depoimento (primeira de cada participante com descrição)
-    const marked = photos.map((photo) => {
-      const key = photo.nome || photo.id; // usar ID se não tiver nome
-      const isFirstWithDesc = photo.descricao && !seenParticipants.has(key);
-      if (photo.descricao && photo.nome) {
-        seenParticipants.add(key);
+    photos.forEach((photo) => {
+      const key = photo.nome || photo.id;
+
+      if (groups.has(key)) {
+        groups.get(key)!.photos.push(photo);
+      } else {
+        groups.set(key, {
+          participantKey: key,
+          nome: photo.nome,
+          descricao: photo.descricao,
+          createdAt: photo.createdAt,
+          photos: [photo],
+        });
       }
-      return { ...photo, showDescription: isFirstWithDesc };
     });
 
-    // Separar: com depoimento primeiro, depois os demais embaralhados
-    const withDesc = marked.filter((p) => p.showDescription);
-    const withoutDesc = marked.filter((p) => !p.showDescription);
+    const groupArray = Array.from(groups.values());
+
+    // Ordenar: grupos com depoimento primeiro
+    const withDesc = groupArray.filter((g) => g.descricao);
+    const withoutDesc = groupArray.filter((g) => !g.descricao);
 
     // Embaralhar os sem depoimento
     for (let i = withoutDesc.length - 1; i > 0; i--) {
@@ -67,35 +85,56 @@ export default function Galeria() {
   }, [photos]);
 
   // Paginação
-  const totalPages = Math.ceil(processedPhotos.length / PHOTOS_PER_PAGE);
+  const totalPages = Math.ceil(photoGroups.length / POSTS_PER_PAGE);
 
-  const paginatedPhotos = useMemo(() => {
-    const startIndex = (currentPage - 1) * PHOTOS_PER_PAGE;
-    const endIndex = startIndex + PHOTOS_PER_PAGE;
-    return processedPhotos.slice(startIndex, endIndex);
-  }, [processedPhotos, currentPage]);
-
-  const selectedPhoto = useMemo(() => {
-    return selectedIndex !== null ? paginatedPhotos[selectedIndex] : null;
-  }, [selectedIndex, paginatedPhotos]);
+  const paginatedGroups = useMemo(() => {
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+    return photoGroups.slice(startIndex, endIndex);
+  }, [photoGroups, currentPage]);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const goToPrev = () => {
-    if (selectedIndex !== null && selectedIndex > 0) {
-      setSelectedIndex(selectedIndex - 1);
-      setExpandedText(false);
+  // Navegação do carrossel no card
+  const goToCarouselPhoto = (groupKey: string, direction: "prev" | "next", totalPhotos: number) => {
+    setCarouselIndexes((prev) => {
+      const current = prev[groupKey] || 0;
+      let newIndex = current;
+      if (direction === "prev" && current > 0) {
+        newIndex = current - 1;
+      } else if (direction === "next" && current < totalPhotos - 1) {
+        newIndex = current + 1;
+      }
+      return { ...prev, [groupKey]: newIndex };
+    });
+  };
+
+  // Navegação no lightbox
+  const goToPrevPhoto = () => {
+    if (selectedPhotoIndex > 0) {
+      setSelectedPhotoIndex(selectedPhotoIndex - 1);
     }
   };
 
-  const goToNext = () => {
-    if (selectedIndex !== null && selectedIndex < paginatedPhotos.length - 1) {
-      setSelectedIndex(selectedIndex + 1);
-      setExpandedText(false);
+  const goToNextPhoto = () => {
+    if (selectedGroup && selectedPhotoIndex < selectedGroup.photos.length - 1) {
+      setSelectedPhotoIndex(selectedPhotoIndex + 1);
     }
+  };
+
+  const openLightbox = (group: PhotoGroup, photoIndex: number) => {
+    setSelectedGroup(group);
+    setSelectedPhotoIndex(photoIndex);
+    setExpandedText(false);
+  };
+
+  const closeLightbox = () => {
+    setSelectedGroup(null);
+    setSelectedPhotoIndex(0);
+    setExpandedText(false);
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -260,78 +299,142 @@ export default function Galeria() {
               {/* Contador */}
               <div className="text-center mb-8">
                 <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-sm font-medium">
-                  🎉 {photos.length} {photos.length === 1 ? "momento" : "momentos"} compartilhados
+                  🎉 {photos.length} {photos.length === 1 ? "foto" : "fotos"} de{" "}
+                  {photoGroups.length} {photoGroups.length === 1 ? "participante" : "participantes"}
                 </span>
               </div>
 
-              {/* Grid estilo Instagram/Pinterest */}
+              {/* Grid estilo Instagram Feed */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {paginatedPhotos.map((photo, index) => (
-                  <article
-                    key={photo.id}
-                    className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {/* Header do card (estilo Instagram) */}
-                    <div className="px-4 py-3 flex items-center gap-3 border-b border-gray-100">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold text-sm">
-                        {photo.nome ? photo.nome.charAt(0).toUpperCase() : "📷"}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-gray-800 truncate">
-                          {photo.nome || "Participante"}
-                        </p>
-                        <p className="text-xs text-gray-500">{formatDate(photo.createdAt)}</p>
-                      </div>
-                      <div className="text-[#e0a085]">
-                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                        </svg>
-                      </div>
-                    </div>
+                {paginatedGroups.map((group, index) => {
+                  const currentPhotoIndex = carouselIndexes[group.participantKey] || 0;
+                  const currentPhoto = group.photos[currentPhotoIndex];
+                  const hasMultiplePhotos = group.photos.length > 1;
 
-                    {/* Imagem */}
-                    <div
-                      className="relative cursor-pointer overflow-hidden"
-                      onClick={() => setSelectedIndex(index)}
+                  return (
+                    <article
+                      key={group.participantKey}
+                      className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <img
-                        src={photo.url}
-                        alt={photo.descricao || "Foto do evento"}
-                        className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 shadow-xl">
-                          <span className="text-3xl">🔍</span>
+                      {/* Header do card (estilo Instagram) */}
+                      <div className="px-4 py-3 flex items-center gap-3 border-b border-gray-100">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold text-sm">
+                          {group.nome ? group.nome.charAt(0).toUpperCase() : "📷"}
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Rodapé com preview do depoimento */}
-                    <div className="px-4 py-3 border-t border-gray-100">
-                      {photo.showDescription && photo.descricao ? (
-                        <div>
-                          <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
-                            <span className="font-semibold">{photo.nome || "Participante"}</span>{" "}
-                            {photo.descricao}
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-gray-800 truncate">
+                            {group.nome || "Participante"}
                           </p>
-                          <button
-                            className="text-gray-500 hover:text-[#8b4513] text-sm mt-1"
-                            onClick={() => setSelectedIndex(index)}
-                          >
-                            ver mais
-                          </button>
+                          <p className="text-xs text-gray-500">{formatDate(group.createdAt)}</p>
                         </div>
-                      ) : (
-                        <p className="text-gray-500 text-sm">
-                          <span className="font-semibold">{photo.nome || "Participante"}</span> ✨
-                          Momento especial
-                        </p>
-                      )}
-                    </div>
-                  </article>
-                ))}
+                        {hasMultiplePhotos && (
+                          <div className="flex items-center gap-1 text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+                            </svg>
+                            {group.photos.length}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Carrossel de imagens */}
+                      <div className="relative">
+                        <div
+                          className="cursor-pointer overflow-hidden"
+                          onClick={() => openLightbox(group, currentPhotoIndex)}
+                        >
+                          <img
+                            src={currentPhoto.url}
+                            alt={group.descricao || "Foto do evento"}
+                            className="w-full aspect-square object-cover hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                        </div>
+
+                        {/* Setas do carrossel */}
+                        {hasMultiplePhotos && (
+                          <>
+                            {currentPhotoIndex > 0 && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  goToCarouselPhoto(
+                                    group.participantKey,
+                                    "prev",
+                                    group.photos.length
+                                  );
+                                }}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all"
+                              >
+                                <span className="text-gray-700">‹</span>
+                              </button>
+                            )}
+                            {currentPhotoIndex < group.photos.length - 1 && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  goToCarouselPhoto(
+                                    group.participantKey,
+                                    "next",
+                                    group.photos.length
+                                  );
+                                }}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-all"
+                              >
+                                <span className="text-gray-700">›</span>
+                              </button>
+                            )}
+
+                            {/* Indicadores de posição */}
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+                              {group.photos.map((_, idx) => (
+                                <button
+                                  key={idx}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    setCarouselIndexes((prev) => ({
+                                      ...prev,
+                                      [group.participantKey]: idx,
+                                    }));
+                                  }}
+                                  className={`w-2 h-2 rounded-full transition-all ${
+                                    idx === currentPhotoIndex
+                                      ? "bg-white w-4"
+                                      : "bg-white/50 hover:bg-white/80"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Rodapé com depoimento */}
+                      <div className="px-4 py-3 border-t border-gray-100">
+                        {group.descricao ? (
+                          <div>
+                            <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
+                              <span className="font-semibold">{group.nome || "Participante"}</span>{" "}
+                              {group.descricao}
+                            </p>
+                            <button
+                              className="text-gray-500 hover:text-[#8b4513] text-sm mt-1"
+                              onClick={() => openLightbox(group, currentPhotoIndex)}
+                            >
+                              ver mais
+                            </button>
+                          </div>
+                        ) : (
+                          <p className="text-gray-500 text-sm">
+                            <span className="font-semibold">{group.nome || "Participante"}</span> ✨
+                            Momento especial
+                          </p>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
 
               {/* Paginação */}
@@ -385,7 +488,7 @@ export default function Galeria() {
               {/* Info da página */}
               {totalPages > 1 && (
                 <p className="text-center text-gray-500 text-sm mt-4">
-                  Página {currentPage} de {totalPages} • {processedPhotos.length} fotos no total
+                  Página {currentPage} de {totalPages} • {photoGroups.length} participantes
                 </p>
               )}
             </>
@@ -394,44 +497,38 @@ export default function Galeria() {
       </Section>
 
       {/* Lightbox Modal estilo Instagram */}
-      {selectedPhoto && selectedIndex !== null && (
+      {selectedGroup && (
         <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={() => {
-            setSelectedIndex(null);
-            setExpandedText(false);
-          }}
+          onClick={closeLightbox}
         >
           <button
-            onClick={() => {
-              setSelectedIndex(null);
-              setExpandedText(false);
-            }}
+            onClick={closeLightbox}
             className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
           >
             ×
           </button>
 
           <div className="absolute top-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
-            {selectedIndex + 1} / {paginatedPhotos.length}
+            {selectedPhotoIndex + 1} / {selectedGroup.photos.length}
           </div>
 
-          {selectedIndex > 0 && (
+          {selectedPhotoIndex > 0 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                goToPrev();
+                goToPrevPhoto();
               }}
               className="absolute left-2 md:left-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
               ‹
             </button>
           )}
-          {selectedIndex < paginatedPhotos.length - 1 && (
+          {selectedPhotoIndex < selectedGroup.photos.length - 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                goToNext();
+                goToNextPhoto();
               }}
               className="absolute right-2 md:right-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
@@ -445,12 +542,29 @@ export default function Galeria() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Imagem */}
-            <div className="md:w-3/4 bg-black flex items-center justify-center shrink-0">
+            <div className="md:w-3/4 bg-black flex items-center justify-center shrink-0 relative">
               <img
-                src={selectedPhoto.url}
-                alt={selectedPhoto.descricao || "Foto do evento"}
+                src={selectedGroup.photos[selectedPhotoIndex].url}
+                alt={selectedGroup.descricao || "Foto do evento"}
                 className="max-h-[40vh] md:max-h-[90vh] w-full object-contain"
               />
+
+              {/* Indicadores no lightbox */}
+              {selectedGroup.photos.length > 1 && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                  {selectedGroup.photos.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedPhotoIndex(idx)}
+                      className={`w-2.5 h-2.5 rounded-full transition-all ${
+                        idx === selectedPhotoIndex
+                          ? "bg-white w-5"
+                          : "bg-white/50 hover:bg-white/80"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Sidebar com info */}
@@ -458,29 +572,34 @@ export default function Galeria() {
               {/* Header */}
               <div className="px-4 py-4 flex items-center gap-3 border-b">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold">
-                  {selectedPhoto.nome ? selectedPhoto.nome.charAt(0).toUpperCase() : "📷"}
+                  {selectedGroup.nome ? selectedGroup.nome.charAt(0).toUpperCase() : "📷"}
                 </div>
-                <div>
+                <div className="flex-1">
                   <p className="font-semibold text-gray-800">
-                    {selectedPhoto.nome || "Participante"}
+                    {selectedGroup.nome || "Participante"}
                   </p>
-                  <p className="text-xs text-gray-500">{formatDate(selectedPhoto.createdAt)}</p>
+                  <p className="text-xs text-gray-500">{formatDate(selectedGroup.createdAt)}</p>
                 </div>
+                {selectedGroup.photos.length > 1 && (
+                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                    {selectedGroup.photos.length} fotos
+                  </span>
+                )}
               </div>
 
               {/* Depoimento */}
               <div className="flex-1 px-4 py-4 overflow-y-auto min-h-[120px] md:min-h-0">
-                {selectedPhoto.descricao ? (
+                {selectedGroup.descricao ? (
                   <div>
                     <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2 text-base">
                       💬 Depoimento
                     </p>
                     <p
-                      className={`text-gray-700 leading-relaxed text-sm md:text-base ${!expandedText && selectedPhoto.descricao.length > 200 ? "md:line-clamp-4" : ""}`}
+                      className={`text-gray-700 leading-relaxed text-sm md:text-base ${!expandedText && selectedGroup.descricao.length > 200 ? "md:line-clamp-4" : ""}`}
                     >
-                      {selectedPhoto.descricao}
+                      {selectedGroup.descricao}
                     </p>
-                    {selectedPhoto.descricao.length > 200 && (
+                    {selectedGroup.descricao.length > 200 && (
                       <button
                         onClick={() => setExpandedText(!expandedText)}
                         className="text-[#8b4513] font-medium text-sm mt-2 hover:underline hidden md:inline-block"
