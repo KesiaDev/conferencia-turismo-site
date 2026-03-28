@@ -365,20 +365,20 @@ export default function Galeria() {
 
           {/* Card estilo Instagram no lightbox */}
           <div
-            className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full mx-4 flex flex-col md:flex-row max-h-[90vh]"
+            className="bg-white rounded-2xl overflow-hidden max-w-6xl w-full mx-4 flex flex-col md:flex-row max-h-[95vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Imagem */}
-            <div className="md:w-2/3 bg-black flex items-center justify-center">
+            <div className="md:w-3/4 bg-black flex items-center justify-center">
               <img
                 src={selectedPhoto.url}
                 alt={selectedPhoto.descricao || "Foto do evento"}
-                className="max-h-[60vh] md:max-h-[80vh] w-full object-contain"
+                className="max-h-[70vh] md:max-h-[90vh] w-full object-contain"
               />
             </div>
 
             {/* Sidebar com info */}
-            <div className="md:w-1/3 flex flex-col">
+            <div className="md:w-1/4 flex flex-col min-w-[280px]">
               {/* Header */}
               <div className="px-4 py-4 flex items-center gap-3 border-b">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold">
