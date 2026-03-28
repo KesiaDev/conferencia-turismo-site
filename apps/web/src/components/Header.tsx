@@ -16,6 +16,7 @@ export default function Header() {
     { name: t("nav.villaDeiTroni"), href: "/villa-dei-troni" },
     { name: t("nav.anais"), href: "/anais" },
     { name: t("nav.watchOnline"), href: "/assista-online" },
+    { name: t("nav.gallery"), href: "/galeria" },
     { name: t("nav.contact"), href: "/contact" },
   ];
 

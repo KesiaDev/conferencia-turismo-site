@@ -27,3 +27,19 @@ model LiveStream {
   sortOrder  Int      @default(0)
   createdAt  DateTime @default(now())
 }
+
+model Photo {
+  id          String      @id @default(cuid())
+  url         String
+  publicId    String
+  nome        String?
+  descricao   String?
+  status      PhotoStatus @default(PENDING)
+  createdAt   DateTime    @default(now())
+}
+
+enum PhotoStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

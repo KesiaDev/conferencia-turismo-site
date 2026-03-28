@@ -23,6 +23,32 @@ export const apiService = {
   submitPanel: (data: any) => api.post("/api/panels", data).then((res) => res.data),
   sendContactMessage: (data: { name: string; email: string; message: string }) =>
     api.post("/api/contact", data).then((res) => res.data),
+
+  // Photos API
+  uploadPhotos: (formData: FormData) =>
+    api
+      .post("/api/photos/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => res.data),
+  getPhotos: (status?: string) =>
+    api.get(`/api/photos${status ? `?status=${status}` : ""}`).then((res) => res.data),
+  updatePhotoStatus: (id: string, status: string, adminPassword: string) =>
+    api
+      .patch(
+        `/api/photos/admin/${id}`,
+        { status },
+        {
+          headers: { "X-Admin-Password": adminPassword },
+        }
+      )
+      .then((res) => res.data),
+  deletePhoto: (id: string, adminPassword: string) =>
+    api
+      .delete(`/api/photos/admin/${id}`, {
+        headers: { "X-Admin-Password": adminPassword },
+      })
+      .then((res) => res.data),
 };
 
 export default apiService;

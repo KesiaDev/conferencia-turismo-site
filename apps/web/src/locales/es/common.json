@@ -13,6 +13,7 @@
     "villaDeiTroni": "Villa Dei Troni",
     "anais": "Actas",
     "watchOnline": "Ver online",
+    "gallery": "Galería",
     "news": "Noticias",
     "contact": "Contacto"
   },
@@ -256,5 +257,33 @@
     "emailLabel": "Correo electrónico",
     "message": "Mensaje",
     "send": "Enviar"
+  },
+  "photos": {
+    "uploadTitle": "Enviar Fotos",
+    "uploadDescription": "Comparte tus fotos del evento",
+    "motivationalTitle": "Fuiste parte de este momento especial",
+    "motivationalText1": "¡Comparte tu mirada sobre estos días increíbles! Cada foto cuenta una historia — queremos ver la tuya.",
+    "motivationalText2": "Ayuda a construir la memoria de este evento con tu perspectiva.",
+    "dropzone": "Arrastra tus fotos aquí o haz clic para seleccionar",
+    "dropzoneHint": "Hasta 10 fotos por envío (máx. 10MB cada una)",
+    "nameLabel": "Tu nombre (opcional)",
+    "namePlaceholder": "¿Cómo te gustaría ser acreditado?",
+    "descriptionLabel": "Cuéntanos sobre esta foto (opcional)",
+    "descriptionPlaceholder": "¿Qué momento especial capturaste?",
+    "submitButton": "Enviar Fotos",
+    "uploading": "Enviando...",
+    "successTitle": "¡Foto enviada con éxito!",
+    "successMessage": "Gracias por compartir este momento con nosotros. Después de la aprobación, tu foto podrá aparecer en la galería del evento.",
+    "sendMore": "Enviar más fotos",
+    "disclaimer": "Al enviar, autorizas el uso de las imágenes para la promoción del evento."
+  },
+  "gallery": {
+    "title": "Galería del Evento",
+    "description": "Fotos compartidas por los participantes",
+    "intro": "Momentos especiales capturados por los participantes de la conferencia.",
+    "empty": "La galería aún está vacía",
+    "emptyHint": "¡Sé el primero en compartir tus fotos del evento!",
+    "uploadCta": "Enviar mis fotos",
+    "ctaText": "¿También participaste? ¡Comparte tus fotos!"
   }
 }

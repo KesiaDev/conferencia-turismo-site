@@ -13,6 +13,7 @@
     "villaDeiTroni": "Villa Dei Troni",
     "anais": "Proceedings",
     "watchOnline": "Watch online",
+    "gallery": "Gallery",
     "news": "News",
     "contact": "Contact"
   },
@@ -256,5 +257,33 @@
     "emailLabel": "Email",
     "message": "Message",
     "send": "Send"
+  },
+  "photos": {
+    "uploadTitle": "Submit Photos",
+    "uploadDescription": "Share your photos from the event",
+    "motivationalTitle": "You were part of this special moment",
+    "motivationalText1": "Share your perspective on these incredible days! Every photo tells a story — we want to see yours.",
+    "motivationalText2": "Help us build the memory of this event with your unique view.",
+    "dropzone": "Drag your photos here or click to select",
+    "dropzoneHint": "Up to 10 photos per submission (max 10MB each)",
+    "nameLabel": "Your name (optional)",
+    "namePlaceholder": "How would you like to be credited?",
+    "descriptionLabel": "Tell us about this photo (optional)",
+    "descriptionPlaceholder": "What special moment did you capture?",
+    "submitButton": "Submit Photos",
+    "uploading": "Uploading...",
+    "successTitle": "Photo submitted successfully!",
+    "successMessage": "Thank you for sharing this moment with us. After approval, your photo may appear in the event gallery.",
+    "sendMore": "Send more photos",
+    "disclaimer": "By submitting, you authorize the use of images for event promotion."
+  },
+  "gallery": {
+    "title": "Event Gallery",
+    "description": "Photos shared by participants",
+    "intro": "Special moments captured by conference participants.",
+    "empty": "The gallery is still empty",
+    "emptyHint": "Be the first to share your photos from the event!",
+    "uploadCta": "Submit my photos",
+    "ctaText": "Were you there too? Share your photos!"
   }
 }

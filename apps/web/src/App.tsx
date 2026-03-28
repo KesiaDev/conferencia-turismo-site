@@ -15,6 +15,9 @@ import NotFound from "./pages/NotFound";
 import AnaisAutorizacao from "./pages/AnaisAutorizacao";
 import AnaisAdminAutorizacoes from "./pages/AnaisAdminAutorizacoes";
 import AssistaOnline from "./pages/AssistaOnline";
+import EnviarFotos from "./pages/EnviarFotos";
+import Galeria from "./pages/Galeria";
+import AdminFotos from "./pages/AdminFotos";
 
 function App() {
   return (
@@ -126,6 +129,23 @@ function App() {
           </Layout>
         }
       />
+      <Route
+        path="/galeria"
+        element={
+          <Layout>
+            <Galeria />
+          </Layout>
+        }
+      />
+      <Route
+        path="/enviar-fotos"
+        element={
+          <Layout>
+            <EnviarFotos />
+          </Layout>
+        }
+      />
+      <Route path="/admin/fotos" element={<AdminFotos />} />
       <Route
         path="*"
         element={

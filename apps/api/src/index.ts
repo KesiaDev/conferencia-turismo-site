@@ -21,6 +21,7 @@ import panelsRouter from "./routes/panels.js";
 import contactRouter from "./routes/contact.js";
 import authorizationRouter from "./routes/authorization.js";
 import liveStreamsRouter from "./routes/liveStreams.js";
+import photosRouter from "./routes/photos.js";
 
 dotenv.config();
 
@@ -155,6 +156,7 @@ app.use("/api/panels", panelsRouter);
 app.use("/api/contact", contactRouter);
 app.use("/api/authorization", authorizationRouter);
 app.use("/api/live-streams", liveStreamsRouter);
+app.use("/api/photos", photosRouter);
 
 // Caminho do frontend após build
 // Tenta primeiro o caminho copiado durante o build (web/dist dentro de dist/)
@@ -232,4 +234,7 @@ app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`   - GET /api/authorization/admin`);
   console.log(`   - GET /api/live-streams`);
   console.log(`   - POST /api/live-streams/admin`);
+  console.log(`   - POST /api/photos/upload`);
+  console.log(`   - GET /api/photos`);
+  console.log(`   - PATCH /api/photos/admin/:id`);
 });
