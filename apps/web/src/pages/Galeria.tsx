@@ -164,17 +164,60 @@ export default function Galeria() {
             </div>
           ) : (
             <>
-              {/* Contador festivo */}
-              <div className="text-center mb-10">
-                <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#8b4513]/10 via-[#e0a085]/20 to-[#8b4513]/10 text-[#8b4513] rounded-full text-lg font-medium border border-[#e0a085]/30">
-                  <span className="text-2xl animate-pulse">🎉</span>
-                  <span>
-                    {photos.length}{" "}
-                    {photos.length === 1 ? "momento incrível" : "momentos incríveis"}{" "}
-                    compartilhados!
-                  </span>
-                  <span className="text-2xl animate-pulse">🎉</span>
+              {/* CTA no topo */}
+              <div className="mb-12 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] via-[#a0522d] to-[#6b3410] p-8 md:p-10 text-center">
+                {/* Confetes animados */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  {[...Array(15)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute text-xl animate-float"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${3 + Math.random() * 4}s`,
+                      }}
+                    >
+                      {["🎉", "✨", "⭐", "🎊", "💫", "🌟"][Math.floor(Math.random() * 6)]}
+                    </div>
+                  ))}
                 </div>
+
+                <div className="relative z-10">
+                  <div className="flex justify-center gap-3 text-4xl mb-4">
+                    <span className="animate-bounce" style={{ animationDelay: "0s" }}>
+                      🎬
+                    </span>
+                    <span className="animate-bounce" style={{ animationDelay: "0.2s" }}>
+                      📸
+                    </span>
+                    <span className="animate-bounce" style={{ animationDelay: "0.4s" }}>
+                      📚
+                    </span>
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                    {t("gallery.ctaText")}
+                  </h3>
+                  <p className="text-white/80 mb-6 max-w-lg mx-auto">
+                    Cada foto conta uma história única. Compartilhe a sua!
+                  </p>
+                  <Link
+                    to="/enviar-fotos"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8b4513] rounded-full font-bold hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-105 shadow-xl"
+                  >
+                    <span className="text-xl">📤</span>
+                    {t("gallery.uploadCta")}
+                    <span className="text-xl">🎉</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Contador */}
+              <div className="text-center mb-8">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-sm font-medium">
+                  🎉 {photos.length} {photos.length === 1 ? "momento" : "momentos"} compartilhados
+                </span>
               </div>
 
               {/* Grid estilo Instagram/Pinterest */}
@@ -236,54 +279,6 @@ export default function Galeria() {
                     </div>
                   </article>
                 ))}
-              </div>
-
-              {/* CTA festivo */}
-              <div className="mt-16 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] via-[#a0522d] to-[#6b3410] p-12 text-center">
-                {/* Confetes animados */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                  {[...Array(20)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="absolute text-2xl animate-float"
-                      style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                        animationDelay: `${Math.random() * 5}s`,
-                        animationDuration: `${3 + Math.random() * 4}s`,
-                      }}
-                    >
-                      {["🎉", "✨", "⭐", "🎊", "💫", "🌟"][Math.floor(Math.random() * 6)]}
-                    </div>
-                  ))}
-                </div>
-
-                <div className="relative z-10">
-                  <div className="flex justify-center gap-4 text-5xl mb-6">
-                    <span className="animate-bounce" style={{ animationDelay: "0s" }}>
-                      🎬
-                    </span>
-                    <span className="animate-bounce" style={{ animationDelay: "0.2s" }}>
-                      📸
-                    </span>
-                    <span className="animate-bounce" style={{ animationDelay: "0.4s" }}>
-                      📚
-                    </span>
-                  </div>
-                  <h3 className="text-3xl font-bold text-white mb-4">{t("gallery.ctaText")}</h3>
-                  <p className="text-white/80 mb-8 max-w-lg mx-auto text-lg">
-                    Cada foto conta uma história única. Compartilhe a sua e faça parte dessa memória
-                    coletiva!
-                  </p>
-                  <Link
-                    to="/enviar-fotos"
-                    className="inline-flex items-center gap-3 px-10 py-5 bg-white text-[#8b4513] rounded-full font-bold text-lg hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-white/25"
-                  >
-                    <span className="text-2xl">📤</span>
-                    {t("gallery.uploadCta")}
-                    <span className="text-2xl">🎉</span>
-                  </Link>
-                </div>
               </div>
             </>
           )}
