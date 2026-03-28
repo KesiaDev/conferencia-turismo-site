@@ -19,6 +19,7 @@ export default function Galeria() {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [expandedText, setExpandedText] = useState(false);
 
   useEffect(() => {
     loadPhotos();
@@ -42,12 +43,14 @@ export default function Galeria() {
   const goToPrev = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
       setSelectedIndex(selectedIndex - 1);
+      setExpandedText(false);
     }
   };
 
   const goToNext = () => {
     if (selectedIndex !== null && selectedIndex < photos.length - 1) {
       setSelectedIndex(selectedIndex + 1);
+      setExpandedText(false);
     }
   };
 
@@ -218,37 +221,18 @@ export default function Galeria() {
                       </div>
                     </div>
 
-                    {/* Ações (estilo Instagram) */}
-                    <div className="px-4 py-3 flex items-center gap-4 border-b border-gray-100">
-                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
-                        ❤️
-                      </button>
-                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
-                        💬
-                      </button>
-                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
-                        🔗
-                      </button>
-                      <div className="ml-auto text-2xl">⭐</div>
-                    </div>
-
-                    {/* Descrição/Comentário */}
+                    {/* Rodapé - depoimento só no lightbox para não repetir */}
                     <div className="px-4 py-3">
                       {photo.descricao ? (
-                        <p className="text-gray-700 leading-relaxed">
-                          <span className="font-semibold text-gray-900">
-                            {photo.nome || "Participante"}
-                          </span>{" "}
-                          {photo.descricao}
-                        </p>
+                        <button
+                          className="text-sm text-[#8b4513] hover:text-[#6b3410] font-medium flex items-center gap-1"
+                          onClick={() => setSelectedIndex(index)}
+                        >
+                          💬 Ver depoimento
+                        </button>
                       ) : (
-                        <p className="text-gray-500 italic text-sm">
-                          ✨ Momento especial da conferência
-                        </p>
+                        <p className="text-gray-400 italic text-sm">✨ Momento especial</p>
                       )}
-                      <p className="mt-2 text-xs text-gray-400 uppercase tracking-wide">
-                        III Conferência de Turismo Literário e Cinematográfico
-                      </p>
                     </div>
                   </article>
                 ))}
@@ -310,10 +294,16 @@ export default function Galeria() {
       {selectedPhoto && selectedIndex !== null && (
         <div
           className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={() => setSelectedIndex(null)}
+          onClick={() => {
+            setSelectedIndex(null);
+            setExpandedText(false);
+          }}
         >
           <button
-            onClick={() => setSelectedIndex(null)}
+            onClick={() => {
+              setSelectedIndex(null);
+              setExpandedText(false);
+            }}
             className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
           >
             ×
@@ -375,35 +365,38 @@ export default function Galeria() {
                 </div>
               </div>
 
-              {/* Comentário */}
+              {/* Depoimento */}
               <div className="flex-1 px-4 py-4 overflow-y-auto">
                 {selectedPhoto.descricao ? (
-                  <p className="text-gray-700 leading-relaxed">
-                    <span className="font-semibold">{selectedPhoto.nome || "Participante"}</span>{" "}
-                    {selectedPhoto.descricao}
-                  </p>
+                  <div>
+                    <p className="font-semibold text-gray-800 mb-2 flex items-center gap-2">
+                      💬 Depoimento
+                    </p>
+                    <p
+                      className={`text-gray-700 leading-relaxed ${!expandedText && selectedPhoto.descricao.length > 200 ? "line-clamp-4" : ""}`}
+                    >
+                      {selectedPhoto.descricao}
+                    </p>
+                    {selectedPhoto.descricao.length > 200 && (
+                      <button
+                        onClick={() => setExpandedText(!expandedText)}
+                        className="text-[#8b4513] font-medium text-sm mt-2 hover:underline"
+                      >
+                        {expandedText ? "← Ver menos" : "Ler mais →"}
+                      </button>
+                    )}
+                  </div>
                 ) : (
-                  <p className="text-gray-500 italic">
-                    ✨ Um momento especial capturado durante a III Conferência Internacional de
-                    Turismo Literário e Cinematográfico
-                  </p>
+                  <p className="text-gray-500 italic">✨ Momento especial da III Conferência</p>
                 )}
               </div>
 
-              {/* Ações */}
-              <div className="px-4 py-4 border-t">
-                <div className="flex items-center gap-4 mb-3">
-                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
-                    ❤️
-                  </span>
-                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
-                    💬
-                  </span>
-                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
-                    🔗
-                  </span>
-                </div>
-                <p className="text-xs text-gray-400 uppercase">III Conferência • Março 2026</p>
+              {/* Rodapé */}
+              <div className="px-4 py-4 border-t bg-gray-50">
+                <p className="text-xs text-gray-500">
+                  📍 III Conferência Internacional de Turismo Literário e Cinematográfico
+                </p>
+                <p className="text-xs text-gray-400 mt-1">Março 2026 • Caxias do Sul/RS</p>
               </div>
             </div>
           </div>
