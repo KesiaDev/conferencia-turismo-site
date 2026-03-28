@@ -100,7 +100,7 @@ export default function EnviarFotos() {
     <>
       <Seo title={t("photos.uploadTitle")} description={t("photos.uploadDescription")} />
 
-      <div className="w-full aspect-[16/5]">
+      <div className="w-full aspect-[16/7] md:aspect-[16/5]">
         <OptimizedImage
           src="/hero-novo.gif"
           alt="Banner da Conferência"
@@ -110,27 +110,29 @@ export default function EnviarFotos() {
         />
       </div>
 
-      <div className="py-8 bg-[#e0a085]">
-        <div className="container-custom">
-          <h1 className="text-2xl md:text-3xl font-semibold text-center text-white">
+      <div className="py-5 md:py-8 bg-[#e0a085]">
+        <div className="container-custom px-4">
+          <h1 className="text-xl md:text-3xl font-semibold text-center text-white">
             {t("photos.uploadTitle")}
           </h1>
         </div>
       </div>
 
       <Section>
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto px-4">
           {/* Mensagem Motivacional */}
-          <div className="mb-10 p-8 bg-gradient-to-br from-[#8b4513]/10 to-[#e0a085]/20 rounded-2xl border border-[#e0a085]/30 text-center">
-            <div className="text-4xl mb-4">✨</div>
-            <h2 className="text-2xl font-bold text-[#8b4513] mb-3">
+          <div className="mb-6 md:mb-10 p-5 md:p-8 bg-gradient-to-br from-[#8b4513]/10 to-[#e0a085]/20 rounded-xl md:rounded-2xl border border-[#e0a085]/30 text-center">
+            <div className="text-3xl md:text-4xl mb-3 md:mb-4">✨</div>
+            <h2 className="text-xl md:text-2xl font-bold text-[#8b4513] mb-2 md:mb-3">
               {t("photos.motivationalTitle")}
             </h2>
-            <p className="text-lg text-gray-700 mb-4 leading-relaxed">
+            <p className="text-base md:text-lg text-gray-700 mb-3 md:mb-4 leading-relaxed">
               {t("photos.motivationalText1")}
             </p>
-            <p className="text-gray-600 italic">{t("photos.motivationalText2")}</p>
-            <div className="text-3xl mt-4">📸</div>
+            <p className="text-sm md:text-base text-gray-600 italic">
+              {t("photos.motivationalText2")}
+            </p>
+            <div className="text-2xl md:text-3xl mt-3 md:mt-4">📸</div>
           </div>
 
           {success ? (
@@ -146,16 +148,16 @@ export default function EnviarFotos() {
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               {/* Drop Zone */}
               <div
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
                 onDrop={handleDrop}
-                className={`relative border-2 border-dashed rounded-xl p-10 text-center transition-all cursor-pointer ${
+                className={`relative border-2 border-dashed rounded-xl p-6 md:p-10 text-center transition-all cursor-pointer ${
                   isDragging
                     ? "border-[#8b4513] bg-[#e0a085]/20"
-                    : "border-gray-300 hover:border-[#e0a085] hover:bg-gray-50"
+                    : "border-gray-300 hover:border-[#e0a085] hover:bg-gray-50 active:bg-gray-50"
                 }`}
               >
                 <input
@@ -165,14 +167,16 @@ export default function EnviarFotos() {
                   onChange={handleFileSelect}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
-                <div className="text-5xl mb-4">📷</div>
-                <p className="text-lg font-medium text-gray-700 mb-2">{t("photos.dropzone")}</p>
-                <p className="text-sm text-gray-500">{t("photos.dropzoneHint")}</p>
+                <div className="text-4xl md:text-5xl mb-3 md:mb-4">📷</div>
+                <p className="text-base md:text-lg font-medium text-gray-700 mb-1 md:mb-2">
+                  {t("photos.dropzone")}
+                </p>
+                <p className="text-xs md:text-sm text-gray-500">{t("photos.dropzoneHint")}</p>
               </div>
 
               {/* Preview Grid */}
               {files.length > 0 && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 md:gap-4">
                   {files.map((f, index) => (
                     <div key={index} className="relative group aspect-square">
                       <img
@@ -183,7 +187,7 @@ export default function EnviarFotos() {
                       <button
                         type="button"
                         onClick={() => removeFile(index)}
-                        className="absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-lg font-bold"
+                        className="absolute top-1.5 right-1.5 md:top-2 md:right-2 w-7 h-7 md:w-8 md:h-8 bg-red-500 text-white rounded-full flex items-center justify-center text-base md:text-lg font-bold shadow-lg active:scale-95 transition-transform"
                       >
                         ×
                       </button>

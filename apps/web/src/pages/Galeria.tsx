@@ -138,16 +138,16 @@ export default function Galeria() {
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    if (selectedIndex === null) return;
-    if (e.key === "ArrowLeft") goToPrev();
-    if (e.key === "ArrowRight") goToNext();
-    if (e.key === "Escape") setSelectedIndex(null);
+    if (!selectedGroup) return;
+    if (e.key === "ArrowLeft") goToPrevPhoto();
+    if (e.key === "ArrowRight") goToNextPhoto();
+    if (e.key === "Escape") closeLightbox();
   };
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedIndex]);
+  }, [selectedGroup, selectedPhotoIndex]);
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
@@ -165,7 +165,7 @@ export default function Galeria() {
     <>
       <Seo title={t("gallery.title")} description={t("gallery.description")} />
 
-      <div className="w-full aspect-[16/5]">
+      <div className="w-full aspect-[16/7] md:aspect-[16/5]">
         <OptimizedImage
           src="/hero-novo.gif"
           alt="Banner da Conferência"
@@ -176,7 +176,7 @@ export default function Galeria() {
       </div>
 
       {/* Header festivo */}
-      <div className="py-10 bg-gradient-to-r from-[#8b4513] via-[#a0522d] to-[#8b4513] relative overflow-hidden">
+      <div className="py-6 md:py-10 bg-gradient-to-r from-[#8b4513] via-[#a0522d] to-[#8b4513] relative overflow-hidden">
         <div className="absolute inset-0 opacity-20">
           <div
             className="absolute top-2 left-10 text-4xl animate-bounce"
@@ -248,9 +248,9 @@ export default function Galeria() {
           ) : (
             <>
               {/* CTA no topo */}
-              <div className="mb-12 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] via-[#a0522d] to-[#6b3410] p-8 md:p-10 text-center">
-                {/* Confetes animados */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="mb-8 md:mb-12 relative overflow-hidden rounded-2xl md:rounded-3xl bg-gradient-to-br from-[#8b4513] via-[#a0522d] to-[#6b3410] p-5 md:p-10 text-center">
+                {/* Confetes animados - menos no mobile */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
                   {[...Array(15)].map((_, i) => (
                     <div
                       key={i}
@@ -268,7 +268,7 @@ export default function Galeria() {
                 </div>
 
                 <div className="relative z-10">
-                  <div className="flex justify-center gap-3 text-4xl mb-4">
+                  <div className="flex justify-center gap-2 md:gap-3 text-2xl md:text-4xl mb-3 md:mb-4">
                     <span className="animate-bounce" style={{ animationDelay: "0s" }}>
                       🎬
                     </span>
@@ -279,33 +279,33 @@ export default function Galeria() {
                       📚
                     </span>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  <h3 className="text-xl md:text-3xl font-bold text-white mb-2 md:mb-3">
                     {t("gallery.ctaText")}
                   </h3>
-                  <p className="text-white/80 mb-6 max-w-lg mx-auto">
+                  <p className="text-white/80 mb-4 md:mb-6 max-w-lg mx-auto text-sm md:text-base">
                     Cada foto conta uma história única. Compartilhe a sua!
                   </p>
                   <Link
                     to="/enviar-fotos"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8b4513] rounded-full font-bold hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-105 shadow-xl"
+                    className="inline-flex items-center gap-2 md:gap-3 px-5 py-3 md:px-8 md:py-4 bg-white text-[#8b4513] rounded-full font-bold hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-105 shadow-xl text-sm md:text-base"
                   >
-                    <span className="text-xl">📤</span>
+                    <span className="text-lg md:text-xl">📤</span>
                     {t("gallery.uploadCta")}
-                    <span className="text-xl">🎉</span>
+                    <span className="text-lg md:text-xl">🎉</span>
                   </Link>
                 </div>
               </div>
 
               {/* Contador */}
-              <div className="text-center mb-8">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-sm font-medium">
+              <div className="text-center mb-6 md:mb-8">
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-xs md:text-sm font-medium">
                   🎉 {photos.length} {photos.length === 1 ? "foto" : "fotos"} de{" "}
                   {photoGroups.length} {photoGroups.length === 1 ? "participante" : "participantes"}
                 </span>
               </div>
 
               {/* Grid estilo Instagram Feed */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {paginatedGroups.map((group, index) => {
                   const currentPhotoIndex = carouselIndexes[group.participantKey] || 0;
                   const currentPhoto = group.photos[currentPhotoIndex];
@@ -439,45 +439,55 @@ export default function Galeria() {
 
               {/* Paginação */}
               {totalPages > 1 && (
-                <div className="mt-12 flex justify-center items-center gap-2">
+                <div className="mt-8 md:mt-12 flex flex-wrap justify-center items-center gap-2">
                   {/* Botão anterior */}
                   <button
                     onClick={() => goToPage(currentPage - 1)}
                     disabled={currentPage === 1}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-2 md:px-4 rounded-lg font-medium transition-all text-sm md:text-base ${
                       currentPage === 1
                         ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-[#8b4513] text-white hover:bg-[#6b3410]"
+                        : "bg-[#8b4513] text-white hover:bg-[#6b3410] active:scale-95"
                     }`}
                   >
                     ←
                   </button>
 
-                  {/* Números das páginas */}
-                  <div className="flex gap-1">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                      <button
-                        key={page}
-                        onClick={() => goToPage(page)}
-                        className={`w-10 h-10 rounded-lg font-medium transition-all ${
-                          currentPage === page
-                            ? "bg-[#8b4513] text-white"
-                            : "bg-gray-100 text-gray-700 hover:bg-[#e0a085] hover:text-white"
-                        }`}
-                      >
-                        {page}
-                      </button>
-                    ))}
+                  {/* Números das páginas - limitar em mobile */}
+                  <div className="flex flex-wrap justify-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                      // No mobile, mostrar apenas páginas próximas à atual
+                      const isMobileVisible =
+                        page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1;
+
+                      return (
+                        <button
+                          key={page}
+                          onClick={() => goToPage(page)}
+                          className={`w-8 h-8 md:w-10 md:h-10 rounded-lg font-medium transition-all text-sm md:text-base ${
+                            !isMobileVisible
+                              ? "hidden md:flex items-center justify-center"
+                              : "flex items-center justify-center"
+                          } ${
+                            currentPage === page
+                              ? "bg-[#8b4513] text-white"
+                              : "bg-gray-100 text-gray-700 hover:bg-[#e0a085] hover:text-white active:scale-95"
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      );
+                    })}
                   </div>
 
                   {/* Botão próximo */}
                   <button
                     onClick={() => goToPage(currentPage + 1)}
                     disabled={currentPage === totalPages}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    className={`px-3 py-2 md:px-4 rounded-lg font-medium transition-all text-sm md:text-base ${
                       currentPage === totalPages
                         ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-[#8b4513] text-white hover:bg-[#6b3410]"
+                        : "bg-[#8b4513] text-white hover:bg-[#6b3410] active:scale-95"
                     }`}
                   >
                     →
@@ -487,7 +497,7 @@ export default function Galeria() {
 
               {/* Info da página */}
               {totalPages > 1 && (
-                <p className="text-center text-gray-500 text-sm mt-4">
+                <p className="text-center text-gray-500 text-xs md:text-sm mt-3 md:mt-4">
                   Página {currentPage} de {totalPages} • {photoGroups.length} participantes
                 </p>
               )}
@@ -499,17 +509,17 @@ export default function Galeria() {
       {/* Lightbox Modal estilo Instagram */}
       {selectedGroup && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-2 md:p-4"
           onClick={closeLightbox}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
+            className="absolute top-2 right-2 md:top-4 md:right-4 w-10 h-10 md:w-12 md:h-12 bg-white/20 hover:bg-white/30 active:bg-white/40 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition-colors z-20"
           >
             ×
           </button>
 
-          <div className="absolute top-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
+          <div className="absolute top-2 left-2 md:top-4 md:left-4 px-3 py-1.5 md:px-4 md:py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs md:text-sm z-20">
             {selectedPhotoIndex + 1} / {selectedGroup.photos.length}
           </div>
 
@@ -538,7 +548,7 @@ export default function Galeria() {
 
           {/* Card estilo Instagram no lightbox */}
           <div
-            className="bg-white rounded-2xl overflow-hidden max-w-6xl w-full mx-4 flex flex-col md:flex-row max-h-[90vh] md:max-h-[95vh] overflow-y-auto"
+            className="bg-white rounded-xl md:rounded-2xl overflow-hidden max-w-6xl w-full mx-2 md:mx-4 flex flex-col md:flex-row max-h-[85vh] md:max-h-[95vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Imagem */}
@@ -546,7 +556,7 @@ export default function Galeria() {
               <img
                 src={selectedGroup.photos[selectedPhotoIndex].url}
                 alt={selectedGroup.descricao || "Foto do evento"}
-                className="max-h-[40vh] md:max-h-[90vh] w-full object-contain"
+                className="max-h-[35vh] md:max-h-[90vh] w-full object-contain"
               />
 
               {/* Indicadores no lightbox */}
