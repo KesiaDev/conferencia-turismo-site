@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const PRESENTATION_EMAIL = "litfilmtourismconferenceucs@gmail.com";
 
 const LISTENER_REGISTRATION_URL =
@@ -25,7 +27,7 @@ export default function ImportantNotice() {
           </span>
         </div>
         <p className="text-sm sm:text-base text-[#7a5c2e] mb-8 max-w-xl mx-auto">
-          Duas informações rápidas para você aproveitar o evento com tranquilidade.
+          Informações importantes para você aproveitar o evento com tranquilidade.
         </p>
 
         <div className="space-y-6 text-left">
@@ -94,6 +96,63 @@ export default function ImportantNotice() {
                   você ajuda na <strong>otimização do tempo</strong> e na{" "}
                   <strong>melhor organização</strong> do evento — contamos com a sua colaboração!
                 </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Seção de compartilhar fotos */}
+          <section
+            className="rounded-xl border-2 p-5 md:p-6 shadow-md transition-transform duration-300 hover:scale-[1.02] hover:shadow-xl relative overflow-hidden"
+            style={{
+              borderColor: "#8b4513",
+              background: "linear-gradient(135deg, #fff9f5 0%, #ffe8d6 50%, #ffd4b8 100%)",
+            }}
+          >
+            {/* Emojis flutuantes decorativos */}
+            <div
+              className="absolute top-2 right-3 text-2xl animate-bounce"
+              style={{ animationDelay: "0s" }}
+            >
+              📸
+            </div>
+            <div
+              className="absolute top-3 right-14 text-lg animate-bounce"
+              style={{ animationDelay: "0.3s" }}
+            >
+              ✨
+            </div>
+            <div
+              className="absolute bottom-2 right-6 text-xl animate-bounce"
+              style={{ animationDelay: "0.6s" }}
+            >
+              🎬
+            </div>
+
+            <div className="flex items-start gap-3">
+              <span
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xl bg-[#8b4513]/20"
+                aria-hidden
+              >
+                💫
+              </span>
+              <div className="flex-1">
+                <h4 className="font-bold text-lg text-[#8b4513] mb-2">
+                  Venha fazer parte dessa história!
+                </h4>
+                <p className="text-[#5A3E00] leading-relaxed text-base md:text-lg mb-3">
+                  <strong className="text-[#8b4513]">Compartilhe seu olhar</strong> sobre esses dias
+                  incríveis! Cada foto carrega uma história —{" "}
+                  <strong className="text-[#c8632d]">queremos ver a sua</strong>. Suas memórias
+                  ajudam a construir a história desse evento especial.
+                </p>
+                <Link
+                  to="/enviar-fotos"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8b4513] to-[#a0522d] text-white font-semibold rounded-full hover:from-[#6b3410] hover:to-[#8b4513] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  <span>📤</span>
+                  <span>Enviar minhas fotos</span>
+                  <span>🎉</span>
+                </Link>
               </div>
             </div>
           </section>
