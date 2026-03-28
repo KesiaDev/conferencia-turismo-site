@@ -14,12 +14,15 @@ interface Photo {
   createdAt: string;
 }
 
+const PHOTOS_PER_PAGE = 12;
+
 export default function Galeria() {
   const { t } = useTranslation();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [expandedText, setExpandedText] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     loadPhotos();
@@ -63,9 +66,23 @@ export default function Galeria() {
     return [...withDesc, ...withoutDesc];
   }, [photos]);
 
+  // Paginação
+  const totalPages = Math.ceil(processedPhotos.length / PHOTOS_PER_PAGE);
+
+  const paginatedPhotos = useMemo(() => {
+    const startIndex = (currentPage - 1) * PHOTOS_PER_PAGE;
+    const endIndex = startIndex + PHOTOS_PER_PAGE;
+    return processedPhotos.slice(startIndex, endIndex);
+  }, [processedPhotos, currentPage]);
+
   const selectedPhoto = useMemo(() => {
-    return selectedIndex !== null ? processedPhotos[selectedIndex] : null;
-  }, [selectedIndex, processedPhotos]);
+    return selectedIndex !== null ? paginatedPhotos[selectedIndex] : null;
+  }, [selectedIndex, paginatedPhotos]);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const goToPrev = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
@@ -75,7 +92,7 @@ export default function Galeria() {
   };
 
   const goToNext = () => {
-    if (selectedIndex !== null && selectedIndex < processedPhotos.length - 1) {
+    if (selectedIndex !== null && selectedIndex < paginatedPhotos.length - 1) {
       setSelectedIndex(selectedIndex + 1);
       setExpandedText(false);
     }
@@ -249,7 +266,7 @@ export default function Galeria() {
 
               {/* Grid estilo Instagram/Pinterest */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {processedPhotos.map((photo, index) => (
+                {paginatedPhotos.map((photo, index) => (
                   <article
                     key={photo.id}
                     className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group"
@@ -386,6 +403,61 @@ export default function Galeria() {
                   </article>
                 ))}
               </div>
+
+              {/* Paginação */}
+              {totalPages > 1 && (
+                <div className="mt-12 flex justify-center items-center gap-2">
+                  {/* Botão anterior */}
+                  <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      currentPage === 1
+                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                        : "bg-[#8b4513] text-white hover:bg-[#6b3410]"
+                    }`}
+                  >
+                    ←
+                  </button>
+
+                  {/* Números das páginas */}
+                  <div className="flex gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        onClick={() => goToPage(page)}
+                        className={`w-10 h-10 rounded-lg font-medium transition-all ${
+                          currentPage === page
+                            ? "bg-[#8b4513] text-white"
+                            : "bg-gray-100 text-gray-700 hover:bg-[#e0a085] hover:text-white"
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Botão próximo */}
+                  <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      currentPage === totalPages
+                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                        : "bg-[#8b4513] text-white hover:bg-[#6b3410]"
+                    }`}
+                  >
+                    →
+                  </button>
+                </div>
+              )}
+
+              {/* Info da página */}
+              {totalPages > 1 && (
+                <p className="text-center text-gray-500 text-sm mt-4">
+                  Página {currentPage} de {totalPages} • {processedPhotos.length} fotos no total
+                </p>
+              )}
             </>
           )}
         </div>
@@ -411,7 +483,7 @@ export default function Galeria() {
           </button>
 
           <div className="absolute top-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
-            {selectedIndex + 1} / {processedPhotos.length}
+            {selectedIndex + 1} / {paginatedPhotos.length}
           </div>
 
           {selectedIndex > 0 && (
@@ -425,7 +497,7 @@ export default function Galeria() {
               ‹
             </button>
           )}
-          {selectedIndex < processedPhotos.length - 1 && (
+          {selectedIndex < paginatedPhotos.length - 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
