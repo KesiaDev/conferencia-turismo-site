@@ -208,13 +208,25 @@ export default function PhotosAdminSection() {
                         </button>
                       </div>
                     ) : (
-                      <button
-                        onClick={() => handleDelete(photo.id)}
-                        disabled={actionLoading === photo.id}
-                        className="w-full rounded bg-gray-200 py-1.5 text-sm text-gray-700 hover:bg-gray-300 disabled:opacity-50"
-                      >
-                        🗑️ Excluir
-                      </button>
+                      <div className="flex gap-2">
+                        {filter === "approved" && (
+                          <button
+                            onClick={() => handleUpdateStatus(photo.id, "rejected")}
+                            disabled={actionLoading === photo.id}
+                            className="flex-1 rounded bg-orange-500 py-1.5 text-sm text-white hover:bg-orange-600 disabled:opacity-50"
+                            title="Remover da galeria"
+                          >
+                            ↩️
+                          </button>
+                        )}
+                        <button
+                          onClick={() => handleDelete(photo.id)}
+                          disabled={actionLoading === photo.id}
+                          className="flex-1 rounded bg-red-500 py-1.5 text-sm text-white hover:bg-red-600 disabled:opacity-50"
+                        >
+                          🗑️
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>

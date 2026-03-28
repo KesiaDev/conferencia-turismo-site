@@ -63,6 +63,18 @@ export default function Galeria() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex]);
 
+  const formatDate = (dateStr: string) => {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 0) return "hoje";
+    if (diffDays === 1) return "ontem";
+    if (diffDays < 7) return `há ${diffDays} dias`;
+    return date.toLocaleDateString("pt-BR");
+  };
+
   return (
     <>
       <Seo title={t("gallery.title")} description={t("gallery.description")} />
@@ -77,46 +89,71 @@ export default function Galeria() {
         />
       </div>
 
-      <div className="py-8 bg-[#e0a085]">
-        <div className="container-custom">
-          <h1 className="text-2xl md:text-3xl font-semibold text-center text-white">
-            {t("gallery.title")}
+      {/* Header festivo */}
+      <div className="py-10 bg-gradient-to-r from-[#8b4513] via-[#a0522d] to-[#8b4513] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div
+            className="absolute top-2 left-10 text-4xl animate-bounce"
+            style={{ animationDelay: "0s" }}
+          >
+            🎉
+          </div>
+          <div
+            className="absolute top-4 right-20 text-3xl animate-bounce"
+            style={{ animationDelay: "0.5s" }}
+          >
+            ✨
+          </div>
+          <div
+            className="absolute bottom-2 left-1/4 text-3xl animate-bounce"
+            style={{ animationDelay: "1s" }}
+          >
+            📸
+          </div>
+          <div
+            className="absolute top-3 left-1/2 text-4xl animate-bounce"
+            style={{ animationDelay: "0.3s" }}
+          >
+            🎊
+          </div>
+          <div
+            className="absolute bottom-3 right-1/4 text-3xl animate-bounce"
+            style={{ animationDelay: "0.7s" }}
+          >
+            ⭐
+          </div>
+        </div>
+        <div className="container-custom relative z-10 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            🎬 {t("gallery.title")} 📚
           </h1>
+          <p className="text-white/90 text-lg">Momentos inesquecíveis compartilhados por vocês!</p>
         </div>
       </div>
 
       <Section>
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Header elegante */}
-          <div className="text-center mb-12">
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              {t("gallery.intro")}
-            </p>
-            <div className="mt-4 flex items-center justify-center gap-3">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#e0a085]"></div>
-              <span className="text-2xl">📸</span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#e0a085]"></div>
-            </div>
-          </div>
-
+        <div className="max-w-6xl mx-auto px-4">
           {loading ? (
             <div className="flex flex-col justify-center items-center py-20">
               <div className="relative">
-                <div className="w-16 h-16 border-4 border-[#e0a085]/30 rounded-full"></div>
-                <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-[#8b4513] rounded-full animate-spin"></div>
+                <div className="w-20 h-20 border-4 border-[#e0a085]/30 rounded-full"></div>
+                <div className="absolute top-0 left-0 w-20 h-20 border-4 border-transparent border-t-[#8b4513] rounded-full animate-spin"></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-2xl">
+                  📷
+                </div>
               </div>
-              <p className="mt-4 text-gray-500">Carregando fotos...</p>
+              <p className="mt-4 text-gray-500">Carregando momentos especiais...</p>
             </div>
           ) : photos.length === 0 ? (
             <div className="text-center py-20">
-              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-[#e0a085]/20 to-[#8b4513]/10 rounded-full flex items-center justify-center">
+              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-[#e0a085]/20 to-[#8b4513]/10 rounded-full flex items-center justify-center animate-pulse">
                 <span className="text-6xl">📷</span>
               </div>
               <h3 className="text-2xl font-semibold text-gray-700 mb-4">{t("gallery.empty")}</h3>
               <p className="text-gray-500 mb-8 max-w-md mx-auto">{t("gallery.emptyHint")}</p>
               <Link
                 to="/enviar-fotos"
-                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8b4513] to-[#a0522d] text-white rounded-full hover:shadow-lg hover:shadow-[#8b4513]/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8b4513] to-[#a0522d] text-white rounded-full hover:shadow-lg hover:shadow-[#8b4513]/25 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105"
               >
                 <span className="text-xl">📤</span>
                 <span className="font-medium">{t("gallery.uploadCta")}</span>
@@ -124,84 +161,143 @@ export default function Galeria() {
             </div>
           ) : (
             <>
-              {/* Contador de fotos */}
-              <div className="text-center mb-8">
-                <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-sm font-medium">
-                  <span>✨</span>
-                  {photos.length}{" "}
-                  {photos.length === 1 ? "momento capturado" : "momentos capturados"}
-                </span>
+              {/* Contador festivo */}
+              <div className="text-center mb-10">
+                <div className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#8b4513]/10 via-[#e0a085]/20 to-[#8b4513]/10 text-[#8b4513] rounded-full text-lg font-medium border border-[#e0a085]/30">
+                  <span className="text-2xl animate-pulse">🎉</span>
+                  <span>
+                    {photos.length}{" "}
+                    {photos.length === 1 ? "momento incrível" : "momentos incríveis"}{" "}
+                    compartilhados!
+                  </span>
+                  <span className="text-2xl animate-pulse">🎉</span>
+                </div>
               </div>
 
-              {/* Grid Masonry-style moderno */}
-              <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+              {/* Grid estilo Instagram/Pinterest */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {photos.map((photo, index) => (
-                  <div
+                  <article
                     key={photo.id}
-                    onClick={() => setSelectedIndex(index)}
-                    className="break-inside-avoid cursor-pointer group relative overflow-hidden rounded-2xl bg-gray-100 shadow-md hover:shadow-2xl transition-all duration-500"
+                    className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group"
+                    style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <img
-                      src={photo.url}
-                      alt={photo.descricao || "Foto do evento"}
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                      loading="lazy"
-                    />
+                    {/* Header do card (estilo Instagram) */}
+                    <div className="px-4 py-3 flex items-center gap-3 border-b border-gray-100">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold text-sm">
+                        {photo.nome ? photo.nome.charAt(0).toUpperCase() : "📷"}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold text-gray-800 truncate">
+                          {photo.nome || "Participante"}
+                        </p>
+                        <p className="text-xs text-gray-500">{formatDate(photo.createdAt)}</p>
+                      </div>
+                      <div className="text-[#e0a085]">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                        </svg>
+                      </div>
+                    </div>
 
-                    {/* Overlay elegante no hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        {photo.nome && (
-                          <p className="text-white font-medium text-lg mb-1">{photo.nome}</p>
-                        )}
-                        {photo.descricao && (
-                          <p className="text-white/80 text-sm line-clamp-2">{photo.descricao}</p>
-                        )}
-                        <div className="mt-3 flex items-center gap-2 text-white/60 text-xs">
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                          </svg>
-                          <span>Clique para ampliar</span>
+                    {/* Imagem */}
+                    <div
+                      className="relative cursor-pointer overflow-hidden"
+                      onClick={() => setSelectedIndex(index)}
+                    >
+                      <img
+                        src={photo.url}
+                        alt={photo.descricao || "Foto do evento"}
+                        className="w-full aspect-square object-cover group-hover:scale-110 transition-transform duration-700"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-300 shadow-xl">
+                          <span className="text-3xl">🔍</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* Badge de câmera */}
-                    <div className="absolute top-3 right-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
-                      <span className="text-lg">📷</span>
+                    {/* Ações (estilo Instagram) */}
+                    <div className="px-4 py-3 flex items-center gap-4 border-b border-gray-100">
+                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
+                        ❤️
+                      </button>
+                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
+                        💬
+                      </button>
+                      <button className="text-2xl hover:scale-125 transition-transform active:scale-95">
+                        🔗
+                      </button>
+                      <div className="ml-auto text-2xl">⭐</div>
                     </div>
-                  </div>
+
+                    {/* Descrição/Comentário */}
+                    <div className="px-4 py-3">
+                      {photo.descricao ? (
+                        <p className="text-gray-700 leading-relaxed">
+                          <span className="font-semibold text-gray-900">
+                            {photo.nome || "Participante"}
+                          </span>{" "}
+                          {photo.descricao}
+                        </p>
+                      ) : (
+                        <p className="text-gray-500 italic text-sm">
+                          ✨ Momento especial da conferência
+                        </p>
+                      )}
+                      <p className="mt-2 text-xs text-gray-400 uppercase tracking-wide">
+                        III Conferência de Turismo Literário e Cinematográfico
+                      </p>
+                    </div>
+                  </article>
                 ))}
               </div>
 
-              {/* CTA bonito para enviar fotos */}
-              <div className="mt-16 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] to-[#6b3410] p-10 text-center">
-                {/* Decoração de fundo */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+              {/* CTA festivo */}
+              <div className="mt-16 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] via-[#a0522d] to-[#6b3410] p-12 text-center">
+                {/* Confetes animados */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                  {[...Array(20)].map((_, i) => (
+                    <div
+                      key={i}
+                      className="absolute text-2xl animate-float"
+                      style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                        animationDelay: `${Math.random() * 5}s`,
+                        animationDuration: `${3 + Math.random() * 4}s`,
+                      }}
+                    >
+                      {["🎉", "✨", "⭐", "🎊", "💫", "🌟"][Math.floor(Math.random() * 6)]}
+                    </div>
+                  ))}
+                </div>
 
                 <div className="relative z-10">
-                  <div className="text-5xl mb-4">✨</div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{t("gallery.ctaText")}</h3>
-                  <p className="text-white/80 mb-6 max-w-md mx-auto">
-                    Cada foto conta uma história única. Compartilhe a sua!
+                  <div className="flex justify-center gap-4 text-5xl mb-6">
+                    <span className="animate-bounce" style={{ animationDelay: "0s" }}>
+                      🎬
+                    </span>
+                    <span className="animate-bounce" style={{ animationDelay: "0.2s" }}>
+                      📸
+                    </span>
+                    <span className="animate-bounce" style={{ animationDelay: "0.4s" }}>
+                      📚
+                    </span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-4">{t("gallery.ctaText")}</h3>
+                  <p className="text-white/80 mb-8 max-w-lg mx-auto text-lg">
+                    Cada foto conta uma história única. Compartilhe a sua e faça parte dessa memória
+                    coletiva!
                   </p>
                   <Link
                     to="/enviar-fotos"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8b4513] rounded-full font-semibold hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-105 shadow-lg"
+                    className="inline-flex items-center gap-3 px-10 py-5 bg-white text-[#8b4513] rounded-full font-bold text-lg hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-110 shadow-2xl hover:shadow-white/25"
                   >
-                    <span className="text-xl">📤</span>
+                    <span className="text-2xl">📤</span>
                     {t("gallery.uploadCta")}
+                    <span className="text-2xl">🎉</span>
                   </Link>
                 </div>
               </div>
@@ -210,33 +306,30 @@ export default function Galeria() {
         </div>
       </Section>
 
-      {/* Lightbox Modal Moderno */}
+      {/* Lightbox Modal estilo Instagram */}
       {selectedPhoto && selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={() => setSelectedIndex(null)}
         >
-          {/* Botão Fechar */}
           <button
             onClick={() => setSelectedIndex(null)}
-            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
+            className="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
           >
             ×
           </button>
 
-          {/* Contador */}
-          <div className="absolute top-6 left-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
+          <div className="absolute top-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
             {selectedIndex + 1} / {photos.length}
           </div>
 
-          {/* Navegação */}
           {selectedIndex > 0 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 goToPrev();
               }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
               ‹
             </button>
@@ -247,52 +340,83 @@ export default function Galeria() {
                 e.stopPropagation();
                 goToNext();
               }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
             >
               ›
             </button>
           )}
 
-          {/* Imagem e Info */}
+          {/* Card estilo Instagram no lightbox */}
           <div
-            className="max-w-6xl w-full mx-4 flex flex-col items-center"
+            className="bg-white rounded-2xl overflow-hidden max-w-4xl w-full mx-4 flex flex-col md:flex-row max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative">
+            {/* Imagem */}
+            <div className="md:w-2/3 bg-black flex items-center justify-center">
               <img
                 src={selectedPhoto.url}
                 alt={selectedPhoto.descricao || "Foto do evento"}
-                className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl"
+                className="max-h-[60vh] md:max-h-[80vh] w-full object-contain"
               />
             </div>
 
-            {(selectedPhoto.nome || selectedPhoto.descricao) && (
-              <div className="mt-6 text-center max-w-2xl animate-fade-in">
-                {selectedPhoto.nome && (
-                  <p className="text-xl font-semibold text-white mb-2 flex items-center justify-center gap-2">
-                    <span className="text-[#e0a085]">📷</span>
-                    {selectedPhoto.nome}
+            {/* Sidebar com info */}
+            <div className="md:w-1/3 flex flex-col">
+              {/* Header */}
+              <div className="px-4 py-4 flex items-center gap-3 border-b">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8b4513] to-[#e0a085] flex items-center justify-center text-white font-bold">
+                  {selectedPhoto.nome ? selectedPhoto.nome.charAt(0).toUpperCase() : "📷"}
+                </div>
+                <div>
+                  <p className="font-semibold text-gray-800">
+                    {selectedPhoto.nome || "Participante"}
+                  </p>
+                  <p className="text-xs text-gray-500">{formatDate(selectedPhoto.createdAt)}</p>
+                </div>
+              </div>
+
+              {/* Comentário */}
+              <div className="flex-1 px-4 py-4 overflow-y-auto">
+                {selectedPhoto.descricao ? (
+                  <p className="text-gray-700 leading-relaxed">
+                    <span className="font-semibold">{selectedPhoto.nome || "Participante"}</span>{" "}
+                    {selectedPhoto.descricao}
+                  </p>
+                ) : (
+                  <p className="text-gray-500 italic">
+                    ✨ Um momento especial capturado durante a III Conferência Internacional de
+                    Turismo Literário e Cinematográfico
                   </p>
                 )}
-                {selectedPhoto.descricao && (
-                  <p className="text-white/70 leading-relaxed">{selectedPhoto.descricao}</p>
-                )}
               </div>
-            )}
 
-            {/* Dica de navegação */}
-            <p className="mt-6 text-white/40 text-sm">Use ← → para navegar ou ESC para fechar</p>
+              {/* Ações */}
+              <div className="px-4 py-4 border-t">
+                <div className="flex items-center gap-4 mb-3">
+                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
+                    ❤️
+                  </span>
+                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
+                    💬
+                  </span>
+                  <span className="text-2xl cursor-pointer hover:scale-125 transition-transform">
+                    🔗
+                  </span>
+                </div>
+                <p className="text-xs text-gray-400 uppercase">III Conferência • Março 2026</p>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+          50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
         }
-        .animate-fade-in {
-          animation: fade-in 0.3s ease-out;
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
         }
       `}</style>
     </>
