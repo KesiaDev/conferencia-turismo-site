@@ -415,21 +415,17 @@ export default function Galeria() {
                         {group.descricao ? (
                           <div>
                             <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
-                              <span className="font-semibold">{group.nome || "Participante"}</span>{" "}
                               {group.descricao}
                             </p>
                             <button
-                              className="text-gray-500 hover:text-[#8b4513] text-sm mt-1"
+                              className="text-[#8b4513] hover:text-[#6b3410] text-sm mt-1 font-medium"
                               onClick={() => openLightbox(group, currentPhotoIndex)}
                             >
                               ver mais
                             </button>
                           </div>
                         ) : (
-                          <p className="text-gray-500 text-sm">
-                            <span className="font-semibold">{group.nome || "Participante"}</span> ✨
-                            Momento especial
-                          </p>
+                          <p className="text-gray-400 text-sm italic">✨ Momento especial</p>
                         )}
                       </div>
                     </article>
