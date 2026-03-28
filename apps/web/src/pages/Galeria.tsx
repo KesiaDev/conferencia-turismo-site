@@ -519,29 +519,6 @@ export default function Galeria() {
             {selectedPhotoIndex + 1} / {selectedGroup.photos.length}
           </div>
 
-          {selectedPhotoIndex > 0 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToPrevPhoto();
-              }}
-              className="absolute left-2 md:left-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
-            >
-              ‹
-            </button>
-          )}
-          {selectedPhotoIndex < selectedGroup.photos.length - 1 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                goToNextPhoto();
-              }}
-              className="absolute right-2 md:right-4 top-1/4 md:top-1/2 -translate-y-1/2 w-10 h-10 md:w-14 md:h-14 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-2xl md:text-3xl transition-all duration-300 hover:scale-110 z-20"
-            >
-              ›
-            </button>
-          )}
-
           {/* Card estilo Instagram no lightbox */}
           <div
             className="bg-white rounded-xl md:rounded-2xl overflow-hidden max-w-6xl w-full mx-2 md:mx-4 flex flex-col md:flex-row max-h-[85vh] md:max-h-[95vh] overflow-y-auto"
@@ -554,6 +531,34 @@ export default function Galeria() {
                 alt={selectedGroup.descricao || "Foto do evento"}
                 className="max-h-[35vh] md:max-h-[90vh] w-full object-contain"
               />
+
+              {/* Botões de navegação DENTRO da imagem */}
+              {selectedGroup.photos.length > 1 && (
+                <>
+                  {selectedPhotoIndex > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToPrevPhoto();
+                      }}
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 hover:bg-black/70 active:bg-black/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition-all z-10"
+                    >
+                      ‹
+                    </button>
+                  )}
+                  {selectedPhotoIndex < selectedGroup.photos.length - 1 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        goToNextPhoto();
+                      }}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-black/50 hover:bg-black/70 active:bg-black/80 rounded-full flex items-center justify-center text-white text-xl md:text-2xl transition-all z-10"
+                    >
+                      ›
+                    </button>
+                  )}
+                </>
+              )}
 
               {/* Indicadores no lightbox */}
               {selectedGroup.photos.length > 1 && (
