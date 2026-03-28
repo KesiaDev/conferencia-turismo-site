@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import Section from "../components/Section";
@@ -18,7 +18,7 @@ export default function Galeria() {
   const { t } = useTranslation();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     loadPhotos();
@@ -34,6 +34,34 @@ export default function Galeria() {
       setLoading(false);
     }
   };
+
+  const selectedPhoto = useMemo(() => {
+    return selectedIndex !== null ? photos[selectedIndex] : null;
+  }, [selectedIndex, photos]);
+
+  const goToPrev = () => {
+    if (selectedIndex !== null && selectedIndex > 0) {
+      setSelectedIndex(selectedIndex - 1);
+    }
+  };
+
+  const goToNext = () => {
+    if (selectedIndex !== null && selectedIndex < photos.length - 1) {
+      setSelectedIndex(selectedIndex + 1);
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (selectedIndex === null) return;
+    if (e.key === "ArrowLeft") goToPrev();
+    if (e.key === "ArrowRight") goToNext();
+    if (e.key === "Escape") setSelectedIndex(null);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex]);
 
   return (
     <>
@@ -58,115 +86,215 @@ export default function Galeria() {
       </div>
 
       <Section>
-        <div className="max-w-6xl mx-auto">
-          <p className="text-center text-gray-600 mb-8">{t("gallery.intro")}</p>
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Header elegante */}
+          <div className="text-center mb-12">
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              {t("gallery.intro")}
+            </p>
+            <div className="mt-4 flex items-center justify-center gap-3">
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#e0a085]"></div>
+              <span className="text-2xl">📸</span>
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#e0a085]"></div>
+            </div>
+          </div>
 
           {loading ? (
-            <div className="flex justify-center items-center py-20">
-              <svg
-                className="animate-spin h-10 w-10 text-[#8b4513]"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
+            <div className="flex flex-col justify-center items-center py-20">
+              <div className="relative">
+                <div className="w-16 h-16 border-4 border-[#e0a085]/30 rounded-full"></div>
+                <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-[#8b4513] rounded-full animate-spin"></div>
+              </div>
+              <p className="mt-4 text-gray-500">Carregando fotos...</p>
             </div>
           ) : photos.length === 0 ? (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6">📷</div>
-              <h3 className="text-xl font-semibold text-gray-700 mb-4">{t("gallery.empty")}</h3>
-              <p className="text-gray-500 mb-8">{t("gallery.emptyHint")}</p>
+            <div className="text-center py-20">
+              <div className="w-32 h-32 mx-auto mb-8 bg-gradient-to-br from-[#e0a085]/20 to-[#8b4513]/10 rounded-full flex items-center justify-center">
+                <span className="text-6xl">📷</span>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-700 mb-4">{t("gallery.empty")}</h3>
+              <p className="text-gray-500 mb-8 max-w-md mx-auto">{t("gallery.emptyHint")}</p>
               <Link
                 to="/enviar-fotos"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#8b4513] text-white rounded-lg hover:bg-[#6b3410] transition-colors"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#8b4513] to-[#a0522d] text-white rounded-full hover:shadow-lg hover:shadow-[#8b4513]/25 transition-all duration-300 transform hover:-translate-y-1"
               >
-                📤 {t("gallery.uploadCta")}
+                <span className="text-xl">📤</span>
+                <span className="font-medium">{t("gallery.uploadCta")}</span>
               </Link>
             </div>
           ) : (
             <>
-              {/* Photo Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {photos.map((photo) => (
+              {/* Contador de fotos */}
+              <div className="text-center mb-8">
+                <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#8b4513]/10 text-[#8b4513] rounded-full text-sm font-medium">
+                  <span>✨</span>
+                  {photos.length}{" "}
+                  {photos.length === 1 ? "momento capturado" : "momentos capturados"}
+                </span>
+              </div>
+
+              {/* Grid Masonry-style moderno */}
+              <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+                {photos.map((photo, index) => (
                   <div
                     key={photo.id}
-                    onClick={() => setSelectedPhoto(photo)}
-                    className="relative aspect-square cursor-pointer group overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow"
+                    onClick={() => setSelectedIndex(index)}
+                    className="break-inside-avoid cursor-pointer group relative overflow-hidden rounded-2xl bg-gray-100 shadow-md hover:shadow-2xl transition-all duration-500"
                   >
                     <img
                       src={photo.url}
                       alt={photo.descricao || "Foto do evento"}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                       loading="lazy"
                     />
-                    {photo.nome && (
-                      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/70 to-transparent">
-                        <p className="text-white text-sm truncate">📷 {photo.nome}</p>
+
+                    {/* Overlay elegante no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-5 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        {photo.nome && (
+                          <p className="text-white font-medium text-lg mb-1">{photo.nome}</p>
+                        )}
+                        {photo.descricao && (
+                          <p className="text-white/80 text-sm line-clamp-2">{photo.descricao}</p>
+                        )}
+                        <div className="mt-3 flex items-center gap-2 text-white/60 text-xs">
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                          </svg>
+                          <span>Clique para ampliar</span>
+                        </div>
                       </div>
-                    )}
+                    </div>
+
+                    {/* Badge de câmera */}
+                    <div className="absolute top-3 right-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100">
+                      <span className="text-lg">📷</span>
+                    </div>
                   </div>
                 ))}
               </div>
 
-              {/* CTA para enviar fotos */}
-              <div className="mt-12 text-center p-8 bg-gradient-to-br from-[#8b4513]/10 to-[#e0a085]/20 rounded-2xl">
-                <p className="text-lg text-gray-700 mb-4">{t("gallery.ctaText")}</p>
-                <Link
-                  to="/enviar-fotos"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#8b4513] text-white rounded-lg hover:bg-[#6b3410] transition-colors"
-                >
-                  📤 {t("gallery.uploadCta")}
-                </Link>
+              {/* CTA bonito para enviar fotos */}
+              <div className="mt-16 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#8b4513] to-[#6b3410] p-10 text-center">
+                {/* Decoração de fundo */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+                <div className="relative z-10">
+                  <div className="text-5xl mb-4">✨</div>
+                  <h3 className="text-2xl font-bold text-white mb-3">{t("gallery.ctaText")}</h3>
+                  <p className="text-white/80 mb-6 max-w-md mx-auto">
+                    Cada foto conta uma história única. Compartilhe a sua!
+                  </p>
+                  <Link
+                    to="/enviar-fotos"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-[#8b4513] rounded-full font-semibold hover:bg-[#f5f0e8] transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  >
+                    <span className="text-xl">📤</span>
+                    {t("gallery.uploadCta")}
+                  </Link>
+                </div>
               </div>
             </>
           )}
         </div>
       </Section>
 
-      {/* Lightbox Modal */}
-      {selectedPhoto && (
+      {/* Lightbox Modal Moderno */}
+      {selectedPhoto && selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setSelectedPhoto(null)}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+          onClick={() => setSelectedIndex(null)}
         >
+          {/* Botão Fechar */}
           <button
-            onClick={() => setSelectedPhoto(null)}
-            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 z-10"
+            onClick={() => setSelectedIndex(null)}
+            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-2xl transition-colors z-20"
           >
             ×
           </button>
-          <div className="max-w-5xl max-h-[90vh] relative" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selectedPhoto.url}
-              alt={selectedPhoto.descricao || "Foto do evento"}
-              className="max-w-full max-h-[85vh] object-contain rounded-lg"
-            />
+
+          {/* Contador */}
+          <div className="absolute top-6 left-6 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
+            {selectedIndex + 1} / {photos.length}
+          </div>
+
+          {/* Navegação */}
+          {selectedIndex > 0 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrev();
+              }}
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+            >
+              ‹
+            </button>
+          )}
+          {selectedIndex < photos.length - 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white text-3xl transition-all duration-300 hover:scale-110 z-20"
+            >
+              ›
+            </button>
+          )}
+
+          {/* Imagem e Info */}
+          <div
+            className="max-w-6xl w-full mx-4 flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative">
+              <img
+                src={selectedPhoto.url}
+                alt={selectedPhoto.descricao || "Foto do evento"}
+                className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl"
+              />
+            </div>
+
             {(selectedPhoto.nome || selectedPhoto.descricao) && (
-              <div className="mt-4 text-center text-white">
+              <div className="mt-6 text-center max-w-2xl animate-fade-in">
                 {selectedPhoto.nome && (
-                  <p className="text-lg font-medium">📷 {selectedPhoto.nome}</p>
+                  <p className="text-xl font-semibold text-white mb-2 flex items-center justify-center gap-2">
+                    <span className="text-[#e0a085]">📷</span>
+                    {selectedPhoto.nome}
+                  </p>
                 )}
                 {selectedPhoto.descricao && (
-                  <p className="text-gray-300 mt-1">{selectedPhoto.descricao}</p>
+                  <p className="text-white/70 leading-relaxed">{selectedPhoto.descricao}</p>
                 )}
               </div>
             )}
+
+            {/* Dica de navegação */}
+            <p className="mt-6 text-white/40 text-sm">Use ← → para navegar ou ESC para fechar</p>
           </div>
         </div>
       )}
+
+      <style>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
     </>
   );
 }
