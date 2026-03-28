@@ -237,4 +237,9 @@ app.listen(Number(PORT), "0.0.0.0", () => {
   console.log(`   - POST /api/photos/upload`);
   console.log(`   - GET /api/photos`);
   console.log(`   - PATCH /api/photos/admin/:id`);
+  console.log(`   - POST /api/photos/:id/like`);
+  console.log(`   - GET /api/photos/:id/likes`);
+  console.log(`   - POST /api/photos/:id/comments`);
+  console.log(`   - GET /api/photos/:id/comments`);
+  console.log(`   - POST /api/photos/stats`);
 });
