@@ -36,9 +36,36 @@ export default function Galeria() {
     }
   };
 
+  // Processar fotos: marcar primeira de cada participante e ordenar
+  const processedPhotos = useMemo(() => {
+    const seenParticipants = new Set<string>();
+
+    // Marcar quais fotos mostram depoimento (primeira de cada participante com descrição)
+    const marked = photos.map((photo) => {
+      const key = photo.nome || photo.id; // usar ID se não tiver nome
+      const isFirstWithDesc = photo.descricao && !seenParticipants.has(key);
+      if (photo.descricao && photo.nome) {
+        seenParticipants.add(key);
+      }
+      return { ...photo, showDescription: isFirstWithDesc };
+    });
+
+    // Separar: com depoimento primeiro, depois os demais embaralhados
+    const withDesc = marked.filter((p) => p.showDescription);
+    const withoutDesc = marked.filter((p) => !p.showDescription);
+
+    // Embaralhar os sem depoimento
+    for (let i = withoutDesc.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [withoutDesc[i], withoutDesc[j]] = [withoutDesc[j], withoutDesc[i]];
+    }
+
+    return [...withDesc, ...withoutDesc];
+  }, [photos]);
+
   const selectedPhoto = useMemo(() => {
-    return selectedIndex !== null ? photos[selectedIndex] : null;
-  }, [selectedIndex, photos]);
+    return selectedIndex !== null ? processedPhotos[selectedIndex] : null;
+  }, [selectedIndex, processedPhotos]);
 
   const goToPrev = () => {
     if (selectedIndex !== null && selectedIndex > 0) {
@@ -48,7 +75,7 @@ export default function Galeria() {
   };
 
   const goToNext = () => {
-    if (selectedIndex !== null && selectedIndex < photos.length - 1) {
+    if (selectedIndex !== null && selectedIndex < processedPhotos.length - 1) {
       setSelectedIndex(selectedIndex + 1);
       setExpandedText(false);
     }
@@ -222,7 +249,7 @@ export default function Galeria() {
 
               {/* Grid estilo Instagram/Pinterest */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {photos.map((photo, index) => (
+                {processedPhotos.map((photo, index) => (
                   <article
                     key={photo.id}
                     className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 group"
@@ -264,15 +291,20 @@ export default function Galeria() {
                       </div>
                     </div>
 
-                    {/* Rodapé - depoimento só no lightbox para não repetir */}
+                    {/* Rodapé com preview do depoimento */}
                     <div className="px-4 py-3">
-                      {photo.descricao ? (
-                        <button
-                          className="text-sm text-[#8b4513] hover:text-[#6b3410] font-medium flex items-center gap-1"
-                          onClick={() => setSelectedIndex(index)}
-                        >
-                          💬 Ver depoimento
-                        </button>
+                      {photo.showDescription && photo.descricao ? (
+                        <div>
+                          <p className="text-gray-700 text-sm leading-relaxed line-clamp-2">
+                            &ldquo;{photo.descricao}&rdquo;
+                          </p>
+                          <button
+                            className="text-[#8b4513] hover:text-[#6b3410] font-medium text-sm mt-1 flex items-center gap-1"
+                            onClick={() => setSelectedIndex(index)}
+                          >
+                            ver mais →
+                          </button>
+                        </div>
                       ) : (
                         <p className="text-gray-400 italic text-sm">✨ Momento especial</p>
                       )}
@@ -305,7 +337,7 @@ export default function Galeria() {
           </button>
 
           <div className="absolute top-4 left-4 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm z-20">
-            {selectedIndex + 1} / {photos.length}
+            {selectedIndex + 1} / {processedPhotos.length}
           </div>
 
           {selectedIndex > 0 && (
@@ -319,7 +351,7 @@ export default function Galeria() {
               ‹
             </button>
           )}
-          {selectedIndex < photos.length - 1 && (
+          {selectedIndex < processedPhotos.length - 1 && (
             <button
               onClick={(e) => {
                 e.stopPropagation();
