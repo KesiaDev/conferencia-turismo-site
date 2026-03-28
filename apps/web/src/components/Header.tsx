@@ -12,7 +12,6 @@ export default function Header() {
     { name: t("nav.keynotes"), href: "/keynotes" },
     { name: t("nav.program"), href: "/program" },
     { name: t("nav.thematicLines"), href: "/thematic-lines" },
-    { name: t("nav.fees"), href: "/fees" },
     { name: t("nav.committees"), href: "/committees" },
     { name: t("nav.villaDeiTroni"), href: "/villa-dei-troni" },
     { name: t("nav.anais"), href: "/anais" },
@@ -67,11 +66,6 @@ export default function Header() {
                   className="flex items-center gap-1 shrink-0 text-sm xl:text-[15px] 2xl:text-base font-medium text-gray-300 hover:text-[#D2B48C] transition-colors duration-200 whitespace-nowrap"
                 >
                   {item.name}
-                  {item.href === "/program" && (
-                    <span className="badge-novo text-[9px] xl:text-[10px] font-bold text-white px-1.5 py-0.5 rounded-full uppercase tracking-wide shrink-0">
-                      Novo
-                    </span>
-                  )}
                 </Link>
               ))}
             </div>
@@ -122,11 +116,6 @@ export default function Header() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                  {item.href === "/program" && (
-                    <span className="badge-novo text-xs font-bold text-white px-2.5 py-1 rounded-full uppercase tracking-wide">
-                      Novo
-                    </span>
-                  )}
                 </Link>
               ))}
             </div>

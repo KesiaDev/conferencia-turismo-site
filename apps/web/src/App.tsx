@@ -5,7 +5,6 @@ import ThematicLines from "./pages/ThematicLines";
 import Keynotes from "./pages/Keynotes";
 import Program from "./pages/Program";
 import Call from "./pages/Call";
-import Fees from "./pages/Fees";
 import Committees from "./pages/Committees";
 import Venue from "./pages/Venue";
 import VillaDeiTroni from "./pages/VillaDeiTroni";
@@ -68,14 +67,6 @@ function App() {
         element={
           <Layout>
             <Call />
-          </Layout>
-        }
-      />
-      <Route
-        path="/fees"
-        element={
-          <Layout>
-            <Fees />
           </Layout>
         }
       />

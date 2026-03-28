@@ -28,11 +28,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/fees" className="hover:text-white transition-colors">
-                  {t("nav.fees")}
-                </Link>
-              </li>
-              <li>
                 <Link to="/villa-dei-troni" className="hover:text-white transition-colors">
                   {t("nav.villaDeiTroni")}
                 </Link>
