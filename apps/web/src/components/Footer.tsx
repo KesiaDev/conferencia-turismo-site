@@ -121,7 +121,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="hover:opacity-80 transition-opacity"
             >
-              <img src="/nandidev-logo.png" alt="NandiDev - Web & App Developer" className="h-20" />
+              <img src="/nandidev-logo.png" alt="NandiDev - Web & App Developer" className="h-28" />
             </a>
           </div>
         </div>
