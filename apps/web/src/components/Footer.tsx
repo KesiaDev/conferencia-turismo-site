@@ -113,19 +113,15 @@ export default function Footer() {
           </div>
 
           {/* Developed by NandiDev */}
-          <div className="flex items-center justify-center gap-3 mt-6 pt-6 border-t border-gray-800">
-            <span className="text-sm text-gray-400">Desenvolvido por</span>
+          <div className="flex items-center justify-center gap-4 mt-6 pt-6 border-t border-gray-800">
+            <span className="text-base text-gray-400">Desenvolvido por</span>
             <a
               href="https://www.nandidev.com.br/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:opacity-80 transition-opacity"
             >
-              <img
-                src="/nandidev-logo.png"
-                alt="NandiDev - Tecnologia sob medida + IA"
-                className="h-12"
-              />
+              <img src="/nandidev-logo.png" alt="NandiDev - Web & App Developer" className="h-20" />
             </a>
           </div>
         </div>
