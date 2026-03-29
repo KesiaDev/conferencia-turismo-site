@@ -125,7 +125,7 @@ export default function Footer() {
                 src="/nandidev-logo.png"
                 alt="NandiDev - Web & App Developer"
                 className="h-36"
-                style={{ mixBlendMode: "lighten" }}
+                style={{ mixBlendMode: "normal" }}
               />
             </a>
           </div>
