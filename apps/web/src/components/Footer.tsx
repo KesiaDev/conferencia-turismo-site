@@ -111,6 +111,23 @@ export default function Footer() {
               {t("footer.rights")}
             </p>
           </div>
+
+          {/* Developed by NandiDev */}
+          <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t border-gray-800">
+            <span className="text-xs text-gray-500">Desenvolvido por</span>
+            <a
+              href="https://www.nandidev.com.br/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-80 transition-opacity"
+            >
+              <img
+                src="/nandidev-logo.png"
+                alt="NandiDev - Tecnologia sob medida + IA"
+                className="h-8"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
