@@ -113,8 +113,8 @@ export default function Footer() {
           </div>
 
           {/* Developed by NandiDev */}
-          <div className="flex items-center justify-center gap-2 mt-4 pt-4 border-t border-gray-800">
-            <span className="text-xs text-gray-500">Desenvolvido por</span>
+          <div className="flex items-center justify-center gap-3 mt-6 pt-6 border-t border-gray-800">
+            <span className="text-sm text-gray-400">Desenvolvido por</span>
             <a
               href="https://www.nandidev.com.br/"
               target="_blank"
@@ -124,7 +124,7 @@ export default function Footer() {
               <img
                 src="/nandidev-logo.png"
                 alt="NandiDev - Tecnologia sob medida + IA"
-                className="h-8"
+                className="h-12"
               />
             </a>
           </div>
