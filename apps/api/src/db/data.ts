@@ -249,7 +249,7 @@ export const program: ProgramDay[] = [
         title: "Mesa-Redonda Internacional",
         description: "Turismo literário, turismo cinematográfico e inovação territorial",
         speaker:
-          "Deborah Castro-Mariño (Univ. Groningen, Países Baixos), Jordi Arcos-Pumarola (CETT – Univ. Barcelona, Espanha), Rita Baleiro (Univ. Algarve, Portugal), Ronaldo Leites Diaz (PPGLET, UCS – Brasil)",
+          "Deborah Castro-Mariño (Univ. Groningen, Países Baixos), Jordi Arcos-Pumarola (CETT – Univ. Barcelona, Espanha), Rita Baleiro (Univ. Algarve, Portugal), Ronaldo Leites Diaz (PPGTURH, UCS – Brasil)",
         location: "Auditório Bloco H",
         kind: "plenary",
       },
