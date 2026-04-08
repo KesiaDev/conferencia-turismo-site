@@ -326,7 +326,7 @@ export default function ProgramacaoProvisoria() {
             time: "16h20–16h35",
             title:
               "O Imaginário Turístico do Sertão Nordestino: uma análise das telenovelas Mar do Sertão (2022) e No Rancho Fundo (2024)",
-            author: "Myllene Medeiros de Oliveira",
+            author: "Myllene Medeiros de Oliveira; Michel Jairo Vieira da Silva",
             affiliation: "Universidade Federal do Rio Grande do Norte – UFRN (Brasil)",
           },
         ],
