@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Section from "../components/Section";
 import Seo from "../components/Seo";
 import OptimizedImage from "../components/OptimizedImage";
-import AuthorizationQr from "../components/authorization/AuthorizationQr";
 import PdfViewer from "../components/PdfViewer";
 
 const ANAIS_PDF_URL = "/anais/anais-iii-conferencia-2026.pdf";
@@ -68,33 +66,6 @@ export default function Anais() {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-8">
-            <h2 className="text-xl font-bold mb-3 text-[#e0a085]">
-              {t("anais.authorizationBlockTitle")}
-            </h2>
-            <p className="text-gray-700 leading-relaxed mb-4">
-              {t("anais.authorizationBlockText")}
-            </p>
-            <Link
-              to="/anais/autorizacao"
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#c47862] px-6 py-3.5 text-base font-semibold text-white shadow-md transition hover:bg-[#b56a52] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8b4513] active:bg-[#a65d47] sm:text-lg"
-            >
-              {t("anais.authorizationCta")}
-              <span aria-hidden className="text-lg leading-none">
-                →
-              </span>
-            </Link>
-
-            <div className="mt-8 flex w-full flex-col items-center border-t border-[#e0a085]/30 pt-8">
-              <p className="mb-4 text-center text-sm font-semibold uppercase tracking-wide text-[#c47862]">
-                {t("anais.authorizationQrCardTitle")}
-              </p>
-              <div className="rounded-2xl border-2 border-[#e0a085] bg-gradient-to-b from-white to-[#fdf6f3] p-6 shadow-lg ring-2 ring-[#e0a085]/15 md:p-8">
-                <AuthorizationQr size={200} label={t("anais.authorizationQrLabel")} prominent />
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6 md:p-8 border-l-4 border-[#e0a085] mb-8">
             <h2 className="text-xl font-bold mb-4 text-[#e0a085]">{t("anais.criteriaTitle")}</h2>
             <ul className="space-y-3 text-gray-700">
               <li className="flex gap-2">
@@ -111,18 +82,6 @@ export default function Anais() {
               </li>
             </ul>
             <p className="mt-4 text-gray-700 font-semibold">{t("anais.importantNote")}</p>
-          </div>
-
-          <div className="space-y-6">
-            <div className="flex gap-3 items-start">
-              <span className="text-2xl" role="img" aria-hidden>
-                📌
-              </span>
-              <div>
-                <h3 className="font-bold text-gray-800 mb-1">{t("anais.publicationTitle")}</h3>
-                <p className="text-gray-700">{t("anais.publicationText")}</p>
-              </div>
-            </div>
           </div>
 
           <div id="anais-visualizacao" className="mt-12 scroll-mt-24">
