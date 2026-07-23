@@ -1,6 +1,6 @@
 [build]
 builder = "nixpacks"
-buildCommand = "rm -rf node_modules .vite dist apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist .pnpm-store 2>/dev/null || true && pnpm store prune && pnpm install --force --no-frozen-lockfile && cd apps/web && rm -rf dist .vite && pnpm build && cd ../api && rm -rf dist && pnpm build && cd ../.."
+buildCommand = "rm -rf node_modules .vite dist apps/web/node_modules apps/web/.vite apps/web/dist apps/api/node_modules apps/api/dist .pnpm-store 2>/dev/null || true && pnpm store prune && pnpm install --force --no-frozen-lockfile --prod=false && cd apps/web && rm -rf dist .vite && pnpm build && cd ../api && rm -rf dist && pnpm build && cd ../.."
 
 [deploy]
 startCommand = "cd apps/api && npm run start"
